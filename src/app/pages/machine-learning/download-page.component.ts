@@ -12,13 +12,10 @@ class Release {
 @Component({
     template: `
         <div class="wrapper main text">
-
-            <h1>Download</h1>
-
-            <div class="branch">
-                <div [class.active]="!showNext" (click)="showNext = false">Current</div>
-                <div *ngIf="isNextAvailable()" [class.active]="showNext" (click)="showNext = true">Next</div>
-            </div>
+<!--            <div class="branch">-->
+<!--                <div [class.active]="!showNext" (click)="showNext = false">Current</div>-->
+<!--                <div *ngIf="isNextAvailable()" [class.active]="showNext" (click)="showNext = true">Next</div>-->
+<!--            </div>-->
 
             <div class="boxes">
                 <div class="box desktop-app">
@@ -32,8 +29,8 @@ class Release {
                     </p>
 
                     <div class="buttons">
-                        <a class="button" target="_blank" href="/download/file/{{getOSXFilePath()}}">macOS</a>
-                        <a class="button" target="_blank" href="/download/file/{{getLinuxFilePath()}}">Linux</a>
+                        <a class="button-small" target="_blank" href="/download/file/{{getOSXFilePath()}}">macOS</a>
+                        <a class="button-small" target="_blank" href="/download/file/{{getLinuxFilePath()}}">Linux</a>
                     </div>
 
                     <div class="getting-started">
@@ -53,7 +50,7 @@ class Release {
                     </p>
 
                     <div class="buttons">
-                        <a class="button" routerLink="/documentation/server/getting-started">Install Docker</a>
+                        <a class="button-small" routerLink="/documentation/server/getting-started">Install Docker</a>
                     </div>
                     <div class="getting-started">
                         &nbsp;
@@ -84,7 +81,7 @@ class Release {
     `,
     styleUrls: [`./download-page.component.scss`]
 })
-export class DownloadPageComponent implements OnInit {
+export class MLDownloadPageComponent implements OnInit {
     public releases: Release[] = [];
     public current?: Release;
     public next?: Release;

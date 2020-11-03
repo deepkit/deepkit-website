@@ -1,5 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Component} from "@angular/core";
 
 @Component({
     template: `
@@ -16,7 +15,7 @@ import {HttpClient} from "@angular/common/http";
                     </p>
 
                     <div class="buttons">
-                        <a class="button" target="_blank"
+                        <a class="button-small" target="_blank"
                            href="https://join.slack.com/t/deepkitcommunity/shared_invite/enQtODA5MTE0NDg5NDExLTkyZjBkZTZkYjRjZWZjMTFjYjcwNmZhZDFiNTliOWUxZmFjZWE1Y2RmNDBhNmI3MTM5NmFkZDg2YzBiNTZlNDc">
                             Join Deepkit Community Slack
                         </a>
@@ -27,13 +26,14 @@ import {HttpClient} from "@angular/common/http";
                     <h3>GitHub</h3>
 
                     <p class="sub">
-                        You can post issues regarding the Python SDK or Deepkit App
-                        in our open-source Github repositories.
+                        You can report issues regarding the Python SDK or Deepkit
+                        in our Github repositories.
                     </p>
 
                     <div class="buttons">
-                        <a class="button" target="_blank" href="https://github.com/deepkit/deepkit">Deepkit</a>
-                        <a class="button" target="_blank" href="https://github.com/deepkit/deepkit-python-sdk">Python SDK</a>
+                        <a class="button-small" target="_blank" href="https://github.com/deepkit/deepkit">Deepkit</a>
+                        <a class="button-small" target="_blank" href="https://github.com/deepkit/deepkit-python-sdk">Python
+                            SDK</a>
                     </div>
                 </div>
             </div>
@@ -46,18 +46,19 @@ import {HttpClient} from "@angular/common/http";
                 </p>
 
                 <div class="buttons">
-                    <a class="button" href="mailto:info@deepkit.ai">Contact us</a>
+                    <a class="button-small" href="mailto:info@deepkit.ai">Contact us</a>
                 </div>
             </div>
 
             <div class="bottom">
                 <p>
-                    Check also <a routerLink="/documentation/faq">the FAQ</a> to see if we covered your question already.
+                    Check also <a routerLink="/documentation/faq">the FAQ</a> to see if we covered your question
+                    already.
                 </p>
             </div>
         </div>
     `,
     styleUrls: [`./support-page.component.scss`]
 })
-export class SupportPageComponent {
+export class MLSupportPageComponent {
 }

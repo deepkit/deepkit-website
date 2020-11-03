@@ -5,7 +5,7 @@ import {Component} from "@angular/core";
     template: `
         <div class="wrapper">
             <div class="left">
-                <img src="../../assets/images/deepkit_dark.svg"/>
+                <img src="../../assets/images/deepkit_white.svg"/>
                 <div class="copyright">
                     © {{year}} Deepkit®<br/>
                     All rights reserved

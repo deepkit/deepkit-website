@@ -13,7 +13,8 @@
     "serve:ssr": "nodemon dist/server/main.js",
     "build:ssr": "ng build --progress=false --prod && ng run website:server:production",
     "server:watch": "ng run website:server --watch",
-    "watch:ssr": "npm-run-all --parallel watch server:watch"
+    "watch:ssr": "npm-run-all --parallel watch server:watch",
+    "server": "ts-node --project tsconfig.server.json ./src/server/app.ts"
   },
   "private": true,
   "dependencies": {
@@ -28,8 +29,13 @@
     "@angular/platform-server": "^10.2.1",
     "@angular/router": "^10.2.1",
     "@nguniversal/express-engine": "^9.0.2",
-    "@deepkit/type": "^1.0.0-alpha.4",
-    "@deepkit/core": "^1.0.0-alpha.4",
+    "@deepkit/framework": "1.0.0-alpha.12",
+    "@deepkit/framework-shared": "1.0.0-alpha.12",
+    "@deepkit/framework-client": "1.0.0-alpha.12",
+    "@deepkit/type": "1.0.0-alpha.12",
+    "@deepkit/core": "1.0.0-alpha.12",
+    "@deepkit/orm": "1.0.0-alpha.12",
+    "@deepkit/mongo": "1.0.0-alpha.12",
     "cookieconsent": "^3.1.1",
     "prismjs": "^1.19.0",
     "express": "^4.17.1",

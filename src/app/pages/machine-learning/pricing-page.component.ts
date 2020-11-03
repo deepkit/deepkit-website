@@ -4,5 +4,5 @@ import {Component} from "@angular/core";
     templateUrl: './pricing-page.component.html',
     styleUrls: ['./pricing-page.component.scss']
 })
-export class PricingPageComponent {
+export class MLPricingPageComponent {
 }

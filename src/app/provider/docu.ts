@@ -1,6 +1,6 @@
 import {Inject, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {stack} from "@deepkit/core";
+// import {stack} from "@deepkit/core";
 
 interface Page {
     title: string;
@@ -24,7 +24,7 @@ export class Docu {
     ) {
     }
 
-    @stack()
+    // @stack()
     async loadPages() {
         if (this.pages) return;
 

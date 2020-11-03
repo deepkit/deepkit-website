@@ -1,0 +1,82 @@
+.framework-banner {
+  display: flex;
+  //justify-content: ;
+
+  > .text {
+    max-width: 550px;
+    margin-right: 100px;
+  }
+
+  > .visual {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.boxes {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+
+  .box-section {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+    .text {
+      padding-top: 9px;
+      font-size: 14px;
+      color: rgba(242, 218, 191, 0.50);
+      text-align: center;
+    }
+  }
+}
+
+.boxes-sub {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(242, 218, 191, 0.34);
+}
+
+.section {
+  margin: 120px auto;
+  text-align: center;
+
+  p {
+    text-align: center;
+  }
+}
+
+.box {
+  width: 88px;
+  height: 88px;
+
+  .header {
+    font-size: 30px;
+    line-height: 32px;
+    font-weight: 300;
+    color: rgba(210, 210, 210, 0.76);
+  }
+
+  .sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(242, 218, 191, 0.50);
+    letter-spacing: 0;
+  }
+}
+
+.economic-comparison-boxes {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 500px;
+  margin: 25px auto;
+
+  .box {
+    width: 150px;
+    color: rgba(242, 218, 191, 0.50);
+  }
+}

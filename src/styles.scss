@@ -1,6 +1,7 @@
 @import "scss/vars";
-@import "assets/source-code-pro/stylesheet.css";
-@import "assets/source-sans-pro/stylesheet.css";
+//@import "assets/source-code-pro/stylesheet.css";
+//@import "assets/source-sans-pro/stylesheet.css";
+@import "assets/muli/stylesheet.css";
 
 * {
     -webkit-font-smoothing: antialiased;
@@ -18,17 +19,25 @@ html {
 }
 
 body {
-    font-family: 'Source Sans Pro', "Helvetica Neue", sans-serif;
+    font-family: 'Muli', "Helvetica Neue", sans-serif;
     padding: 0;
     margin: 0;
     font-size: 16px;
-    line-height: 150%;
     text-align: center;
-    background-color: #f1f3f8;
+    background-color: var(--color-dark-creme);
+    color: var(--color-white-creme-light);
+    background-image: radial-gradient(50% 100%, #17191C 0%, #111213 100%);
 
     overflow: auto;
     overflow: overlay;
     scrollbar-width: thin;
+
+    --color-white: #F9EDDF;
+    --color-white-creme: #F9EDDF;
+    --color-white-creme-light: rgba(242, 218, 191, 0.5);
+    --color-dark-creme: #171B1E;
+    --color-orange: #FF662A;
+    --color-line: rgba(151, 151, 151, 0.12);
 
     &::-webkit-scrollbar {
         height: 11px;
@@ -58,29 +67,29 @@ body {
 
 
 ::selection {
-    background: $linkHover;
+    background: #0062b6;
     color: white;
 }
 
 h1 {
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 36px;
-    letter-spacing: 1px;
-    padding: 0;
+    font-size: 32px;
+    color: var(--color-white-creme);
+    line-height: 50px;
+    font-weight: 200;
     margin: 23px 0;
 }
 
 h2 {
-    font-weight: 500;
     font-size: 22px;
-    line-height: 24px;
-    letter-spacing: 1px;
+    line-height: 50px;
+    font-weight: 300;
+    color: var(--color-white-creme);
     margin: 15px 0;
 }
 
 h3 {
     font-weight: 500;
+    color: var(--color-white-creme);
     margin: 10px 0;
     font-size: 18px;
     line-height: 24px;
@@ -101,12 +110,49 @@ hr {
 }
 
 a, a:link {
-    color: $link;
+    color: var(--color-white-creme);
 
     &:hover {
-        color: $linkHover;
+        color: var(--color-orange);
         text-decoration: underline;
     }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+
+    > * {
+        margin: 0 10px;
+    }
+}
+
+a.button, a.button:link,
+a.button-small, a.button-small:link {
+    color: var(--color-white-creme);
+    text-decoration: none;
+    border: 1px solid #FF662A;
+    border-radius: 26px;
+    text-align: center;
+    padding: 0 45px;
+    height: 49px;
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 2px;
+    background-color: transparent;
+
+    &:hover {
+        color: var(--color-white-creme);
+        background-color: #090a0c;
+        //border: 1px solid rgba(255, 102, 42, 0.5);
+    }
+}
+
+a.button-small, a.button-small:link {
+    padding: 0 25px;
+    height: 32px;
+    border: 1px solid #c1c1c1;
 }
 
 .wrapper {
@@ -160,44 +206,6 @@ a, a:link {
     padding: 50px 0;
 }
 
-a, a:link {
-    color: $link;
-
-    &:hover {
-        color: $linkHover;
-    }
-}
-
-a.button {
-    background-image: linear-gradient(180deg, #D6D6D6 0%, #CACACA 100%);
-    border-radius: 2px;
-
-    display: inline-block;
-    line-height: 16px;
-    padding: 8px 25px;
-    font-size: 13px;
-    color: #161616;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    text-align: center;
-    margin: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-
-    &:first-child {
-        margin-left: 0;
-    }
-
-    &:hover {
-        background: #c1c1c1;
-        text-decoration: none;
-    }
-    &:active {
-        background: #adadad;
-    }
-}
-
 .doc-content {
     letter-spacing: 0;
     line-height: 24px;
@@ -243,4 +251,67 @@ a.button {
         letter-spacing: 0;
         margin-top: 20px;
     }
+}
+
+.header-sub {
+    margin: 30px 0;
+    display: flex;
+
+    h1 {
+        flex: 1;
+    }
+
+    nav {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        a, a:link {
+            margin-left: 20px;
+            color: var(--color-white-creme-light);
+            text-decoration: none;
+            font-size: 14px;
+
+            &:hover,
+            &.active {
+                color: var(--color-white-creme);
+            }
+        }
+    }
+}
+
+.header-actions {
+    display: flex;
+    margin-top: 30px;
+    > * {
+        margin-right: 15px;
+    }
+}
+
+.banner {
+    position: relative;
+
+    .text {
+        position: relative;
+        max-width: 600px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 22px;
+        margin: 5px 0;
+        padding: 5px 0;
+    }
+}
+
+
+.box {
+    background: #1F242A;
+    box-shadow: 0 3px 0 0 #FF662A;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }

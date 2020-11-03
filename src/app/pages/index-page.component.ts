@@ -1,23 +1,27 @@
-import {Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild} from "@angular/core";
-import {isPlatformBrowser} from "@angular/common";
+import {Component} from "@angular/core";
 
 @Component({
-    templateUrl: './index-page.component.html',
+    template: `
+        <div class="bg">
+
+            <div class="center">
+                <h1>GERMAN ENGINEERING</h1>
+
+                <p>
+                    Deepkit is a German software engineering company building high-performance
+                    developer tools and top-notch web applications.
+                </p>
+
+                <div class="actions">
+                    <a class="button">Deepkit ML</a>
+                    <a class="button">Deepkit Framework</a>
+                </div>
+            </div>
+        </div>
+
+    `,
     styleUrls: ['./index-page.component.scss']
 })
-export class IndexPageComponent implements OnInit {
-    @ViewChild('video', {read: ElementRef}) video?: ElementRef;
+export class IndexPageComponent {
 
-    constructor(
-        @Inject(PLATFORM_ID) protected platformId
-    ) {
-    }
-
-    ngOnInit() {
-        setTimeout(() => {
-            if (this.video && isPlatformBrowser(this.platformId)) {
-                (this.video.nativeElement as HTMLVideoElement).play();
-            }
-        }, 500);
-    }
 }

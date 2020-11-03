@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, HostListener, Inject, OnInit, Optional} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {RESPONSE} from "@nguniversal/express-engine/tokens";
 import {Docu} from "../provider/docu";
 import {AnchorService} from "../provider/anchor";

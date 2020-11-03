@@ -1,67 +1,62 @@
-@import "../../scss/vars";
-
 :host {
-    display: block;
-    background-color: #f0f3f8;
-    color: black;
-    padding: 25px 0;
+  display: block;
+
+  img {
+    width: 26px;
+  }
 }
 
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0;
+  border-top: 1px solid rgba(255, 102, 42, 0.20);
 }
 
 .left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .copyright {
-    margin-left: 15px;
-    font-size: 11px;
-    color: #4b4c4e;
-    letter-spacing: 1px;
-    text-align: center;
-    line-height: 14px;
-    width: 150px;
+  margin-left: 15px;
+  font-size: 14px;
+  text-align: center;
+  width: 150px;
 }
 
 .navi {
-    margin-left: auto;
+  margin-left: auto;
+  text-align: right;
+  display: flex;
+
+  a, a:link {
+    font-weight: 500;
+    color: var(--color-white-creme);
+    font-size: 14px;
+    letter-spacing: 1px;
     text-align: right;
-    display: flex;
-
-    a, a:link {
-        font-weight: 500;
-        font-size: 14px;
-        color: #171b1e;
-        letter-spacing: 1px;
-        text-align: right;
-        text-decoration: none;
-        margin-left: 35px;
-
-        &:hover {
-            color: $linkHover;
-        }
-    }
+    text-decoration: none;
+    margin-left: 35px;
+  }
 }
 
 @media(max-width: 450px) {
-    .wrapper, .left, .navi {
-        display: block;
-        text-align: center;
-    }
+  .wrapper, .left, .navi {
+    display: block;
+    text-align: center;
+  }
 
-    .navi {
-        margin-top: 15px;
-        a, a:link {
-            margin-left: 15px;
-        }
-    }
+  .navi {
+    margin-top: 15px;
 
-    .copyright {
-        margin: auto;
+    a, a:link {
+      margin-left: 15px;
     }
+  }
+
+  .copyright {
+    margin: auto;
+  }
 }
