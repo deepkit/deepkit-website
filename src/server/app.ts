@@ -1,14 +1,33 @@
+import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
-import {Application, Databases} from '@deepkit/framework';
+import {Application, KernelModule} from '@deepkit/framework';
+import {AngularUniversalModule} from '@deepkit/angular-universal';
 import {MongoDatabase} from "./db";
-import {AngularController} from "./controller/angular.controller";
+import {appConfig} from "./config";
+import {FrameworkController, FrameworkHttpController} from './controller/framework.controller';
+import {AuthListener} from "./auth";
+import {dirname} from 'path';
 
-
-Application.run({
-    providers: [
+Application.create({
+    providers: [],
+    controllers: [
+        FrameworkController,
+        FrameworkHttpController,
     ],
-    controllers: [AngularController],
+    listeners: [
+        AuthListener
+    ],
+    config: appConfig,
     imports: [
-        Databases.for(MongoDatabase)
+        KernelModule.configure({
+            publicDir: __dirname + '/../../dist/browser',
+            databases: [MongoDatabase],
+            debug: true,
+            workers: 1,
+        }),
+        AngularUniversalModule.configure({
+            browserPath: __dirname + '/../../dist/browser',
+            serverPath: __dirname + '/../../dist/server',
+        }),
     ]
-});
+}).run();

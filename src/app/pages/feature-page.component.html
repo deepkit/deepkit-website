@@ -1,0 +1,425 @@
+<div class="banner">
+  <div class="wrapper">
+    <div class="blur1"></div>
+    <div class="blur2"></div>
+    <div class="blur3"></div>
+    <div class="visual"><img alt="visual" src="assets/images/logo-white-bg.svg"/></div>
+
+    <div class="text">
+      <h1>
+        Deepkit Framework<br/>
+        Features
+
+      </h1>
+
+      <div class="actions">
+        <a routerLink="/documentation/framework" class="button primary">Get started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<feature-box>
+  <div class="left">
+    <h2>HTTP</h2>
+    <p>
+      HTTP server and router with automatic serialization and validation of parameters. Name routes, define
+      properties directly with decorators, and add your own application specific settings.
+    </p>
+
+    <p>
+      Organize your routes in handy Typescript classes and make sure everything is well encapsulated using
+      dependency injection.
+    </p>
+
+    <p>
+      The result is automatically serialized to JSON, HTML, or you can register your own result converter.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        class HelloWorldController {
+          constructor(protected database: Database) {
+          }
+
+          @http.GET('/user/:id')
+          async simple(id: number) {
+            const user = await this.database.query(User)
+              .filter({id: id})
+              .findOne();
+            return {hello: user.username};
+          }
+        }
+
+        Application.root({
+            providers: [Database],
+            controllers: [HelloWorldController],
+        }).run();
+    </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box align="right" color="#00FFFF66">
+  <div class="right">
+    <h2>Template Engine</h2>
+    <p>
+      Full type-safe HTML template engine based on TSX.
+    </p>
+
+    <p>
+      Organize your templates in handy functions or classes that have full access to the dependency-injection
+      container like services and controllers do.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="left">
+    <div class="box">
+      <textarea codeHighlight>
+        function Website(props: {title: string}, contents: string[]) {
+            return <html>
+            <header>
+                <title>
+                    {props.title} - My Website
+                </title></header>
+            <body>
+            <h1>{props.title}</h1>
+            {contents}
+            </body>
+            </html>;
+        }
+
+        class HelloWorldController {
+            @http.GET('/')
+            startPage() {
+                return <Website title="Startpage">
+                    <p>Hello there!</p>
+                </Website>;
+            }
+        }
+    </textarea>
+    </div>
+  </div>
+</feature-box>
+
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Dependency Injection</h2>
+    <p>
+      A high-performance dependency-injection container allows you to separates your code and logic in handy classes
+      that are perfectly unit-testable.
+    </p>
+
+    <p>
+      Every class has not only access to other providers defined in the container, but also to the type-safe
+      configuration system.
+    </p>
+
+    <p>
+      With support for scopes, tagged providers, constructor and property injection, detailed provider
+      definition (singleton, factory, etc.) and compiler passes (modifying registered providers).
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        class UserHandler {
+            constructor(
+                protected database: Database,
+                protected mailer: Mailer,
+            ) { }
+
+            async register(user: User) {
+                await this.database.persist(user);
+                await this.mailer.send(
+                    <UserRegistration user={user}/>,
+                    "Welcome!",
+                    user.email,
+                );
+            }
+        }
+
+        Application.root({
+            providers: [Database, UserHandler, Mailer],
+        }).run();
+    </textarea>
+    </div>
+  </div>
+
+</feature-box>
+
+
+<feature-box align="right">
+  <div class="right">
+    <h2>Configuration</h2>
+    <p>
+      Expressive configuration system that automatically validates and can be used type-safely in all your dependency
+      injected classes.
+    </p>
+
+    <div class="actions">
+      <a class="button">Learn more</a>
+    </div>
+
+    <div class="box">
+      <textarea codeHighlight>
+        const appConfig = createConfig({
+           title: t.string.default(‘MyWebsite’),
+           databaseUrl: t.string.default(‘mongodb://localhost')
+        });
+
+        Application.root({
+            config: appConfig,
+            providers: [DefaultDatabase],
+        }).run();
+    </textarea>
+    </div>
+  </div>
+
+  <div class="left">
+    <div class="box">
+      <textarea codeHighlight>
+class ConfigSlice extends appConfig.slice('databaseUrl') {}
+
+class DefaultDatabase extends Database {
+  constructor(config: ConfigSlice) {
+     super(new MongoDatabaseAdapter(config.databaseUrl));
+  }
+}
+
+class Website {
+  constructor(
+    protected props: { page: string },
+    protected children: string,
+    @inject(appConfig.token(‘title’))
+    protected title: string
+  ) { }
+
+  async render() {
+    return <html>
+      <title>{this.props.page} - {this.title}</title>
+    </html>;
+  }
+}
+    </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box>
+
+  <div class="top">
+    <h2>RPC</h2>
+
+    <p class="mini-wrapper" style="margin-bottom: 90px;">
+      The fastest way to connect your frontend with your backend or interconnect your micro-services with automatic
+      serialization, validation, error forwarding, fully typsafe interface, and streaming capabilities using RxJS —
+      without code generation or config files.
+    </p>
+  </div>
+
+  <div class="left">
+    <div style="text-align: center">
+      <h3>Frontend</h3>
+
+      <p>Angular, React, Vue, HTML5.</p>
+    </div>
+
+
+    <div class="box">
+      <textarea codeHighlight>
+import {DeepkitClient} from ‘@deepkit/rpc’;
+import {MyControllerInterface} from ‘common’;
+
+const client = new DeepkitClient(‘localhost’);
+const myController = client.controller(MyControllerInterface);
+
+const user = await myController.getUser(42);
+console.log(user.username);
+      </textarea>
+    </div>
+  </div>
+
+  <div class="right">
+    <div style="text-align: center">
+      <h3>Server</h3>
+    </div>
+    <div class="box">
+      <textarea codeHighlight>
+import {rpc} from ‘@deepkit/rpc’;
+import {MyControllerInterface, User} from ‘common’;
+
+@rpc.controller(MyControllerInterface)
+class MyController implements MyControllerInterface {
+    constructor(protected database: Database) {}
+
+    @rpc.action()
+    @t.generic(User)
+    async getUser(id: number): Promise<User> {
+        return await this.database.query(User)
+            .filter({id: id}).findOne();
+    }
+}
+      </textarea>
+    </div>
+  </div>
+
+  <div class="mini-wrapper">
+
+    <div style="text-align: center">
+      <h3>Common</h3>
+    </div>
+
+    <div class="box">
+        <textarea codeHighlight>
+export MyControllerInterface = Controller<MyControllerInterface>(‘my’);
+export interface MyControllerInterface {
+     async getUser(id: number): Promise<User>;
+}
+
+@entity.name(‘user’)
+export class User {
+    @t username: string = ‘’;
+    constructor(@t public id: number) {}
+}
+        </textarea>
+    </div>
+  </div>
+
+</feature-box>
+
+
+<feature-box color="#0F3360">
+  <div class="left">
+    <h2>CLI</h2>
+    <p>
+      With the integrated CLI API, you can quickly build command line tools that have
+      complete access to the dependency injection container and thus works like your other controllers.
+    </p>
+
+    <div class="box">
+      <textarea codeHighlight>
+        $ ./app.ts user foo --withAudit
+      </textarea>
+    </div>
+
+    <div class="actions">
+      <a class="button">Learn more</a>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+@cli.controller('user')
+export class MyToolController implements Command {
+    constructor(protected database: Database) {}
+
+    async execute(
+        @arg username: string,
+        @flag.optional withAudit: boolean = false,
+    ) {
+        const user = await this.database.query(User)
+          .filter({username: username})
+          .findOne();
+        console.log('user', user);
+
+        if (!withAudit) return;
+        const audit = await this.database.query(Audit)
+          .filter({user: user})
+          .find();
+        console.log('audit', audit);
+    }
+}
+    </textarea>
+    </div>
+  </div>
+</feature-box>
+
+
+<feature-box>
+  <div class="top">
+    <div style="text-align: left">
+      <h2>Real-Time Database Feed</h2>
+      <p style="margin-bottom: 90px; text-align: left">
+        Return a self-updating collection of entity objects to the client
+        without
+      </p>
+    </div>
+  </div>
+
+  <div class="left">
+    <div class="box">
+      <textarea codeHighlight>
+//frontend
+import {DeepkitClient} from ‘@deepkit/rpc’;
+import {AdminControllerInterface} from ‘common’;
+
+const client = new DeepkitClient(‘localhost’);
+const admin = client.controller(AdminControllerInterface);
+
+const users = await admin.userList();
+
+//users keeps itself up to date. No need to reload it.
+//even when new users are added, updated, or deleted.
+users.subscribe((items) => {
+    console.log("list updated", items);
+});
+      </textarea>
+    </div>
+
+    <div class="actions">
+      <a class="button">Learn more</a>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+//backend
+@rpc.controller(AdminControllerInterface)
+export class AdminController {
+    constructor(protected liveDatabase: LiveDatabase) {}
+
+    @rpc.action()
+    async userList(): Promise<Collection<User>> {
+      return await this.liveDatabase.query(User)
+        .filter({active: true})
+        .find();
+    }
+}
+    </textarea>
+    </div>
+  </div>
+</feature-box>
+
+
+<feature-box>
+<div class="wrapper features">
+  <div style="text-align: left">
+    <h2>And more</h2>
+
+    <p style="margin-bottom: 90px;">
+      See our documentation to get more information about how each feature works.
+    </p>
+  </div>
+
+  <div class="points">
+    <index-feature img="icon-modules" header="Modules"
+                   text="Powerful module system to easily add your own plugins and separate code."></index-feature>
+    <index-feature img="icon-debugger" header="Debugger"
+                   text="Interactive local debugger for high-level application profiling and debugging."></index-feature>
+    <index-feature img="icon-workflow" header="Workflow"
+                   text="Workflow engine for complex finite state-machine use-cases."></index-feature>
+    <index-feature img="icon-logger" header="Logger" text="Configurable application logger."></index-feature>
+  </div>
+</div>
+
+</feature-box>

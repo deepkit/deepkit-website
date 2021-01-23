@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    "outDir": "./dist",
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2020",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -15,5 +19,9 @@
       "es2015",
       "dom"
     ]
-  }
+  },
+  "include": [
+    "**/*.ts",
+    "../shared/index.ts"
+  ]
 }

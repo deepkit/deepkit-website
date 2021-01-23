@@ -2,7 +2,7 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app-server",
-    "target": "es2018",
+    "target": "es2020",
     "module": "CommonJS",
     "emitDecoratorMetadata": true,
     "types": [

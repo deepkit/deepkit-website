@@ -24,15 +24,10 @@ export class AppComponent {
         title: TitleService,
         @Inject(PLATFORM_ID) platformId
     ) {
-
-        if (isPlatformBrowser(platformId)) {
-            docu.loadPages();
-        }
-
         router.events.subscribe((e) => {
             if (e instanceof NavigationEnd || e instanceof ActivationEnd) {
                 const firstChild = route.firstChild;
-                requestAnimationFrame(() => {
+                setTimeout(() => {
                     if (firstChild.snapshot.data['title']) {
                         title.setTitle(firstChild.snapshot.data['title']);
                     }

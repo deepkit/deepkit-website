@@ -1,0 +1,28 @@
+:host {
+    flex: 0 0 30%;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 50px;
+
+    h4 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 16px;
+        color: var(--color-white-creme);
+    }
+
+    p {
+        margin-top: 15px;
+        font-size: 15px;
+        color: #7A818C;
+        letter-spacing: 0;
+        line-height: 22px;
+    }
+
+    .image {
+        user-select: none;
+        flex: 0 0 40px;
+        text-align: center;
+    }
+}

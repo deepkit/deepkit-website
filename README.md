@@ -3,13 +3,13 @@
 ## development
 
 
-New console
+New console: angular
 ```
 npm run watch:ssr
 ```
 
-new console
+new console: server
 
 ```
-npm run serve:ssr
+npm run server:watch
 ```

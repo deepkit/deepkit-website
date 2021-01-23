@@ -12,6 +12,8 @@ import {MLIndexPageComponent} from "./pages/machine-learning/index-page.componen
 import {FrameworkIndexPageComponent} from "./pages/framwork/index-page.component";
 import {MLFrame} from "./pages/machine-learning/frame.component";
 import {FrameworkFrameComponent} from "./pages/framwork/frame.component";
+import {BenchmarkComponent} from "./pages/framwork/benchmark.component";
+import { FeaturesPageComponent } from "./pages/features-page.component";
 
 
 const routes: Routes = [
@@ -25,24 +27,31 @@ const routes: Routes = [
     },
 
     {
-        path: 'framework',
-        pathMatch: 'full',
-        component: FrameworkFrameComponent,
-        data: {title: 'Deepkit Framework'},
-        children: [
-            {path: '', pathMatch: 'full', component: FrameworkIndexPageComponent, data: {title: 'Deepkit Framework'}},
-        ]
+        path: 'products/framework',
+        component: FeaturesPageComponent,
+        data: {title: 'Features'},
     },
 
-    {
-        path: 'machine-learning', component: MLFrame, data: {title: 'Machine Learning'}, children: [
-            {path: '', pathMatch: 'full', component: MLIndexPageComponent, data: {title: 'Machine Learning'}},
-
-            {path: 'download', component: MLDownloadPageComponent, data: {title: 'Download'}},
-            {path: 'support', component: MLSupportPageComponent, data: {title: 'Support'}},
-            {path: 'pricing', component: MLPricingPageComponent, data: {title: 'Pricing'}},
-        ]
-    },
+    // {
+    //     path: 'framework',
+    //     component: FrameworkFrameComponent,
+    //     data: {title: 'Deepkit Framework'},
+    //     children: [
+    //         {path: '', pathMatch: 'full', component: FrameworkIndexPageComponent, data: {title: 'Deepkit Framework'}},
+    //
+    //         {path: 'benchmark', component: BenchmarkComponent, data: {title: 'Framework Benchmark'}},
+    //     ]
+    // },
+    //
+    // {
+    //     path: 'machine-learning', component: MLFrame, data: {title: 'Machine Learning'}, children: [
+    //         {path: '', pathMatch: 'full', component: MLIndexPageComponent, data: {title: 'Machine Learning'}},
+    //
+    //         {path: 'download', component: MLDownloadPageComponent, data: {title: 'Download'}},
+    //         {path: 'support', component: MLSupportPageComponent, data: {title: 'Support'}},
+    //         {path: 'pricing', component: MLPricingPageComponent, data: {title: 'Pricing'}},
+    //     ]
+    // },
 
 
     {
@@ -57,10 +66,11 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-        initialNavigation: 'enabled',
-        anchorScrolling: 'enabled',
-        scrollPositionRestoration: 'enabled',
-    })],
+    initialNavigation: 'enabled',
+    anchorScrolling: 'enabled',
+    scrollPositionRestoration: 'enabled',
+    relativeLinkResolution: 'legacy'
+})],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

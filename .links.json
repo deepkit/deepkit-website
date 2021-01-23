@@ -2,12 +2,12 @@
   "@deepkit/core": "../deepkit-framework/packages/core",
   "@deepkit/core-rxjs": "../deepkit-framework/packages/core-rxjs",
   "@deepkit/framework": "../deepkit-framework/packages/framework",
-  "@deepkit/framework-shared": "../deepkit-framework/packages/framework-shared",
-  "@deepkit/framework-client": "../deepkit-framework/packages/framework-client",
+  "@deepkit/angular-universal": "../deepkit-framework/packages/angular-universal",
+  "@deepkit/framework-debug-gui": "../deepkit-framework/packages/framework-debug-gui",
   "@deepkit/fs": "../deepkit-framework/packages/fs",
   "@deepkit/mongo": "../deepkit-framework/packages/mongo",
   "@deepkit/orm": "../deepkit-framework/packages/orm",
-  "!@deepkit/sql": "../deepkit-framework/packages/sql",
+  "@deepkit/rpc": "../deepkit-framework/packages/rpc",
   "@deepkit/topsort": "../deepkit-framework/packages/topsort",
   "@deepkit/type": "../deepkit-framework/packages/type"
 }

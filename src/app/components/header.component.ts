@@ -1,25 +1,87 @@
-import {ChangeDetectorRef, Component, Input, SkipSelf} from "@angular/core";
-import {ActivatedRoute, ActivationEnd, NavigationEnd, Router} from "@angular/router";
+import { ChangeDetectorRef, Component, Input, SkipSelf } from "@angular/core";
+import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/router";
 
 @Component({
     selector: 'dw-header',
     template: `
-        <div class="wrapper">
-            <a routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
-            <nav>
-                <a routerLinkActive="active" routerLink="/machine-learning">Machine Learning</a>
-                <a routerLinkActive="active" routerLink="/framework">Framework</a>
-                <a routerLinkActive="active" routerLink="/services">Services</a>
-<!--                <a routerLinkActive="active" routerLink="/pricing">Pricing</a>-->
-<!--                <a routerLinkActive="active" routerLink="/documentation">Documentation</a>-->
-<!--                <a routerLinkActive="active" routerLink="/support">Support</a>-->
-<!--                <a id="github-logo" href="https://github.com/deepkit/deepkit" target="_blank">-->
-<!--                    <img width="24" height="24" src="/assets/images/github.svg"/>-->
-<!--                </a>-->
-            </nav>
+      <div class="wrapper">
+        <a routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
+
+        <nav (click)="menu = ''">
+          <a class="products" (mouseenter)="open('products')" (mouseleave)="close('products')">Products</a>
+          <a routerLinkActive="active" routerLink="/support">Pro</a>
+
+          <a routerLinkActive="active" routerLink="/community">Community</a>
+          <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
+
+          <a id="github-logo" href="https://github.com/deepkit/deepkit-framework" target="_blank">
+            <img width="24" height="24" src="/assets/images/github.svg"/>
+          </a>
+        </nav>
+
+        <div [class.active]="menu === 'products'" (mouseenter)="open('products')" (mouseleave)="close('products')" class="products-menu">
+          <div class="framework">
+            <h3>Framework</h3>
+            
+            <a routerLink="/products/framework">Features</a>
+            <a routerLink="documentation/why-deepkit">Why Deepkit?</a>
+            <a routerLink="/documentation/framework">Get Started</a>
+          </div>
+          
+          <div class="components">
+            <h3>Typescript Components</h3>
+
+            <div>
+              <h4>Type</h4>
+              <p>Runtime TypeScript type/reflection system with ultra-fast serialization and validation.</p>
+            </div>
+            <div>
+              <h4>ORM</h4>
+              <p>Fastest TypeScript ORM for MongoDB, SQLite, MySQL, MariaDB, PostgreSQL.</p>
+            </div>
+            <div>
+              <h4>RPC</h4>
+              <p>Highly configurable RPC server for TypeScript with automatic type serialization and validation.</p>
+            </div>
+            <div>
+              <h4>Broker</h4>
+              <p>High-Performance typesafe message bus for pub/sub, key-value, and central atomic app locks.</p>
+            </div>
+            <div>
+              <h4>Desktop UI</h4>
+              <p>Angular & Electron desktop UI framework. Angular components for native looking UI widgets.</p>
+            </div>
+          </div>
         </div>
+      </div>
     `,
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+    public menu: string = '';
+
+    protected lastTimeout: any;
+
+    constructor(
+        protected cd: ChangeDetectorRef,
+        protected router: Router,
+    ) {
+        router.events.subscribe(() => {
+            this.menu = '';
+            this.cd.detectChanges();
+        })
+    }
+
+    open(menu: string){
+        if (this.lastTimeout) clearTimeout(this.lastTimeout);
+
+        this.menu = menu;
+    }
+
+    close(menu: string){
+        this.lastTimeout = setTimeout(() => {
+            if (this.menu === menu) this.menu = '';
+            this.cd.detectChanges();
+        }, 200);
+    }
 }

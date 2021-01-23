@@ -1,80 +1,161 @@
 :host {
-    display: block;
-    img {
-        width: 26px;
-    }
+  display: block;
+  position: relative;
+  z-index: 1000;
+
+  background: rgba(0, 0, 0, 0.09);
+  border: 1px solid rgba(151, 151, 151, 0.06);
+  user-select: none;
+
+  img {
+    width: 26px;
+  }
 }
 
-
 .wrapper {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--color-line);
-    padding-top: 30px;
-    padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+  padding: 25px 20px;
 }
 
 nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
 
-    a, a:link {
-        font-size: 14px;
-        font-weight: 600;
-        text-decoration: none;
-        text-transform: uppercase;
-        color: var(--color-white-creme);
-        text-align: right;
-        margin-right: 30px;
-        margin-left: 30px;
+  a, a:link {
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-white-creme);
+    text-align: right;
+    margin: 0 20px;
 
-        &:hover {
-            color: var(--color-orange);
-        }
-
-        &.active {
-            color: var(--color-orange);
-        }
-
-        img, svg {
-            position: relative;
-            top: 4px;
-        }
+    &:hover {
+      color: var(--color-orange);
     }
+
+    &.active {
+      color: var(--color-orange);
+    }
+
+    img, svg {
+      position: relative;
+      top: 4px;
+    }
+  }
 }
 
 :host.white {
-    #twitter-logo {
-        fill: #171B1E;
+  #twitter-logo {
+    fill: #171B1E;
+  }
+}
+
+.wrapper {
+  position: relative;
+}
+
+.products-menu {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  left: 50px;
+  right: 50px;
+  top: 90px;
+  background-color: var(--color-white-creme);
+  border-radius: 6px;
+  box-shadow: 0 2px 24px 0 rgba(24, 24, 24, 0.80);
+
+  display: flex;
+  text-align: left;
+  padding: 15px 20px;
+  color: var(--color-dark-creme);
+
+  h3 {
+    color: var(--color-dark-creme);
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  .framework {
+    flex: 0 0 160px;
+  }
+
+  a, a:link {
+    color: var(--color-dark-creme);
+    display: block;
+    margin: 15px 0;
+    font-weight: 600;
+  }
+
+  .components {
+    margin-left: auto;
+  }
+
+  .components > div {
+    border-radius: 6px;
+    padding: 4px 6px;
+    line-height: 17px;
+    margin: 13px 0;
+    cursor: pointer;
+
+    h4 {
+      font-weight: 500;
+      margin: 3px 0;
+      font-size: 16px;
+      color: var(--color-dark-creme);
     }
+
+    p {
+      margin: 0;
+      padding: 3px 0;
+      font-weight: 500;
+      font-size: 14px;
+      color: #7A818C;
+    }
+
+    &:hover {
+      background-color: var(--color-white-creme-light);
+    }
+
+    &:active {
+      background-color: rgba(242, 218, 191, 0.8);
+    }
+  }
+}
+
+.products-menu.active {
+  pointer-events: all;
+  opacity: 1;
 }
 
 @media(max-width: 450px) {
-    .wrapper {
-        display: block;
-        text-align: center;
-    }
+  .wrapper {
+    display: block;
+    text-align: center;
+  }
 
-    #twitter-logo {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-    }
+  #twitter-logo {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
 
-    #github-logo {
-        position: absolute;
-        right: 45px;
-        top: 15px;
-    }
+  #github-logo {
+    position: absolute;
+    right: 45px;
+    top: 15px;
+  }
 
-    nav {
-        margin-top: 15px;
-        justify-content: space-between;
+  nav {
+    margin-top: 15px;
+    justify-content: space-between;
 
-        a, a:link {
-            margin: auto;
-        }
+    a, a:link {
+      margin: auto;
     }
+  }
 }

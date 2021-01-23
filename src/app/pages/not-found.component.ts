@@ -1,21 +1,19 @@
-import {RESPONSE} from '@nguniversal/express-engine/tokens';
+import {RESPONSE} from '@deepkit/angular-universal/tokens';
+import type {HttpResponse} from '@deepkit/framework';
 import {Component, OnInit, Inject, Optional} from '@angular/core';
-import {Response} from 'express';
 
 @Component({
     template: `
         <div class="wrapper main text">
-            <h1>Lost</h1>
+            <h1>404</h1>
 
-            <p>404 - not found</p>
+            <p>I am afraid I can not do that.</p>
         </div>
     `,
 })
 export class NotFoundComponent implements OnInit {
-    private response: Response;
 
-    constructor(@Optional() @Inject(RESPONSE) response: any) {
-        this.response = response;
+    constructor(@Optional() @Inject(RESPONSE) protected response?: HttpResponse) {
     }
 
     ngOnInit() {

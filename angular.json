@@ -22,8 +22,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "preserveSymlinks": true,
             "aot": true,
-            "extractCss": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -43,7 +43,6 @@
               "node_modules/prismjs/components/prism-java.min.js",
               "node_modules/prismjs/components/prism-diff.min.js",
               "node_modules/prismjs/components/prism-yaml.min.js"
-
             ]
           },
           "configurations": {
@@ -57,7 +56,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
