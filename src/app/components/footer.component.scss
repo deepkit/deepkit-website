@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 25px 0;
+  padding: 25px 20px;
 }
 
 .left {
@@ -32,7 +32,7 @@
   display: flex;
 
   a, a:link {
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-white-creme);
     font-size: 14px;
     letter-spacing: 1px;

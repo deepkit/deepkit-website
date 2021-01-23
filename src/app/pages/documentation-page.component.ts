@@ -1,70 +1,95 @@
-import {ChangeDetectorRef, Component, HostListener, Inject, OnInit, Optional} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {RESPONSE} from "@nguniversal/express-engine/tokens";
-import {Docu} from "../provider/docu";
-import {AnchorService} from "../provider/anchor";
-import {TitleService} from "../provider/title";
+import { ChangeDetectorRef, Component, HostListener, Inject, OnInit, Optional } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { RESPONSE } from "@nguniversal/express-engine/tokens";
+import { Docu } from "../provider/docu";
+import { AnchorService } from "../provider/anchor";
+import { TitleService } from "../provider/title";
 
 @Component({
     template: `
-        <div class="wrapper main">
-            <div class="sidebar">
-                <a *ngFor="let page of docu.getPages('')" routerLink="/documentation/{{page.url}}"
-                   [class.active]="docu.getUrl(page) === selectedUrl"
-                >{{page.title}}</a>
+      <div class="wrapper">
+        <nav>
+          <div class="category">
+            <div class="category-title">Framework</div>
 
-                <ng-container *ngIf="docu.pages">
-                    <div class="section" *ngFor="let section of docu.getSections()">
-                        <div class="section-title">{{section.title}}</div>
-                        <a *ngFor="let page of docu.getPages(section.url)"
-                           [class.active]="docu.getUrl(page) === selectedUrl"
-                           routerLink="/documentation/{{docu.getUrl(page)}}">{{page.title}}</a>
-                    </div>
-                </ng-container>
-            </div>
+            <a routerLink="">Getting started</a>
+            <a routerLink="">Modules</a>
+            <a routerLink="">Services</a>
 
-            <div class="content doc-content">
-                <ng-container *ngIf="docu.pageMap && docu.pageMap[selectedUrl]">
-                    <markdown [data]="docu.pageMap[selectedUrl].markdown"></markdown>
-                </ng-container>
-            </div>
+            <div class="section-title">HTTP</div>
+            <section>
+              <a routerLink="">Controller</a>
+              <a routerLink="">Template</a>
+              <a routerLink="">Authentication</a>
+              <a routerLink="">Sessino/Roles</a>
+            </section>
 
-        </div>
+            <div class="section-title">RPC</div>
+            <section>
+              <a routerLink="">Controller</a>
+              <a routerLink="">Client</a>
+              <a routerLink="">Authentication</a>
+              <a routerLink="">Sessino/Roles</a>
+              <a routerLink="">Stream/RxJS</a>
+            </section>
+
+            <a routerLink="">CLI</a>
+            <a routerLink="">Logger</a>
+            <a routerLink="">Event Dispatcher</a>
+            <a routerLink="">Dependency Injection</a>
+            <a routerLink="">Workflow</a>
+            <a routerLink="">Configuration</a>
+            <a routerLink="">Testing</a>
+          </div>
+
+          <div class="category">
+            <div class="category-title">Type</div>
+
+            <a routerLink="">Getting started</a>
+            <a routerLink="">Schema</a>
+            <a routerLink="">Serialization</a>
+            <a routerLink="">Validation</a>
+            <a routerLink="">Groups</a>
+            <a routerLink="">Patch</a>
+            <a routerLink="">State management</a>
+            <a routerLink="">Serialization target</a>
+            <a routerLink="">External classes</a>
+          </div>
+
+          <div class="category">
+            <div class="category-title">Database/ORM</div>
+
+            <a routerLink="">Getting started</a>
+            <a routerLink="">Schema</a>
+            <a routerLink="">Session</a>
+            <a routerLink="">Query</a>
+            <a routerLink="">Relations</a>
+            <a routerLink="">Events</a>
+            <div class="section-title">Plugins</div>
+            <section>
+              <a routerLink="">Soft-Delete</a>
+            </section>
+          </div>
+        </nav>
+        <main>
+          <div class="subline">Framework</div>
+          <h2>Getting Started</h2>
+
+          <h3>Server Requirements</h3>
+
+          <p>
+            Deepkit framework has no system requirements except than an installed NodeJS v14+.
+          </p>
+          <p>
+            The easiest way to use Deepkit Framework is by using a full-stack example project that has already
+            everything installed. The examples with frontend contain a NX managed mono-repository with server, shared,
+            and frontend package.
+          </p>
+        </main>
+      </div>
     `,
     styleUrls: ['./documentation-page.component.scss']
 })
-export class DocumentationPageComponent implements OnInit {
-    selectedUrl = 'home';
+export class DocumentationPageComponent {
 
-    constructor(
-        protected anchorService: AnchorService,
-        protected route: ActivatedRoute,
-        protected title: TitleService,
-        protected cd: ChangeDetectorRef,
-        public docu: Docu,
-        @Optional() @Inject(RESPONSE) protected response: any,
-    ) {
-        route.firstChild.url.subscribe(async v => {
-            this.selectedUrl = v.map(u => u.path).join('/');
-            this.setTitle();
-        });
-    }
-
-    protected setTitle() {
-        if (this.docu.pageMap && this.docu.pageMap[this.selectedUrl]) {
-            this.title.setTitle(this.docu.pageMap[this.selectedUrl].title + ' Documentation');
-        }
-    }
-
-    async ngOnInit() {
-        await this.docu.loadPages();
-        this.setTitle();
-        this.cd.detectChanges();
-        this.anchorService.scrollToAnchor();
-    }
-
-    @HostListener('click', ['$event'])
-    public onClick($event: MouseEvent) {
-        this.anchorService.interceptClick($event);
-    }
 }

@@ -3,27 +3,50 @@
 :host {
     display: block;
     color: #3C3C3C;
+    background-color: #ddd;
+    min-height: 1500px;
 }
 
-.wrapper.main {
+.wrapper {
     display: flex;
     padding-top: 35px;
 }
 
-.doc-content {
-    color: #3C3C3C;
+main {
+    text-align: left;
+    font-weight: 500;
     font-size: 15px;
+    color: #313131;
+    line-height: 22px;
 
     h1, h2, h3, h4, h5 {
         color: #333333;
     }
+    overflow: hidden;
+
+    h1, h2 {
+        margin-top: 0;
+        font-weight: 600;
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    h3 {
+        font-weight: bold;
+    }
+
+    .subline {
+        color: #7c7c7c;
+    }
 }
 
-.sidebar {
+nav {
     flex: 0 0 175px;
-    padding-top: 25px;
     margin-right: 55px;
     min-height: 100%;
+    text-align: left;
 
     font-size: 14px;
     line-height: 24px;
@@ -32,6 +55,7 @@
     a, a:link {
         display: block;
         color: #3C3C3C;
+        font-weight: 500;
         margin-top: 1px;
         text-decoration: none;
 
@@ -44,30 +68,23 @@
         }
     }
 
-    .section {
-        border-top: 1px solid #dbdbdb;
-        margin-top: 25px;
-        padding-top: 25px;
-
-        .section-title {
-            font-weight: 600;
-        }
-    }
-}
-
-.content {
-    overflow: hidden;
-    *:first-child {
-        margin-top: 0;
-    }
-}
-
-@media(max-width: 500px) {
-    .wrapper.main {
-        display: block;
+    .category-title {
+        font-weight: bold;
+        color: black;
     }
 
-    .sidebar {
-        margin-right: 0;
+    .category {
+        margin-bottom: 35px;
+    }
+
+    .section-title {
+        font-size: 13px;
+        margin-top: 10px;
+        color: grey;
+    }
+
+    section {
+        padding-left: 5px;
+        margin-bottom: 15px;
     }
 }

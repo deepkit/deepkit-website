@@ -7,7 +7,7 @@ import {Component, OnInit, Inject, Optional} from '@angular/core';
         <div class="wrapper main text">
             <h1>404</h1>
 
-            <p>I am afraid I can not do that.</p>
+            <p>I am afraid I can't do that.</p>
         </div>
     `,
 })
