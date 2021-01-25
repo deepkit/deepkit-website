@@ -140,7 +140,7 @@
           "builder": "@angular-builders/custom-webpack:server",
           "options": {
             "customWebpackConfig": {
-              "path": "./extra-webpack.config.js"
+              "path": "./extra-webpack-server.config.js"
             },
             "outputPath": "dist/server",
             "main": "server.ts",

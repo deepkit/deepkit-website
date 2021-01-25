@@ -8,7 +8,6 @@ import { ContactPageComponent } from "./pages/contact-page.component";
 import { DataProtectionPageComponent } from "./pages/data-protection-page.component";
 import { DocumentationPageComponent } from "./pages/documentation-page.component";
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { MarkdownModule } from "ngx-markdown";
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { HumanFileSizePipe } from "./pipes";

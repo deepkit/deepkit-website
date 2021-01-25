@@ -3,27 +3,13 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-    // entry: {
-    //     'editor.worker': 'node_modules/monaco-editor/esm/vs/editor/editor.worker.js',
-    //     'json.worker': 'node_modules/monaco-editor/esm/vs/language/json/json.worker',
-    //     'css.worker': 'node_modules/monaco-editor/esm/vs/language/css/css.worker',
-    //     'html.worker': 'node_modules/monaco-editor/esm/vs/language/html/html.worker',
-    //     'ts.worker': 'node_modules/monaco-editor/esm/vs/language/typescript/ts.worker'
-    // },
     plugins: [
-        // new ExtraEntryWebpackPlugin({
-        //     entry: 'node_modules/monaco-editor/esm/vs/editor/editor.worker.js',
-        //     outputName: 'editor.worker.bundle.js'
-        // }
-        // new Visualizer({
-        //     filename: './statistics.html'
-        // }),
         new webpack.IgnorePlugin({resourceRegExp: /better_sqlite3/}),
         new MonacoWebpackPlugin({
             languages: ['javascript', 'typescript'],
         }),
     ],
     externals: {
-      'better-sqlite3': 'commonjs @deepkit/sql',
+      'better-sqlite3': {root: 'window'}, //just use something that exists, and is NOT better-sqlite3.
     },
 }
