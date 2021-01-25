@@ -1,0 +1,8 @@
+/node_modules
+/dist
+/var
+/Dockerfile
+/debug
+.git
+/deploy.sh
+/.idea

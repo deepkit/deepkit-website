@@ -1,0 +1,106 @@
+:host {
+  display: block;
+  position: relative;
+  top: -50px;
+  z-index: 101;
+}
+
+.wrapper {
+  max-width: 1300px;
+
+}
+
+.layout {
+  display: flex;
+  height: 400px;
+  text-align: left;
+  border: 1px solid #292929;
+  background-color: #0c0d0f;
+  border-radius: 4px;
+  box-shadow: 0 15px 22px 0 rgba(0, 0, 0, 0.21);
+
+  > * {
+    flex: 0 0 50%;
+    height: 100%;
+  }
+}
+
+pre {
+  padding: 15px;
+  margin: 0;
+}
+
+.dql {
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table th, table td {
+  font-size: 14px;
+  padding: 2px 5px;
+}
+
+.browser {
+  display: flex;
+  flex-direction: column;
+
+  .actions {
+    flex: 0 0 32px;
+    padding: 0 10px;
+    border-bottom: 1px solid #292929;
+  }
+
+  .content {
+    flex: 1;
+    overflow: auto;
+    overflow: overlay;
+    scrollbar-width: thin;
+  }
+
+  .console {
+    flex: 1;
+    border-top: 1px solid #292929;
+    font-size: 13px;
+
+    > div {
+      padding: 0 5px;
+      white-space: pre-line;
+      border-bottom: 1px solid #29292966;
+    }
+  }
+}
+
+.tables {
+  padding: 15px;
+}
+
+.actions {
+  display: flex;
+
+  .tabs {
+    text-align: center;
+    flex: 1;
+  }
+
+  button.tab {
+    border-radius: 2px;
+    border: 0;
+    background-color: transparent;
+    outline: 0;
+    background-image: none;
+
+    &:hover {
+      background-color: #116fec;
+    }
+
+    &.active {
+      background-color: #0e6dea;
+    }
+
+    &:active {
+      background-color: #0c66dd;
+    }
+  }
+}

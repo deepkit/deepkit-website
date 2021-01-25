@@ -7,8 +7,9 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
       <div class="wrapper">
         <a routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
 
-        <nav (click)="menu = ''">
-          <a class="products" (mouseenter)="open('products')" (mouseleave)="close('products')">Products</a>
+        <nav>
+          <a class="products" [class.active]="router.url.startsWith('/products')" 
+             (click)="open('products'); $event.preventDefault()" (mouseenter)="open('products')" (mouseleave)="close('products')">Products</a>
           <a routerLinkActive="active" routerLink="/support">Pro</a>
 
           <a routerLinkActive="active" routerLink="/community">Community</a>
@@ -21,7 +22,7 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
 
         <div [class.active]="menu === 'products'" (mouseenter)="open('products')" (mouseleave)="close('products')" class="products-menu">
           <div class="framework">
-            <h3>Framework</h3>
+            <h3>Framework <span class="tag" style="position: relative; top: -8px;">alpha</span></h3>
             
             <a routerLink="/products/framework">Features</a>
             <a routerLink="documentation/why-deepkit">Why Deepkit?</a>
@@ -31,11 +32,11 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
           <div class="components">
             <h3>Typescript Components</h3>
 
-            <div>
+            <div routerLink="/products/type">
               <h4>Type</h4>
               <p>Runtime TypeScript type/reflection system with ultra-fast serialization and validation.</p>
             </div>
-            <div>
+            <div routerLink="/products/orm">
               <h4>ORM</h4>
               <p>Fastest TypeScript ORM for MongoDB, SQLite, MySQL, MariaDB, PostgreSQL.</p>
             </div>
@@ -64,7 +65,7 @@ export class HeaderComponent {
 
     constructor(
         protected cd: ChangeDetectorRef,
-        protected router: Router,
+        public router: Router,
     ) {
         router.events.subscribe(() => {
             this.menu = '';
@@ -76,6 +77,7 @@ export class HeaderComponent {
         if (this.lastTimeout) clearTimeout(this.lastTimeout);
 
         this.menu = menu;
+        this.cd.detectChanges();
     }
 
     close(menu: string){

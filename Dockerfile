@@ -1,16 +1,25 @@
-FROM node:12-alpine3.9
+FROM node:14-alpine
 
-RUN apk --no-cache add git
-RUN npm config set unsafe-perm true
+RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python postgresql-dev
+
+ENV DIST=/app/dist/
+ENV HOST=0.0.0.0
+EXPOSE 8080
 
 ADD package.json /app/package.json
 ADD package-lock.json /app/package-lock.json
 
-RUN cd /app && npm install
+WORKDIR /app
 
-ADD . /app
-RUN cd /app && npm run build:ssr && npm prune --production
+RUN npm install
 
-ENV PORT=80
-EXPOSE 80
-CMD cd /app && node dist/server/main.js
+COPY . /app
+
+RUN npm run build:ssr
+RUN npm run server:build
+RUN npm prune --production
+
+RUN apk del g++ gcc linux-headers make python
+RUN rm -rf /tmp/* /var/tmp/*
+
+CMD node /app/dist/app/server/app.js server:listen

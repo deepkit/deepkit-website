@@ -1,0 +1,99 @@
+<div class="banner" style="height: 520px;">
+  <div class="wrapper">
+    <div class="text">
+      <h1>Deepkit ORM</h1>
+
+      <p class="banner-text">
+        The fastest Typescript ORM for MongoDB, MySQL, MariaDB, PostgreSQL, SQLite.
+      </p>
+
+      <p class="banner-text">
+        With data-mapper, active-record, UnitOfWork, identity map, migrations, relations support, and much more.<br/>
+        Use your plain Typescript classes - no code-generation required.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<orm-playground></orm-playground>
+
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Typescript classes</h2>
+    <p>
+      Just use your already defined Typescript classes, annotate with database related information,
+      and share with the rest of the application (even frontend). With support for strict Typescript.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+import { entity, t } from '@deepkit/type';
+
+@entity.name('user')
+class User {
+    @t.primary.autoIncrement id: number = 0;
+    @t createdAt: Date = new Date;
+
+    @t lastName?: string;
+    @t firstName?: string;
+
+    @t.pattern(/^\S+@\S+\.\S+$/).index()
+    email?: string;
+
+    constructor(
+       @t.minLength(3) public username: string
+    ) {}
+}
+    </textarea>
+    </div>
+  </div>
+
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Relations</h2>
+    <p>
+      Define your relations in terms of object references, and let the database handle the rest.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+class Author {
+    @t.primary.autoIncrement id: number = 0;
+    @t createdAt: Date = new Date;
+
+    @t lastName?: string;
+    @t firstName?: string;
+
+    @t.backReference() books: Book[] = [];
+
+    constructor(
+       @t.minLength(3) public username: string
+    ) {}
+}
+
+class Book {
+    @t.primary.autoIncrement id: number = 0;
+    @t createdAt: Date = new Date;
+
+    @t description: string = '';
+
+    constructor(
+       @t.minLength(3) public title: string,
+       @t.reference() author: Author,
+    ) {}
+}
+    </textarea>
+    </div>
+  </div>
+
+</feature-box>

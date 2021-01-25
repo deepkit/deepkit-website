@@ -15,8 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js"
+            },
             "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -26,23 +29,22 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/monaco-editor/min/", "output": "./monaco-editor/" }
             ],
             "styles": [
               "src/styles.scss",
               "node_modules/cookieconsent/build/cookieconsent.min.css",
-              "node_modules/prismjs/themes/prism-okaidia.css"
+              "node_modules/prismjs/themes/prism-okaidia.css",
+              "node_modules/monaco-editor/min/vs/editor/editor.main.css"
             ],
             "scripts": [
+              "node_modules/sql.js/dist/sql-wasm.js",
+              "node_modules/monaco-editor/min/vs/loader.js",
               "node_modules/cookieconsent/build/cookieconsent.min.js",
               "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-python.min.js",
-              "node_modules/prismjs/components/prism-bash.min.js",
               "node_modules/prismjs/components/prism-typescript.min.js",
-              "node_modules/prismjs/components/prism-json.min.js",
-              "node_modules/prismjs/components/prism-java.min.js",
-              "node_modules/prismjs/components/prism-diff.min.js",
-              "node_modules/prismjs/components/prism-yaml.min.js"
+              "node_modules/prismjs/components/prism-sql.min.js"
             ]
           },
           "configurations": {

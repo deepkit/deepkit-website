@@ -66,13 +66,13 @@ class Release {
                 <h2>Changelog</h2>
                 <ng-container *ngIf="next as release">
                     <h3>Next / Nightly</h3>
-                    <markdown [data]="release.releasenotes"></markdown>
+<!--                    <markdown [data]="release.releasenotes"></markdown>-->
                 </ng-container>
 
                 <ng-container *ngFor="let release of releases|slice:0:max">
                     <h3>{{release.version}}</h3>
                     <div class="released">released {{release.released|date}}</div>
-                    <markdown [data]="release.releasenotes"></markdown>
+<!--                    <markdown [data]="release.releasenotes"></markdown>-->
                 </ng-container>
 
                 <a class="button" *ngIf="releases.length > max" (click)="max =  max + 5">Show more</a>

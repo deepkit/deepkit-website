@@ -30,9 +30,9 @@ import { DeepkitClient } from '@deepkit/rpc';
 import { ControllerClient } from './client';
 import { IndexFeatureComponent } from './components/index-feature.component';
 import { FeaturesPageComponent } from './pages/features-page.component';
-import { SeparatorComponent } from './components/separator.component';
-import { FeatureBoxComponent } from './components/feature-box.component';
-import { CodeHighlightComponent } from './components/code-highlight.component';
+import { TypeComponent } from './pages/type.component';
+import { FormsModule } from "@angular/forms";
+import { AppCommonModule } from './common/common.module';
 
 @NgModule({
     declarations: [
@@ -57,16 +57,16 @@ import { CodeHighlightComponent } from './components/code-highlight.component';
         BenchmarkComponent,
         IndexFeatureComponent,
         FeaturesPageComponent,
-        SeparatorComponent,
-        FeatureBoxComponent,
-        CodeHighlightComponent,
+        TypeComponent,
     ],
     imports: [
         CommonModule,
+        AppCommonModule,
+        FormsModule,
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
-        MarkdownModule.forRoot({
-            sanitize: SecurityContext.NONE
-        }),
+        // MarkdownModule.forRoot({
+        //     sanitize: SecurityContext.NONE
+        // }),
         AppRoutingModule,
         HttpClientModule,
         TransferHttpCacheModule,

@@ -1,0 +1,262 @@
+<div class="banner" style="height: 400px;">
+  <div class="wrapper">
+    <div class="text">
+      <h1>Deepkit Type</h1>
+
+      <p class="banner-text">
+        Runtime type reflection system for Typescript, with high-performance serializer and validator.
+      </p>
+
+      <div class="actions">
+        <a routerLink="/documentation/type" class="button primary">Get started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<feature-box>
+  <div class="left">
+    <h2>Class annotation</h2>
+    <p>
+      Annotate your model classes with <code>@t</code>
+      to get runtime type information and allow serialization and validation.
+    </p>
+
+    <div class="box">
+      <textarea codeHighlight>
+        const schema = getClassSchema(User);
+
+        schema.getProperty('id').type; //number
+        schema.getProperty('username').isOptional; //false
+
+        schema.getProperty('firstName').type; //string
+        schema.getProperty('firstName').isOptional; //true
+
+        schema.hasProperty('internal'); //false
+      </textarea>
+    </div>
+
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+      import { t } from '@deepkit/type';
+
+      class User {
+        @t id: number = 0;
+
+        @t createdAt: Date = new Date;
+
+        @t firstName?: string;
+        @t lastName?: string;
+
+        @t.pattern(/^\S+@\S+\.\S+$/)
+        email?: string;
+
+        constructor(
+          @t.minLength(3) public username: string
+        ) { }
+      }
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box align="right">
+  <div class="left">
+    <h2>Schema definition</h2>
+    <p>
+      Made for class-less use-cases as well.
+    </p>
+
+    <div class="box">
+      <textarea codeHighlight>
+        user.getProperty('id').type; //number
+        user.getProperty('username').isOptional; //false
+
+        user.getProperty('firstName').type; //string
+        user.getProperty('firstName').isOptional; //true
+      </textarea>
+    </div>
+
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+      import { t } from '@deepkit/type';
+
+      const user = t.schema({
+        id: t.number.default(0),
+        createdAt: t.date.default(() => new Date),
+        firstName: t.string.optional,
+        lastName: t.string.optional,
+        username: t.string,
+      });
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box align="left">
+  <div class="left">
+    <h2>Serialization</h2>
+    <p>
+      High-performance serialization from and to JSON, optimized by JIT techniques.
+    </p>
+
+    <p>
+      Supports custom serializer targets as well.
+    </p>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { classToPlain, plainToClass } from '@deepkit/type';
+
+        const myUser = new User('Daniel');
+        const json = classToPlain(User, myUser);
+
+        const user: User = plainToClass(User, {
+          username: 'Daniel',
+          createdAt: '2021-01-24T15:23:16.582Z'
+        });
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+
+<feature-box align="left">
+  <div class="left">
+    <h2>Validation</h2>
+    <p>
+      High-performance validation optimized by JIT techniques.
+    </p>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { validatedPlainToClass, validate } from '@deepkit/type';
+
+        const user: User = validatedPlainToClass(User, {
+          username: 'Daniel',
+          email: 'invalid',
+        }); //throws an ValidationFailedError if invalid
+
+        //or validate class instances
+        const user = new User('ba');
+        const errors = validate(User, user); //empty array if valid
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+
+<feature-box align="left">
+  <div class="left">
+    <h2>Class re-use</h2>
+    <p>
+      Avoid code duplication and make refactoring easier by re-using
+      models.
+    </p>
+
+    <div class="box">
+      <textarea codeHighlight>
+        import { mixin } from '@deepkit/type';
+
+        class User extends mixin(UUID, Timestamp, SoftDelete) {
+          @t firstName?: string;
+          @t lastName?: string;
+
+          @t.pattern(/^\S+@\S+\.\S+$/)
+          email?: string;
+
+          constructor(
+            @t.minLength(3) public username: string
+          ) {
+            super();
+          }
+        }
+      </textarea>
+    </div>
+
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { uuid } from '@deepkit/type';
+
+        class Timestamp {
+           @t createdAt: Date = new Date;
+           @t updatedAt: Date = new Date;
+        }
+
+        class SoftDelete {
+           @t deletedAt?: Date;
+           @t deletedBy?: string;
+        }
+
+        class UUID {
+           @t.uuid uuid: string = uuid();
+        }
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box align="left">
+  <div class="left">
+    <h2>Class slicing</h2>
+    <p>
+      Slice your classes the way you want to avoid code-duplication.
+    </p>
+
+    <div class="box">
+      <textarea codeHighlight>
+        import { sliceClass } from '@deepkit/type';
+
+        class FrontendUser extends
+          sliceClass(User).exclude('password', 'salt') {
+
+          // when user sets this, we handle it correctly
+          //by hashing it accordingly and update `User`
+          @t newPassword?: string;
+        }
+
+      </textarea>
+    </div>
+
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { t } from '@deepkit/type';
+
+        class User {
+          @t id: number = 0;
+
+          // this field should never reach
+          // the frontend
+          @t password?: string;
+          @t salt?: string;
+
+          @t createdAt: Date = new Date;
+
+          @t firstName?: string;
+          @t lastName?: string;
+
+          constructor(
+            @t.minLength(3) public username: string
+          ) { }
+        }
+      </textarea>
+    </div>
+  </div>
+</feature-box>

@@ -1,12 +1,12 @@
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
-import {Application, KernelModule} from '@deepkit/framework';
-import {AngularUniversalModule} from '@deepkit/angular-universal';
-import {MongoDatabase} from "./db";
-import {appConfig} from "./config";
-import {FrameworkController, FrameworkHttpController} from './controller/framework.controller';
-import {AuthListener} from "./auth";
-import {dirname} from 'path';
+import { Application, KernelModule } from '@deepkit/framework';
+import { AngularUniversalModule } from '@deepkit/angular-universal';
+import { MongoDatabase } from "./db";
+import { appConfig } from "./config";
+import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
+import { AuthListener } from "./auth";
+import { dirname } from 'path';
 
 Application.create({
     providers: [],
@@ -20,14 +20,15 @@ Application.create({
     config: appConfig,
     imports: [
         KernelModule.configure({
-            publicDir: __dirname + '/../../dist/browser',
+            publicDir: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
             databases: [MongoDatabase],
-            debug: true,
-            workers: 1,
+            debug: false,
+            host: process.env.HOST || '127.0.0.1',
+            workers: 1
         }),
         AngularUniversalModule.configure({
-            browserPath: __dirname + '/../../dist/browser',
-            serverPath: __dirname + '/../../dist/server',
+            browserPath: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
+            serverPath: (process.env.DIST || __dirname + '/../../dist/') + 'server',
         }),
     ]
 }).run();

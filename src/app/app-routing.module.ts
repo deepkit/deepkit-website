@@ -14,6 +14,7 @@ import {MLFrame} from "./pages/machine-learning/frame.component";
 import {FrameworkFrameComponent} from "./pages/framwork/frame.component";
 import {BenchmarkComponent} from "./pages/framwork/benchmark.component";
 import { FeaturesPageComponent } from "./pages/features-page.component";
+import { TypeComponent } from './pages/type.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,18 @@ const routes: Routes = [
     {
         path: 'products/framework',
         component: FeaturesPageComponent,
-        data: {title: 'Features'},
+        data: {title: 'Framework Features'},
+    },
+
+    {
+        path: 'products/type',
+        component: TypeComponent,
+        data: {title: 'Deepkit Type'},
+    },
+    {
+        path: 'products/orm',
+        loadChildren: () => import('./orm/orm.module').then(m => m.OrmModule),
+        data: {title: 'Deepkit ORM'},
     },
 
     // {

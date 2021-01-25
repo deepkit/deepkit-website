@@ -1,10 +1,5 @@
 .banner {
-  overflow: hidden;
-  padding-top: 90px;
-  top: -90px;
-  position: relative;
-  z-index: 100;
-  margin-bottom: -90px;
+  display: block;
 
   > .wrapper {
     height: 680px;

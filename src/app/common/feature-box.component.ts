@@ -55,17 +55,28 @@ import { Component, HostBinding, Input } from "@angular/core";
             position: relative;
             display: flex;
         }
+        
+        .layout ::ng-deep h2:first-of-type {
+            margin-top: 0;
+        }
 
         .layout div.left {
             position: relative;
             text-align: left;
             margin-right: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .layout div.right {
             position: relative;
-            margin-left: 25px;
+            margin-left: auto;
+            padding-left: 25px;
             text-align: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     `],
     host: {
