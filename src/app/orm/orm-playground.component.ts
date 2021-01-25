@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    Inject,
+    OnDestroy,
+    OnInit, PLATFORM_ID,
+    ViewChild
+} from "@angular/core";
 import { ModuleKind, ScriptTarget, transpile } from "typescript";
 import * as type from '@deepkit/type';
 import * as orm from "@deepkit/orm";
@@ -8,6 +17,7 @@ import { Database } from "@deepkit/orm";
 import { ClassType } from "@deepkit/core";
 import type { editor, languages } from 'monaco-editor';
 import { SQLDatabaseAdapter } from "@deepkit/sql";
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'orm-playground',
@@ -97,8 +107,13 @@ console.log('ids', await database.query(User).select('username').findField('id')
     protected editor?: editor.IStandaloneCodeEditor;
 
     public logs: string[] = [];
+    protected isBrowser: boolean = true;
 
-    constructor(protected cd: ChangeDetectorRef) {
+    constructor(
+        protected cd: ChangeDetectorRef,
+        @Inject(PLATFORM_ID) protected platformId: any,
+    ) {
+        this.isBrowser = isPlatformBrowser(platformId);
     }
 
     openTab(tab: string) {
@@ -117,6 +132,8 @@ console.log('ids', await database.query(User).select('username').findField('id')
     }
 
     async ngAfterViewInit() {
+        if (!this.isBrowser) return;
+
         if (this.container) {
             (window as any).require.config({ paths: { 'vs': `monaco-editor/vs` } });
             (window as any).require(['vs/editor/editor.main'], (monaco) => {

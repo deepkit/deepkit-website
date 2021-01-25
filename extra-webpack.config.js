@@ -1,5 +1,6 @@
 // const ExtraEntryWebpackPlugin = require('extra-entry-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     // entry: {
@@ -13,12 +14,16 @@ module.exports = {
         // new ExtraEntryWebpackPlugin({
         //     entry: 'node_modules/monaco-editor/esm/vs/editor/editor.worker.js',
         //     outputName: 'editor.worker.bundle.js'
-        // })
+        // }
         // new Visualizer({
         //     filename: './statistics.html'
         // }),
+        new webpack.IgnorePlugin({resourceRegExp: /better_sqlite3/}),
         new MonacoWebpackPlugin({
             languages: ['javascript', 'typescript'],
         }),
     ],
+    externals: {
+      'better-sqlite3': 'commonjs @deepkit/sql',
+    },
 }

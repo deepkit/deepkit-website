@@ -20,6 +20,7 @@
   },
   "private": true,
   "browser": {
+    "sqlite3": false,
     "better-sqlite3": false,
     "crypto": false
   },

@@ -110,9 +110,9 @@ import { Component } from "@angular/core";
         </p>
 
         <div class="points">
-          <div><h3>Type</h3>
+          <div routerLink="/products/type"><h3>Type</h3>
             <p>Runtime types, serialization, validation.</p><a routerLink="/">Learn more</a></div>
-          <div><h3>ORM</h3>
+          <div routerLink="/products/orm"><h3>ORM</h3>
             <p>Fastest TypeScript ORM.</p><a routerLink="/">Learn more</a></div>
           <div><h3>Broker</h3>
             <p>Message bus with pub/sub, key/value, and more.</p><a routerLink="/">Learn more</a></div>
