@@ -45,7 +45,7 @@ export class SQLJSConnectionPool extends SQLiteConnectionPool {
 }
 
 let lastDb: any;
-export class SQLJSDatabaseAdapter extends SQLDatabaseAdapter {
+export class SQLiteDatabaseAdapter extends SQLDatabaseAdapter {
     public readonly connectionPool: SQLJSConnectionPool;
     public readonly platform = new SQLitePlatform();
     protected db;

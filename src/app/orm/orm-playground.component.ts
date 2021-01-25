@@ -69,7 +69,7 @@ export class OrmPlaygroundComponent implements AfterViewInit, OnDestroy {
     ts: string = `
 import {Database} from '@deepkit/orm';
 import {t, entity} from '@deepkit/type';
-import {SQLJSDatabaseAdapter} from '@deepkit/sqlite-js';
+import {SQLiteDatabaseAdapter} from '@deepkit/sqlite';
 
 @entity.name('user')
 class User {
@@ -82,7 +82,7 @@ class User {
     ) {}
 }
 
-const database = new Database(new SQLJSDatabaseAdapter(), [User]);
+const database = new Database(new SQLiteDatabaseAdapter(), [User]);
 await database.migrate();
 
 await database.persist(new User('Peter'), new User('Daniel'), new User('Marie'));
@@ -90,7 +90,7 @@ await database.persist(new User('Peter'), new User('Daniel'), new User('Marie'))
 const items = await database.query(User).select('username').find();
 console.log('items', items);
 
-console.log('ids', await database.query(User).select('username').findField('id'));
+console.log('ids', await database.query(User).findField('id'));
 
     `.trim();
     js: string = '';
@@ -225,7 +225,7 @@ console.log('ids', await database.query(User).select('username').findField('id')
             await new Function('require', 'exports', 'return async function() { ' + this.js + '}')((id: string) => {
                 if (id === '@deepkit/type') return type;
                 if (id === '@deepkit/orm') return { ...orm, Database: LoggedDatabase };
-                if (id === '@deepkit/sqlite-js') return sqlJs;
+                if (id === '@deepkit/sqlite') return sqlJs;
             }, {})();
 
         } finally {

@@ -1,4 +1,4 @@
-<div class="banner" style="height: 520px;">
+<div class="banner" style="height: 550px;">
   <div class="wrapper">
     <div class="text">
       <h1>Deepkit ORM</h1>
@@ -12,12 +12,14 @@
         Use your plain Typescript classes - no code-generation required.
       </p>
 
+      <div class="actions">
+        <a routerLink="/documentation/orm" class="button primary">Get started</a>
+      </div>
     </div>
   </div>
 </div>
 
 <orm-playground></orm-playground>
-
 
 <feature-box color="#3e3e3e">
   <div class="left">
@@ -25,6 +27,10 @@
     <p>
       Just use your already defined Typescript classes, annotate with database related information,
       and share with the rest of the application (even frontend). With support for strict Typescript.
+    </p>
+    <p>
+      All database related information are declared using <code>@deepkit/type</code> so
+      no ORM/database related code is imported to other users of this model.
     </p>
     <a class="button">Learn more</a>
   </div>
@@ -57,16 +63,106 @@ class User {
 
 <feature-box color="#3e3e3e">
   <div class="left">
-    <h2>Relations</h2>
+    <h2>Query API</h2>
     <p>
-      Define your relations in terms of object references, and let the database handle the rest.
+      The query API allows you to fetch and manipulate data in a type-safe manner.
     </p>
-    <a class="button">Learn more</a>
+    <p>
+      Filtering uses an Mongo-Like query interface, that works for every
+      database (even SQL) the same.
+    </p>
+    <p>
+      The API is designed to build cross-database queries that work
+      on every database the same.
+    </p>
+    <div class="box">
+      <textarea codeHighlight>
+        const result = await database.query(User)
+          .orderBy('createdAt')
+          .limit(5)
+          .patchMany({credit: {$inc: 100}});
+        //reports affected records, e.g. [1, 2, 3, 4, 5]
+        result.primaryKeys;
+        //also returns the new credit value
+        result.returning.credit; //e.g. [100, 200, 100, 300, 100]
+
+        const result = await database.query(User)
+          .filter({disabled: true})
+          .deleteMany();
+        //reports affected records, e.g. [1, 2, 3, 4, 5]
+        result.primaryKeys;
+      </textarea>
+    </div>
+
+    <div class="actions">
+      <a class="button">Learn more</a>
+    </div>
   </div>
 
   <div class="right">
     <div class="box">
       <textarea codeHighlight>
+        const user = await database.query(User)
+          .filter({username: 'Peter')
+          .findOne(); //returns User class instance
+
+        const users = await database.query(User)
+          .orderBy('lastLogin')
+          .limit(10)
+          .find(); //returns array of User class instance
+
+        const users = await database.query(User)
+          //Mongo-Like queries for cross-databases queries
+          // lastLogin > 10 ($gt = greater than)
+          .filter({lastLogin: {$gt: 10})
+          .limit(10)
+          .find();
+
+        //aggregation queries: Get user count in each group
+        const users = await database.query(User)
+          .groupBy('group')
+          .withCount('id', 'users')
+          .find(); // [{group: 'teamA', users: 5}]
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Relations</h2>
+    <p>
+      Define your relations in terms of object references, and let the database handle the rest.
+    </p>
+
+    <div class="box">
+      <textarea codeHighlight>
+        const books = await database.query(Book)
+          .joinWith('author')
+          .find();
+        for (const book of books) {
+          //access the eagerly loaded relation
+          book.author.username;
+        }
+
+        const books = await database.query(Book)
+          .useInnerJoinWith('author')
+            //add additional filter to the join
+            .filter({username: 'Peter'})
+            .end()
+          .find();
+      </textarea>
+    </div>
+    <div class="actions">
+      <a class="button">Learn more</a>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+import { entity, t } from '@deepkit/type';
+
 class Author {
     @t.primary.autoIncrement id: number = 0;
     @t createdAt: Date = new Date;
@@ -74,10 +170,12 @@ class Author {
     @t lastName?: string;
     @t firstName?: string;
 
-    @t.backReference() books: Book[] = [];
+    @t.array(Book).backReference()
+    books: Book[] = [];
 
     constructor(
-       @t.minLength(3) public username: string
+        @t.minLength(3)
+        public username: string
     ) {}
 }
 
@@ -88,12 +186,317 @@ class Book {
     @t description: string = '';
 
     constructor(
-       @t.minLength(3) public title: string,
-       @t.reference() author: Author,
+        @t.minLength(3) public title: string,
+        @t.reference() public author: Author,
     ) {}
 }
     </textarea>
     </div>
   </div>
 
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Class-less</h2>
+    <p>
+      Define entities in a dynamic fashion without the need to use an actual Typescript class.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { t } from '@deepkit/type';
+
+        const user = t.schema({
+          id: t.number.primaryKey.autoIncrement,
+          createdAt: t.date.default(() => new Date),
+          firstName: t.string.optional,
+          lastName: t.string.optional,
+          username: t.string,
+        });
+
+        const user = await database.query(user)
+          .filter({username: 'Peter'})
+          .findOne();
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Unit of Work</h2>
+    <p>
+      The easiest way to work with your entities. Handle ten-thousands
+      of instances at the same time and let the UoW inserts/updates them in
+      the most efficient way possible.
+    </p>
+    <p>
+      The identity map makes sure that all persisted and fetched instances
+      in one session are uniquely identifiable and always the same instance.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        const session = database.createSession();
+
+        for (let i = 0; i < 10_000; i++) {
+          session.add(new User('User ' + i));
+        }
+
+        //all items are inserted extremely fast in one
+        //transaction with a single query
+        await session.commit();
+
+        const users = session.query(User).find();
+        for (const user of users) {
+          if (user.credit < 1000) user.credit += 100;
+        }
+
+        //changes are automatically detected and
+        //patched to the database
+        await session.commit();
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>ActiveRecord</h2>
+    <p>
+      For prototyping purposes Deepkit ORM also supports the ActiveRecord pattern.
+      It allows you to directly work with the entity class, without accessing
+      a Database object.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { entity, t } from '@deepkit/type';
+        import { ActiveRecord } from '@deepkit/orm';
+
+        @entity.name('user')
+        class User extends ActiveRecord {
+            @t.primary.autoIncrement id: number = 0;
+            @t createdAt: Date = new Date;
+            //...
+        }
+
+        const user = new User('Marie');
+        await user.save();
+
+        const users = await User.query()
+          .filter({logins: ${gt: 10}})
+          .find();
+        for (const user of users) {
+          user.credit += 10;
+          await user.save();
+        }
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Event system</h2>
+    <p>
+      You can hook into the UoW process or query execution using asynchronous event
+      listeners that are for example able to modify the query itself.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        //onFetch is called for find(), findOne(),
+        // findOneOrUndefined(), etc
+        database.queryEvents.onFetch.subscribe((event) => {
+          if (event.isSchemaOf(User)) {
+            //modify the query
+            event.query = event.query.addFilter({deleted: false});
+          }
+        });
+
+        //onDeletePost is called after
+        //.deleteOne()/.deleteMany() successfully executed
+        database.queryEvents.onFetch.subscribe((event) => {
+          //primaryKeys contains each primary key for
+          //all affected records
+          for (const id of event.deleteResult.primaryKeys) {
+            await event.databaseSession.persist(
+              new AuditLog('deleted', event.classSchema.getName())
+            );
+          }
+        });
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Migrations</h2>
+    <p>
+      Migrations help you migrate schema changes for SQL databases in an easy yet effective way.
+    </p>
+    <p>
+      The migration file is automatically generated based on the difference
+      between the actual schema of your database and your schema defined
+      in your database entities.
+    </p>
+    <p>
+      You can modify the generated schema migration as you wish and commit
+      to Git, so your colleagues and deploy script can update the database schema
+      automatically.
+    </p>
+    <div class="box">
+      <textarea codeHighlight>
+        class User {
+          @t.number.primary.autoIncrement id:number = 0;
+          @t username: string = '';
+        }
+
+        //version 2 adds new fields
+        class User {
+          @t.number.primary.autoIncrement id:number = 0;
+          @t username: string = '';
+          @t lastName: string = '';
+          @t firstName: string = '';
+        }
+      </textarea>
+    </div>
+
+    <div class="actions">
+      <a class="button">Learn more</a>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight lang="sql">
+//my-app/migration/20200917-1727.ts
+import {Migration} from '@deepkit/framework';
+export class SchemaMigration implements Migration {
+    name = `extended user`;
+
+    adapterName = "sqlite";
+
+    version = 1600362068;
+
+    up() {
+        return [
+          `ALTER TABLE "user" ADD COLUMN "lastName" TEXT`
+          `ALTER TABLE "user" ADD COLUMN "firstName" TEXT`
+        ];
+    }
+
+    down() {
+        return [
+          `ALTER TABLE "user" DROP COLUMN "lastName"`
+          `ALTER TABLE "user" DROP COLUMN "firstName"`
+        ];
+    }
+}
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>High-Performance</h2>
+    <p>
+      Deepkit ORM is based on Deepkit Type, the high-performance serializer/validator, and is
+      itself carefully optimized by using JIT techniques, to make it the fastest ORM/ODM on the market.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <performance-chart yAxis="ms / SQLite query 10k records">
+      <performance-entry title="TypeORM" [value]="52.139"></performance-entry>
+      <performance-entry title="Prisma" [value]="73.932"></performance-entry>
+      <performance-entry title="MikroORM" [value]="43.754"></performance-entry>
+      <performance-entry title="Deepkit ORM" [value]="15.057"></performance-entry>
+    </performance-chart>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Fastest MongoDB</h2>
+    <p>
+      The MongoDB adapter for Deepkit ORM is based on the high-performance
+      BSON serializer and decoder @deepkit/bson, and optimized MongoDB client
+      making it the by far fastest MongoDB ORM/ODM.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <performance-chart yAxis="ms / MongoDB query 10k records">
+      <performance-entry title="TypeORM" [value]="71.733"></performance-entry>
+      <performance-entry title="Mongoose" [value]="236.819"></performance-entry>
+      <performance-entry title="MikroORM" [value]="99.530"></performance-entry>
+      <performance-entry title="Deepkit ORM" [value]="18.242"></performance-entry>
+    </performance-chart>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Query composition</h2>
+    <p>
+      Reuse type-safe query classes and organize database access in the most efficient way.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+        import { Query } from '@deepkit/orm';
+
+        class SoftDeleteQuery<T extends {deletedAt?: Date}>
+          extends Query<T> {
+
+          findDeleted(): Promise<T[]> {
+            return this.filter({deletedAt: {$ne: undefined}}).find();
+          }
+        }
+
+        const deletedUser = await database.query(User)
+          .use(SoftDeleteQuery)
+          .findDeleted();
+      </textarea>
+    </div>
+  </div>
+</feature-box>
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>Plugins</h2>
+    <p>
+      Soft-Delete, Versioning, Archiving, Audit
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <div class="box">
+      <textarea codeHighlight>
+      </textarea>
+    </div>
+  </div>
 </feature-box>

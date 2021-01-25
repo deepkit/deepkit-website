@@ -67,6 +67,7 @@ import { Component, HostBinding, Input } from "@angular/core";
             display: flex;
             justify-content: center;
             align-items: center;
+            max-width: 50%;
         }
 
         .layout div.right {
@@ -74,9 +75,14 @@ import { Component, HostBinding, Input } from "@angular/core";
             margin-left: auto;
             padding-left: 25px;
             text-align: right;
+            max-width: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        :host ::ng-deep .actions {
+            margin: 20px 0;
         }
     `],
     host: {
