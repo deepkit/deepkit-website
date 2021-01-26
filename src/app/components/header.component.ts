@@ -30,7 +30,7 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
           </div>
           
           <div class="components">
-            <h3>Typescript Components</h3>
+            <h3>Typescript Libraries</h3>
 
             <div routerLink="/products/type">
               <h4>Type</h4>
@@ -40,6 +40,10 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
               <h4>ORM</h4>
               <p>Fastest TypeScript ORM for MongoDB, SQLite, MySQL, MariaDB, PostgreSQL.</p>
             </div>
+<!--            <div routerLink="/products/desktop-ui">-->
+<!--              <h4>Desktop UI</h4>-->
+<!--              <p>Angular & Electron desktop UI framework. Angular components for native looking UI widgets.</p>-->
+<!--            </div>-->
             <div>
               <h4>RPC</h4>
               <p>Highly configurable RPC server for TypeScript with automatic type serialization and validation.</p>
@@ -47,10 +51,6 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
             <div>
               <h4>Broker</h4>
               <p>High-Performance typesafe message bus for pub/sub, key-value, and central atomic app locks.</p>
-            </div>
-            <div>
-              <h4>Desktop UI</h4>
-              <p>Angular & Electron desktop UI framework. Angular components for native looking UI widgets.</p>
             </div>
           </div>
         </div>

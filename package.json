@@ -21,6 +21,7 @@
   "private": true,
   "browser": {
     "sqlite3": false,
+    "electron": false,
     "better-sqlite3": false,
     "crypto": false
   },
@@ -43,6 +44,7 @@
     "@deepkit/mongo": "^1.0.1-alpha.13",
     "@deepkit/orm": "^1.0.1-alpha.13",
     "@deepkit/rpc": "^1.0.1-alpha.13",
+    "@deepkit/desktop-ui": "^1.0.1-alpha.13",
     "@deepkit/sql": "^1.0.1-alpha.13",
     "@deepkit/sqlite": "^1.0.1-alpha.13",
     "@deepkit/type": "^1.0.1-alpha.13",
@@ -67,6 +69,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^14.0.0",
     "@types/prismjs": "^1.16.2",
+    "@angular/cdk": "^11.1.0",
     "codelyzer": "^5.1.2",
     "cookieconsent": "^3.1.1",
     "jasmine-core": "~3.5.0",

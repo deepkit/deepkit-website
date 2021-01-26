@@ -9,5 +9,6 @@
   "@deepkit/orm": "../deepkit-framework/packages/orm",
   "@deepkit/rpc": "../deepkit-framework/packages/rpc",
   "@deepkit/topsort": "../deepkit-framework/packages/topsort",
+  "@deepkit/desktop-ui": "../deepkit-framework/packages/desktop-ui",
   "@deepkit/type": "../deepkit-framework/packages/type"
 }

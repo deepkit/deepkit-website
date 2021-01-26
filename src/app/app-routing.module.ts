@@ -43,6 +43,11 @@ const routes: Routes = [
         loadChildren: () => import('./orm/orm.module').then(m => m.OrmModule),
         data: {title: 'Deepkit ORM'},
     },
+    // {
+    //     path: 'products/desktop-ui',
+    //     loadChildren: () => import('./desktop-ui/desktop-ui.module').then(m => m.DesktopUiModule),
+    //     data: {title: 'Angular Desktop UI'},
+    // },
 
     // {
     //     path: 'framework',

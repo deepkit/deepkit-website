@@ -135,8 +135,8 @@ console.log('ids', await database.query(User).findField('id'));
         if (!this.isBrowser) return;
 
         if (this.container) {
-            (window as any).require.config({ paths: { 'vs': `monaco-editor/vs` } });
-            (window as any).require(['vs/editor/editor.main'], (monaco) => {
+            (window as any)._require.config({ paths: { 'vs': `monaco-editor/vs` } });
+            (window as any)._require(['vs/editor/editor.main'], (monaco) => {
                 monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
                     noSemanticValidation: true,
                     noSyntaxValidation: true,

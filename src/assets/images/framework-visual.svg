@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="262px" height="534px" viewBox="0 0 262 534" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>framework-visual</title>
+    <g id="v3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Deepkit-Frameworkv3" transform="translate(-762.000000, -150.000000)">
+            <g id="framework-visual" transform="translate(762.500000, 151.000000)">
+                <rect id="Rectangle" stroke-opacity="0.496320818" stroke="#303030" fill-opacity="0.401821323" fill="#0F0F0F" x="72" y="138.5" width="188" height="255" rx="4"></rect>
+                <path d="M85.5,182 L246.5,182 C248.709139,182 250.5,183.790861 250.5,186 L250.5,219 C250.5,221.209139 248.709139,223 246.5,223 L85.5,223 C83.290861,223 81.5,221.209139 81.5,219 L81.5,186 C81.5,183.790861 83.290861,182 85.5,182 Z" id="Rectangle" fill-opacity="0.214124986" fill="#232527"></path>
+                <rect id="Rectangle" stroke-opacity="0.496320818" stroke="#303030" fill-opacity="0.401821323" fill="#0F0F0F" x="72" y="-0.5" width="188" height="116" rx="4"></rect>
+                <text id="Frontend" font-family="Muli-Regular, Muli" font-size="16" font-weight="normal" fill="#737880">
+                    <tspan x="132.712" y="25">Frontend</tspan>
+                </text>
+                <rect id="Rectangle" stroke-opacity="0.496320818" stroke="#303030" fill-opacity="0.401821323" fill="#0F0F0F" x="73" y="416.5" width="188" height="116" rx="4"></rect>
+                <line x1="166" y1="415.5" x2="166" y2="394.5" id="Line-4" stroke-opacity="0.35" stroke="#F2DABF" stroke-linecap="square"></line>
+                <text id="Database" font-family="Muli-Regular, Muli" font-size="16" font-weight="normal" fill="#737880">
+                    <tspan x="130.712" y="442">Database</tspan>
+                </text>
+                <rect id="Rectangle" stroke-opacity="0.496320818" stroke="#303030" fill-opacity="0.401821323" fill="#0F0F0F" x="0" y="30.5" width="49" height="473" rx="4"></rect>
+                <text id="Models-/-Business-lo" transform="translate(22.500000, 247.000000) rotate(-90.000000) translate(-22.500000, -247.000000) " font-family="Muli-Regular, Muli" font-size="15" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="-106.47" y="252.5">Models  /  Business logic  /  Validation</tspan>
+                </text>
+                <text id="Server" font-family="Muli-Regular, Muli" font-size="16" font-weight="normal" fill="#737880">
+                    <tspan x="142.772" y="165">Server</tspan>
+                </text>
+                <text id="RPC" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="93.804" y="208">RPC</tspan>
+                </text>
+                <text id="REST" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="145.951" y="208">REST</tspan>
+                </text>
+                <text id="MVC" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="205.89" y="208">MVC</tspan>
+                </text>
+                <text id="Angular" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="105.6" y="62">Angular</tspan>
+                </text>
+                <text id="React" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="183.226" y="62">React</tspan>
+                </text>
+                <text id="Vue" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="114.774" y="89">Vue</tspan>
+                </text>
+                <text id="HTML5" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="178.459" y="89">HTML5</tspan>
+                </text>
+                <g id="Group-5" transform="translate(97.500000, 467.000000)" fill="#D9D9D9" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal">
+                    <text id="SQLite">
+                        <tspan x="11.496" y="42">SQLite</tspan>
+                    </text>
+                    <text id="MongoDB">
+                        <tspan x="0.737" y="14">MongoDB</tspan>
+                    </text>
+                    <text id="MySQL">
+                        <tspan x="85.76" y="42">MySQL</tspan>
+                    </text>
+                    <text id="Postgres">
+                        <tspan x="80.475" y="14">Postgres</tspan>
+                    </text>
+                </g>
+                <path d="M85.5,229 L246.5,229 C248.709139,229 250.5,230.790861 250.5,233 L250.5,259 C250.5,261.209139 248.709139,263 246.5,263 L85.5,263 C83.290861,263 81.5,261.209139 81.5,259 L81.5,233 C81.5,230.790861 83.290861,229 85.5,229 Z" id="Rectangle" fill-opacity="0.214124986" fill="#232527"></path>
+                <text id="Authentication" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="118.379" y="252">Authentication</tspan>
+                </text>
+                <path d="M85.5,270 L246.5,270 C248.709139,270 250.5,271.790861 250.5,274 L250.5,300 C250.5,302.209139 248.709139,304 246.5,304 L85.5,304 C83.290861,304 81.5,302.209139 81.5,300 L81.5,274 C81.5,271.790861 83.290861,270 85.5,270 Z" id="Rectangle" fill-opacity="0.214124986" fill="#232527"></path>
+                <text id="CLI" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="155.591" y="293">CLI</tspan>
+                </text>
+                <path d="M85.5,310 L246.5,310 C248.709139,310 250.5,311.790861 250.5,314 L250.5,340 C250.5,342.209139 248.709139,344 246.5,344 L85.5,344 C83.290861,344 81.5,342.209139 81.5,340 L81.5,314 C81.5,311.790861 83.290861,310 85.5,310 Z" id="Rectangle" fill-opacity="0.214124986" fill="#232527"></path>
+                <text id="DI-/-Config-/-Module" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="103.388" y="333">DI / Config / Module</tspan>
+                </text>
+                <path d="M85.5,350 L246.5,350 C248.709139,350 250.5,351.790861 250.5,354 L250.5,380 C250.5,382.209139 248.709139,384 246.5,384 L85.5,384 C83.290861,384 81.5,382.209139 81.5,380 L81.5,354 C81.5,351.790861 83.290861,350 85.5,350 Z" id="Rectangle" fill-opacity="0.214124986" fill="#232527"></path>
+                <text id="ORM-/-ODM" font-family="Muli-Regular, Muli" font-size="14" font-weight="normal" fill="#D9D9D9">
+                    <tspan x="127.584" y="373">ORM / ODM</tspan>
+                </text>
+                <line x1="166" y1="137.5" x2="166" y2="116.5" id="Line-4" stroke-opacity="0.35" stroke="#F2DABF" stroke-linecap="square"></line>
+                <line x1="50" y1="76.5" x2="71" y2="76.5" id="Line-5" stroke-opacity="0.35" stroke="#F2DABF" stroke-linecap="square"></line>
+                <line x1="50" y1="444.5" x2="71" y2="444.5" id="Line-5" stroke-opacity="0.35" stroke="#F2DABF" stroke-linecap="square"></line>
+                <line x1="50" y1="251.5" x2="71" y2="251.5" id="Line-5" stroke-opacity="0.35" stroke="#F2DABF" stroke-linecap="square"></line>
+            </g>
+        </g>
+    </g>
+</svg>

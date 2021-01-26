@@ -14,8 +14,13 @@ import { Component } from "@angular/core";
             </h1>
 
             <p class="banner-text">
-              The most advanced and fastest full-featured web framework for isomorphic and sophisticated Typescript
+              A new high-performance web framework for sophisticated Typescript
               projects like complex admin interfaces, websites, games, desktop and mobile apps.
+            </p>
+            
+            <p class="banner-text">
+              By fully utilizing the advantages of isomorphic Typescript you are able to
+              build web applications faster than ever before.
             </p>
 
             <div class="actions">
@@ -24,7 +29,7 @@ import { Component } from "@angular/core";
             </div>
           </div>
           <div class="visual">
-            <img alt="framework visual" src="assets/images/framework-visual.png"/>
+            <img alt="framework visual" src="assets/images/framework-visual.svg"/>
           </div>
         </div>
       </div>
@@ -34,8 +39,9 @@ import { Component } from "@angular/core";
 
         <p>
           Deepkit Framework is a Node.js Framework written in and for Typescript. It focuses on high-performance server
-          side applications while also providing tools for the whole tech-stack including frontend.<br/>
-          It is a set of reusable Typescript Component and a Framework for web applications.
+          side applications while also providing tools for the whole tech-stack that interact in the most efficient way 
+          regarding performance and development efficiency.<br/>
+          It is a set of reusable Typescript libraries and a framework for web applications.
         </p>
       </div>
 
@@ -103,9 +109,9 @@ import { Component } from "@angular/core";
       </div>
 
       <div class="wrapper components">
-        <h2>Components</h2>
+        <h2>Libraries</h2>
         <p>
-          Typescript components that you can use standalone but work best together in the realm of the Deepkit
+          Typescript libraries that you can use standalone but work best together in the realm of the Deepkit
           Framework.
         </p>
 
@@ -116,8 +122,8 @@ import { Component } from "@angular/core";
             <p>Fastest TypeScript ORM.</p><a routerLink="/">Learn more</a></div>
           <div><h3>Broker</h3>
             <p>Message bus with pub/sub, key/value, and more.</p><a routerLink="/">Learn more</a></div>
-          <div><h3>Desktop UI</h3>
-            <p>Angular & Electron desktop UI framework.</p><a routerLink="/">Learn more</a></div>
+<!--          <div><h3>Desktop UI</h3>-->
+<!--            <p>Angular & Electron desktop UI framework.</p><a routerLink="/">Learn more</a></div>-->
           <div><h3>RPC</h3>
             <p>Highly configurable RPC client/server.</p><a routerLink="/">Learn more</a></div>
           <div><h3>BSON</h3>

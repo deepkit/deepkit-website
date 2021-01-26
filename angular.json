@@ -36,6 +36,7 @@
               "src/styles.scss",
               "node_modules/cookieconsent/build/cookieconsent.min.css",
               "node_modules/prismjs/themes/prism-okaidia.css",
+              "node_modules/@deepkit/desktop-ui/src/scss/icon.scss",
               "node_modules/monaco-editor/min/vs/editor/editor.main.css"
             ],
             "scripts": [

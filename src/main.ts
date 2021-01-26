@@ -9,6 +9,9 @@ if (environment.production) {
     enableProdMode();
 }
 
+(window as any)._require = (window as any).require;
+(window as any).require = undefined;
+
 platformBrowserDynamic().bootstrapModule(AppModule, {
     ngZone: 'noop'
 })
