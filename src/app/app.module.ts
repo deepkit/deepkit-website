@@ -32,6 +32,8 @@ import { FeaturesPageComponent } from './pages/features-page.component';
 import { TypeComponent } from './pages/type.component';
 import { FormsModule } from "@angular/forms";
 import { AppCommonModule } from './common/common.module';
+import {RpcComponent} from './pages/rpc.component';
+import {AboutUsComponent} from './pages/about-us.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +59,8 @@ import { AppCommonModule } from './common/common.module';
         IndexFeatureComponent,
         FeaturesPageComponent,
         TypeComponent,
+        RpcComponent,
+        AboutUsComponent,
     ],
     imports: [
         CommonModule,

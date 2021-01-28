@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
     template: `
-        <div class="wrapper main">
+        <main>
             <h1>Contact</h1>
 
             <p>
@@ -92,7 +92,7 @@ import {Component} from "@angular/core";
                 personal profile for the purpose of providing excellent customer service. You can find more information
                 on the official https://tawk.to/ page.</p>
 
-        </div>
+        </main>
     `
 })
 export class ContactPageComponent {

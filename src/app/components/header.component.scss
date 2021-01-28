@@ -93,6 +93,9 @@ nav {
 
   .components {
     margin-left: auto;
+    > div {
+      outline: 0;
+    }
   }
 
   .components > div {

@@ -29,7 +29,7 @@ import { Component } from "@angular/core";
             </div>
           </div>
           <div class="visual">
-            <img alt="framework visual" src="assets/images/framework-visual.svg"/>
+            <img alt="framework visual" src="assets/images/framework-visual.png" style="width: 262px;"/>
           </div>
         </div>
       </div>

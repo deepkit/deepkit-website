@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "app": false,
     "align": {
       "options": [
         "parameters",
@@ -15,18 +16,17 @@
     },
     "component-class-suffix": true,
     "contextual-lifecycle": true,
-    "curly": true,
+    "curly": false,
+    "object-literal-shorthand": false,
     "directive-class-suffix": true,
     "directive-selector": [
       true,
       "attribute",
-      "app",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
       "kebab-case"
     ],
     "eofline": true,
@@ -58,6 +58,7 @@
         ]
       }
     ],
+    "no-trailing-whitespace": false,
     "no-consecutive-blank-lines": false,
     "no-console": [
       true,
@@ -68,10 +69,7 @@
       "trace"
     ],
     "no-empty": false,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": false,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
@@ -88,7 +86,7 @@
     ],
     "trailing-comma": false,
     "no-conflicting-lifecycle": true,
-    "no-host-metadata-property": true,
+    "no-host-metadata-property": false,
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
     "no-output-native": true,

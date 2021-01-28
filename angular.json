@@ -30,7 +30,11 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/monaco-editor/min/", "output": "./monaco-editor/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min/",
+                "output": "./monaco-editor/"
+              }
             ],
             "styles": [
               "src/styles.scss",
@@ -162,6 +166,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "website"
+    }
+  },
+  "defaultProject": "website",
+  "cli": {
+    "analytics": "f73e07c4-b400-45b4-bcea-6891d58f2b4a"
+  }
 }

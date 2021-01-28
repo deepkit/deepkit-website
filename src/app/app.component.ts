@@ -1,8 +1,7 @@
 import {ChangeDetectorRef, Component, Inject, Injector, PLATFORM_ID} from '@angular/core';
-import {ActivatedRoute, ActivationEnd, NavigationEnd, Router} from "@angular/router";
-import {isPlatformBrowser} from "@angular/common";
-import {Docu} from "./provider/docu";
-import {TitleService} from "./provider/title";
+import {ActivatedRoute, ActivationEnd, NavigationEnd, Router} from '@angular/router';
+import {Docu} from './provider/docu';
+import {TitleService} from './provider/title';
 
 @Component({
     selector: 'app-root',
@@ -28,10 +27,10 @@ export class AppComponent {
             if (e instanceof NavigationEnd || e instanceof ActivationEnd) {
                 const firstChild = route.firstChild;
                 setTimeout(() => {
-                    if (firstChild.snapshot.data['title']) {
-                        title.setTitle(firstChild.snapshot.data['title']);
+                    if (firstChild.snapshot.data.title) {
+                        title.setTitle(firstChild.snapshot.data.title);
                     }
-                    this.dark = firstChild.snapshot.data['header'] === 'startpage';
+                    this.dark = firstChild.snapshot.data.header === 'startpage';
                     cd.detectChanges();
                 });
             }

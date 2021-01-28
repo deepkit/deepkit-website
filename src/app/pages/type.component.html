@@ -134,14 +134,19 @@
   <div class="left">
     <h2>Validation</h2>
     <p>
-      High-performance validation optimized by JIT techniques.
+      High-performance validation optimized by JIT techniques
+      with detailed error objects, that can be easily used in
+      the frontend.
     </p>
   </div>
 
   <div class="right">
     <div class="box">
       <textarea codeHighlight>
-        import { validatedPlainToClass, validate } from '@deepkit/type';
+        import {
+          validatedPlainToClass,
+          validate
+        } from '@deepkit/type';
 
         const user: User = validatedPlainToClass(User, {
           username: 'Daniel',
@@ -150,7 +155,14 @@
 
         //or validate class instances
         const user = new User('ba');
-        const errors = validate(User, user); //empty array if valid
+
+        //empty array if valid
+        const errors = validate(User, user);
+        errors[0] === {
+          path: 'email',
+          code: 'invalid_type',
+          message: 'Not a valid date given'
+        };
       </textarea>
     </div>
   </div>
@@ -260,3 +272,25 @@
     </div>
   </div>
 </feature-box>
+
+
+
+<feature-box color="#3e3e3e">
+  <div class="left">
+    <h2>High-Performance</h2>
+    <p>
+      The serializer and validator are equally JIT optimized to
+      enable the highest performance possible.
+    </p>
+    <a class="button">Learn more</a>
+  </div>
+
+  <div class="right">
+    <performance-chart yAxis="thousand ops/sec | serialization" sort="asc" format="0.0-0">
+      <performance-entry title="class-transformer" [value]="317"></performance-entry>
+      <performance-entry title="cerialize" [value]="3505"></performance-entry>
+      <performance-entry title="Deepkit Type" [value]="20324"></performance-entry>
+    </performance-chart>
+  </div>
+</feature-box>
+

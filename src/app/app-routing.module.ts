@@ -1,20 +1,14 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {IndexPageComponent} from "./pages/index-page.component";
-import {ContactPageComponent} from "./pages/contact-page.component";
-import {DataProtectionPageComponent} from "./pages/data-protection-page.component";
-import {DocumentationPageComponent} from "./pages/documentation-page.component";
-import {NotFoundComponent} from "./pages/not-found.component";
-import {MLDownloadPageComponent} from "./pages/machine-learning/download-page.component";
-import {MLPricingPageComponent} from "./pages/machine-learning/pricing-page.component";
-import {MLSupportPageComponent} from "./pages/machine-learning/support-page.component";
-import {MLIndexPageComponent} from "./pages/machine-learning/index-page.component";
-import {FrameworkIndexPageComponent} from "./pages/framwork/index-page.component";
-import {MLFrame} from "./pages/machine-learning/frame.component";
-import {FrameworkFrameComponent} from "./pages/framwork/frame.component";
-import {BenchmarkComponent} from "./pages/framwork/benchmark.component";
-import { FeaturesPageComponent } from "./pages/features-page.component";
+import {IndexPageComponent} from './pages/index-page.component';
+import {ContactPageComponent} from './pages/contact-page.component';
+import {DataProtectionPageComponent} from './pages/data-protection-page.component';
+import {DocumentationPageComponent} from './pages/documentation-page.component';
+import {NotFoundComponent} from './pages/not-found.component';
+import { FeaturesPageComponent } from './pages/features-page.component';
 import { TypeComponent } from './pages/type.component';
+import {RpcComponent} from './pages/rpc.component';
+import { AboutUsComponent } from './pages/about-us.component';
 
 
 const routes: Routes = [
@@ -22,9 +16,13 @@ const routes: Routes = [
     {path: 'contact', pathMatch: 'full', component: ContactPageComponent, data: {title: 'Contact'}},
     {
         path: 'data-protection',
-        pathMatch: 'full',
         component: DataProtectionPageComponent,
         data: {title: 'Data protection'}
+    },
+    {
+        path: 'about-us',
+        component: AboutUsComponent,
+        data: {title: 'About Deepkit'}
     },
 
     {
@@ -43,6 +41,11 @@ const routes: Routes = [
         loadChildren: () => import('./orm/orm.module').then(m => m.OrmModule),
         data: {title: 'Deepkit ORM'},
     },
+    {
+        path: 'products/rpc',
+        component: RpcComponent,
+    },
+
     // {
     //     path: 'products/desktop-ui',
     //     loadChildren: () => import('./desktop-ui/desktop-ui.module').then(m => m.DesktopUiModule),

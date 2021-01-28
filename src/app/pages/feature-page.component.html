@@ -225,59 +225,62 @@ class Website {
     </p>
   </div>
 
-  <div class="left">
-    <div style="text-align: center">
-      <h3>Frontend</h3>
+    <div class="left">
+        <div style="text-align: center">
+            <h3>Frontend</h3>
 
-      <p>Angular, React, Vue, HTML5.</p>
-    </div>
+            <p>Angular, React, Vue, HTML5.</p>
+        </div>
 
 
-    <div class="box">
+        <div class="box">
       <textarea codeHighlight>
 import {DeepkitClient} from ‘@deepkit/rpc’;
 import {MyControllerInterface} from ‘common’;
 
+//connect via WebSockets/TCP, or in-memory for SSR
 const client = new DeepkitClient(‘localhost’);
-const myController = client.controller(MyControllerInterface);
+const ctrl = client.controller(MyControllerInterface);
 
-const user = await myController.getUser(42);
+const user = await ctrl.getUser(42);
 console.log(user.username);
+console.log(user instanceof User); //true
       </textarea>
+        </div>
     </div>
-  </div>
 
-  <div class="right">
-    <div style="text-align: center">
-      <h3>Server</h3>
-    </div>
-    <div class="box">
+    <div class="right">
+        <div style="text-align: center">
+            <h3>Server</h3>
+            <p>Using Typescript classes.</p>
+        </div>
+        <div class="box">
       <textarea codeHighlight>
 import {rpc} from ‘@deepkit/rpc’;
 import {MyControllerInterface, User} from ‘common’;
 
 @rpc.controller(MyControllerInterface)
 class MyController implements MyControllerInterface {
-    constructor(protected database: Database) {}
-
     @rpc.action()
-    @t.generic(User)
     async getUser(id: number): Promise<User> {
-        return await this.database.query(User)
-            .filter({id: id}).findOne();
+        return new User(id);
     }
 }
       </textarea>
-    </div>
-  </div>
-
-  <div class="mini-wrapper">
-
-    <div style="text-align: center">
-      <h3>Common</h3>
+        </div>
     </div>
 
-    <div class="box">
+    <div class="mini-wrapper">
+
+        <div style="text-align: center; margin-top: 40px;">
+            <h3>Common</h3>
+            <p>
+                In a common package shared with backend and frontend you define
+                your interface and models.
+            </p>
+        </div>
+
+        <div class="box">
         <textarea codeHighlight>
 export MyControllerInterface = Controller<MyControllerInterface>(‘my’);
 export interface MyControllerInterface {
@@ -290,8 +293,8 @@ export class User {
     constructor(@t public id: number) {}
 }
         </textarea>
+        </div>
     </div>
-  </div>
 
 </feature-box>
 
@@ -301,7 +304,7 @@ export class User {
     <h2>CLI</h2>
     <p>
       With the integrated CLI API, you can quickly build command line tools that have
-      complete access to the dependency injection container and thus works like your other controllers.
+      complete access to the dependency injection container and thus work like your other controllers.
     </p>
 
     <div class="box">
@@ -350,7 +353,7 @@ export class MyToolController implements Command {
       <h2>Real-Time Database Feed</h2>
       <p style="margin-bottom: 90px; text-align: left">
         Return a self-updating collection of entity objects to the client
-        without
+        without the need to reload manually. Ideal for desktop applications.
       </p>
     </div>
   </div>

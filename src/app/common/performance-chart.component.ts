@@ -1,5 +1,5 @@
-import { AfterViewInit, ContentChildren, QueryList } from "@angular/core";
-import { Component, ContentChild, Directive, Input } from "@angular/core";
+import { AfterViewInit, ContentChildren, QueryList } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 
 @Directive({
     selector: 'performance-entry',
@@ -15,7 +15,7 @@ export class PerformanceEntryDirective {
       <div class="boards">
         <div class="bar" [style.height.px]="item.height" *ngFor="let item of items">
           <div class="label" [style.bottom.px]="item.labelPos">{{item.title}}</div>
-          <div class="value">{{item.value|number:'0.2-2'}}</div>
+          <div class="value">{{item.value|number:format}}</div>
           <div class="line" *ngIf="item.labelPos > item.height"
                [style.bottom.px]="item.height"
                [style.height.px]="item.labelPos-item.height"
@@ -58,8 +58,7 @@ export class PerformanceEntryDirective {
             width: 30px;
             margin-right: 25px;
             position: relative;
-            background: rgb(15 15 15);
-            border: 1px solid rgba(62, 62, 62, 0.5);
+            background: rgba(173, 173, 173, 0.78);
             border-radius: 4px;
         }
 
@@ -71,6 +70,7 @@ export class PerformanceEntryDirective {
             opacity: 0.8;
             padding-right: 5px;
             font-size: 14px;
+            text-shadow: 1px 1px 1px black;
         }
 
         .line {
@@ -97,6 +97,9 @@ export class PerformanceChartComponent implements AfterViewInit {
     @Input() yAxis: string = '';
 
     @Input() height: number = 250;
+    @Input() sort: 'asc' | 'desc' = 'desc';
+    @Input() format: string = '0.2-2';
+
 
     items: { title: string, value: number, height: number, labelPos: number }[] = [];
 
@@ -108,11 +111,19 @@ export class PerformanceChartComponent implements AfterViewInit {
         const items = this.entries.toArray();
         let max = 0;
 
-        items.sort((a, b) => {
-            if (a.value > b.value) return +1;
-            if (a.value < b.value) return -1;
-            return 0;
-        });
+        if (this.sort === 'desc') {
+            items.sort((a, b) => {
+                if (a.value > b.value) return +1;
+                if (a.value < b.value) return -1;
+                return 0;
+            });
+        } else {
+            items.sort((a, b) => {
+                if (a.value > b.value) return -1;
+                if (a.value < b.value) return +1;
+                return 0;
+            });
+        }
 
         for (const item of items) {
             if (item.value > max) max = item.value;
@@ -128,6 +139,6 @@ export class PerformanceChartComponent implements AfterViewInit {
             y += 25;
         }
 
-        this.items.reverse()
+        this.items.reverse();
     }
 }

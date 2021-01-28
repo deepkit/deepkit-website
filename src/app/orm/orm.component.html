@@ -4,12 +4,12 @@
       <h1>Deepkit ORM</h1>
 
       <p class="banner-text">
-        The fastest Typescript ORM for MongoDB, MySQL, MariaDB, PostgreSQL, SQLite.
+        The fastest Typescript ORM for MongoDB, MySQL, PostgreSQL, SQLite.
       </p>
 
       <p class="banner-text">
         With data-mapper, active-record, UnitOfWork, identity map, migrations, relations support, and much more.<br/>
-        Use your plain Typescript classes - no code-generation required.
+        Use your plain Typescript — no code-generation or config files required.
       </p>
 
       <div class="actions">
@@ -132,7 +132,7 @@ class User {
   <div class="left">
     <h2>Relations</h2>
     <p>
-      Define your relations in terms of object references, and let the database handle the rest.
+      Define your relations in terms of object references, and let Deepkit ORM handle the rest.
     </p>
 
     <div class="box">
@@ -313,6 +313,9 @@ class Book {
       You can hook into the UoW process or query execution using asynchronous event
       listeners that are for example able to modify the query itself.
     </p>
+    <p>
+      This allows you to write plugins or change the behavior of your entities.
+    </p>
     <a class="button">Learn more</a>
   </div>
 
@@ -418,7 +421,7 @@ export class SchemaMigration implements Migration {
     <h2>High-Performance</h2>
     <p>
       Deepkit ORM is based on Deepkit Type, the high-performance serializer/validator, and is
-      itself carefully optimized by using JIT techniques, to make it the fastest ORM/ODM on the market.
+      itself carefully optimized by using JIT techniques, to make it the fastest Typescript ORM/ODM on the market.
     </p>
     <a class="button">Learn more</a>
   </div>

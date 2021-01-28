@@ -237,6 +237,7 @@ a.button.primary {
   border-radius: 6px;
 }
 
+main,
 .wrapper {
   max-width: 1040px;
   margin: auto;
@@ -246,6 +247,11 @@ a.button.primary {
   //@include breakpoint($for-tablet) {
   //    padding: 0 20px;
   //}
+}
+
+main {
+  margin: 80px auto;
+  text-align: left;
 }
 
 .mini-wrapper {

@@ -8,10 +8,11 @@ import {Component} from "@angular/core";
                 <img src="../../assets/images/deepkit_white.svg"/>
                 <div class="copyright">
                     © {{year}} Deepkit®<br/>
-                    All rights reserved
+                    All rights reserved.
                 </div>
             </div>
             <div class="navi">
+                <a routerLink="/about-us">About us</a>
                 <a routerLink="/contact">Contact</a>
                 <a routerLink="/data-protection">Data protection</a>
                 <a href="https://twitter.com/deepkitIO" target="_blank">

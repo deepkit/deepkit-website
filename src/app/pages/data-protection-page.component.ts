@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
     template: `
-        <div class="wrapper main text">
+        <main>
             <h1>Data protection</h1>
 
             <p>
@@ -516,7 +516,7 @@ import {Component} from "@angular/core";
                     mit der RC GmbH, die <a href="http://remarketing.company/">gebrauchte Notebooks</a> wiederverwertet
                     und den <a href="https://www.wbs-law.de/abmahnung-filesharing/">Filesharing Rechtsanwälten</a> von
                     WBS-LAW erstellt.</p>
-            </div>
+            </main>
     `
 })
 export class DataProtectionPageComponent {

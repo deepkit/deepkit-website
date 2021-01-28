@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Input, SkipSelf } from "@angular/core";
-import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/router";
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'dw-header',
@@ -44,11 +44,11 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
 <!--              <h4>Desktop UI</h4>-->
 <!--              <p>Angular & Electron desktop UI framework. Angular components for native looking UI widgets.</p>-->
 <!--            </div>-->
-            <div>
+            <div routerLink="/products/rpc">
               <h4>RPC</h4>
               <p>Highly configurable RPC server for TypeScript with automatic type serialization and validation.</p>
             </div>
-            <div>
+            <div routerLink="/products/broker">
               <h4>Broker</h4>
               <p>High-Performance typesafe message bus for pub/sub, key-value, and central atomic app locks.</p>
             </div>
@@ -59,7 +59,7 @@ import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from "@angular/r
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-    public menu: string = '';
+    public menu = '';
 
     protected lastTimeout: any;
 
@@ -70,11 +70,11 @@ export class HeaderComponent {
         router.events.subscribe(() => {
             this.menu = '';
             this.cd.detectChanges();
-        })
+        });
     }
 
     open(menu: string){
-        if (this.lastTimeout) clearTimeout(this.lastTimeout);
+        if (this.lastTimeout) { clearTimeout(this.lastTimeout); }
 
         this.menu = menu;
         this.cd.detectChanges();
@@ -82,7 +82,7 @@ export class HeaderComponent {
 
     close(menu: string){
         this.lastTimeout = setTimeout(() => {
-            if (this.menu === menu) this.menu = '';
+            if (this.menu === menu) { this.menu = ''; }
             this.cd.detectChanges();
         }, 200);
     }
