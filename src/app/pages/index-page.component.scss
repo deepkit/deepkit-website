@@ -1,221 +1,73 @@
 .banner {
-  display: block;
+  max-width: 550px;
+  padding: 80px 0;
 
-  > .wrapper {
-    height: 680px;
-    display: flex;
-    text-align: left;
-    align-items: center;
-    position: relative;
+  h1 {
+    margin: 0;
   }
 
-
-  .blur1 {
-    position: absolute;
-    right: 22px;
-    bottom: -20px;
-    height: 180px;
-    width: 410px;
-    border-radius: 410px;
-    opacity: 0.04;
-    background: #154007ad;
-    filter: blur(50px);
+  p {
+    font-size: 18px;
   }
+}
 
-  .blur2 {
-    position: absolute;
-    right: -80px;
-    top: 60px;
-    height: 255px;
-    width: 530px;
-    border-radius: 530px;
-    opacity: 0.07;
-    background: #FF0000;
-    filter: blur(50px);
-  }
+.separator {
+  height: 72px;
+  display: flex;
+  max-width: 1040px;
+  margin: auto;
+  user-select: none;
 
-  .blur3 {
-    position: absolute;
-    right: -65px;
-    top: 95px;
-    height: 555px;
-    width: 280px;
-    border-radius: 555px;
-    opacity: 0.09;
-    background: #0000FF;
-    filter: blur(50px);
-  }
-
-  .text {
-    position: relative;
-
-    h1 {
-      max-width: 500px;
-    }
-
-    p {
-      max-width: 550px;
-      margin-top: 45px;
-    }
-  }
-
-  .visual {
-    position: relative;
+  div {
     flex: 1;
-    text-align: center;
-    user-select: none;
-  }
-
-  .actions {
-    margin-top: 45px;
-
-    .button {
-      margin-right: 25px;
-    }
-  }
-}
-
-.what-is-deepkit {
-  padding: 120px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  max-width: 750px;
-
-  h2 {
-    margin-bottom: 30px;
-  }
-}
-
-.efficiency {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 0;
-  overflow: hidden;
-
-  background-image: radial-gradient(50% 100%, #17191C 0%, #111213 100%);
-  border-top: 1px solid #292929;
-
-  .wrapper {
+    border-top: 1px solid #4B4B4B;
     position: relative;
+    top: 36px;
   }
 
-  .layout {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 25px;
-
-    .text {
-      max-width: 458px;
-      text-align: left;
-    }
-
-    .visual {
-      user-select: none;
-      flex: 1;
-      text-align: center;
-
-      img {
-        position: relative;
-        right: -20px;
-      }
-    }
-  }
-
-  .blur1 {
-    pointer-events: none;
-    position: absolute;
-    left: -165px;
-    bottom: -205px;
-    height: 290px;
-    width: 737px;
-    border-radius: 737px;
-    opacity: 0.03;
-    background: #0000FF;
-    filter: blur(50px);
+  img {
+    flex: 0;
   }
 }
 
-.features {
-  h2 {
-    text-align: center;
+
+.what {
+  display: flex;
+  justify-content: center;
+  margin: 60px auto;
+
+  h3 {
+    margin-bottom: 40px;
   }
 
-  .points {
-    margin-top: 70px;
+  > div {
+    background-color: #F8F8F8;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex: 1;
 
     > div {
+      max-width: 500px;
+      padding: 48px;
+      text-align: center;
     }
+  }
+
+  > div:first-child {
+    margin-right: 10px;
+    justify-content: flex-end;
+  }
+
+  > div:last-child {
+    margin-left: 10px;
+    justify-content: flex-start;
   }
 }
 
 
-.components {
-  margin-top: 50px;
+.libraries {
   text-align: left;
 
-  > p {
-    max-width: 460px;
-  }
-
-  .points {
-    margin-top: 70px;
-    display: grid;
-    grid-gap: 40px;
-    grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr);
-    margin-bottom: 50px;
-    padding-bottom: 20px;
-
-    > div {
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: rgba(15, 15, 15, 0.40);
-      border: 1px solid rgba(48, 48, 48, 0.50);
-      border-radius: 8px;
-      text-align: center;
-      padding: 11px;
-
-      &:hover {
-        cursor: pointer;
-        background: rgba(15, 15, 15, 0.70);
-      }
-
-      &:active {
-        background: rgba(15, 15, 15);
-      }
-
-      h4 {
-        font-weight: 600;
-        font-size: 16px;
-        color: var(--color-white-creme);
-      }
-
-      p, a {
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 17px;
-        color: #7A818C;
-      }
-
-      a {
-        color: #737880;
-      }
-
-      a:hover {
-        text-decoration: none;
-      }
-    }
+  p {
+    max-width: 880px;
   }
 }

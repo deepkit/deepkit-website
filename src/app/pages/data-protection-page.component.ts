@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
+import {Component} from '@angular/core';
 
 @Component({
     template: `
-        <main>
+        <main class="text-page">
             <h1>Data protection</h1>
 
             <p>

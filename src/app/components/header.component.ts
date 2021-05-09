@@ -4,57 +4,62 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'dw-header',
     template: `
-      <div class="wrapper">
-        <a routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
+        <div class="wrapper">
+            <a routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
 
-        <nav>
-          <a class="products" [class.active]="router.url.startsWith('/products')" 
-             (click)="open('products'); $event.preventDefault()" (mouseenter)="open('products')" (mouseleave)="close('products')">Products</a>
-          <a routerLinkActive="active" routerLink="/support">Pro</a>
+            <nav>
+                <a routerLinkActive="active" routerLink="/framework">Framework</a>
+                <a routerLinkActive="active" routerLink="/library">Libraries</a>
+                <a routerLinkActive="active" routerLink="/community">Community</a>
+            </nav>
 
-          <a routerLinkActive="active" routerLink="/community">Community</a>
-          <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
+            <nav style="justify-content: flex-end;">
+                <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
+                <a routerLinkActive="active" routerLink="/blog">Blog</a>
+            </nav>
 
-          <a id="github-logo" href="https://github.com/deepkit/deepkit-framework" target="_blank">
-            <img width="24" height="24" src="/assets/images/github.svg"/>
-          </a>
-        </nav>
-
-        <div [class.active]="menu === 'products'" (mouseenter)="open('products')" (mouseleave)="close('products')" class="products-menu">
-          <div class="framework">
-            <h3>Framework <span class="tag" style="position: relative; top: -8px;">alpha</span></h3>
-            
-            <a routerLink="/products/framework">Features</a>
-            <a routerLink="documentation/why-deepkit">Why Deepkit?</a>
-            <a routerLink="/documentation/framework">Get Started</a>
-          </div>
-          
-          <div class="components">
-            <h3>Typescript Libraries</h3>
-
-            <div routerLink="/products/type">
-              <h4>Type</h4>
-              <p>Runtime TypeScript type/reflection system with ultra-fast serialization and validation.</p>
-            </div>
-            <div routerLink="/products/orm">
-              <h4>ORM</h4>
-              <p>Fastest TypeScript ORM for MongoDB, SQLite, MySQL, MariaDB, PostgreSQL.</p>
-            </div>
-<!--            <div routerLink="/products/desktop-ui">-->
-<!--              <h4>Desktop UI</h4>-->
-<!--              <p>Angular & Electron desktop UI framework. Angular components for native looking UI widgets.</p>-->
+<!--            <div [class.active]="menu === 'library'" (mouseenter)="open('library')" (mouseleave)="close('library')" class="library-menu">-->
+<!--                <section>-->
+<!--                    <h4>Database</h4>-->
+<!--                    <a routerLink="/library/orm">orm</a>-->
+<!--                    <a routerLink="/library/orm-browser">orm-browser</a>-->
+<!--                    <a routerLink="/library/mongo">mongo</a>-->
+<!--                    <a routerLink="/library/mysql">mysql</a>-->
+<!--                    <a routerLink="/library/postgres">postgres</a>-->
+<!--                    <a routerLink="/library/sqlite">sqlite</a>-->
+<!--                </section>-->
+<!--                <section>-->
+<!--                    <h4>Data</h4>-->
+<!--                    <a routerLink="/library/type">type</a>-->
+<!--                    <a routerLink="/library/broker">broker</a>-->
+<!--                    <a routerLink="/library/rpc">rpc</a>-->
+<!--                    <a routerLink="/library/rpc-tcp">rpc-tcp</a>-->
+<!--                    <a routerLink="/library/bson">bson</a>-->
+<!--                </section>-->
+<!--                <section>-->
+<!--                    <h4>Framework</h4>-->
+<!--                    <a routerLink="/library/app">app</a>-->
+<!--                    <a routerLink="/library/framework">framework</a>-->
+<!--                    <a routerLink="/library/debugger">debugger</a>-->
+<!--                    <a routerLink="/library/http">http</a>-->
+<!--                    <a routerLink="/library/injector">injector</a>-->
+<!--                    <a routerLink="/library/logger">logger</a>-->
+<!--                    <a routerLink="/library/template">template</a>-->
+<!--                    <a routerLink="/library/event">event</a>-->
+<!--                    <a routerLink="/library/workflow">workflow</a>-->
+<!--                    <a routerLink="/library/stopwatch">stopwatch</a>-->
+<!--                    <a routerLink="/library/core">core</a>-->
+<!--                    <a routerLink="/library/core-rxjs">core-rxjs</a>-->
+<!--                    <a routerLink="/library/topsort">topsort</a>-->
+<!--                </section>-->
+<!--                <section>-->
+<!--                    <h4>Angular</h4>-->
+<!--                    <a routerLink="/library/desktop-ui">desktop-ui</a>-->
+<!--                    <a routerLink="/library/type-angular">type-angular</a>-->
+<!--                    <a routerLink="/library/angular-universal">angular-universal</a>-->
+<!--                </section>-->
 <!--            </div>-->
-            <div routerLink="/products/rpc">
-              <h4>RPC</h4>
-              <p>Highly configurable RPC server for TypeScript with automatic type serialization and validation.</p>
-            </div>
-            <div routerLink="/products/broker">
-              <h4>Broker</h4>
-              <p>High-Performance typesafe message bus for pub/sub, key-value, and central atomic app locks.</p>
-            </div>
-          </div>
         </div>
-      </div>
     `,
     styleUrls: ['./header.component.scss']
 })
@@ -73,16 +78,20 @@ export class HeaderComponent {
         });
     }
 
-    open(menu: string){
-        if (this.lastTimeout) { clearTimeout(this.lastTimeout); }
+    open(menu: string) {
+        if (this.lastTimeout) {
+            clearTimeout(this.lastTimeout);
+        }
 
         this.menu = menu;
         this.cd.detectChanges();
     }
 
-    close(menu: string){
+    close(menu: string) {
         this.lastTimeout = setTimeout(() => {
-            if (this.menu === menu) { this.menu = ''; }
+            if (this.menu === menu) {
+                this.menu = '';
+            }
             this.cd.detectChanges();
         }, 200);
     }

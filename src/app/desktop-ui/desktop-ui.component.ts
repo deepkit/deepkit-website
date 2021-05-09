@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { DuiApp } from "@deepkit/desktop-ui";
+import { Component } from '@angular/core';
+import { DuiApp } from '@deepkit/desktop-ui';
 
 @Component({
     template: `
@@ -61,7 +61,7 @@ import { DuiApp } from "@deepkit/desktop-ui";
             top: -80px;
             margin-bottom: -80px;
             border-radius: 4px;
-            background-image: url(/assets/desktop-ui/bg.png);
+            background-image: url('/assets/desktop-ui/bg.png');
         }
 
         dui-window {

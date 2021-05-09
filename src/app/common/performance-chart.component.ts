@@ -29,13 +29,14 @@ export class PerformanceEntryDirective {
     styles: [`
         :host {
             display: flex;
+            margin: 15px 0;
         }
-        
+
         .y {
             position: relative;
             flex: 0 0 30px;
         }
-        
+
         .y div {
             transform: rotate(-90deg);
             position: absolute;
@@ -53,12 +54,12 @@ export class PerformanceEntryDirective {
             display: flex;
             align-items: flex-end;
         }
-        
+
         .bar {
             width: 30px;
             margin-right: 25px;
             position: relative;
-            background: rgba(173, 173, 173, 0.78);
+            background: #363636;
             border-radius: 4px;
         }
 
@@ -70,13 +71,13 @@ export class PerformanceEntryDirective {
             opacity: 0.8;
             padding-right: 5px;
             font-size: 14px;
-            text-shadow: 1px 1px 1px black;
+            text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.6), 1px -1px 0 rgba(255, 255, 255, 0.6), -1px 1px 0 rgba(255, 255, 255, 0.6), 1px 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         .line {
             position: absolute;
             right: 14px;
-            border-right: 1px solid #c0c0c026;
+            border-right: 1px solid #000;
         }
 
         .value {

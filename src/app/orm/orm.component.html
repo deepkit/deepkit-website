@@ -1,43 +1,85 @@
-<div class="banner" style="height: 550px;">
-  <div class="wrapper">
-    <div class="text">
-      <h1>Deepkit ORM</h1>
+<div class="page">
+    <div class="banner">
+        <nav>
+            <div class="breadcrumb">
+                <a routerLink="/library">Deepkit library</a> /
+            </div>
+            <a routerLink="/library/orm" routerLinkActive="active">Overview</a>
+            <a routerLink="">Documentation</a>
+            <a routerLink="">API</a>
+        </nav>
 
-      <p class="banner-text">
-        The fastest Typescript ORM for MongoDB, MySQL, PostgreSQL, SQLite.
-      </p>
-
-      <p class="banner-text">
-        With data-mapper, active-record, UnitOfWork, identity map, migrations, relations support, and much more.<br/>
-        Use your plain Typescript — no code-generation or config files required.
-      </p>
-
-      <div class="actions">
-        <a routerLink="/documentation/orm" class="button primary">Get started</a>
-      </div>
+        <h1>ORM</h1>
+        <div class="package-name">@deepkit/orm</div>
+        <p>
+            The fastest TypeScript ORM for MongoDB, MySQL, PostgreSQL, SQLite.
+        </p>
+        <p>
+            With data-mapper, active-record, UnitOfWork, identity map, migrations, relations support, and much
+            more.
+        </p>
+        <p>
+            Use plain TypeScript — no code-generation, schema or config files required.
+        </p>
+        <div class="actions">
+        </div>
     </div>
-  </div>
-</div>
 
-<orm-playground></orm-playground>
+    <div class="line"></div>
+    <div style="margin-top: 45px;">
+        <h2>Playground</h2>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Typescript classes</h2>
-    <p>
-      Just use your already defined Typescript classes, annotate with database related information,
-      and share with the rest of the application (even frontend). With support for strict Typescript.
-    </p>
-    <p>
-      All database related information are declared using <code>@deepkit/type</code> so
-      no ORM/database related code is imported to other users of this model.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
+        <p>Interactive TypeScript playground with SQLite database — in your browser.</p>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <orm-playground></orm-playground>
+    </div>
+    <div class="wrapper banner-features">
+        <div>
+            <h3>High performance</h3>
+            <div>
+                <performance-chart yAxis="ms / SQLite query 10k records">
+                    <performance-entry title="TypeORM" [value]="52.139"></performance-entry>
+                    <performance-entry title="Prisma" [value]="73.932"></performance-entry>
+                    <performance-entry title="MikroORM" [value]="43.754"></performance-entry>
+                    <performance-entry title="Deepkit ORM" [value]="15.057"></performance-entry>
+                </performance-chart>
+            </div>
+        </div>
+
+        <div>
+            <h3>Fastest MongoDB</h3>
+            <div>
+                <performance-chart yAxis="ms / MongoDB query 10k records">
+                    <performance-entry title="TypeORM" [value]="71.733"></performance-entry>
+                    <performance-entry title="Mongoose" [value]="236.819"></performance-entry>
+                    <performance-entry title="MikroORM" [value]="99.530"></performance-entry>
+                    <performance-entry title="Raw MongoClient" [value]="57.520"></performance-entry>
+                    <performance-entry title="Deepkit ORM" [value]="18.242"></performance-entry>
+                </performance-chart>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="line"></div>
+
+    <div class="text">
+        <h2>Installation</h2>
+        <pre class="console">npm install @deepkit/orm @deepkit/sqlite</pre>
+        <p>
+            Make sure @deepkit/type is already installed.
+        </p>
+
+        <h2>TypeScript classes</h2>
+        <p>
+            Use already defined TypeScript classes, annotate with database related information,
+            and share with the rest of the application (even frontend). With support for strict TypeScript.
+        </p>
+        <p>
+            All database related information are declared using <code>@deepkit/type</code> so
+            no ORM/database related code is imported to other users of this model.
+        </p>
+        <textarea codeHighlight>
 import { entity, t } from '@deepkit/type';
 
 @entity.name('user')
@@ -56,27 +98,22 @@ class User {
     ) {}
 }
     </textarea>
-    </div>
-  </div>
 
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Query API</h2>
-    <p>
-      The query API allows you to fetch and manipulate data in a type-safe manner.
-    </p>
-    <p>
-      Filtering uses an Mongo-Like query interface, that works for every
-      database (even SQL) the same.
-    </p>
-    <p>
-      The API is designed to build cross-database queries that work
-      on every database the same.
-    </p>
-    <div class="box">
-      <textarea codeHighlight>
+        <h2>Query API</h2>
+        <p>
+            The query API allows you to fetch and manipulate data in a type-safe manner.
+        </p>
+        <p>
+            Filtering uses an Mongo-Like query interface, that works for every
+            database (even SQL) the same.
+        </p>
+        <p>
+            The API is designed to build cross-database queries that work
+            on every database the same.
+        </p>
+
+        <textarea codeHighlight>
         const result = await database.query(User)
           .orderBy('createdAt')
           .limit(5)
@@ -92,16 +129,8 @@ class User {
         //reports affected records, e.g. [1, 2, 3, 4, 5]
         result.primaryKeys;
       </textarea>
-    </div>
 
-    <div class="actions">
-      <a class="button">Learn more</a>
-    </div>
-  </div>
-
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
         const user = await database.query(User)
           .filter({username: 'Peter')
           .findOne(); //returns User class instance
@@ -124,19 +153,14 @@ class User {
           .withCount('id', 'users')
           .find(); // [{group: 'teamA', users: 5}]
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Relations</h2>
-    <p>
-      Define your relations in terms of object references, and let Deepkit ORM handle the rest.
-    </p>
 
-    <div class="box">
-      <textarea codeHighlight>
+        <h2>Relations</h2>
+        <p>
+            Define your relations in terms of object references, and let Deepkit ORM handle the rest.
+        </p>
+
+        <textarea codeHighlight>
         const books = await database.query(Book)
           .joinWith('author')
           .find();
@@ -152,15 +176,8 @@ class User {
             .end()
           .find();
       </textarea>
-    </div>
-    <div class="actions">
-      <a class="button">Learn more</a>
-    </div>
-  </div>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 import { entity, t } from '@deepkit/type';
 
 class Author {
@@ -191,23 +208,14 @@ class Book {
     ) {}
 }
     </textarea>
-    </div>
-  </div>
 
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Class-less</h2>
-    <p>
-      Define entities in a dynamic fashion without the need to use an actual Typescript class.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
+        <h2>Class-less</h2>
+        <p>
+            Define entities in a dynamic fashion without the need to use an actual TypeScript class.
+        </p>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
         import { t } from '@deepkit/type';
 
         const user = t.schema({
@@ -222,28 +230,19 @@ class Book {
           .filter({username: 'Peter'})
           .findOne();
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Unit of Work</h2>
-    <p>
-      The easiest way to work with your entities. Handle ten-thousands
-      of instances at the same time and let the UoW inserts/updates them in
-      the most efficient way possible.
-    </p>
-    <p>
-      The identity map makes sure that all persisted and fetched instances
-      in one session are uniquely identifiable and always the same instance.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <h2>Unit of Work</h2>
+        <p>
+            The easiest way to work with your entities. Handle ten-thousands
+            of instances at the same time and let the UoW inserts/updates them in
+            the most efficient way possible.
+        </p>
+        <p>
+            The identity map makes sure that all persisted and fetched instances
+            in one session are uniquely identifiable and always the same instance.
+        </p>
+        <textarea codeHighlight>
         const session = database.createSession();
 
         for (let i = 0; i < 10_000; i++) {
@@ -263,24 +262,15 @@ class Book {
         //patched to the database
         await session.commit();
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>ActiveRecord</h2>
-    <p>
-      For prototyping purposes Deepkit ORM also supports the ActiveRecord pattern.
-      It allows you to directly work with the entity class, without accessing
-      a Database object.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <h2>ActiveRecord</h2>
+        <p>
+            For prototyping purposes Deepkit ORM also supports the ActiveRecord pattern.
+            It allows you to directly work with the entity class, without accessing
+            a Database object.
+        </p>
+        <textarea codeHighlight>
         import { entity, t } from '@deepkit/type';
         import { ActiveRecord } from '@deepkit/orm';
 
@@ -302,26 +292,17 @@ class Book {
           await user.save();
         }
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Event system</h2>
-    <p>
-      You can hook into the UoW process or query execution using asynchronous event
-      listeners that are for example able to modify the query itself.
-    </p>
-    <p>
-      This allows you to write plugins or change the behavior of your entities.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
+        <h2>Event system</h2>
+        <p>
+            You can hook into the UoW process or query execution using asynchronous event
+            listeners that are for example able to modify the query itself.
+        </p>
+        <p>
+            This allows you to write plugins or change the behavior of your entities.
+        </p>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
         //onFetch is called for find(), findOne(),
         // findOneOrUndefined(), etc
         database.queryEvents.onFetch.subscribe((event) => {
@@ -343,28 +324,23 @@ class Book {
           }
         });
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Migrations</h2>
-    <p>
-      Migrations help you migrate schema changes for SQL databases in an easy yet effective way.
-    </p>
-    <p>
-      The migration file is automatically generated based on the difference
-      between the actual schema of your database and your schema defined
-      in your database entities.
-    </p>
-    <p>
-      You can modify the generated schema migration as you wish and commit
-      to Git, so your colleagues and deploy script can update the database schema
-      automatically.
-    </p>
-    <div class="box">
-      <textarea codeHighlight>
+
+        <h2>Migrations</h2>
+        <p>
+            Migrations help you migrate schema changes for SQL databases in an easy yet effective way.
+        </p>
+        <p>
+            The migration file is automatically generated based on the difference
+            between the actual schema of your database and your schema defined
+            in your database entities.
+        </p>
+        <p>
+            You can modify the generated schema migration as you wish and commit
+            to Git, so your colleagues and deploy script can update the database schema
+            automatically.
+        </p>
+        <textarea codeHighlight>
         class User {
           @t.number.primary.autoIncrement id:number = 0;
           @t username: string = '';
@@ -378,16 +354,7 @@ class Book {
           @t firstName: string = '';
         }
       </textarea>
-    </div>
-
-    <div class="actions">
-      <a class="button">Learn more</a>
-    </div>
-  </div>
-
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight lang="sql">
+        <textarea codeHighlight lang="sql">
 //my-app/migration/20200917-1727.ts
 import {Migration} from '@deepkit/framework';
 export class SchemaMigration implements Migration {
@@ -412,64 +379,14 @@ export class SchemaMigration implements Migration {
     }
 }
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>High-Performance</h2>
-    <p>
-      Deepkit ORM is based on Deepkit Type, the high-performance serializer/validator, and is
-      itself carefully optimized by using JIT techniques, to make it the fastest Typescript ORM/ODM on the market.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
 
-  <div class="right">
-    <performance-chart yAxis="ms / SQLite query 10k records">
-      <performance-entry title="TypeORM" [value]="52.139"></performance-entry>
-      <performance-entry title="Prisma" [value]="73.932"></performance-entry>
-      <performance-entry title="MikroORM" [value]="43.754"></performance-entry>
-      <performance-entry title="Deepkit ORM" [value]="15.057"></performance-entry>
-    </performance-chart>
-  </div>
-</feature-box>
+        <h2>Query composition</h2>
+        <p>
+            Reuse type-safe query classes and organize database access in the most efficient way.
+        </p>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Fastest MongoDB</h2>
-    <p>
-      The MongoDB adapter for Deepkit ORM is based on the high-performance
-      BSON serializer and decoder @deepkit/bson, and optimized MongoDB client
-      making it the by far fastest MongoDB ORM/ODM.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
-
-  <div class="right">
-    <performance-chart yAxis="ms / MongoDB query 10k records">
-      <performance-entry title="TypeORM" [value]="71.733"></performance-entry>
-      <performance-entry title="Mongoose" [value]="236.819"></performance-entry>
-      <performance-entry title="MikroORM" [value]="99.530"></performance-entry>
-      <performance-entry title="Raw MongoClient" [value]="57.520"></performance-entry>
-      <performance-entry title="Deepkit ORM" [value]="18.242"></performance-entry>
-    </performance-chart>
-  </div>
-</feature-box>
-
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Query composition</h2>
-    <p>
-      Reuse type-safe query classes and organize database access in the most efficient way.
-    </p>
-    <a class="button">Learn more</a>
-  </div>
-
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
         import { Query } from '@deepkit/orm';
 
         class SoftDeleteQuery<T extends {deletedAt?: Date}>
@@ -484,23 +401,11 @@ export class SchemaMigration implements Migration {
           .use(SoftDeleteQuery)
           .findDeleted();
       </textarea>
-    </div>
-  </div>
-</feature-box>
 
-<feature-box color="#3e3e3e">
-  <div class="left">
-    <h2>Plugins</h2>
-    <p>
-      Soft-Delete, Versioning, Archiving, Audit
-    </p>
-    <a class="button">Learn more</a>
-  </div>
+        <h2>Plugins</h2>
+        <p>
+            Soft-Delete, Versioning.
+        </p>
 
-  <div class="right">
-    <div class="box">
-      <textarea codeHighlight>
-      </textarea>
     </div>
-  </div>
-</feature-box>
+</div>

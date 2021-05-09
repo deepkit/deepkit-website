@@ -4,7 +4,6 @@ import { Component, HostBinding, Input } from "@angular/core";
     selector: 'feature-box',
     template: `
       <div class="wrapper">
-        <div class="blur1"></div>
         <ng-content select=".top"></ng-content>
         <div class="layout">
             <div class="left">
@@ -18,8 +17,6 @@ import { Component, HostBinding, Input } from "@angular/core";
           <ng-content></ng-content>
         </div>
       </div>
-
-      <separator [align]="align"></separator>
     `, styles: [`
         :host {
             display: block;
@@ -27,24 +24,6 @@ import { Component, HostBinding, Input } from "@angular/core";
             overflow: hidden;
         }
 
-        :host.right .blur1 {
-            left: unset;
-            right: -65px;
-        }
-        
-        .blur1 {
-            position: absolute;
-            left: -65px;
-            bottom: -120px;
-            height: 260px;
-            width: 737px;
-            border-radius: 555px;
-            opacity: 0.06;
-            background: var(--color);
-            filter: blur(50px);
-            pointer-events: none;
-        }
-        
         .wrapper {
             position: relative;
             padding-top: 80px;
@@ -87,7 +66,6 @@ import { Component, HostBinding, Input } from "@angular/core";
     `],
     host: {
         '[class.right]': `align === 'right'`,
-        '[style.--color]': `color`,
     }
 })
 export class FeatureBoxComponent {

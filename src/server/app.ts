@@ -6,7 +6,6 @@ import { MongoDatabase } from "./db";
 import { appConfig } from "./config";
 import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
 import { AuthListener } from "./auth";
-import { dirname } from 'path';
 
 Application.create({
     providers: [],

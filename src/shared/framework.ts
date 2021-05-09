@@ -1,6 +1,5 @@
-import {ControllerSymbol} from "@deepkit/rpc";
-import {entity, t} from "@deepkit/type";
-
+import {ControllerSymbol} from '@deepkit/rpc';
+import {entity, t} from '@deepkit/type';
 
 @entity.name('benchmark/entry')
 export class BenchmarkEntry {
@@ -13,7 +12,7 @@ export class BenchmarkEntry {
 @entity.name('benchmark/run')
 export class BenchmarkRun {
     @t.primary.autoIncrement id?: number;
-    @t created: Date = new Date;
+    @t created: Date = new Date();
 
     @t.map(t.map(t.map(BenchmarkEntry)))
     data: { [fileName: string]: { [suite: string]: { [method: string]: BenchmarkEntry } } } = {};

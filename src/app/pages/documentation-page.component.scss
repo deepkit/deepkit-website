@@ -1,9 +1,7 @@
-@import "../../scss/vars";
 
 :host {
     display: block;
     color: #3C3C3C;
-    background-color: #ddd;
     min-height: 1500px;
 }
 
@@ -60,11 +58,11 @@ nav {
         text-decoration: none;
 
         &:hover {
-            color: $linkHover;
+            color: var(--color-link-hover);
         }
 
         &.active {
-            color: $linkActive;
+            color: var(--color-link-active);
         }
     }
 

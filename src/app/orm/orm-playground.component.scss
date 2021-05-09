@@ -1,26 +1,28 @@
 :host {
   display: block;
   position: relative;
-  top: -50px;
   z-index: 101;
+  margin: 75px auto;
 }
 
 .wrapper {
-  max-width: 1300px;
+  max-width: 1500px;
 }
 
 .layout {
   display: flex;
-  height: 430px;
+  height: 460px;
   text-align: left;
-  border: 1px solid #292929;
-  background-color: #0c0d0f;
-  border-radius: 4px;
-  box-shadow: 0 15px 22px 0 rgba(0, 0, 0, 0.21);
+  border: 1px solid #b5b5b5;
+  background-color: #f9f9f9;
+  //border-radius: 4px;
+  box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 
   > * {
     flex: 0 0 50%;
     height: 100%;
+    overflow: hidden;
   }
 }
 
@@ -44,11 +46,12 @@ table th, table td {
 .browser {
   display: flex;
   flex-direction: column;
+  border-left: 1px solid #d0d0d0;
 
   .actions {
     flex: 0 0 32px;
     padding: 0 10px;
-    border-bottom: 1px solid #292929;
+    border-bottom: 1px solid #d0d0d0;
   }
 
   .content {
@@ -60,13 +63,13 @@ table th, table td {
 
   .console {
     flex: 1;
-    border-top: 1px solid #292929;
+    border-top: 1px solid #adadad;
     font-size: 13px;
 
     > div {
       padding: 0 5px;
       white-space: pre-line;
-      border-bottom: 1px solid #29292966;
+      border-bottom: 1px solid #d0d0d0;
     }
   }
 }
@@ -78,28 +81,40 @@ table th, table td {
 .actions {
   display: flex;
 
+  button {
+    padding: 4px 12px;
+  }
+
   .tabs {
     text-align: center;
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   button.tab {
     border-radius: 2px;
     border: 0;
     background-color: transparent;
+    color: black;
     outline: 0;
+    margin: 0 3px;
     background-image: none;
 
     &:hover {
       background-color: #116fec;
+      color: white;
     }
 
     &.active {
       background-color: #0e6dea;
+      color: white;
     }
 
     &:active {
       background-color: #0c66dd;
+      color: white;
     }
   }
 }

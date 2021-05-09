@@ -1,5 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild} from "@angular/core";
-import {isPlatformBrowser} from "@angular/common";
+import { Component } from '@angular/core';
 
 @Component({
     templateUrl: './index-page.component.html',

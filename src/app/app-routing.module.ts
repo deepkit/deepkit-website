@@ -9,6 +9,8 @@ import { FeaturesPageComponent } from './pages/features-page.component';
 import { TypeComponent } from './pages/type.component';
 import {RpcComponent} from './pages/rpc.component';
 import { AboutUsComponent } from './pages/about-us.component';
+import {BrokerComponent} from './pages/broker.component';
+import { LibrariesComponent } from './pages/libraries.component';
 
 
 const routes: Routes = [
@@ -26,31 +28,41 @@ const routes: Routes = [
     },
 
     {
-        path: 'products/framework',
+        path: 'framework',
         component: FeaturesPageComponent,
         data: {title: 'Framework Features'},
     },
 
     {
-        path: 'products/type',
+        path: 'library/type',
         component: TypeComponent,
         data: {title: 'Deepkit Type'},
     },
     {
-        path: 'products/orm',
+        path: 'library',
+        component: LibrariesComponent,
+        data: {title: 'Libraries'},
+    },
+    {
+        path: 'library/orm',
         loadChildren: () => import('./orm/orm.module').then(m => m.OrmModule),
         data: {title: 'Deepkit ORM'},
     },
     {
-        path: 'products/rpc',
+        path: 'library/rpc',
         component: RpcComponent,
     },
+    {
+        path: 'library/broker',
+        component:
+        BrokerComponent,
+    },
 
-    // {
-    //     path: 'products/desktop-ui',
-    //     loadChildren: () => import('./desktop-ui/desktop-ui.module').then(m => m.DesktopUiModule),
-    //     data: {title: 'Angular Desktop UI'},
-    // },
+    {
+        path: 'library/desktop-ui',
+        loadChildren: () => import('./desktop-ui/desktop-ui.module').then(m => m.DesktopUiModule),
+        data: {title: 'Angular Desktop UI'},
+    },
 
     // {
     //     path: 'framework',

@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 
 @Component({
     template: `
-        <main>
+        <main class="text-page">
             <div style="max-width: 700px;">
                 <p style="margin-bottom: 50px;">
-                    <img src="assets/images/deepkit-logo-text.svg" style="width: 400px;"/>
+                    <img src="assets/images/deepkit_text.svg" style="width: 400px;"/>
                 </p>
 
 
@@ -14,9 +14,9 @@ import {Component} from '@angular/core';
                 </p>
                 
                 <p>
-                    Deepkit was founded in 2018 in Hamburg, Germany, by Marc J. Schmidt, a long-term entrepreneur with failures he learnt from 
+                    Deepkit was founded in 2018 in Hamburg, Germany, by <a href="https://marcjschmidt.de">Marc J. Schmidt</a>, a long-term entrepreneur with failures he learnt from 
                     and successes he humbly appreciated, an open-source contributor, and electrical/software engineer, 
-                    who believes in the web, open cultures, and the future of isomorphic tech-stacks like Typescript.
+                    who believes in the web, open cultures, and the future of a isomorphic tech-stack.
                 </p>
                 
                 <p>
@@ -27,7 +27,7 @@ import {Component} from '@angular/core';
                 <h2>Mission</h2>
 
                 <p>
-                    Our mission is to make tech more accessible, easier to use, and much more efficient.
+                    Our mission is to make web tech more accessible, easier to use, and much more efficient.
                     
                     We love high-performance code and are committed to provide performant,
                     well designed and written code.

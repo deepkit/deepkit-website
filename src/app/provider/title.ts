@@ -12,7 +12,7 @@ export class TitleService {
     setTitle(name: string = '') {
         this.title.setTitle(
             (name ? name + ' | ' : '')
-            + 'Deepkit - High-Performance Typescript Framework'
+            + 'Deepkit - High-Performance TypeScript Framework'
         );
     }
 }

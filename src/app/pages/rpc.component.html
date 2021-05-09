@@ -1,71 +1,81 @@
-<div class="banner" style="height: 500px;">
-    <div class="wrapper">
-        <div class="text">
-            <h1>Deepkit RPC</h1>
+<div class="page">
+    <div class="banner">
+        <nav>
+            <div class="breadcrumb">
+                <a routerLink="/library">Deepkit library</a> /
+            </div>
+            <a routerLink="/library/rpc" routerLinkActive="active">Overview</a>
+            <a routerLink="">Documentation</a>
+            <a routerLink="">API</a>
+        </nav>
 
-            <p class="banner-text">
-                The fastest way to connect your frontend with your backend or interconnect your micro-services with
-                automatic
-                serialization, validation, error forwarding, fully typsafe interface, and streaming capabilities using RxJS
-                <br/> —
-                without code generation or config files, all Typescript.
-            </p>
+        <h1>RPC</h1>
+        <div class="package-name">@deepkit/rpc</div>
+        <p> The fastest way to connect your frontend with your backend or interconnect your micro-services with
+            automatic
+            serialization, validation, error forwarding, fully typsafe interface, and streaming capabilities using RxJS
+            <br/> —
+            without code generation or config files, all TypeScript.
+        </p>
+        <div class="actions">
+        </div>
+    </div>
 
-            <div class="actions">
-                <a routerLink="/documentation/type" class="button primary">Get started</a>
+    <div class="wrapper banner-features">
+        <div>
+            <h3>Flexible</h3>
+            <div>
+                <img src="/assets/images/rpc-visual.svg"/>
+            </div>
+        </div>
+
+        <div>
+            <h3>High performance</h3>
+            <div>
+                <performance-chart yAxis="ops/second via TCP" sort="asc" format="0.0-0">
+                    <performance-entry title="gRPC-js" [value]="7536"></performance-entry>
+                    <performance-entry title="Deepkit RPC" [value]="34320"></performance-entry>
+                </performance-chart>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="line"></div>
 
-<feature-box>
-    <div class="top" style="margin-bottom: 50px;">
-        <h3>This is how it works</h3>
+    <div class="wrapper how-it-works">
+        <h2>How it works</h2>
         <p>
             You write your controller interface (actions) and models (parameter and return types)
             in a shared library/package that can be imported by frontend/client and server.
         </p>
         <p>
-            <strong>The server</strong> implements the interface using a simple Typescript class and decorators.<br/>
+            <strong>The server</strong> implements the interface using a simple TypeScript class and decorators.<br/>
             <strong>The client</strong> consumes the interface with a client that automatically serializes
             and executes the action on the server.
         </p>
-    </div>
-
-    <div class="left">
-        <div style="text-align: center">
-            <h3>Frontend</h3>
-
-            <p>Angular, React, Vue, HTML5, Node.</p>
-        </div>
-
-
-        <div class="box">
-      <textarea codeHighlight>
-import {DeepkitClient} from ‘@deepkit/rpc’;
-import {MyControllerInterface} from ‘common’;
+        <div class="client-server">
+            <div>
+                <h4>Client</h4>
+                <p>Angular, React, Vue, HTML5, Node.</p>
+                <textarea codeHighlight>
+import {DeepkitClient} from '@deepkit/rpc';
+import {MyControllerInterface} from 'common';
 
 //connect via WebSockets/TCP, or in-memory for SSR
-const client = new DeepkitClient(‘localhost’);
+const client = new DeepkitClient('localhost');
 const ctrl = client.controller(MyControllerInterface);
 
 const user = await ctrl.getUser(42);
 console.log(user.username);
 console.log(user instanceof User); //true
       </textarea>
-        </div>
-    </div>
-
-    <div class="right">
-        <div style="text-align: center">
-            <h3>Server</h3>
-            <p>Using Typescript classes.</p>
-        </div>
-        <div class="box">
-      <textarea codeHighlight>
-import {rpc} from ‘@deepkit/rpc’;
-import {MyControllerInterface, User} from ‘common’;
+            </div>
+            <div>
+                <h4>Server</h4>
+                <p>Using TypeScript classes.</p>
+                <textarea codeHighlight>
+import {rpc} from '@deepkit/rpc';
+import {MyControllerInterface, User} from 'common';
 
 @rpc.controller(MyControllerInterface)
 class MyController implements MyControllerInterface {
@@ -75,67 +85,57 @@ class MyController implements MyControllerInterface {
     }
 }
       </textarea>
+            </div>
         </div>
-    </div>
-
-    <div class="mini-wrapper">
-
-        <div style="text-align: center; margin-top: 40px;">
-            <h3>Common</h3>
+        <div class="common">
+            <h4>Common</h4>
             <p>
-                In a common package shared with backend and frontend you define
-                your interface and models.
+                In a common package shared with server and client you define your interface and models.
             </p>
-        </div>
-
-        <div class="box">
-        <textarea codeHighlight>
-@entity.name(‘user’)
+            <textarea codeHighlight>
+@entity.name('user')
 export class User {
-    @t username: string = ‘’;
+    @t username: string = '';
     constructor(@t public id: number) {}
 }
 
-export MyControllerInterface = Controller<MyControllerInterface>(‘my’, [User]);
+export MyControllerInterface = Controller<MyControllerInterface>('my', [User]);
 export interface MyControllerInterface {
      async getUser(id: number): Promise<User>;
 }
         </textarea>
+            <p>
+                Note: Both the client and server can register a controller, and both can consume a controller making the
+                communication flow in both direction. This example demonstrates the simplest use-case where the server
+                registers a controller and a client connecting via TCP/WebSockets consumes that controller.
+            </p>
         </div>
     </div>
 
-</feature-box>
+    <div class="line"></div>
 
+    <div class="text">
+        <h2>Installation</h2>
+        <pre class="console">npm install @deepkit/rpc @deepkit/rpc-tpc</pre>
+        <p>
+            Make sure @deepkit/type is already installed.
+        </p>
 
-<feature-box>
-    <div class="left">
+        <div class="line"></div>
+
         <h2>Simple class methods</h2>
-        <p>
-            RPC actions are simple class methods, decorated with <code>@rpc.action()</code>.
-            Parameter and return type are inferred as much as possible using Deepkit Type.
-        </p>
 
         <p>
-            Types that can't be inferred from Typescript's <code>emitDecoratorMetadata</code>
-            can be manually annotated using Deepkit Type.
+            RPC actions are simple class methods, decorated with @rpc.action(). Parameter and return type are inferred
+            as much as possible using Deepkit Type.
+            Types that can't be inferred from TypeScript's emitDecoratorMetadata can be manually annotated using Deepkit
+            Type. Fully type-safe since you import the TypeScript interface of your controller in your clients directly.
+            You can even share your database models from Deepkit ORM and return them directly in your RPC action.
         </p>
 
-        <p>
-            Fully type-safe since you import the Typescript interface of your controller
-            in your clients directly.
-        </p>
-
-        <p>
-            You can even share your database models from Deepkit ORM and return them
-            directly in your RPC action.
-        </p>
-    </div>
-
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {rpc} from ‘@deepkit/rpc’;
-import {MyControllerInterface, User} from ‘common’;
+        <textarea codeHighlight>
+import {rpc} from '@deepkit/rpc';
+import {MyControllerInterface, User} from 'common';
 
 @rpc.controller(MyControllerInterface)
 class MyController implements MyControllerInterface {
@@ -146,7 +146,7 @@ class MyController implements MyControllerInterface {
     }
 
     // more complex types need to be annotated using @t
-    // since they are not emitted by Typescript.
+    // since they are not emitted by TypeScript.
     @rpc.action()
     @t.map(t.number)
     async labelUser(
@@ -158,24 +158,16 @@ class MyController implements MyControllerInterface {
         });
     }
 }
-      </textarea>
-        </div>
-    </div>
-</feature-box>
+        </textarea>
 
-
-<feature-box>
-    <div class="left">
         <h2>Type serialization</h2>
         <p>
-            Data types of action parameters and its return type like String, Number, Boolean, Date, arrays, typed arrays,
-            objects, and custom entities are serialized automatically back and forth using a flexible and fast binary protocol.
+            Data types of action parameters and its return type like String, Number, Boolean, Date, arrays, typed
+            arrays,
+            objects, and custom entities are serialized automatically back and forth using a flexible and fast binary
+            protocol.
         </p>
-    </div>
-
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 class MyController implements MyControllerInterface {
     @rpc.action()
     async getUser(id: number): Promise<User> {
@@ -192,14 +184,8 @@ class MyController implements MyControllerInterface {
         return true;
     }
 }
-      </textarea>
-        </div>
-    </div>
-</feature-box>
+        </textarea>
 
-
-<feature-box>
-    <div class="left">
         <h2>Parameter validation</h2>
         <p>
             All parameters are automatically validated on the server side to make sure
@@ -213,11 +199,7 @@ class MyController implements MyControllerInterface {
             with detailed error code and message for each parameter, that
             can be nicely shown in the user interface.
         </p>
-    </div>
-
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 class MyController implements MyControllerInterface {
     @rpc.action()
     async getUser(
@@ -241,13 +223,7 @@ class MyController implements MyControllerInterface {
     }
 }
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
-
-<feature-box>
-    <div class="left">
         <h2>RxJS streaming</h2>
         <p>
             Streaming data to the client shouldn't be hard. That's why Deepkit RPC
@@ -268,10 +244,9 @@ class MyController implements MyControllerInterface {
             All Observables and subscriptions are automatically closed when the client disconnects.
         </p>
 
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 // client
-const client = new DeepkitClient(‘localhost’);
+const client = new DeepkitClient('localhost');
 const ctrl = client.controller(MyControllerInterface);
 
 const sensorData = await ctrl.sensorData();
@@ -291,13 +266,8 @@ chat.subscribe((next) => {
 //completes the whole Subject, triggering its TearDown
 chat.unsubscribe();
       </textarea>
-        </div>
 
-    </div>
-
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 // server
 class MyController implements MyControllerInterface {
     protected sensorData = new Subject<number>();
@@ -340,13 +310,7 @@ class MyController implements MyControllerInterface {
     }
 }
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
-
-<feature-box>
-    <div class="left">
         <h2>Error forwarding</h2>
         <p>
             If an error is throwing in an action on the server,
@@ -358,16 +322,15 @@ class MyController implements MyControllerInterface {
             custom entity classes.
         </p>
 
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 //client.ts
-const client = new DeepkitClient(‘localhost’);
+const client = new DeepkitClient('localhost');
 const ctrl = client.controller(MyControllerInterface);
 
 try {
-    const sensorData = await ctrl.sensorData();
+    const sensorData = await ctrl.sensorData('a');
 } catch (error) {
-    error.message === 'No sensor with name ...';
+    error.message === 'No sensor a';
 }
 
 try {
@@ -377,22 +340,16 @@ try {
 }
 
       </textarea>
-        </div>
-    </div>
 
-    <div class="right">
-        <div class="box" style="margin-bottom: 25px;">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 //common.ts
 @entity.name('@error/my-custom')
 class MyCustomError extends Error {
     @t.array(t.string) codes: string[] = [];
 }
       </textarea>
-        </div>
 
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 //server.ts
 class MyController implements MyControllerInterface {
     @rpc.action()
@@ -409,22 +366,23 @@ class MyController implements MyControllerInterface {
     }
 }
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
+        <h2>Peer2Peer</h2>
+        <p>
+            A client itself can implement a controller interface and
+            register as peer. Another connection can use the interface
+            as regular client. This allows to communicate from clien to client
+            directly (via the server redirecting the messages accordingly).
+        </p>
 
-<feature-box>
-    <div class="left">
         <h2>Download/Upload progress</h2>
         <p>
             Bigger packages are chunked automatically and allow you to monitor the upload and download progress.
         </p>
 
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 //client.ts
-const client = new DeepkitClient(‘localhost’);
+const client = new DeepkitClient('localhost');
 const ctrl = client.controller(MyControllerInterface);
 
 const progress = ClientProgress.track();
@@ -443,12 +401,8 @@ progress2.download.subscribe(progress => {
 const zip = await ctrl.downloadFile('file.zip');
 
       </textarea>
-        </div>
-    </div>
 
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
+        <textarea codeHighlight>
 //server.ts
 class MyController implements MyControllerInterface {
     @rpc.action()
@@ -462,25 +416,5 @@ class MyController implements MyControllerInterface {
     }
 }
       </textarea>
-        </div>
     </div>
-</feature-box>
-
-
-<feature-box color="#3e3e3e">
-    <div class="left">
-        <h2>High-Performance</h2>
-        <p>
-            A carefully optimized binary protocol, serializer and decoder for the v8 engine
-            as well as light abstraction enables very high ops/second with efficiency memory usage.
-        </p>
-        <a class="button">Learn more</a>
-    </div>
-
-    <div class="right">
-        <performance-chart yAxis="ops/second via TCP" sort="asc" format="0.0-0">
-            <performance-entry title="gRPC-js" [value]="7536"></performance-entry>
-            <performance-entry title="Deepkit RPC" [value]="34320"></performance-entry>
-        </performance-chart>
-    </div>
-</feature-box>
+</div>

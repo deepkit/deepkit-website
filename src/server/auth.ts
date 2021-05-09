@@ -1,7 +1,6 @@
 import {eventDispatcher, httpWorkflow, inject} from "@deepkit/framework";
 import {appConfig} from "./config";
 
-
 export class AuthListener {
     constructor(
         @inject(appConfig.token('benchmarkAuthToken')) protected authToken: string

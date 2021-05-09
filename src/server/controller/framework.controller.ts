@@ -1,8 +1,8 @@
-import {http, injectable} from "@deepkit/framework";
-import {rpc} from "@deepkit/rpc";
-import {BenchmarkRun, FrameworkControllerInterface} from "../../shared";
-import {MongoDatabase} from "../db";
-import {t} from "@deepkit/type";
+import {http, injectable} from '@deepkit/framework';
+import {rpc} from '@deepkit/rpc';
+import {BenchmarkRun, FrameworkControllerInterface} from '../../shared';
+import {MongoDatabase} from '../db';
+import {t} from '@deepkit/type';
 
 @rpc.controller(FrameworkControllerInterface)
 export class FrameworkController implements FrameworkControllerInterface {
@@ -30,7 +30,7 @@ export class FrameworkHttpController {
         }
 
         if (dataSize === 1) {
-            console.log("benchmark not added, since only one data point");
+            console.log('benchmark not added, since only one data point');
             return false;
         }
 

@@ -1,16 +1,14 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, OnChanges, OnInit, ViewChild } from "@angular/core";
+import { Directive, ElementRef, OnChanges, OnInit } from '@angular/core';
 import { highlight, languages } from 'prismjs';
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { ContentChild } from "@angular/core";
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
-import { Input } from "@angular/core";
+import { Input } from '@angular/core';
 
 function removeIndent(str: string): string {
     const matches = str.match(/^ +/g);
     if (!matches) return str;
     const initial = matches[0].length;
-    let re = RegExp(`^.{${initial}}`, 'gm');
+    const re = RegExp(`^.{${initial}}`, 'gm');
     return str.replace(re, '');
 }
 

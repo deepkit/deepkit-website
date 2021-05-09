@@ -1,67 +1,58 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    Inject,
-    OnDestroy,
-    OnInit, PLATFORM_ID,
-    ViewChild
-} from "@angular/core";
-import { ModuleKind, ScriptTarget, transpile } from "typescript";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild } from '@angular/core';
+import { ModuleKind, ScriptTarget, transpile } from 'typescript';
 import * as type from '@deepkit/type';
-import * as orm from "@deepkit/orm";
-import * as sqlJs from "./sql-js-adapter";
-import { ClassSchema, getClassSchema, getGlobalStore, plainToClass, t } from "@deepkit/type";
-import { Database } from "@deepkit/orm";
-import { ClassType } from "@deepkit/core";
-import type { editor, languages } from 'monaco-editor';
-import { SQLDatabaseAdapter } from "@deepkit/sql";
+import { ClassSchema, getGlobalStore } from '@deepkit/type';
+import * as orm from '@deepkit/orm';
+import { Database } from '@deepkit/orm';
+import * as sqlJs from './sql-js-adapter';
+import { ClassType } from '@deepkit/core';
+import type { editor } from 'monaco-editor';
+import { SQLDatabaseAdapter } from '@deepkit/sql';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'orm-playground',
     template: `
-      <div class="wrapper">
-        <div class="layout">
-          <div #container></div>
-          <div class="browser">
-            <div class="actions">
-              <div>
-                <button (click)="transpile()">Run</button>
-              </div>
-              
-              <div class="tabs">
-                  <button class="tab" [class.active]="tab === 'list'" (click)="openTab('list')">Tables</button>
-                  <button class="tab" [class.active]="tab === 'sql'" (click)="openTab('sql')">SQL</button>
-              </div>
+        <div class="wrapper">
+            <div class="layout">
+                <div #container></div>
+                <div class="browser">
+                    <div class="actions">
+                        <div style="display: flex; align-items: center">
+                            <button class="primary" style="font-size: 13px; line-height: 15px;" (click)="transpile()">Run</button>
+                        </div>
+
+                        <div class="tabs">
+                            <button class="tab" [class.active]="tab === 'list'" (click)="openTab('list')">Tables</button>
+                            <button class="tab" [class.active]="tab === 'sql'" (click)="openTab('sql')">SQL</button>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="tables" *ngIf="tab === 'list'">
+                            <table *ngFor="let table of tables; trackBy: trackByIndex">
+                                {{table.name}}
+                                <tr>
+                                    <th *ngFor="let name of table.columns; trackBy: trackByIndex">
+                                        {{name}}
+                                    </th>
+                                </tr>
+                                <tr *ngFor="let row of table.items; trackBy: trackByIndex">
+                                    <td *ngFor="let name of table.columns; trackBy: trackByIndex">
+                                        {{row[name] === undefined ? 'undefined' : (row[name]|json)}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dql" *ngIf="tab === 'sql'">
+                            <div codeHighlight="sql" [code]="dql"></div>
+                        </div>
+                    </div>
+                    <div class="console">
+                        <div *ngFor="let log of logs; trackBy: trackByIndex">{{log}}</div>
+                    </div>
+                </div>
             </div>
-            <div class="content">
-              <div class="tables" *ngIf="tab === 'list'">
-                <table *ngFor="let table of tables; trackBy: trackByIndex">
-                  {{table.name}}
-                  <tr>
-                      <th *ngFor="let name of table.columns; trackBy: trackByIndex">
-                        {{name}}
-                      </th>
-                  </tr>
-                  <tr *ngFor="let row of table.items; trackBy: trackByIndex">
-                        <td *ngFor="let name of table.columns; trackBy: trackByIndex">
-                          {{row[name] === undefined ? 'undefined' : (row[name]|json)}}
-                        </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="dql" *ngIf="tab === 'sql'">
-                <div codeHighlight="sql" [code]="dql"></div>
-              </div>
-            </div>
-            <div class="console">
-              <div *ngFor="let log of logs; trackBy: trackByIndex">{{log}}</div>
-            </div>
-          </div>
         </div>
-      </div>
     `,
     styleUrls: ['./orm-playground.component.scss']
 })
@@ -132,10 +123,12 @@ console.log('ids', await database.query(User).findField('id'));
     }
 
     async ngAfterViewInit() {
-        if (!this.isBrowser) return;
+        if (!this.isBrowser) {
+            return;
+        }
 
         if (this.container) {
-            (window as any)._require.config({ paths: { 'vs': `monaco-editor/vs` } });
+            (window as any)._require.config({ paths: { vs: `monaco-editor/vs` } });
             (window as any)._require(['vs/editor/editor.main'], (monaco) => {
                 monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
                     noSemanticValidation: true,
@@ -145,11 +138,12 @@ console.log('ids', await database.query(User).findField('id'));
                 this.editor = monaco.editor.create(this.container.nativeElement, {
                     roundedSelection: false,
                     renderLineHighlight: 'all',
+                    automaticLayout: true,
                     minimap: {
                         enabled: false,
                     },
                     value: this.ts,
-                    theme: 'vs-dark',
+                    theme: 'vs',
                     language: 'typescript',
                 });
 
@@ -198,11 +192,11 @@ console.log('ids', await database.query(User).findField('id'));
 
         const old = {
             log: console.log,
-        }
+        };
 
         console.log = (...args: any[]) => {
             this.logs.push(args.map(v => JSON.stringify(v)).join(' '));
-        }
+        };
 
         for (const db of this.databases) {
             db.disconnect();
@@ -223,9 +217,15 @@ console.log('ids', await database.query(User).findField('id'));
 
         try {
             await new Function('require', 'exports', 'return async function() { ' + this.js + '}')((id: string) => {
-                if (id === '@deepkit/type') return type;
-                if (id === '@deepkit/orm') return { ...orm, Database: LoggedDatabase };
-                if (id === '@deepkit/sqlite') return sqlJs;
+                if (id === '@deepkit/type') {
+                    return type;
+                }
+                if (id === '@deepkit/orm') {
+                    return { ...orm, Database: LoggedDatabase };
+                }
+                if (id === '@deepkit/sqlite') {
+                    return sqlJs;
+                }
             }, {})();
 
         } finally {
