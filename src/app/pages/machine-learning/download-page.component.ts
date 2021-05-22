@@ -1,6 +1,6 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {t, jsonSerializer} from "@deepkit/type";
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {t, jsonSerializer} from '@deepkit/type';
 
 class Release {
     @t version!: string;

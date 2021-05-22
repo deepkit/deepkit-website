@@ -78,16 +78,6 @@ a, a:link {
   text-decoration: none;
 }
 
-.tag {
-  background: #FF662A;
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 12px;
-  color: #FFFFFF;
-  letter-spacing: 0;
-  padding: 0 3px;
-}
-
 pre.code {
   font-family: 'Source Code Pro', monospace;
   font-size: 13px;
@@ -269,11 +259,11 @@ pre.console {
 }
 
 .library-cards {
-  max-width: 1200px;
+  max-width: 1040px;
   margin: 80px auto;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
   grid-gap: 25px;
 
   library-card {

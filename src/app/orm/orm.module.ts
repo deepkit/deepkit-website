@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { OrmComponent } from "./orm.component";
-import { OrmPlaygroundComponent } from "./orm-playground.component";
-import { RouterModule, Routes } from "@angular/router";
-import { FormsModule } from "@angular/forms";
-import { CommonModule } from "@angular/common";
-import { AppCommonModule } from "../common/common.module";
+import { NgModule } from '@angular/core';
+import { OrmComponent } from './orm.component';
+import { OrmPlaygroundComponent } from './orm-playground.component';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AppCommonModule } from '../common/common.module';
 
 const routes: Routes = [
     {path: '', component: OrmComponent}

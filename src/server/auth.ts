@@ -1,5 +1,7 @@
-import {eventDispatcher, httpWorkflow, inject} from "@deepkit/framework";
-import {appConfig} from "./config";
+import { eventDispatcher } from '@deepkit/event';
+import { httpWorkflow } from '@deepkit/http';
+import { inject } from '@deepkit/injector';
+import {appConfig} from './config';
 
 export class AuthListener {
     constructor(
@@ -10,7 +12,7 @@ export class AuthListener {
     @eventDispatcher.listen(httpWorkflow.onAuth)
     async onAuth(event: typeof httpWorkflow.onAuth.event) {
         if (event.route.groups.includes('benchmarkAuth')) {
-            if (event.request.headers['authorization'] !== this.authToken) {
+            if (event.request.headers.authorization !== this.authToken) {
                 event.response.writeHead(403);
                 event.response.end('Nope');
             }

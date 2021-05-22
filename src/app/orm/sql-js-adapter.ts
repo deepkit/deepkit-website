@@ -1,15 +1,17 @@
-import { DatabaseSession } from "@deepkit/orm";
+import { DatabaseSession } from '@deepkit/orm';
+import { SQLDatabaseAdapter, SQLDatabaseQueryFactory, SQLPersistence } from '@deepkit/sql';
 import {
-    SQLConnection,
-    SQLConnectionPool,
-    SQLDatabaseAdapter,
-    SQLDatabaseQueryFactory,
-    SQLPersistence, SQLStatement
-} from "@deepkit/sql";
-import { SQLiteConnection, SQLiteConnectionPool, SQLiteDatabaseQueryFactory, SQLitePersistence, SQLitePlatform } from "@deepkit/sqlite";
-import { SQLiteStatement } from "@deepkit/sqlite";
+    SQLiteConnection,
+    SQLiteConnectionPool,
+    SQLiteDatabaseQueryFactory,
+    SQLitePersistence,
+    SQLitePlatform,
+    SQLiteStatement
+} from '@deepkit/sqlite';
 
 export class SQLJSStatement extends SQLiteStatement {
+    protected stmt: any;
+
     async get(params: any[] = []): Promise<any> {
         return this.stmt.get(...params);
     }
@@ -29,22 +31,23 @@ export class SQLJSStatement extends SQLiteStatement {
 
 export class SQLJSConnection extends SQLiteConnection {
     async prepare(sql: string) {
-        return new SQLJSStatement(this.db.prepare(sql));
+        return new SQLJSStatement(this.logger, sql, this.db.prepare(sql));
     }
 
     async run(sql: string, params: any[] = []) {
-        this.db.run(sql, params);
+        this.db.prepare(sql).run(params);
     }
 }
 
 export class SQLJSConnectionPool extends SQLiteConnectionPool {
-    getConnection(): SQLJSConnection {
+    async getConnection(): Promise<SQLJSConnection> {
         this.activeConnections++;
         return new SQLJSConnection(this, this.db);
     }
 }
 
 let lastDb: any;
+
 export class SQLiteDatabaseAdapter extends SQLDatabaseAdapter {
     public readonly connectionPool: SQLJSConnectionPool;
     public readonly platform = new SQLitePlatform();
@@ -52,9 +55,12 @@ export class SQLiteDatabaseAdapter extends SQLDatabaseAdapter {
 
     constructor() {
         super();
-        if (lastDb) lastDb.close();
+        if (lastDb) {
+            lastDb.close();
+        }
 
-        lastDb = this.db = new (window as any).SQL.Database();;
+        lastDb = this.db = new (window as any).SQL.Database();
+        ;
         this.connectionPool = new SQLJSConnectionPool(this.db);
     }
 
@@ -66,8 +72,8 @@ export class SQLiteDatabaseAdapter extends SQLDatabaseAdapter {
         return '';
     }
 
-    createPersistence(): SQLPersistence {
-        return new SQLitePersistence(this.platform, this.connectionPool.getConnection());
+    createPersistence(session: DatabaseSession<any>): SQLPersistence {
+        return new SQLitePersistence(this.platform, this.connectionPool, session);
     }
 
     queryFactory(databaseSession: DatabaseSession<any>): SQLDatabaseQueryFactory {

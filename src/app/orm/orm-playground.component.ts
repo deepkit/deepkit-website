@@ -143,7 +143,7 @@ console.log('ids', await database.query(User).findField('id'));
                         enabled: false,
                     },
                     value: this.ts,
-                    theme: 'vs',
+                    theme: 'vs-dark',
                     language: 'typescript',
                 });
 

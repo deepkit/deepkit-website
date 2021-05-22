@@ -1,8 +1,9 @@
-import {http, injectable} from '@deepkit/framework';
 import {rpc} from '@deepkit/rpc';
 import {BenchmarkRun, FrameworkControllerInterface} from '../../shared';
 import {MongoDatabase} from '../db';
 import {t} from '@deepkit/type';
+import { injectable } from '@deepkit/injector';
+import { http } from '@deepkit/http';
 
 @rpc.controller(FrameworkControllerInterface)
 export class FrameworkController implements FrameworkControllerInterface {

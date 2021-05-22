@@ -17,6 +17,6 @@ export class BenchmarkComponent implements OnInit {
     }
 
     async ngOnInit() {
-        this.benchmarkRun = await this.client.framework.getLastBenchmarkRun();
+        //this.benchmarkRun = await this.client.framework.getLastBenchmarkRun();
     }
 }

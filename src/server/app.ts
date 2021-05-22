@@ -1,11 +1,11 @@
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 import { Application, KernelModule } from '@deepkit/framework';
-import { AngularUniversalModule } from '@deepkit/angular-universal';
-import { MongoDatabase } from "./db";
-import { appConfig } from "./config";
+import { angularUniversalModule } from '@deepkit/angular-universal';
+import { MongoDatabase } from './db';
+import { appConfig } from './config';
 import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
-import { AuthListener } from "./auth";
+import { AuthListener } from './auth';
 
 Application.create({
     providers: [],
@@ -25,7 +25,7 @@ Application.create({
             host: process.env.HOST || '127.0.0.1',
             workers: 1
         }),
-        AngularUniversalModule.configure({
+        angularUniversalModule.configure({
             browserPath: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
             serverPath: (process.env.DIST || __dirname + '/../../dist/') + 'server',
         }),

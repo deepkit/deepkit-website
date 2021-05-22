@@ -13,10 +13,11 @@
   display: flex;
   height: 460px;
   text-align: left;
-  border: 1px solid #b5b5b5;
-  background-color: #f9f9f9;
-  //border-radius: 4px;
-  box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.15);
+  //border: 1px solid #b5b5b5;
+  background-color: #1e1e1e;
+  border-radius: 4px;
+  color: #eee;
+  //box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.15);
   overflow: hidden;
 
   > * {
@@ -46,12 +47,12 @@ table th, table td {
 .browser {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid #d0d0d0;
+  border-left: 1px solid #666;
 
   .actions {
     flex: 0 0 32px;
     padding: 0 10px;
-    border-bottom: 1px solid #d0d0d0;
+    border-bottom: 1px solid #666;
   }
 
   .content {
@@ -63,13 +64,13 @@ table th, table td {
 
   .console {
     flex: 1;
-    border-top: 1px solid #adadad;
+    border-top: 1px solid #666;
     font-size: 13px;
 
     > div {
       padding: 0 5px;
       white-space: pre-line;
-      border-bottom: 1px solid #d0d0d0;
+      border-bottom: 1px solid #444;
     }
   }
 }
@@ -97,7 +98,6 @@ table th, table td {
     border-radius: 2px;
     border: 0;
     background-color: transparent;
-    color: black;
     outline: 0;
     margin: 0 3px;
     background-image: none;

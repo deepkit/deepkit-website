@@ -1,22 +1,21 @@
-<div class="banner" style="height: 500px;">
-    <div class="wrapper">
-        <div class="text">
-            <h1>Deepkit Broker</h1>
+<div class="page">
+    <product-banner header="Broker" id="broker">
+        <p>
+            High performance typesafe message bus server for pub/sub pattern, key-value storage, and central atomic app locks.
+        </p>
+        <p>
+            A highly configurable message broker written in and for TypeScript.
+        </p>
+    </product-banner>
 
-            <p class="banner-text">
-                A highly extendable, fast, and type-safe cache and message broker for TypeScript.
-            </p>
+    <div class="line"></div>
+    <div class="text">
 
-            <div class="actions">
-                <a routerLink="/documentation/type" class="button primary">Get started</a>
-            </div>
-        </div>
-    </div>
-</div>
+        <h2>Installation</h2>
+        <pre class="console">npm install @deepkit/broker</pre>
+        <p>
+        </p>
 
-
-<feature-box>
-    <div class="left">
         <h3>Key/Value</h3>
         <p>
             Type-safe key/value storage.
@@ -25,14 +24,9 @@
             The data is serialized using a very fast binary encoding and stored
             on the server using efficient ArrayBuffers.
         </p>
-    </div>
-
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {BrokerClient} from ‘@deepkit/broker’;
-import {t} from ‘@deepkit/type’;
-
+        <textarea codeHighlight>
+import {BrokerClient} from '@deepkit/broker';
+import {t} from '@deepkit/type';
 const client = new BrokerClient();
 
 const userLogins = client.key('logins/123', t.number);
@@ -40,91 +34,70 @@ await userLogins.set(123);
 const logins = await userLogins.get();
 await userLogins.delete();
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
-
-
-<feature-box>
-    <div class="left">
         <h3>Atomic increment</h3>
         <p>
             Type-safe key/value storage.
         </p>
-    </div>
+        <textarea codeHighlight>
+import {BrokerClient} from '@deepkit/broker';
+const client = new BrokerClient();
 
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {BrokerClient} from ‘@deepkit/broker’;
+client.increment('logins/user1', +1);
+
+const v = client.increment('logins/user1', -1);
+expect(v).toBe(0);
+
+client.delete('logins/user1');
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
-
-
-<feature-box>
-    <div class="left">
         <h3>Pub/Sub</h3>
         <p>
             Type-safe key/value storage.
         </p>
-    </div>
+        <textarea codeHighlight>
+import {t} from '@deepkit/type';
+import {BrokerClient} from '@deepkit/broker';
+const client = new BrokerClient();
 
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {BrokerClient} from ‘@deepkit/broker’;
+const messageSchema1 = t.schema({ value: t.number });
+const channel1 = client.channel('channel1', messageSchema1);
+
+await channel1.subscribe(v => (message) => {
+    console.log('got message', message);
+}));
+
+await channel1.publish({ value: 1345 });
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
-
-
-<feature-box>
-    <div class="left">
         <h3>Atomic lock</h3>
         <p>
             For critical region locking
         </p>
-    </div>
+        <textarea codeHighlight>
+import {BrokerClient} from '@deepkit/broker';
+const client = new BrokerClient();
 
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {BrokerClient} from ‘@deepkit/broker’;
+if (await client.isLocked('lock1')) {
+    // lock in place already.
+}
+
+// blocks until lock acquired.
+const lock1 = await client.lock('lock1');
+try {
+    // do critical work.
+} finally {
+    await lock1.unsubscribe();
+}
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
-
-
-<feature-box>
-    <div class="left">
         <h3>Extendable</h3>
         <p>
-            If you have custom algorithms to implement in a distributed fashion,
-            you can extend the Broker server and client using simple TypeScript.
+            You can implement custom actions on the broker using TypeScript by
+            simply extending the BrokerClient and BrokerKernel.
             In contrast to other solutions like Redis you are not limited.
         </p>
-    </div>
 
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {BrokerClient} from ‘@deepkit/broker’;
-      </textarea>
-        </div>
-    </div>
-</feature-box>
-
-
-<feature-box>
-    <div class="left">
         <h3>Easy to deploy</h3>
         <p>
             The server being regular TypeScript code makes it very easy to deploy your
@@ -134,13 +107,9 @@ import {BrokerClient} from ‘@deepkit/broker’;
             You can deploy Deepkit Broker as WebSocket server as well and access
             it directly from your frontend application.
         </p>
-    </div>
-
-    <div class="right">
-        <div class="box">
-      <textarea codeHighlight>
-import {BrokerKernel} from ‘@deepkit/broker’;
-import {TcpServer} from ‘@deepkit/rpc-tcp’;
+        <textarea codeHighlight>
+import {BrokerKernel} from '@deepkit/broker';
+import {TcpServer} from '@deepkit/rpc-tcp';
 
 const server = new TcpServer(
     new BrokerKernel,
@@ -148,27 +117,20 @@ const server = new TcpServer(
 );
 server.start();
       </textarea>
-        </div>
-    </div>
-</feature-box>
 
 
-<feature-box color="#3e3e3e">
-    <div class="left">
         <h2>High-Performance</h2>
         <p>
             A carefully optimized binary protocol, serializer and decoder for the v8 engine
             as well as light abstraction makes Deepkit Broker very fast.
         </p>
-        <a class="button">Learn more</a>
+        <div style="display: flex; justify-content: center; padding: 25px;">
+            <performance-chart yAxis="get/second via TCP" sort="asc" format="0.0-0">
+                <performance-entry title="node-redis" [value]="43582"></performance-entry>
+                <performance-entry title="Deepkit Broker" [value]="41575"></performance-entry>
+            </performance-chart>
+        </div>
     </div>
+</div>
 
-    <div class="right">
-        <performance-chart yAxis="get/second via TCP" sort="asc" format="0.0-0">
-            <performance-entry title="socketcluster" [value]="43582"></performance-entry>
-            <performance-entry title="socket.io" [value]="43582"></performance-entry>
-            <performance-entry title="node-redis" [value]="43582"></performance-entry>
-            <performance-entry title="Deepkit Broker" [value]="41575"></performance-entry>
-        </performance-chart>
-    </div>
-</feature-box>
+

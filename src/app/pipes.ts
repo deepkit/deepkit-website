@@ -1,5 +1,5 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {humanBytes} from "@deepkit/core";
+import {Pipe, PipeTransform} from '@angular/core';
+import {humanBytes} from '@deepkit/core';
 
 
 @Pipe({name: 'fileSize'})

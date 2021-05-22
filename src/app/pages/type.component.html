@@ -1,22 +1,9 @@
 <div class="page">
-    <div class="banner">
-        <nav>
-            <div class="breadcrumb">
-                <a routerLink="/library">Deepkit library</a> /
-            </div>
-            <a routerLink="/library/type" routerLinkActive="active">Overview</a>
-            <a routerLink="">Documentation</a>
-            <a routerLink="">API</a>
-        </nav>
-
-        <h1>Type</h1>
-        <div class="package-name">@deepkit/type</div>
+    <product-banner header="Type" id="type">
         <p>
             Runtime type reflection system for TypeScript, with high-performance serializer and validator.
         </p>
-        <div class="actions">
-        </div>
-    </div>
+    </product-banner>
 
     <div class="line"></div>
 
@@ -30,20 +17,6 @@
             Annotate your model classes with <code>@t</code>
             to get runtime type information and allow serialization and validation.
         </p>
-
-        <textarea codeHighlight>
-        import { getClassSchema } from '@deepkit/type';
-
-        const schema = getClassSchema(User);
-
-        schema.getProperty('id').type; //number
-        schema.getProperty('username').isOptional; //false
-
-        schema.getProperty('firstName').type; //string
-        schema.getProperty('firstName').isOptional; //true
-
-        schema.hasProperty('internal'); //false
-      </textarea>
 
         <textarea codeHighlight>
       import { t } from '@deepkit/type';
@@ -65,6 +38,20 @@
       }
       </textarea>
 
+
+        <textarea codeHighlight>
+        import { getClassSchema } from '@deepkit/type';
+
+        const schema = getClassSchema(User);
+
+        schema.getProperty('id').type; //number
+        schema.getProperty('username').isOptional; //false
+
+        schema.getProperty('firstName').type; //string
+        schema.getProperty('firstName').isOptional; //true
+
+        schema.hasProperty('internal'); //false
+      </textarea>
 
         <h2>Schema definition</h2>
         <p>

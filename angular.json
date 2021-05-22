@@ -30,6 +30,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              { "glob": "**/*", "input": "./node_modules/@deepkit/desktop-ui/src/assets", "output": "assets" },
               {
                 "glob": "**/*",
                 "input": "node_modules/monaco-editor/min/",
@@ -40,6 +41,7 @@
               "src/styles.scss",
               "node_modules/cookieconsent/build/cookieconsent.min.css",
               "node_modules/@deepkit/desktop-ui/src/scss/icon.scss",
+              "node_modules/@deepkit/desktop-ui/src/scss/dui.scss",
               "node_modules/monaco-editor/min/vs/editor/editor.main.css"
             ],
             "scripts": [

@@ -31,6 +31,10 @@ import { Component } from '@angular/core';
                 <p>High performance typesafe message bus server for pub/sub pattern, key-value storage, and central atomic app locks.</p>
             </library-card>
 
+            <library-card package="@deepkit/debugger" title="Framework Debugger" sub="Debugger and profiler">
+                <p>Interactive debugger for Deepkit Framework with high-level profiler, data management, and context debugging.</p>
+            </library-card>
+
             <library-card package="@deepkit/bson" title="BSON" sub="BSON encoder/decoder">
                 <p>Fastest BSON parser and serializer. 13x faster than official bson-js/bson-ext, and 2x faster than JSON.</p>
                 <p>Based on @deepkit/type.</p>
@@ -38,7 +42,7 @@ import { Component } from '@angular/core';
 
             <library-card package="@deepkit/mongo" title="Mongo" sub="MongoDB client">
                 <p>High performance MongoDB client for modern TypeScript: Full async error stack trace, BigInt support, and fully
-                    type-safe</p>
+                    type-safe.</p>
                 <p>Based on @deepkit/type.</p>
             </library-card>
 
@@ -55,8 +59,24 @@ import { Component } from '@angular/core';
                 <p>A fast implementation of a topological sort/dependency resolver with type grouping algorithm.</p>
             </library-card>
 
+            <library-card package="@deepkit/http" title="HTTP" sub="HTTP kernel">
+                <p>A HTTP kernel and router with async controller support based on workflow system and decorators.</p>
+            </library-card>
+
             <library-card package="@deepkit/logger" title="Logger" sub="Logging abstraction">
                 <p>A logger library with support for colors, scopes, various transporter and formatter.</p>
+            </library-card>
+
+            <library-card package="@deepkit/event" title="Event" sub="Event dispatcher">
+                <p>Async typed decoupled event dispatcher.</p>
+            </library-card>
+
+            <library-card package="@deepkit/workflow" title="Workflow" sub="Finite state machine">
+                <p>A workflow library to manage a workflow or finite state machine.</p>
+            </library-card>
+
+            <library-card package="@deepkit/type-angular" title="Type-Angular" sub="Type: Angular addon">
+                <p>A powerful form builder for Angular based on @deepkit/type.</p>
             </library-card>
         </div>
     `
