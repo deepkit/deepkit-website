@@ -28,6 +28,11 @@ import { Component, Input } from '@angular/core';
         a:hover{
             text-decoration: none;
         }
+        
+        .package {
+            color: gray;
+            font-size: 14px;
+        }
 
         .title {
             margin-top: 5px;

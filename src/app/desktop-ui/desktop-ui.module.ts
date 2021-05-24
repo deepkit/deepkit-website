@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppCommonModule } from '../common/common.module';
 import { DesktopUiComponent } from './desktop-ui.component';
@@ -34,6 +34,12 @@ import { SliderComponent } from './pages/slider.component';
 import { IndicatorComponent } from './pages/indicator.component';
 import { TableComponent } from './pages/table.component';
 import { ListComponent } from './pages/list.component';
+import { InputComponent } from './pages/input.component';
+import { DialogComponent } from './pages/dialog.component';
+import { MenuComponent } from './pages/menu.component';
+import { WindowComponent } from './pages/window.component';
+import { CodeFrameComponent } from '../components/doc-code-frame.component';
+import { WindowToolbarComponent } from './pages/window-toolbar.component';
 
 
 const routes: Routes = [
@@ -48,6 +54,7 @@ const routes: Routes = [
         DesktopUiComponent,
         FormComponent,
         ButtonComponent,
+        InputComponent,
         ButtonGroupComponent,
         ApiDocComponent,
         RadioboxComponent,
@@ -59,6 +66,11 @@ const routes: Routes = [
         IndicatorComponent,
         TableComponent,
         ListComponent,
+        DialogComponent,
+        MenuComponent,
+        WindowComponent,
+        CodeFrameComponent,
+        WindowToolbarComponent,
     ],
     providers: [
         ApiDocProvider
@@ -66,6 +78,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         AppCommonModule,
         RouterModule.forChild(routes),
         DuiAppModule.forRoot(),

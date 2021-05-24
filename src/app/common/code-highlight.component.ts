@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Directive, DoCheck, ElementRef, OnChanges, OnInit } from '@angular/core';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
@@ -15,8 +15,8 @@ function removeIndent(str: string): string {
 @Directive({
     selector: '[codeHighlight]'
 })
-export class CodeHighlightComponent implements OnInit, OnChanges {
-    @Input() codeHighlight?: string;
+export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit, DoCheck {
+    @Input() codeHighlight: string = 'typescript';
     @Input() code?: string;
 
     protected pre?: HTMLPreElement;
@@ -32,6 +32,16 @@ export class CodeHighlightComponent implements OnInit, OnChanges {
 
     ngOnInit(): void {
         this.render();
+    }
+
+    ngAfterViewInit() {
+        this.render();
+    }
+
+    ngDoCheck() {
+        queueMicrotask(() => {
+            this.elementRef.nativeElement.after(this.pre);
+        });
     }
 
     render() {
@@ -50,5 +60,4 @@ export class CodeHighlightComponent implements OnInit, OnChanges {
         const highlighted = highlight(this.code, languages[lang], lang);
         this.pre.innerHTML = highlighted;
     }
-
 }

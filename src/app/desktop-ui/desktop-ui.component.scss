@@ -1,13 +1,14 @@
 
 :host ::ng-deep {
   pre.code {
-
     user-select: text;
+    -webkit-user-select: text;
     cursor: text;
     margin: 6px 0;
 
     * {
       user-select: text;
+      -webkit-user-select: text;
       cursor: text;
     }
 
@@ -26,13 +27,15 @@
 .preview {
   position: relative;
   z-index: 101;
-  top: -80px;
-  margin-bottom: -80px;
-  border-radius: 4px;
   padding: 150px 0;
+  background-color: #000;
   background-image: url('/assets/desktop-ui/bg.png');
   background-repeat: no-repeat;
   background-position: center center;
+
+  .wrapper {
+    max-width: 1300px;
+  }
 
   ::ng-deep {
     h1 {

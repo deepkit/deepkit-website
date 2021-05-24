@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
         <h1>Indicator</h1>
 
         <textarea codeHighlight>
-        import {DuiIndicatorModule} from '@marcj/angular-desktop-ui';
+        import {DuiIndicatorModule} from '@deepkit/desktop-ui';
         </textarea>
 
         <dui-indicator [step]="progress"></dui-indicator> {{progress}}<br/>

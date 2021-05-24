@@ -100,6 +100,6 @@ export class FormComponent {
     disabled = false;
     disabledAll = false;
     i = 0;
-    radioValue = 'a';
-    selectBox1 = 'x';
+    radioValue?: string;
+    selectBox1?: string;
 }

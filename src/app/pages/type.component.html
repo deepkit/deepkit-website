@@ -1,17 +1,16 @@
 <div class="page">
     <product-banner header="Type" id="type">
         <p>
-            Runtime type reflection system for TypeScript, with high-performance serializer and validator.
+            Runtime type reflection system for TypeScript, with high-performance JIT based serializer and validator.
+        </p>
+        <p>
+            With built-in JSON serializer, customizable serializer/validator API, object snapshotting, and change detector.
         </p>
     </product-banner>
 
     <div class="line"></div>
 
     <div class="text">
-        <h2>Installation</h2>
-        <pre class="console">npm install @deepkit/type</pre>
-
-
         <h2>Class annotation</h2>
         <p>
             Annotate your model classes with <code>@t</code>
@@ -89,8 +88,10 @@
         import { classToPlain, plainToClass } from '@deepkit/type';
 
         const myUser = new User('Daniel');
+        // class instance to json object
         const json = classToPlain(User, myUser);
 
+        // json object to class instance
         const user: User = plainToClass(User, {
           username: 'Daniel',
           createdAt: '2021-01-24T15:23:16.582Z'

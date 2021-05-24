@@ -51,12 +51,6 @@
     <div class="line"></div>
 
     <div class="text">
-        <h2>Installation</h2>
-        <pre class="console">npm install @deepkit/orm @deepkit/sqlite</pre>
-        <p>
-            Make sure @deepkit/type is already installed.
-        </p>
-
         <h2>TypeScript classes</h2>
         <p>
             Use already defined TypeScript classes, annotate with database related information,
@@ -320,12 +314,12 @@ class Book {
         <p>
             The migration file is automatically generated based on the difference
             between the actual schema of your database and your schema defined
-            in your database entities.
+            in your TypeScript code.
         </p>
         <p>
             You can modify the generated schema migration as you wish and commit
-            to Git, so your colleagues and deploy script can update the database schema
-            automatically.
+            to Git, so your colleagues and deploy procedure can update the database
+            schema correctly.
         </p>
         <textarea codeHighlight>
         class User {
