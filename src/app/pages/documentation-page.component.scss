@@ -1,88 +1,96 @@
 
 :host {
-    display: block;
-    color: #3C3C3C;
-    min-height: 1500px;
+  display: block;
+  color: #3C3C3C;
+  min-height: 1500px;
 }
 
 .wrapper {
-    display: flex;
-    padding-top: 35px;
+  display: flex;
+  padding-top: 35px;
 }
 
 main {
-    text-align: left;
-    font-weight: 500;
-    font-size: 15px;
-    color: #313131;
-    line-height: 22px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 15px;
+  color: #313131;
+  line-height: 22px;
+  margin: 0 auto;
+  flex: 1;
+
+  ::ng-deep {
 
     h1, h2, h3, h4, h5 {
-        color: #333333;
+      color: #333333;
     }
+
     overflow: hidden;
 
     h1, h2 {
-        margin-top: 0;
-        font-weight: 600;
+      margin-top: 0;
+      font-weight: 600;
     }
 
     h2 {
-        font-weight: bold;
+      font-weight: bold;
     }
 
     h3 {
-        font-weight: bold;
+      font-weight: bold;
     }
 
     .subline {
-        color: #7c7c7c;
+      color: #7c7c7c;
     }
+  }
 }
 
 nav {
-    flex: 0 0 175px;
-    margin-right: 55px;
-    min-height: 100%;
-    text-align: left;
+  flex: 0 0 175px;
+  margin-right: 55px;
+  min-height: 100%;
+  text-align: left;
 
-    font-size: 14px;
-    line-height: 24px;
-    letter-spacing: 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0;
 
-    a, a:link {
-        display: block;
-        color: #3C3C3C;
-        font-weight: 500;
-        margin-top: 1px;
-        text-decoration: none;
+  a, a:link {
+    display: block;
+    color: #3C3C3C;
+    font-weight: 500;
+    margin-top: 1px;
+    text-decoration: none;
+    font-size: 13px;
 
-        &:hover {
-            color: var(--color-link-hover);
-        }
-
-        &.active {
-            color: var(--color-link-active);
-        }
+    &:hover {
+      color: var(--color-link-hover);
     }
 
-    .category-title {
-        font-weight: bold;
-        color: black;
+    &.active {
+      font-weight: bold;
+      color: var(--color-link-active);
     }
+  }
 
-    .category {
-        margin-bottom: 35px;
-    }
+  .category-title {
+    font-weight: bold;
+    color: black;
+  }
 
-    .section-title {
-        font-size: 13px;
-        margin-top: 10px;
-        color: grey;
-    }
+  .category {
+    margin-bottom: 35px;
+  }
 
-    section {
-        padding-left: 5px;
-        margin-bottom: 15px;
-    }
+  .section-title {
+    font-size: 13px;
+    margin-top: 10px;
+    color: grey;
+  }
+
+  section {
+    padding-left: 5px;
+    margin-bottom: 15px;
+  }
 }

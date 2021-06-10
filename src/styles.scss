@@ -76,6 +76,52 @@ body {
 
 a, a:link {
   text-decoration: none;
+  color: var(--color-link);
+}
+
+code {
+  padding: 2px 5px;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(238, 238, 238, 0.86);
+  border-radius: 6px;
+}
+
+table.pretty {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 15px 0;
+
+  td, th {
+    padding: 3px 3px;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f8f8f8;
+  }
+
+  tr:hover td {
+    background-color: #f1f1f1;
+  }
+
+  th {
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+}
+
+pre.codeHighlight[title] {
+  &::before {
+    display: block;
+    text-align: center;
+    content: attr(title);
+    margin-bottom: 5px;
+    color: #ddd;
+    font-style: italic;
+  }
 }
 
 pre.code {

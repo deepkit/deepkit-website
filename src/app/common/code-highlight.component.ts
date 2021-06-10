@@ -2,6 +2,8 @@ import { AfterViewInit, Directive, DoCheck, ElementRef, OnChanges, OnInit } from
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-json';
 import { Input } from '@angular/core';
 
 function removeIndent(str: string): string {
@@ -18,6 +20,7 @@ function removeIndent(str: string): string {
 export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit, DoCheck {
     @Input() codeHighlight: string = 'typescript';
     @Input() code?: string;
+    @Input() title?: string;
 
     protected pre?: HTMLPreElement;
 
@@ -52,6 +55,10 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
         if (!this.pre) {
             this.pre = document.createElement('pre');
             this.pre.classList.add('code');
+            this.pre.classList.add('codeHighlight');
+            if (this.title) {
+                this.pre.setAttribute('title', this.title);
+            }
             this.elementRef.nativeElement.style.display = 'none';
             this.elementRef.nativeElement.after(this.pre);
         }

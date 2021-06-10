@@ -6,7 +6,7 @@ import { FooterComponent } from './components/footer.component';
 import { HeaderComponent } from './components/header.component';
 import { ContactPageComponent } from './pages/contact-page.component';
 import { DataProtectionPageComponent } from './pages/data-protection-page.component';
-import { DocumentationPageComponent } from './pages/documentation-page.component';
+import { DocumentationDefaultPageComponent, DocumentationPageComponent } from './pages/documentation-page.component';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -38,6 +38,17 @@ import { BrokerComponent } from './pages/broker.component';
 import { LibraryCardComponent } from './components/library-card.component';
 import { LibraryCardsComponent } from './components/library-cards.component';
 import { LibrariesComponent } from './pages/libraries.component';
+import { OrmBrowserComponent } from './pages/orm-browser.component';
+import { DocTypeGettingStartedComponent } from './pages/documentation/type/getting-started.component';
+import { DocTypeSchemaComponent } from './pages/documentation/type/schema.component';
+import { DocTypeSerializationComponent } from './pages/documentation/type/serialization.component';
+import { DocTypeReflectionComponent } from './pages/documentation/type/reflection.component';
+import { DocTypeValidationComponent } from './pages/documentation/type/validation.component';
+import { DocTypePerformanceComponent } from './pages/documentation/type/performance.component';
+import { DocTypePatchComponent } from './pages/documentation/type/patch.component';
+import { DocTypeChangeDetectionComponent } from './pages/documentation/type/change-detection.component';
+import { DocTypeStateManagementComponent } from './pages/documentation/type/state-management.component';
+import { DocTypeSerializationTargetComponent } from './pages/documentation/type/serialization-target.component';
 
 @NgModule({
     declarations: [
@@ -69,6 +80,18 @@ import { LibrariesComponent } from './pages/libraries.component';
         RpcComponent,
         AboutUsComponent,
         BrokerComponent,
+        OrmBrowserComponent,
+        DocumentationDefaultPageComponent,
+        DocTypeGettingStartedComponent,
+        DocTypeSchemaComponent,
+        DocTypeSerializationComponent,
+        DocTypeReflectionComponent,
+        DocTypeValidationComponent,
+        DocTypePerformanceComponent,
+        DocTypePatchComponent,
+        DocTypeChangeDetectionComponent,
+        DocTypeStateManagementComponent,
+        DocTypeSerializationTargetComponent,
     ],
     imports: [
         CommonModule,

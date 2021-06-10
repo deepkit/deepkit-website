@@ -352,10 +352,21 @@ class MyController implements MyControllerInterface {
 
         <h2>Peer2Peer</h2>
         <p>
-            A client itself can implement a controller interface and
-            register as peer. Another connection can use the interface
-            as regular client. This allows to communicate from clien to client
-            directly (via the server redirecting the messages accordingly).
+            A client can register a peer controller under a global identifier which
+            can be consumed by other clients. This allows to communicate from client to client
+            without routing it manually as a pub/sub router (@deepkit/broker) or in-memory router
+            is implemented out of the box.
+        </p>
+
+        <p>
+            A security layer allows to control whether a client can register as peer or consume peer controllers.
+        </p>
+
+        <h2>Security</h2>
+
+        <p>
+            You can configure an arbitrary token as login and control for each action whether a client is
+            allowed to execute. A session system enables you to retrieve and store session related values.
         </p>
 
         <h2>Download/Upload progress</h2>

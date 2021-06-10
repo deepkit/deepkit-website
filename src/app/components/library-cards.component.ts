@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
             </library-card>
 
             <library-card package="@deepkit/orm-browser" title="ORM Browser" sub="Visual database browser">
-                <p>View, add, update, or delete database records directly in the browser.</p>
+                <p>Manage your data of your ORM models directly in the browser.</p>
                 <p>Seed, migrate, or display the ER Model of your database. With interactive query prompt.</p>
             </library-card>
 
