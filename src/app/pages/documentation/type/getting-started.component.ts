@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
         
         <h2>Getting Started</h2>
         
+        <p>
+            This is the documentation for Deepkit Type. A high performance serializer, validator, change detector, 
+            and reflection API for TypeScript. See the <a routerLink="/library/type">Deepkit Type product page</a> for more information on what it does. 
+        </p>
         
         <h3>Installation</h3>
         

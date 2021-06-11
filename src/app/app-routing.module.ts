@@ -28,6 +28,10 @@ import { DocFrameworkServicesComponent } from './pages/documentation/framework/s
 import { DocFrameworkFundamentalsComponent } from './pages/documentation/framework/fundamentals.component.ts';
 import { DocWelcomeComponent } from './pages/documentation/welcome.component';
 import { DocFrameworkEventsComponent } from './pages/documentation/framework/events.component';
+import { DocFrameworkCLIComponent } from './pages/documentation/framework/cli.component';
+import { DocFrameworkDatabaseComponent } from './pages/documentation/framework/database.component';
+import { DocFrameworkHttpControllerComponent } from './pages/documentation/framework/http/controller.component';
+import { DocFrameworkHttpTemplateComponent } from './pages/documentation/framework/http/template.component';
 
 
 const routes: Routes = [
@@ -115,6 +119,10 @@ const routes: Routes = [
             { path: 'framework/modules', component: DocFrameworkModulesComponent },
             { path: 'framework/services', component: DocFrameworkServicesComponent },
             { path: 'framework/events', component: DocFrameworkEventsComponent },
+            { path: 'framework/cli', component: DocFrameworkCLIComponent },
+            { path: 'framework/database', component: DocFrameworkDatabaseComponent },
+            { path: 'framework/http/controller', component: DocFrameworkHttpControllerComponent },
+            { path: 'framework/http/template', component: DocFrameworkHttpTemplateComponent },
 
             { path: 'type', component: DocTypeGettingStartedComponent },
             { path: 'type/schema', component: DocTypeSchemaComponent },

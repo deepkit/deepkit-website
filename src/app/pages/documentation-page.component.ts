@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
                     <a routerLinkActive="active" routerLink="/documentation/framework/services">Services</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/events">Events</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/cli">CLI</a>
-                    <a routerLinkActive="active" routerLink="/documentation/framework/cli">Database</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/database">Database</a>
 
                     <div class="section-title">HTTP</div>
                     <section>
@@ -37,6 +37,7 @@ import { Component } from '@angular/core';
                     <a routerLinkActive="active" routerLink="/documentation/framework/workflow">Workflow</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/configuration">Configuration</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/testing">Testing</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/deployment">Deployment</a>
                 </div>
 
                 <div class="category">

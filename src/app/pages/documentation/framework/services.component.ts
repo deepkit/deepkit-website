@@ -18,8 +18,9 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            Services can then be imported and used in other services, in HTTP/RPC/CLI controllers, and event listeners using dependency
-            injection via concretely the constructor injection or property injection. 
+            Services are handled and instantiated by the dependency injection container and thus can be imported and used in other services, 
+            in controllers, and event listeners using constructor injection or property injection.
+            See the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more details.
         </p>
 
         <p>
@@ -69,11 +70,6 @@ import { Component } from '@angular/core';
                 }
             }
         </textarea>
-
-        <p>
-            Please note that services are registered and constructed in a dependency injection container under specific rules and behaviors.
-            Please read the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more information.
-        </p>
     `
 })
 export class DocFrameworkServicesComponent {

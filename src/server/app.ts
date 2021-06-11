@@ -7,6 +7,7 @@ import { appConfig } from './config';
 import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
 import { AuthListener } from './auth';
 
+// this stuff is needed for desktop-ui
 (global as any).requestAnimationFrame = (callback, element) => {
     let lastTime = 0;
     const currTime = new Date().getTime();
@@ -22,7 +23,6 @@ import { AuthListener } from './auth';
 global.cancelAnimationFrame = (id) => {
     clearTimeout(id);
 };
-
 
 (global as any).matchMedia = () => {
     return {matches: false, media: '', addEventListener: () => {}};

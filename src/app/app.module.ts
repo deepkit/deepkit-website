@@ -55,6 +55,10 @@ import { DocFrameworkServicesComponent } from './pages/documentation/framework/s
 import { DocFrameworkFundamentalsComponent } from './pages/documentation/framework/fundamentals.component.ts';
 import { DocWelcomeComponent } from './pages/documentation/welcome.component';
 import { DocFrameworkEventsComponent } from './pages/documentation/framework/events.component';
+import { DocFrameworkCLIComponent } from './pages/documentation/framework/cli.component';
+import { DocFrameworkDatabaseComponent } from './pages/documentation/framework/database.component';
+import { DocFrameworkHttpControllerComponent } from './pages/documentation/framework/http/controller.component';
+import { DocFrameworkHttpTemplateComponent } from './pages/documentation/framework/http/template.component';
 
 @NgModule({
     declarations: [
@@ -104,6 +108,10 @@ import { DocFrameworkEventsComponent } from './pages/documentation/framework/eve
         DocFrameworkServicesComponent,
         DocFrameworkFundamentalsComponent,
         DocFrameworkEventsComponent,
+        DocFrameworkCLIComponent,
+        DocFrameworkDatabaseComponent,
+        DocFrameworkHttpControllerComponent,
+        DocFrameworkHttpTemplateComponent,
     ],
     imports: [
         CommonModule,

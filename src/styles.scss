@@ -92,9 +92,10 @@ table.pretty {
   table-layout: fixed;
   border-collapse: collapse;
   margin: 15px 0;
+  font-size: 13px;
 
   td, th {
-    padding: 3px 3px;
+    padding: 4px 3px;
     vertical-align: top;
   }
 
@@ -132,10 +133,31 @@ pre.code {
   background: #202020;
   border-radius: 3px;
   color: #ddd;
-  overflow: auto;
-
   padding: 11px;
   text-align: left;
+
+  overflow: auto;
+  overflow: overlay;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 11px;
+    width: 11px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(169, 173, 175, 0.77);
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.01);
+    background-clip: padding-box;
+
+    &:hover {
+      background: #727475;
+      border: 2px solid rgba(0, 0, 0, 0.01);
+      background-clip: padding-box;
+    }
+  }
 }
 
 h1, h2, h3, h4, h5 {

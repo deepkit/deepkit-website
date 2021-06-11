@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
         <p>
             Since TypeScript's data structure is removed during transpilation, Deepkit Type uses decorator metadata to
             save as much as possible and make them available in the JavaScript runtime. Since not all data types can be rescued
-            this way, you have to manually annotated (aka decorate) certain data types using the <code>@t</code> decorator.
+            this way, you have to manually annotate (aka decorate) certain data types using the <code>@t</code> decorator.
         </p>
 
         <textarea codeHighlight>
@@ -43,12 +43,13 @@ import { Component } from '@angular/core';
                 Required and optional properties can only be detected from strict TypeScript code.
                 You have to use <code>@t.required</code> or <code>@t.optional</code> explicitly when you have code like
                 <textarea codeHighlight>@t.required title!: name;</textarea>
-                which is required in strict TypeScript.
+                This is required in strict TypeScript combined with the <code>!</code> operator.
+                
                 If you don't have strict TypeScript enabled and have code like
                 <textarea codeHighlight>@t.required title: name;</textarea>
                 without setting a value for <code>title</code> in the
-                constructor it is considered not-strict code (and won't compile without errors with strict TypeScript enabled),
-                you have to use <code>@t.required</code> as well, as there is not way to detect whether that property is optional or not.
+                constructor it is considered non-strict code (and won't compile without errors with strict TypeScript enabled),
+                you have to use <code>@t.required</code> as well, as there is no way to detect whether that property is optional or not.
                 It's recommended to use always strict TypeScript and do not use the <code>!</code> operator. This way all properties will
                 correctly and automatically detected as optional or required.
             </li>
@@ -56,7 +57,9 @@ import { Component } from '@angular/core';
                 Constructor properties names need to survive a minification process.
                 Or need to be named explicitly using <code>@t.name('propertyName')</code>. If you have for example a build step and a
                 minification process that renames constructor arguments to something different, you have to use this approach, otherwise
-                constructor properties are not correctly assigned. This is only needed due to technical reasons for constructor properties.
+                constructor properties are not correctly assigned. 
+                This is only needed for constructor properties due to technical reasons. 
+                It's recommended to disable the minification of variable names and use GZIP compression on HTTP level instead. 
                 <textarea codeHighlight>
                     constructor(@t.name('name') public name: string) {
                     }
@@ -66,10 +69,10 @@ import { Component } from '@angular/core';
 
         <h3>Type annotation</h3>
 
-        Many basic types can be extracted automatically like String, Date, Number, Boolean. In the class schema approach anything else need
-        to be annotated again using the <code>t</code> decorator.
+        Many basic types can be extracted automatically like String, Date, Number, Boolean, and classes like custom classes or native classes.
+        In the class schema approach above anything else need to be annotated again using a more detailed <code>t</code> decorator.
 
-        <table class="pretty" style="font-size: 14px;">
+        <table class="pretty">
             <tr>
                 <th>TypeScript type</th>
                 <th>Class schema needed?</th>
@@ -113,7 +116,7 @@ import { Component } from '@angular/core';
             <tr>
                 <td>property?: string;</td>
                 <td>No</td>
-                <td>t.date.optional</td>
+                <td>t.string.optional</td>
             </tr>
             <tr>
                 <td>property: string | null;</td>
@@ -146,6 +149,11 @@ import { Component } from '@angular/core';
                 <td>t.array(t.string.optional)</td>
             </tr>
             <tr>
+                <td>property: (number | string)[];</td>
+                <td>Yes</td>
+                <td>t.array(t.union(t.number, t.string))</td>
+            </tr>
+            <tr>
                 <td>property: {{"{"}}[name: string]: boolean{{"}"}};</td>
                 <td>Yes</td>
                 <td>t.map(t.boolean)</td>
@@ -164,9 +172,9 @@ import { Component } from '@angular/core';
 
         Additional special modifiers are available (for database mapping for example).
 
-        <table class="pretty" style="font-size: 14px;">
+        <table class="pretty">
             <tr>
-                <th>Type decoration</th>
+                <th style="width: 170px;">Type decoration</th>
                 <th>Description</th>
             </tr>
             <tr>
@@ -195,14 +203,13 @@ import { Component } from '@angular/core';
             </tr>
             <tr>
                 <td>t.backReference()</td>
-                <td>Marks this field as a reference. Also known as Reverse Foreign Key in database context.</td>
+                <td>Marks this field as a back reference. Needed for the reversed side of a reference.</td>
             </tr>
         </table>
 
         <p>
-            "Class schema needed?" indicated whether you have to add "Type decoration" in front of your property. For example this doesn't
-            need
-            a type decorator:
+            "Class schema needed?" indicated whether you have to add "Type decoration" in front of your property. 
+            For example this doesn't need a detailed type decorator (it does not <code>@t</code> though):
 
             <textarea codeHighlight>
                 class MyModel {
@@ -210,7 +217,7 @@ import { Component } from '@angular/core';
                 }
             </textarea>
 
-            But this requires it since those type information are not available in the runtime:
+            But this requires more than simply the <code>@t</code> since those type information are not available in the runtime:
 
             <textarea codeHighlight>
                 class MyModel {
@@ -289,6 +296,31 @@ import { Component } from '@angular/core';
             about that class including properties and sub properties using the 
             <a href="/documentation/type/reflection">Reflection API</a>.
         </p>
+        
+        
+        <p>
+            To use the type of the schema itself in other places, you can use it like that:
+        </p>
+        
+        <textarea codeHighlight>
+            import { t } from '@deepkit/type';
+
+            const userSchema = t.schema({
+                username: t.string,
+            });
+            type User = InstanceType<typeof userSchema.classType>;
+            
+            function addUser(user: User) {
+                user.username;
+            }
+            addUser({username: 'Peter'});
+        </textarea>
+        
+        <p>
+            That's the small disadvantage of using the functional approach to define a schema: You have to define on another line
+            the actual type, or use <code>InstanceType&lt;typeof userSchema.classType&gt;</code> everywhere. For the class approach this is
+            not necessary.
+        </p>
 
         <h3>Validation</h3>
         
@@ -297,7 +329,7 @@ import { Component } from '@angular/core';
             To add custom validation functions and learn more about validation, see the chapter <a href="/documentation/type/validation">Validation</a>.
         </p>
 
-        <table class="pretty" style="font-size: 14px;">
+        <table class="pretty">
             <tr>
                 <th>Type decoration</th>
                 <th>Description</th>
@@ -355,7 +387,6 @@ import { Component } from '@angular/core';
                 <td>Validation for a value being positive or negative.</td>
             </tr>
         </table>
-        
         
         <h3>Custom data</h3>
 

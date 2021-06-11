@@ -41,7 +41,8 @@ import { Component } from '@angular/core';
         <p>
             There are three types of controllers: CLI controller, HTTP controller, and RPC controller. Each serves its own purpose, but
             all have in common that they act as API to an external client. HTTP controllers define routes, RPC controllers define actions,
-            and CLI controllers define commands. They are the entrypoint to your application.
+            and CLI controllers define commands.<br/> 
+            They are the <i>entrypoint</i> to your application.
 
             See each chapter 
             <a routerLink="/documentation/framework/http/controller">HTTP controller</a>,
@@ -53,9 +54,9 @@ import { Component } from '@angular/core';
         <h3>Events</h3>
         
         <p>
-            Event listener are special services that receive events based on <i>event tokens</i>. An event token defines
-            its id and its event argument. They usually react on events by using models or calling actions on other services.
-            Events can be dispatched by services and controllers using the <i>EventDispatcher</i>.
+            Event listener are special services that receive events based on <i>event tokens</i>. 
+            They usually react on events by using models or calling actions on other services.
+            Events can be dispatched by services, controllers, and event listeners using the <i>EventDispatcher</i>.
             See the chapter <a routerLink="/documentation/framework/events">Events</a> for more information.
         </p>
         
