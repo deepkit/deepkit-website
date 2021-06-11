@@ -8,12 +8,16 @@ import { Component } from '@angular/core';
                     <div class="category-title">Framework</div>
 
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/framework">Getting started</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/fundamentals">Fundamentals</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/modules">Modules</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/services">Services</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/events">Events</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/cli">CLI</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/cli">Database</a>
 
                     <div class="section-title">HTTP</div>
                     <section>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/http-controller">Controller</a>
+                        <a routerLinkActive="active" routerLink="/documentation/framework/http/controller">Controller</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/template">Template</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/authentication">Authentication</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/sessions">Session/Roles</a>
@@ -28,10 +32,8 @@ import { Component } from '@angular/core';
                         <a routerLinkActive="active" routerLink="/documentation/framework/rpc/stream">Stream/RxJS</a>
                     </section>
 
-                    <a routerLinkActive="active" routerLink="/documentation/framework/cli">CLI</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/logger">Logger</a>
-                    <a routerLinkActive="active" routerLink="/documentation/framework/event-dispatcher">Event Dispatcher</a>
-                    <a routerLinkActive="active" routerLink="/documentation/framework/dependency-injection">Dependency Injection</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/dependency-injection">Dependency injection</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/workflow">Workflow</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/configuration">Configuration</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/testing">Testing</a>

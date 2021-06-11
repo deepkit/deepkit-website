@@ -1,16 +1,18 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'library-card',
+    host: {
+        '(click)': 'router.navigateByUrl(url)',
+    },
     template: `
-        <a href="/library/{{package|slice:9}}">
-            <div class="package">{{package}}</div>
-            <div class="title">{{title}}</div>
-            <div class="sub">{{sub}}</div>
-            <div class="content">
-                <ng-content></ng-content>
-            </div>
-        </a>
+        <div class="package">{{package}}</div>
+        <div class="title">{{title}}</div>
+        <div class="sub">{{sub}}</div>
+        <div class="content">
+            <ng-content></ng-content>
+        </div>
     `,
     styles: [`
         :host {
@@ -58,4 +60,11 @@ export class LibraryCardComponent {
     @Input() package!: string;
     @Input() title!: string;
     @Input() sub!: string;
+
+    get url() {
+        return '/library/' + this.package.substr(9);
+    }
+
+    constructor(public router: Router) {
+    }
 }

@@ -49,6 +49,12 @@ import { DocTypePatchComponent } from './pages/documentation/type/patch.componen
 import { DocTypeChangeDetectionComponent } from './pages/documentation/type/change-detection.component';
 import { DocTypeStateManagementComponent } from './pages/documentation/type/state-management.component';
 import { DocTypeSerializationTargetComponent } from './pages/documentation/type/serialization-target.component';
+import { DocFrameworkGettingStartedComponent } from './pages/documentation/framework/getting-started.component';
+import { DocFrameworkModulesComponent } from './pages/documentation/framework/modules.component';
+import { DocFrameworkServicesComponent } from './pages/documentation/framework/services.component';
+import { DocFrameworkFundamentalsComponent } from './pages/documentation/framework/fundamentals.component.ts';
+import { DocWelcomeComponent } from './pages/documentation/welcome.component';
+import { DocFrameworkEventsComponent } from './pages/documentation/framework/events.component';
 
 @NgModule({
     declarations: [
@@ -82,6 +88,7 @@ import { DocTypeSerializationTargetComponent } from './pages/documentation/type/
         BrokerComponent,
         OrmBrowserComponent,
         DocumentationDefaultPageComponent,
+        DocWelcomeComponent,
         DocTypeGettingStartedComponent,
         DocTypeSchemaComponent,
         DocTypeSerializationComponent,
@@ -92,6 +99,11 @@ import { DocTypeSerializationTargetComponent } from './pages/documentation/type/
         DocTypeChangeDetectionComponent,
         DocTypeStateManagementComponent,
         DocTypeSerializationTargetComponent,
+        DocFrameworkGettingStartedComponent,
+        DocFrameworkModulesComponent,
+        DocFrameworkServicesComponent,
+        DocFrameworkFundamentalsComponent,
+        DocFrameworkEventsComponent,
     ],
     imports: [
         CommonModule,

@@ -22,6 +22,12 @@ import { DocTypePatchComponent } from './pages/documentation/type/patch.componen
 import { DocTypeChangeDetectionComponent } from './pages/documentation/type/change-detection.component';
 import { DocTypeStateManagementComponent } from './pages/documentation/type/state-management.component';
 import { DocTypeSerializationTargetComponent } from './pages/documentation/type/serialization-target.component';
+import { DocFrameworkGettingStartedComponent } from './pages/documentation/framework/getting-started.component';
+import { DocFrameworkModulesComponent } from './pages/documentation/framework/modules.component';
+import { DocFrameworkServicesComponent } from './pages/documentation/framework/services.component';
+import { DocFrameworkFundamentalsComponent } from './pages/documentation/framework/fundamentals.component.ts';
+import { DocWelcomeComponent } from './pages/documentation/welcome.component';
+import { DocFrameworkEventsComponent } from './pages/documentation/framework/events.component';
 
 
 const routes: Routes = [
@@ -103,6 +109,13 @@ const routes: Routes = [
 
     {
         path: 'documentation', component: DocumentationPageComponent, children: [
+            { path: '', component: DocWelcomeComponent },
+            { path: 'framework', component: DocFrameworkGettingStartedComponent },
+            { path: 'framework/fundamentals', component: DocFrameworkFundamentalsComponent },
+            { path: 'framework/modules', component: DocFrameworkModulesComponent },
+            { path: 'framework/services', component: DocFrameworkServicesComponent },
+            { path: 'framework/events', component: DocFrameworkEventsComponent },
+
             { path: 'type', component: DocTypeGettingStartedComponent },
             { path: 'type/schema', component: DocTypeSchemaComponent },
             { path: 'type/serialization', component: DocTypeSerializationComponent },

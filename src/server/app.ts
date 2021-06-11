@@ -7,6 +7,31 @@ import { appConfig } from './config';
 import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
 import { AuthListener } from './auth';
 
+(global as any).requestAnimationFrame = (callback, element) => {
+    let lastTime = 0;
+    const currTime = new Date().getTime();
+    const timeToCall = Math.max(0, 16 - (currTime - lastTime));
+    const id = setTimeout(() => {
+            callback(currTime + timeToCall);
+        },
+        timeToCall);
+    lastTime = currTime + timeToCall;
+    return id;
+};
+
+global.cancelAnimationFrame = (id) => {
+    clearTimeout(id);
+};
+
+
+(global as any).matchMedia = () => {
+    return {matches: false, media: '', addEventListener: () => {}};
+};
+
+(global as any).localStorage = {setItem: () => {}, getItem: () => {}, removeItem: () => {}};
+(global as any).dispatchEvent = () => {};
+
+
 Application.create({
     providers: [],
     controllers: [
