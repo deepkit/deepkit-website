@@ -32,6 +32,10 @@ import { DocFrameworkCLIComponent } from './pages/documentation/framework/cli.co
 import { DocFrameworkDatabaseComponent } from './pages/documentation/framework/database.component';
 import { DocFrameworkHttpControllerComponent } from './pages/documentation/framework/http/controller.component';
 import { DocFrameworkHttpTemplateComponent } from './pages/documentation/framework/http/template.component';
+import { DocFrameworkRPCControllerComponent } from './pages/documentation/framework/rpc/controller.component';
+import { DocFrameworkRPCClientComponent } from './pages/documentation/framework/rpc/client.component';
+import { DocFrameworkRPCSecurityComponent } from './pages/documentation/framework/rpc/security.component';
+import { DocFrameworkDependencyInjectionComponent } from './pages/documentation/framework/dependency-injection.component';
 
 
 const routes: Routes = [
@@ -123,6 +127,12 @@ const routes: Routes = [
             { path: 'framework/database', component: DocFrameworkDatabaseComponent },
             { path: 'framework/http/controller', component: DocFrameworkHttpControllerComponent },
             { path: 'framework/http/template', component: DocFrameworkHttpTemplateComponent },
+
+            { path: 'framework/rpc/controller', component: DocFrameworkRPCControllerComponent },
+            { path: 'framework/rpc/client', component: DocFrameworkRPCClientComponent },
+            { path: 'framework/rpc/security', component: DocFrameworkRPCSecurityComponent },
+
+            { path: 'framework/dependency-injection', component: DocFrameworkDependencyInjectionComponent },
 
             { path: 'type', component: DocTypeGettingStartedComponent },
             { path: 'type/schema', component: DocTypeSchemaComponent },

@@ -65,7 +65,7 @@ import { Component } from '@angular/core';
         <h3>Components</h3>
 
         <p>
-            You can structure your templates like you're used to in React. Either modularise your layout into several functions or
+            You can structure your templates like you're used to in React. Either modularise your layout into several function or
             class components.
         </p>
 

@@ -56,7 +56,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            HTTP controllers are handled by the dependency injection container, like services and event listeners, and have thus access
+            HTTP controllers are handled and instantiated by the dependency injection container, like services and event listeners, and have thus access
             to all other registered services.
             See the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more details.
         </p>

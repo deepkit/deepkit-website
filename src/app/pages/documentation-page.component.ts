@@ -19,25 +19,22 @@ import { Component } from '@angular/core';
                     <section>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/controller">Controller</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/template">Template</a>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/http/authentication">Authentication</a>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/http/sessions">Session/Roles</a>
+                        <a routerLinkActive="active" routerLink="/documentation/framework/http/securityn">Security</a>
                     </section>
 
                     <div class="section-title">RPC</div>
                     <section>
                         <a routerLinkActive="active" routerLink="/documentation/framework/rpc/controller">Controller</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/rpc/client">Client</a>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/rpc/authentication">Authentication</a>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/rpc/sessions">Session/Roles</a>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/rpc/stream">Stream/RxJS</a>
+                        <a routerLinkActive="active" routerLink="/documentation/framework/rpc/security">Security</a>
                     </section>
 
-                    <a routerLinkActive="active" routerLink="/documentation/framework/logger">Logger</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/dependency-injection">Dependency injection</a>
-                    <a routerLinkActive="active" routerLink="/documentation/framework/workflow">Workflow</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/configuration">Configuration</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/testing">Testing</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/deployment">Deployment</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/workflow">Workflow</a>
+                    <a routerLinkActive="active" routerLink="/documentation/framework/logger">Logger</a>
                 </div>
 
                 <div class="category">

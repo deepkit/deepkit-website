@@ -73,7 +73,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Note: Controllers are handled by the dependency injection container, like services, and have thus access
+            Note: Controllers are handled and instantiated by the dependency injection container, like services, and have thus access
             to all other registered services (like the EventDispatcher). 
             See the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more details.
         </p>
@@ -86,7 +86,7 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            Event listeners are handled by the dependency injection container, like services and controllers, and have thus access
+            Event listeners are handled and instantiated by the dependency injection container, like services and controllers, and have thus access
             to all other registered services.
             See the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more details.
         </p>

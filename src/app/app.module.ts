@@ -59,6 +59,10 @@ import { DocFrameworkCLIComponent } from './pages/documentation/framework/cli.co
 import { DocFrameworkDatabaseComponent } from './pages/documentation/framework/database.component';
 import { DocFrameworkHttpControllerComponent } from './pages/documentation/framework/http/controller.component';
 import { DocFrameworkHttpTemplateComponent } from './pages/documentation/framework/http/template.component';
+import { DocFrameworkRPCControllerComponent } from './pages/documentation/framework/rpc/controller.component';
+import { DocFrameworkRPCClientComponent } from './pages/documentation/framework/rpc/client.component';
+import { DocFrameworkRPCSecurityComponent } from './pages/documentation/framework/rpc/security.component';
+import { DocFrameworkDependencyInjectionComponent } from './pages/documentation/framework/dependency-injection.component';
 
 @NgModule({
     declarations: [
@@ -112,6 +116,10 @@ import { DocFrameworkHttpTemplateComponent } from './pages/documentation/framewo
         DocFrameworkDatabaseComponent,
         DocFrameworkHttpControllerComponent,
         DocFrameworkHttpTemplateComponent,
+        DocFrameworkRPCControllerComponent,
+        DocFrameworkRPCClientComponent,
+        DocFrameworkRPCSecurityComponent,
+        DocFrameworkDependencyInjectionComponent,
     ],
     imports: [
         CommonModule,
