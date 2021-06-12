@@ -86,23 +86,25 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            You create new class you name however you like and specify in its constructor the adapter with its parameters,
+            You create a new class you name however you like and specify in its constructor the adapter with its parameters,
             and add all entities aka models that should be associated with that database to the second parameter.
         </p>
         
         <p>
             You can now register this database class in the KernelModule. It makes sure that you can use it
             with the migration function and other utilities like the ORM Browser. We also enable <code>migrateOnStartup</code>,
-            which creates all tables in our database automatically on bootstrap. Note that you should <strong>not</strong> use this feature
+            which creates all tables in your database automatically on bootstrap. Note that you should <strong>not</strong> use this feature
             for a serious project or production setup.
         </p>
         
         <p>
             We furthermore enable <code>debug</code> which allows us to open the debugger when the application's server is started
-            and manage our database models directly in its integrated ORM Browser.
+            and manage your database models directly in its integrated ORM Browser.
         </p>
         
         <textarea codeHighlight>
+            import { KernelModule, Application } from '@deepkit/framework';
+            
             Application.create({,
                 imports: [
                     KernelModule.configure({
@@ -119,7 +121,8 @@ import { Component } from '@angular/core';
         <p>
             You have everything setup to be able to manage your database data now using the Deepkit ORM Browser. 
             
-            In order to open the ORM Browser and manage the content, write all the steps from above into the <code>app.ts</code> file:
+            In order to open the ORM Browser and manage the content, write all the steps from above into the <code>app.ts</code> file.
+            At the bottom of this chapter you find the full source code example.
         </p>
         
         
@@ -153,7 +156,8 @@ import { Component } from '@angular/core';
         
         <p>
             When you click on "User" in the left sidebar, you can manage its content. Click on the "+", and change the title of
-            the new record. After adjust the record, press "Commit". This commits all changes to the database and makes all changes persistent.
+            the new record. After change required values (like the username), press "Commit". 
+            This commits all changes to the database and makes all changes persistent. The auto increment ID is automatically assigned.
         </p>
 
         <img src="/assets/documentation/framework/debugger-database-user.png"/>
@@ -161,8 +165,8 @@ import { Component } from '@angular/core';
         <h3>Use database</h3>
         
         <p>
-            In order to use the created database class, we use our <code>TestCommand</code> again from the Getting Started chapter again.
-            We adjust it slightly so it takes our class <code>SQLiteDatabase</code> as dependency.
+            In order to use the created database class in your code, you can use the <code>TestCommand</code> again from the Getting Started.
+            We adjust it slightly so it takes your class <code>SQLiteDatabase</code> as dependency.
         </p>
         
         <p>
@@ -268,9 +272,11 @@ import { Component } from '@angular/core';
         
         <p>
             To learn more about how the <code>SQLiteDatabase</code> works, please read the chapter <a routerLink="/documentation/orm">Deepkit ORM</a>
-            and it sub chapters like how to query data, to to manipulate data via sessions, how to defined relations, and more.
+            and it sub chapters like how to query data, how to manipulate data via sessions, how to define relations, and more.
             Please note that the chapters there are related to the standalone library <code>@deepkit/orm</code> and does not contain documentation
-            about the Deepkit Framework part you've read above from this chapter.
+            about the Deepkit Framework part that you've read above from this chapter. In the standalone library you instantiate your database
+            class manually like via <code>new SQLiteDatabase()</code>, however in your Deepkit Framework application this is done 
+            automatically using the dependency injection container.
         </p>
     `
 })

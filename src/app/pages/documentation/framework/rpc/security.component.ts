@@ -18,10 +18,8 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            Deepkit RPC uses a class called <code>RpcKernelSecurity</code> which has a allow-all implementation in Deepkit Framework.
-            This implementation called <code>DeepkitRpcSecurity</code> is registered as the security class for the RPC kernel
-            that is automatically used for registered RPC controllers. The class <code>DeepkitRpcSecurity</code> is pre configured
-            as provider in the dependency injection container. To overwrite it, you have to register a new provider.
+            Deepkit RPC uses a class called <code>RpcKernelSecurity</code> which is an allow-all implementation per default.
+            To overwrite it, you have to register a new provider for that class with a new implementation.
         </p>
 
         <p>
@@ -31,7 +29,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application, DeepkitRpcSecurity } from '@deepkit/framework';
+            import { Application } from '@deepkit/framework';
             import { rpc, RpcKernelSecurity, Session, RpcAction } from '@deepkit/rpc';
             import { MyRPCInterface } from './my-rpc';
             import { ClassType } from '@deepkit/core';
@@ -66,17 +64,16 @@ import { Component } from '@angular/core';
             
             Application.create({
                 providers: [
-                    {provide: DeepkitRpcSecurity, useClass: MyRpcSecurity}
+                    {provide: RpcKernelSecurity, useClass: MyRpcSecurity}
                 ],
                 controllers: [MyRpcController],
             }).run();
         </textarea>
 
         <p>
-            The line <code>{{"{"}}provide: DeepkitRpcSecurity, useClass: MyRpcSecurity{{"}"}}</code> is crucial. It tells the dependency
-            injection
-            container that whenever the class <code>DeepkitRpcSecurity</code> is requested it should take <code>MyRpcSecurity</code>
-            instead.
+            The line <code>{{"{"}}provide: RpcKernelSecurity, useClass: MyRpcSecurity{{"}"}}</code> is crucial. It tells the dependency
+            injection container that whenever the class <code>RpcKernelSecurity</code> is requested it should take
+            <code>MyRpcSecurity</code> instead.
         </p>
 
         <p>
@@ -244,7 +241,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            With both of these methods it is possible to specify in detail which peer can talk to which peer. 
+            With both of these methods it is possible to specify in detail which peer can talk to which peer.
             A peer id is an arbitrary string, but using is as communication channel path can be the most useful. For example a peer id
             like <code>user/:id</code> or <code>microservice/:name</code> makes it obvious for what that channel is used for.
         </p>

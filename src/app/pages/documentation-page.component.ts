@@ -53,7 +53,7 @@ import { Component } from '@angular/core';
                 </div>
 
                 <div class="category">
-                    <div class="category-title">Database/ORM</div>
+                    <div class="category-title">ORM</div>
 
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/orm">Getting started</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/schema">Schema</a>
@@ -65,6 +65,18 @@ import { Component } from '@angular/core';
                     <section>
                         <a routerLinkActive="active" routerLink="/documentation/orm/plugin/soft-delete">Soft-Delete</a>
                     </section>
+                </div>
+
+                
+                <div class="category">
+                    <div class="category-title">RPC</div>
+
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting started</a>
+                    <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Server</a>
+                    <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Controller</a>
+                    <a routerLinkActive="active" routerLink="/documentation/rpc/client">Client</a>
+                    <a routerLinkActive="active" routerLink="/documentation/rpc/query">Stream</a>
+                    <a routerLinkActive="active" routerLink="/documentation/rpc/events">Security</a>
                 </div>
             </nav>
             <main>

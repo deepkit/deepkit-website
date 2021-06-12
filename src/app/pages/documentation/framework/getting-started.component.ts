@@ -36,7 +36,8 @@ import { Component } from '@angular/core';
             Alternatively you can compile the source via the TypeScript compiler and run the JavaScript source directly.
             This has the advantage that the execution time for short commands increases dramatically.
             However, this adds also an additional workflow overhead by either running the compiler manually or by setting
-            up a watcher. That's why this documentation uses ts-node in all examples.
+            up a watcher. That's why this documentation uses ts-node in all examples. See the chapter
+            <a routerLink="/documentation/framework/deployment">Deployment</a> to learn about compilation.
         </p>
         
         <h3>Write the application</h3>
