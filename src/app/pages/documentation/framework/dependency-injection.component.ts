@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
         <p>
             The heart of Deepkit Framework is a very powerful dependency injection container, <a routerLink="/library/injector">Deepkit
             Injector</a>.
-            Its a very powerful implementation of dependency injection with a compiled container, scopes, typesafe configuration system,
-            automatic dependency resolving, compiler passes, tagged providers, various providers and more. Its where all class instances of
-            your application are created and live.
+            Its a compiling container with scopes, typesafe configuration system,
+            automatic dependency resolving, compiler passes, tagged providers, various providers and more. 
+            Its where all class instances of your application are created and live.
         </p>
 
         <h3>Provider</h3>
@@ -87,8 +87,8 @@ import { Component } from '@angular/core';
         <h4>Factory provider</h4>
 
         <p>
-            If your service is more complex or requires non-service/non-configuration dependencies or maybe requires
-            rather complex setup calls on a newly created instance before it can used, you can use a factory.
+            If your service is more complex or requires complex setup calls on a newly created instance before it can used,
+            you can use a factory.
         </p>
 
         <textarea codeHighlight>

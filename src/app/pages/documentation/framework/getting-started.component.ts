@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         <h3>Installation</h3>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/framework
+            npm install @deepkit/framework rxjs typescript
         </textarea>
 
         <p>
@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/framework reflect-metadata rxjs @deepkit/app @deepkit/broker \\
+            npm install @deepkit/framework reflect-metadata rxjs typescript @deepkit/app @deepkit/broker \\
                @deepkit/core @deepkit/core-rxjs @deepkit/crypto @deepkit/event @deepkit/event \\
                @deepkit/http @deepkit/injector @deepkit/logger @deepkit/orm @deepkit/rpc \\
                @deepkit/rpc-tcp @deepkit/sql @deepkit/sqlite @deepkit/stopwatch @deepkit/template \\
@@ -71,10 +71,7 @@ import { Component } from '@angular/core';
                 "esModuleInterop": true,
                 "target": "ES2020",
                 "moduleResolution": "node"
-              },
-              "files": [
-                 "app.ts"
-              ]
+              }
             }
         </textarea>
 

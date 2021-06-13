@@ -158,7 +158,7 @@ import { Component } from '@angular/core';
             
                 async execute(
                     @arg title: string,
-                    @flag color: boolean = false,
+                    @flag.optional color: boolean = false,
                 ) {
                     if (color) {
                         this.logger.log('Colored: <yellow>Hello', title, '</yellow>');

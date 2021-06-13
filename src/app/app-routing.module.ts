@@ -37,6 +37,7 @@ import { DocFrameworkRPCClientComponent } from './pages/documentation/framework/
 import { DocFrameworkRPCSecurityComponent } from './pages/documentation/framework/rpc/security.component';
 import { DocFrameworkDependencyInjectionComponent } from './pages/documentation/framework/dependency-injection.component';
 import { DocFrameworkConfigurationComponent } from './pages/documentation/framework/configuration.component';
+import { DocFrameworkTestingComponent } from './pages/documentation/framework/testing.component';
 
 
 const routes: Routes = [
@@ -135,6 +136,7 @@ const routes: Routes = [
 
             { path: 'framework/dependency-injection', component: DocFrameworkDependencyInjectionComponent },
             { path: 'framework/configuration', component: DocFrameworkConfigurationComponent },
+            { path: 'framework/testing', component: DocFrameworkTestingComponent },
 
             { path: 'type', component: DocTypeGettingStartedComponent },
             { path: 'type/schema', component: DocTypeSchemaComponent },

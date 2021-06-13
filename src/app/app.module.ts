@@ -64,6 +64,7 @@ import { DocFrameworkRPCClientComponent } from './pages/documentation/framework/
 import { DocFrameworkRPCSecurityComponent } from './pages/documentation/framework/rpc/security.component';
 import { DocFrameworkDependencyInjectionComponent } from './pages/documentation/framework/dependency-injection.component';
 import { DocFrameworkConfigurationComponent } from './pages/documentation/framework/configuration.component';
+import { DocFrameworkTestingComponent } from './pages/documentation/framework/testing.component';
 
 @NgModule({
     declarations: [
@@ -122,6 +123,7 @@ import { DocFrameworkConfigurationComponent } from './pages/documentation/framew
         DocFrameworkRPCSecurityComponent,
         DocFrameworkDependencyInjectionComponent,
         DocFrameworkConfigurationComponent,
+        DocFrameworkTestingComponent,
     ],
     imports: [
         CommonModule,
