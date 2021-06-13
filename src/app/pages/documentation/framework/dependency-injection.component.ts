@@ -295,21 +295,21 @@ import { Component } from '@angular/core';
             that service is instantiated per scope. 
             Your application can create custom scopes by creating a new InjectorContext. This is done automatically in your
             Deepkit Framework applications: For HTTP requests <code>http</code>, for RCP sessions <code>rpc</code>, 
-            and CLI commands<code>cli</code>. A new HTTP scope is created for each incoming request and closed when done.
+            and CLI commands <code>cli</code>. A new HTTP scope is created for each incoming request and closed when done.
             The same for a RPC session: As soon as a new client connects a RPC scope is created and closed when the client disconnects.
             For CLI commands a CLI scope is created for each executed command.
         </p>
         
         <p>
             When you put for example a service into the <code>http</code> scope, your service can only be requested by
-            other services living in the same scope. Your HTTP controllers are automatically into the <code>http</code> scope,
+            other services living in the same scope. Your HTTP controllers are automatically in the <code>http</code> scope,
             so they would be able to request that service. The objects <code>HttpRequest</code> and <code>HttpResponse</code>
             are only available in the <code>http</code> scope.
         </p>
         
         <p>
             There are certain system services that are in a scope. For example <code>RpcKernelConnection</code> can be requested
-            from RPC controllers (that are automatically int he <code>rpc</code> scope) and services that are in that scope as well.
+            from RPC controllers (that are automatically in the <code>rpc</code> scope) and services that are in that scope as well.
         </p>
         
         <textarea codeHighlight>

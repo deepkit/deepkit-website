@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         <h3>Installation</h3>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/framework rxjs typescript
+            npm install @deepkit/framework
         </textarea>
 
         <p>
@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/framework reflect-metadata rxjs typescript @deepkit/app @deepkit/broker \\
+            npm install @deepkit/framework reflect-metadata rxjs @deepkit/app @deepkit/broker \\
                @deepkit/core @deepkit/core-rxjs @deepkit/crypto @deepkit/event @deepkit/event \\
                @deepkit/http @deepkit/injector @deepkit/logger @deepkit/orm @deepkit/rpc \\
                @deepkit/rpc-tcp @deepkit/sql @deepkit/sqlite @deepkit/stopwatch @deepkit/template \\
@@ -26,14 +26,16 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            To execute our application in development we recommend <code>ts-node</code>. Install it with this command:
+            To compile your application we need the TypeScript compiler and recommend <code>ts-node</code> to run it easily. 
+            Install it with this command:
         </p>
 
         <textarea codeHighlight="bash">
-            $ npm install ts-node
+            $ npm install typescript ts-node
         </textarea>
+        
         <p>
-            Alternatively you can compile the source via the TypeScript compiler and run the JavaScript source directly.
+            Alternatively to <code>ts-node</code> is to compile the source via the TypeScript compiler and run the JavaScript source directly.
             This has the advantage that the execution time for short commands increases dramatically.
             However, this adds also an additional workflow overhead by either running the compiler manually or by setting
             up a watcher. That's why this documentation uses ts-node in all examples. See the chapter
@@ -70,8 +72,12 @@ import { Component } from '@angular/core';
                 "strict": true,
                 "esModuleInterop": true,
                 "target": "ES2020",
+                "module": "CommonJS",
                 "moduleResolution": "node"
-              }
+              },
+              "files": [
+                "app.ts"
+              ]
             }
         </textarea>
 

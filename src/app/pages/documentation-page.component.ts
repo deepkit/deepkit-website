@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AnchorService } from '../provider/anchor';
+import { TitleService } from '../provider/title';
 
 @Component({
     template: `
@@ -7,7 +10,8 @@ import { Component } from '@angular/core';
                 <div class="category">
                     <div class="category-title">Framework</div>
 
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/framework">Getting started</a>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/framework">Getting
+                        started</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/fundamentals">Fundamentals</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/modules">Modules</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/services">Services</a>
@@ -19,7 +23,8 @@ import { Component } from '@angular/core';
                     <section>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/controller">Controller</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/template">Template</a>
-                        <a routerLinkActive="active" routerLink="/documentation/framework/http/securityn">Security</a>
+                        <a routerLinkActive="active" routerLink="/documentation/framework/http/security">Security</a>
+                        <a routerLinkActive="active" routerLink="/documentation/framework/http/public-dir">Public directory</a>
                     </section>
 
                     <div class="section-title">RPC</div>
@@ -40,22 +45,27 @@ import { Component } from '@angular/core';
                 <div class="category">
                     <div class="category-title">Type</div>
 
-                    <a routerLinkActive="active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/type">Getting started</a>
+                    <a routerLinkActive="active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                       routerLink="/documentation/type">Getting started</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/schema">Schema</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/reflection">Reflection</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/serialization">Serialization</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/validation">Validation</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/performance">Performance</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/patch">Patch</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/change-detection">Change detection</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/state-management">State management</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/serialization-target">Serialization target</a>
+                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/change-detection">Change
+                        detection</a>
+                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/state-management">State
+                        management</a>
+                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/serialization-target">Serialization
+                        target</a>
                 </div>
 
                 <div class="category">
                     <div class="category-title">ORM</div>
 
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/orm">Getting started</a>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/orm">Getting
+                        started</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/schema">Schema</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/session">Session</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/query">Query</a>
@@ -67,11 +77,12 @@ import { Component } from '@angular/core';
                     </section>
                 </div>
 
-                
+
                 <div class="category">
                     <div class="category-title">RPC</div>
 
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting started</a>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting
+                        started</a>
                     <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Server</a>
                     <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Controller</a>
                     <a routerLinkActive="active" routerLink="/documentation/rpc/client">Client</a>
@@ -79,26 +90,84 @@ import { Component } from '@angular/core';
                     <a routerLinkActive="active" routerLink="/documentation/rpc/events">Security</a>
                 </div>
             </nav>
-            <main>
-                <router-outlet></router-outlet>
+            <main #content>
+                <router-outlet (activate)="onOutlet($event)"></router-outlet>
             </main>
+            <div class="table-of-content">
+                <a [routerLink]="router.url.split('#')[0]" [fragment]="getFragment(h.innerText)"
+                   *ngFor="let h of headers" class="{{h.tagName.toLowerCase()}}">
+                    {{h.innerText}}
+                </a>
+            </div>
         </div>
     `,
     styleUrls: ['./documentation-page.component.scss']
 })
-export class DocumentationPageComponent {
+export class DocumentationPageComponent implements AfterViewInit {
+    @ViewChild('content') elementRef?: ElementRef<HTMLDivElement>;
 
+    public headers: HTMLHeadingElement[] = [];
+
+    constructor(
+        public router: Router,
+        public title: TitleService,
+        protected anchorService: AnchorService,
+    ) {
+    }
+
+    getFragment(value: string): string {
+        return value.trim().replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
+    }
+
+    loadTableOfContent() {
+        if (!this.elementRef) {
+            return;
+        }
+
+        this.headers = [];
+        let title = '';
+        let subline = '';
+        const headers: HTMLHeadingElement[] = Array.from(this.elementRef.nativeElement.querySelectorAll('div.subline, h2, h3, h4'));
+
+        for (const header of headers) {
+            if (header.tagName.toLowerCase() === 'h2') {
+                title = header.innerText;
+            }
+            if (header.tagName.toLowerCase() === 'div') {
+                subline = header.innerText;
+                continue;
+            }
+
+            this.headers.push(header);
+            if ((header as any)._addedLink) return;
+            const fragment = this.getFragment(header.innerText);
+            const a = document.createElement('a');
+            a.name = fragment;
+            header.appendChild(a);
+            (header as any)._addedLink = true;
+        }
+
+        this.title.setTitle(`${title} - ${subline} - Documentation`);
+        this.anchorService.scrollToAnchor();
+    }
+
+    ngAfterViewInit() {
+        this.loadTableOfContent();
+    }
+
+    onOutlet(event: any) {
+        this.loadTableOfContent();
+    }
 }
 
 @Component({
     template: `
-    <h2>Not found</h2>
-    
-    <p>
-        This page has not yet been created. Please try again later.
-    </p>
+        <h2>Not found</h2>
+
+        <p>
+            This page has not yet been created. Please try again later.
+        </p>
     `
 })
 export class DocumentationDefaultPageComponent {
-
 }

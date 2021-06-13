@@ -38,6 +38,8 @@ import { DocFrameworkRPCSecurityComponent } from './pages/documentation/framewor
 import { DocFrameworkDependencyInjectionComponent } from './pages/documentation/framework/dependency-injection.component';
 import { DocFrameworkConfigurationComponent } from './pages/documentation/framework/configuration.component';
 import { DocFrameworkTestingComponent } from './pages/documentation/framework/testing.component';
+import { DocFrameworkDeploymentComponent } from './pages/documentation/framework/deployment.component';
+import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
 
 
 const routes: Routes = [
@@ -129,6 +131,7 @@ const routes: Routes = [
             { path: 'framework/database', component: DocFrameworkDatabaseComponent },
             { path: 'framework/http/controller', component: DocFrameworkHttpControllerComponent },
             { path: 'framework/http/template', component: DocFrameworkHttpTemplateComponent },
+            { path: 'framework/http/public-dir', component: DocFrameworkHttpPublicDirComponent },
 
             { path: 'framework/rpc/controller', component: DocFrameworkRPCControllerComponent },
             { path: 'framework/rpc/client', component: DocFrameworkRPCClientComponent },
@@ -137,6 +140,7 @@ const routes: Routes = [
             { path: 'framework/dependency-injection', component: DocFrameworkDependencyInjectionComponent },
             { path: 'framework/configuration', component: DocFrameworkConfigurationComponent },
             { path: 'framework/testing', component: DocFrameworkTestingComponent },
+            { path: 'framework/deployment', component: DocFrameworkDeploymentComponent },
 
             { path: 'type', component: DocTypeGettingStartedComponent },
             { path: 'type/schema', component: DocTypeSchemaComponent },

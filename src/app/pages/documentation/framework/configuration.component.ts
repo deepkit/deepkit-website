@@ -57,9 +57,83 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            There are several ways to read those configuration values in your services and controllers. Please read the chapter
-            <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> to get more information.
+            There are several ways to read those configuration values in your services and controllers.
         </p>
+
+        <h4>Configuration tokens</h4>
+
+        <p>
+            Configuration tokens are injected one per one. You can quickly add configuration options but have to keep
+            their data type in sync. For more serious applications you should use <i>configuration slice</i>.
+        </p>
+
+        <textarea codeHighlight title="app.ts">
+            import { inject } from '@deepkit/injector';
+            import { config } from './app-config.ts';
+            
+            @http.controller()
+            class MyWebsite {
+                constructor(@inject(config.token('pageTitle')) pageTitle: string) {
+                }
+            }
+        </textarea>
+
+        <h4>Configuration slice</h4>
+
+        <p>
+            Configuration slices are the recommended way to provide your configuration options to services and controllers.
+            They are fully type-safe, can be reused, and are easy to inject by simply using the class as type.
+            They are also easy to test in your unit tests.
+        </p>
+
+        <textarea codeHighlight title="website.ts">
+            import { config } from './app-config.ts';
+            
+            class WebsiteSettings extends config.slice(['pageTitle']) {
+            }
+            
+            @http.controller()
+            class MyWebsite {
+                constructor(protected settings: WebsiteSettings) {
+                }
+            
+                @http.GET()
+                helloWorld() {
+                    return 'Hello from ' + this.settings.pageTitle;
+                }
+            }
+        </textarea>
+
+        <textarea codeHighlight title="website.spec.ts">
+            import { MyWebsite } from './app-config.ts';
+            
+            test('website', async () => {
+                const website = new MyWebsite({pageTitle: 'World'});
+            
+                expect(website.helloWorld()).toBe('Hello from World');
+            });
+        </textarea>
+
+        <h4>All configuration options</h4>
+        
+        <p>
+            Another option is to inject the whole configuration object. This is not recommended but makes prototyping easy and fast.
+        </p>
+
+        <textarea codeHighlight title="website.ts">
+            import { config } from './app-config.ts';
+
+            @http.controller()
+            class MyWebsite {
+                constructor(@inject(config.all()) protected settings: typeof config.type) {
+                }
+            
+                @http.GET()
+                helloWorld() {
+                    return 'Hello from ' + this.settings.pageTitle;
+                }
+            }
+        </textarea>
 
         <h3>Configuration schema</h3>
 
@@ -106,11 +180,45 @@ import { Component } from '@angular/core';
         </textarea>
 
         <img src="/assets/documentation/framework/debugger-configuration.png"/>
+        
+        <p>
+            You can also use <code>ts-node app.ts app:config</code> to see all available configuration options, active default, their
+            default value, description and data type.
+        </p>
+        
+        <textarea codeHighlight="bash">
+            $ ts-node app.ts app:config
+            Application config
+            ┌─────────┬───────────────┬────────────────────────┬────────────────────────┬─────────────┬───────────┐
+            │ (index) │     name      │         value          │      defaultValue      │ description │   type    │
+            ├─────────┼───────────────┼────────────────────────┼────────────────────────┼─────────────┼───────────┤
+            │    0    │  'pageTitle'  │     'Other title'      │      'Cool site'       │     ''      │ 'string'  │
+            │    1    │   'domain'    │     'example.com'      │     'example.com'      │     ''      │ 'string'  │
+            │    2    │    'port'     │          8080          │          8080          │     ''      │ 'number'  │
+            │    3    │ 'databaseUrl' │ 'mongodb://localhost/' │ 'mongodb://localhost/' │     ''      │ 'string'  │
+            │    4    │    'email'    │         false          │         false          │     ''      │ 'boolean' │
+            │    5    │ 'emailSender' │       undefined        │       undefined        │     ''      │ 'string?' │
+            └─────────┴───────────────┴────────────────────────┴────────────────────────┴─────────────┴───────────┘
+            Modules config
+            ┌─────────┬───────────────────────────┬─────────────────┬─────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────┐
+            │ (index) │           name            │      value      │  defaultValue   │                                            description                                             │    type    │
+            ├─────────┼───────────────────────────┼─────────────────┼─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┤
+            │    0    │       'kernel.host'       │   'localhost'   │   'localhost'   │                                                 ''                                                 │  'string'  │
+            │    1    │       'kernel.port'       │      8080       │      8080       │                                                 ''                                                 │  'number'  │
+            │    2    │    'kernel.httpsPort'     │    undefined    │    undefined    │ 'If httpsPort and ssl is defined, then the https server is started additional to the http-server.' │ 'number?'  │
+            │    3    │    'kernel.selfSigned'    │    undefined    │    undefined    │           'If for ssl: true the certificate and key should be automatically generated.'            │ 'boolean?' │
+            │    4    │ 'kernel.keepAliveTimeout' │    undefined    │    undefined    │                                                 ''                                                 │ 'number?'  │
+            │    5    │       'kernel.path'       │       '/'       │       '/'       │                                                 ''                                                 │  'string'  │
+            │    6    │     'kernel.workers'      │        1        │        1        │                                                 ''                                                 │  'number'  │
+            │    7    │       'kernel.ssl'        │      false      │      false      │                                       'Enables HTTPS server'                                       │ 'boolean'  │
+            │    8    │    'kernel.sslOptions'    │    undefined    │    undefined    │                   'Same interface as tls.SecureContextOptions & tls.TlsOptions.'                   │   'any'    │
+            ...
+        </textarea>
 
         <h3>Set configuration values</h3>
 
         <p>
-            Per default no values are overwritten, so default values are used. There are several ways to o set configuration values.
+            Per default no values are overwritten, so default values are used. There are several ways to set configuration values.
         </p>
 
         <ul>
@@ -118,9 +226,9 @@ import { Component } from '@angular/core';
             <li>Environment variable via JSON</li>
             <li><i>dotenv</i> files</li>
         </ul>
-        
+
         <p>
-            You can use multiple configuration loading methods at the same time. The order in which they are called is important.  
+            You can use multiple configuration loading methods at the same time. The order in which they are called is important.
         </p>
 
         <h4>Environment variables</h4>
@@ -189,19 +297,19 @@ import { Component } from '@angular/core';
             pageTitle=Other title
             $ ts-node app.ts server:listen
         </textarea>
-        
+
         <h3>Configure module</h3>
-        
+
         <p>
             Each imported module should have a module id. This id is used for the configuration paths used above.
             Core modules like <code>KernelModule</code> and <code>HttpModule</code> are imported automatically if not done manually.
         </p>
-        
+
         <p>
             For environment variable configuration the path for example for the kernel option <code>port</code> is <code>kernel_port</code>.
             If a prefix of <code>APP_</code> is used you can change the port via:
         </p>
-        
+
         <textarea codeHighlight="bash">
             $ APP_kernel_port=9999 ts-node app.ts server:listen
             2021-06-12T18:59:26.363Z [LOG] Start HTTP server, using 1 workers.
@@ -213,19 +321,19 @@ import { Component } from '@angular/core';
         <p>
             In dotenv files it would become <code>kernel_port=9999</code>.
         </p>
-        
+
         <p>
             In JSON environment variables on the other hand its not separated by an underscore. <code>kernel</code> becomes an object.
         </p>
-        
+
         <textarea codeHighlight>
             $ APP_CONFIG='{"kernel": {"port": 9999}}' ts-node app.ts server:listen
         </textarea>
-        
+
         <p>
             This works the same for all modules. For configuration option of your application there is no module prefix needed.
         </p>
-        
+
     `
 })
 export class DocFrameworkConfigurationComponent {

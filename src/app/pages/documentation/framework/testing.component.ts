@@ -71,17 +71,34 @@ import { Component } from '@angular/core';
         
         <p>
             Please read the <a target="_blank" href="https://jestjs.io/">Jest documentation</a>
-            to learn more how the jest CLI tool work and how you can write unit tests.
+            to learn more how the jest CLI tool work and how you can write more sophisticated tests and whole test suits.
         </p>
 
         <h3>Unit tests</h3>
 
         <p>
-            Whenever possible try to unit test your services. The easier and more well defined your service dependencies
-            are the easier is it to unit test them.
+            Whenever possible try to unit test your services. The easier, better separated, and more well defined your service dependencies
+            are the easier is it to unit test them. In this case you can write simple tests like the following:
         </p>
 
-        <p></p>
+        <textarea codeHighlight title="my-service.ts">
+            export class MyService {
+                helloWorld() {
+                    return 'hello world';
+                }   
+            }
+        </textarea>
+
+        <textarea codeHighlight title="my-service.spec.ts">
+            import { MyService } from './my-service.ts';
+            
+            test('hello world', () => {
+                const myService = new MyService();
+                expect(myService.helloWorld()).toBe('hello world');
+            });
+        </textarea>
+
+
 
         <h3>Integration tests</h3>
         
@@ -137,6 +154,73 @@ import { Component } from '@angular/core';
                 const myService = testing.app.get(MyService);
             
                 expect(myService.helloWorld()).toBe('hello world');
+            });
+        </textarea>
+        
+        <p>
+            When you separated your application in multiple modules, you can easier test them. For example, lets assume you have a
+            AppCoreModule created and want to test some services.
+        </p>
+
+
+        <textarea codeHighlight title="core.ts">
+            const config = new AppModuleConfig({
+                items: t.number.default(10)
+            });
+            
+            export class MyService {
+                constructor(@inject(config.token('item')) protected items: number) {
+            
+                }
+            
+                doIt(): boolean {
+                    //do something
+                    return true;
+                }
+            }
+            
+            export AppCoreModule = new AppModule({
+                config: config,
+                provides: [MyService]
+            }, 'core');
+            
+        </textarea>
+
+        <p>
+            You use your module like this:
+        </p>
+        
+        <textarea codeHighlight title="app.ts">
+            import { AppCoreModule } from './app-core.ts';
+            
+            Application.create({
+                imports: [AppCoreModule]
+            }).run();
+        </textarea>
+        
+        <p>
+            And test it without bootstrapping the whole application server like that.
+        </p>
+
+        <textarea codeHighlight title="core.spec.ts">
+            import { createTestingApp } from '@deepkit/framework';
+            import { AppCoreModule, MyService } from './app-core.ts';
+            
+            test('service simple', async () => {
+                const testing = createTestingApp({ imports: [AppCoreModule] });
+
+                const myService = testing.app.get(MyService);
+                expect(myService.doIt()).toBe(true);
+            });
+            
+            test('service simple big', async () => {
+                // you change configurations of your module for specific test scenarios
+                const testing = createTestingApp({ 
+                    imports: [AppCoreModule.configure({items: 100})]
+                });
+
+                const myService = testing.app.get(MyService);
+                expect(myService.doIt()).toBe(true);
             });
         </textarea>
     `

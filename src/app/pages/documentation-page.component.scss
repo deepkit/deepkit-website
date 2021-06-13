@@ -50,8 +50,33 @@ main {
   }
 }
 
+.table-of-content {
+  text-align: left;
+  position: absolute;
+  right: 30px;
+  left: calc(100%/2 + 1040px / 2);
+
+  @media(max-width: 1450px) {
+    display: none;
+  }
+
+  a {
+    display: block;
+    font-size: 14px;
+    padding: 3px 0;
+
+    &.h4 {
+      padding-left: 15px;
+    }
+
+    &.h5 {
+      padding-left: 25px;
+    }
+  }
+}
+
 nav {
-  flex: 0 0 175px;
+  flex: 0 0 140px;
   margin-right: 55px;
   min-height: 100%;
   text-align: left;
@@ -59,7 +84,9 @@ nav {
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0;
+}
 
+.table-of-content, nav {
   a, a:link {
     display: block;
     color: #3C3C3C;
