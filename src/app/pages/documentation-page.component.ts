@@ -116,6 +116,7 @@ export class DocumentationPageComponent implements AfterViewInit {
     }
 
     getFragment(value: string): string {
+        if ('string' !== typeof value) return '';
         return value.trim().replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
     }
 
