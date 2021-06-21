@@ -18,6 +18,8 @@ RUN /app/build-api.sh
 
 COPY . /app
 
+RUN cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
+
 RUN npm run build:ssr
 RUN npm run server:build
 RUN npm prune --production
