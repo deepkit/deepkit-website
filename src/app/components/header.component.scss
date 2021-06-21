@@ -1,13 +1,14 @@
 :host {
   display: block;
-  position: relative;
   z-index: 1000;
   background: #202020;
   user-select: none;
 
-  img {
-    height: 26px;
-    margin-right: 20px;
+  a.logo {
+    img {
+      height: 26px;
+      margin-right: 20px;
+    }
   }
 }
 
@@ -15,12 +16,20 @@
   height: 55px;
   display: flex;
   align-items: center;
+  position: static !important;
+
   > a {
     line-height: 0;
+
     &:hover {
       opacity: 0.6;
     }
   }
+}
+
+.burger {
+  margin-left: auto;
+  display: none;
 }
 
 nav {
@@ -55,86 +64,44 @@ nav {
   }
 }
 
-:host.white {
-  #twitter-logo {
-    fill: #171B1E;
-  }
-}
-
-.wrapper {
-  position: relative;
-}
-
-.library-menu {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 300ms ease-in-out;
-  left: 50px;
-  width: 550px;
-  top: 35px;
-  background: #202020;
-  border-radius: 6px;
-  box-shadow: 0 2px 20px 0 rgba(24, 24, 24, 0.20);
-
-  text-align: left;
-  padding: 15px 20px;
-
-  color: white;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
-  h4 {
-    color: grey;
-  }
-
-  section {
-    margin-bottom: 25px;
-  }
-
-  a, a:link {
-    display: block;
-    color: white;
-    font-size: 14px;
-    margin-bottom: 3px;
-
-    &:hover {
-      text-decoration: none;
-      color: var(--color-orange);
+@media(max-width: 600px) {
+  a.logo {
+    text-align: center;
+    flex: 1;
+    img {
+      margin-right: 0 !important;
     }
   }
-}
-
-.library-menu.active {
-  pointer-events: all;
-  opacity: 1;
-}
-
-@media(max-width: 450px) {
-  .wrapper {
+  .burger {
     display: block;
-    text-align: center;
-  }
-
-  #twitter-logo {
     position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 25px;
+    top: 20px;
   }
-
-  #github-logo {
-    position: absolute;
-    right: 45px;
-    top: 15px;
-  }
-
   nav {
-    margin-top: 15px;
-    justify-content: space-between;
-
+    display: block;
     a, a:link {
-      margin: auto;
+      padding:7px 10px;
+      display: block;
+      text-align: left;
+    }
+  }
+
+  nav.main {
+    display: none;
+    background: #202020;
+    padding-top: 25px;
+  }
+
+  .showMenu {
+    nav.main {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      overflow: auto;
+      display: block;
     }
   }
 }

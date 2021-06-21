@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnchorService } from '../provider/anchor';
 import { TitleService } from '../provider/title';
@@ -6,7 +6,21 @@ import { TitleService } from '../provider/title';
 @Component({
     template: `
         <div class="wrapper">
-            <nav>
+            <div class="chapters" (click)="toggleMenu()">
+                <div>Documentation chapters</div>
+                <svg *ngIf="showMenu" width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="arrow_up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <path d="M11.8443139,6.21655734 C12.0945582,5.9426926 12.5163616,5.92638983 12.7864381,6.18014409 C13.0565147,6.43389835 13.072592,6.86161807 12.8223477,7.13548282 L9.4890169,10.7834457 C9.22518123,11.0721848 8.77481877,11.0721848 8.5109831,10.7834457 L5.17765229,7.13548282 C4.92740802,6.86161807 4.94348529,6.43389835 5.21356186,6.18014409 C5.48363844,5.92638983 5.90544182,5.9426926 6.15568608,6.21655734 L9,9.32934519 L11.8443139,6.21655734 Z" id="Arrows" fill="#000000" fill-rule="nonzero" transform="translate(9.000000, 8.500000) scale(1, -1) translate(-9.000000, -8.500000) "></path>
+                    </g>
+                </svg>
+                <svg *ngIf="!showMenu" width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="arrow_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <path d="M11.8443139,6.21655734 C12.0945582,5.9426926 12.5163616,5.92638983 12.7864381,6.18014409 C13.0565147,6.43389835 13.072592,6.86161807 12.8223477,7.13548282 L9.4890169,10.7834457 C9.22518123,11.0721848 8.77481877,11.0721848 8.5109831,10.7834457 L5.17765229,7.13548282 C4.92740802,6.86161807 4.94348529,6.43389835 5.21356186,6.18014409 C5.48363844,5.92638983 5.90544182,5.9426926 6.15568608,6.21655734 L9,9.32934519 L11.8443139,6.21655734 Z" id="Arrows" fill="#000000" fill-rule="nonzero"></path>
+                    </g>
+                </svg>
+            </div>
+            
+            <nav [class.showMenu]="showMenu">
                 <div class="category">
                     <div class="category-title">Framework</div>
 
@@ -107,12 +121,23 @@ export class DocumentationPageComponent implements AfterViewInit {
     @ViewChild('content') elementRef?: ElementRef<HTMLDivElement>;
 
     public headers: HTMLHeadingElement[] = [];
+    public showMenu: boolean = false;
 
     constructor(
         public router: Router,
         public title: TitleService,
+        protected cd: ChangeDetectorRef,
         protected anchorService: AnchorService,
     ) {
+        router.events.subscribe(() => {
+            this.showMenu = false;
+            this.cd.detectChanges();
+        });
+    }
+
+    toggleMenu() {
+        this.showMenu = !this.showMenu;
+        this.cd.detectChanges();
     }
 
     getFragment(value: string): string {

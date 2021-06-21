@@ -125,3 +125,45 @@ nav {
     margin-bottom: 15px;
   }
 }
+
+.chapters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15px;
+
+  svg {
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+@media(max-width: 768px) {
+  nav {
+    margin-right: 8px;
+  }
+
+  main {
+    padding: 0 5px;
+  }
+}
+
+@media(max-width: 600px) {
+  .wrapper {
+    display: block;
+    padding-top: 15px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  nav.showMenu {
+    display: block;
+  }
+
+  main {
+    padding: 0;
+  }
+}

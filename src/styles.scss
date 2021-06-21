@@ -243,6 +243,7 @@ pre.console {
     margin: 45px auto;
     text-align: left;
     font-size: 15px;
+    padding: 0 10px;
 
     > h2 {
       margin-top: 36px;
@@ -297,18 +298,20 @@ pre.console {
       max-width: 600px;
     }
 
-    nav {
-      text-align: right;
-      margin-bottom: 8px;
+    .head {
+      display: flex;
 
-      .breadcrumb {
-        float: left;
-
-        a:first-child {
-          margin-left: 0;
-        }
+      nav {
+        margin-left: auto;
       }
+    }
 
+    nav {
+      margin-bottom: 8px;
+      text-align: right;
+    }
+
+    nav, .breadcrumb {
       a, a:link {
         margin-left: 24px;
         font-size: 14px;
@@ -325,12 +328,40 @@ pre.console {
         }
       }
     }
+
+    .breadcrumb {
+      a:first-child {
+        margin-left: 0;
+      }
+    }
+
+  }
+
+  @media(max-width: 500px) {
+    .banner {
+      margin: 30px auto;
+
+      .head {
+        display: block;
+
+        nav {
+          //display: flex;
+          //justify-content: space-around;
+          margin-top: 15px;
+
+          //a, a:link {
+          //  margin: 0;
+          //}
+        }
+      }
+    }
   }
 }
 
 .library-cards {
   max-width: 1040px;
   margin: 80px auto;
+  padding: 0 20px;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
@@ -340,6 +371,10 @@ pre.console {
     min-height: 330px;
     flex: 0 0 23%;
     cursor: pointer;
+
+    @media(max-width: 540px) {
+      min-height: unset;
+    }
 
     &:hover {
       box-shadow: 0 0 16px rgba(0, 0, 0, 0.23);
@@ -467,6 +502,12 @@ main {
 .mini-wrapper {
   max-width: 700px;
   margin: auto;
+}
+
+.image {
+  @media(max-width: 540px) {
+    text-align: center;
+  }
 }
 
 //

@@ -1,6 +1,6 @@
 .banner {
   max-width: 550px;
-  padding: 80px 0;
+  padding: 80px 20px;
 
   h1 {
     margin: 0;
@@ -69,5 +69,34 @@
 
   p {
     max-width: 880px;
+  }
+}
+
+
+@media(max-width: 600px) {
+  .banner {
+    padding: 40px 20px;
+  }
+
+  .what {
+    margin: 20px auto;
+    font-size: 14px;
+
+    > div > div {
+      padding: 20px;
+    }
+  }
+}
+
+@media(max-width: 400px) {
+
+  .what {
+    margin: 20px auto;
+    font-size: 14px;
+
+    > div > div {
+      font-size: 13px;
+      padding: 8px;
+    }
   }
 }

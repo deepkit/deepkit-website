@@ -4,61 +4,31 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'dw-header',
     template: `
-        <div class="wrapper">
-            <a routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
+        <div class="wrapper" [class.showMenu]="showMenu">
+            <a class="logo" routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
 
-            <nav>
+            <a class="burger" (click)="toggleMenu()">
+                <svg width="21px" height="16px" viewBox="0 0 21 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="burger" fill="#FFFFFF">
+                            <rect id="Rectangle" x="0" y="0" width="21" height="2"></rect>
+                            <rect id="Rectangle" x="0" y="7" width="21" height="2"></rect>
+                            <rect id="Rectangle" x="0" y="14" width="21" height="2"></rect>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <nav class="main">
                 <a routerLinkActive="active" routerLink="/framework">Framework</a>
                 <a routerLinkActive="active" routerLink="/library">Libraries</a>
                 <a routerLinkActive="active" routerLink="/community">Community</a>
+
+                <nav style="justify-content: flex-end;">
+                    <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
+                    <a routerLinkActive="active" routerLink="/blog">Blog</a>
+                </nav>
             </nav>
 
-            <nav style="justify-content: flex-end;">
-                <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
-                <a routerLinkActive="active" routerLink="/blog">Blog</a>
-            </nav>
-
-<!--            <div [class.active]="menu === 'library'" (mouseenter)="open('library')" (mouseleave)="close('library')" class="library-menu">-->
-<!--                <section>-->
-<!--                    <h4>Database</h4>-->
-<!--                    <a routerLink="/library/orm">orm</a>-->
-<!--                    <a routerLink="/library/orm-browser">orm-browser</a>-->
-<!--                    <a routerLink="/library/mongo">mongo</a>-->
-<!--                    <a routerLink="/library/mysql">mysql</a>-->
-<!--                    <a routerLink="/library/postgres">postgres</a>-->
-<!--                    <a routerLink="/library/sqlite">sqlite</a>-->
-<!--                </section>-->
-<!--                <section>-->
-<!--                    <h4>Data</h4>-->
-<!--                    <a routerLink="/library/type">type</a>-->
-<!--                    <a routerLink="/library/broker">broker</a>-->
-<!--                    <a routerLink="/library/rpc">rpc</a>-->
-<!--                    <a routerLink="/library/rpc-tcp">rpc-tcp</a>-->
-<!--                    <a routerLink="/library/bson">bson</a>-->
-<!--                </section>-->
-<!--                <section>-->
-<!--                    <h4>Framework</h4>-->
-<!--                    <a routerLink="/library/app">app</a>-->
-<!--                    <a routerLink="/library/framework">framework</a>-->
-<!--                    <a routerLink="/library/debugger">debugger</a>-->
-<!--                    <a routerLink="/library/http">http</a>-->
-<!--                    <a routerLink="/library/injector">injector</a>-->
-<!--                    <a routerLink="/library/logger">logger</a>-->
-<!--                    <a routerLink="/library/template">template</a>-->
-<!--                    <a routerLink="/library/event">event</a>-->
-<!--                    <a routerLink="/library/workflow">workflow</a>-->
-<!--                    <a routerLink="/library/stopwatch">stopwatch</a>-->
-<!--                    <a routerLink="/library/core">core</a>-->
-<!--                    <a routerLink="/library/core-rxjs">core-rxjs</a>-->
-<!--                    <a routerLink="/library/topsort">topsort</a>-->
-<!--                </section>-->
-<!--                <section>-->
-<!--                    <h4>Angular</h4>-->
-<!--                    <a routerLink="/library/desktop-ui">desktop-ui</a>-->
-<!--                    <a routerLink="/library/type-angular">type-angular</a>-->
-<!--                    <a routerLink="/library/angular-universal">angular-universal</a>-->
-<!--                </section>-->
-<!--            </div>-->
         </div>
     `,
     styleUrls: ['./header.component.scss']
@@ -68,14 +38,22 @@ export class HeaderComponent {
 
     protected lastTimeout: any;
 
+    public showMenu: boolean = false;
+
     constructor(
         protected cd: ChangeDetectorRef,
         public router: Router,
     ) {
         router.events.subscribe(() => {
             this.menu = '';
+            this.showMenu = false;
             this.cd.detectChanges();
         });
+    }
+
+    toggleMenu() {
+        this.showMenu = !this.showMenu;
+        this.cd.detectChanges();
     }
 
     open(menu: string) {

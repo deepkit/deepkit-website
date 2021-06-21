@@ -76,10 +76,23 @@ nav.links {
 }
 
 
-@media(max-width: 450px) {
+@media(max-width: 550px) {
   .wrapper, .left, .navi {
     display: block;
     text-align: center;
+  }
+
+  nav.social {
+    margin: 25px 0;
+  }
+
+  .text {
+    text-align: center;
+  }
+
+  nav.links {
+    width: unset;
+    align-items: center;
   }
 
   .navi {

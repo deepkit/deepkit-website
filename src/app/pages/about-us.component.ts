@@ -4,12 +4,12 @@ import {Component} from '@angular/core';
     template: `
         <main class="text-page">
             <div style="max-width: 700px;">
-                <p style="margin-bottom: 50px;">
+                <p style="margin-bottom: 50px;" class="image">
                     <img src="assets/images/deepkit_text.svg" style="width: 400px;"/>
                 </p>
 
 
-                <p>
+                <p class="image">
                     <img src="assets/images/marc-j-schmidt-profile.png" style="width: 250px;"/>
                 </p>
                 
