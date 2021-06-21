@@ -364,11 +364,11 @@ pre.console {
   padding: 0 20px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(230px, max-content));
   grid-gap: 25px;
 
   library-card {
-    min-height: 330px;
+    min-height: 310px;
     flex: 0 0 23%;
     cursor: pointer;
 

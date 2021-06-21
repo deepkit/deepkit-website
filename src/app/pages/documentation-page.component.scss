@@ -127,7 +127,7 @@ nav {
 }
 
 .chapters {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding-bottom: 15px;
@@ -150,6 +150,10 @@ nav {
 }
 
 @media(max-width: 600px) {
+  .chapters {
+    display: flex;
+    cursor: pointer;
+  }
   .wrapper {
     display: block;
     padding-top: 15px;
