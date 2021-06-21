@@ -63,12 +63,12 @@ import { Component } from '@angular/core';
             When the all compiler settings are correct and your <code>outDir</code> points to a folder like <code>dist</code> for example, then
             as soon as you run the command <code>tsc</code> in your project, all your linked files in <code>files</code> in the <i>tsconfig.json</i>
             are compiled to JavaScript.
-            Its enough to specify your entry point files to be in that list. All imported files are automatically compiled as well and don't need
-            to be inserted in the <i>tsconfig.json</i>.
+            Its enough to specify your entry point files to be in that list. All imported files are automatically compiled as well 
+            and don't need to be inserted in the <i>tsconfig.json</i>. <code>tsc</code> is part of Typescript when you install <code>npm install typescript</code>.
         </p>
         
         <textarea codeHighlight="bash">
-            $ tsc
+            $ ./node_modules/.bin/tsc
         </textarea>
         
         <p>

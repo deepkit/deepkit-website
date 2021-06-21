@@ -1,13 +1,13 @@
 :host {
   display: block;
   user-select: none;
+  background: #202020;
 }
 
 .wrapper {
   margin-top: 50px;
   display: flex;
   align-items: flex-start;
-  background: #202020;
   justify-content: space-between;
   padding: 50px;
 }

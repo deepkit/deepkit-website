@@ -27,6 +27,7 @@ body {
   font-size: 16px;
   text-align: center;
   background-color: var(--color-bg);
+  background: #202020;
 
   letter-spacing: 0;
 
@@ -360,6 +361,16 @@ pre.console {
   grid-auto-columns: auto;
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+  &.links .card {
+    background: #FFFFFF;
+    box-shadow: 0 0 16px rgb(0 0 0 / 13%);
+
+    &:hover {
+      box-shadow: 0 0 16px rgb(0 0 0 / 23%);
+      background-color: #f9f9f9;
+    }
+  }
 }
 
 .card {
@@ -371,6 +382,10 @@ pre.console {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  &:link:hover {
+    text-decoration: none;
+  }
 
   h4 {
     font-weight: 600;

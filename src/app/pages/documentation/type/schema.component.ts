@@ -99,6 +99,11 @@ import { Component } from '@angular/core';
                 <td>t.date</td>
             </tr>
             <tr>
+                <td>property: bigint;</td>
+                <td>No</td>
+                <td>t.bigint</td>
+            </tr>
+            <tr>
                 <td>property: 'a';</td>
                 <td>Yes</td>
                 <td>t.literal('a')</td>

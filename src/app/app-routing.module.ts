@@ -40,6 +40,7 @@ import { DocFrameworkConfigurationComponent } from './pages/documentation/framew
 import { DocFrameworkTestingComponent } from './pages/documentation/framework/testing.component';
 import { DocFrameworkDeploymentComponent } from './pages/documentation/framework/deployment.component';
 import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
+import { CommunityPageComponent } from './pages/community.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,11 @@ const routes: Routes = [
         path: 'framework',
         component: FeaturesPageComponent,
         data: { title: 'Framework Features' },
+    },
+    {
+        path: 'community',
+        component: CommunityPageComponent,
+        data: { title: 'Community' },
     },
 
     {

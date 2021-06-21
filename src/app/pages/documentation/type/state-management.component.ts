@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         <p>
             State management is primarily known in JavaScript for rather complex frontend applications.
             As soon as you work with a state management library you usually face several new limitation to the state structure itself.
-            Deepkit Type provides a handy function to make the live easier in this area and fix currenty limitations.
+            Deepkit Type provides a handy function to make the live easier in this area and fix current limitations.
         </p>
 
         <p>
@@ -17,20 +17,21 @@ import { Component } from '@angular/core';
             but also with tremendous disadvantages. The biggest disadvantage is that in order to change the state you have to return
             a new state object, copying all previous values and overwrite only the new values. This leads to sewerage limitations of the
             data
-            structure simply because of the usability aspect. It's recommended here to keep the state structure shallow in order to not
-            have too many copy instructions in your state change code.
+            structure simply because of the usability aspect. It's thus usually recommended here to keep the state 
+            structure shallow and normalized in order to not have too many copy instructions in your state change code.
         </p>
 
         <p>
             To work around that a library like <a target="_blank" href="https://immerjs.github.io/immer/">Immer</a> can be used. However,
-            this has several new disadvantages.
+            this has several new disadvantages and does not solve the problem completely.
         </p>
 
         <p>
-            When you use Deepkit Type decorated classes as your state structure, you can serialize your state (and store it for example
-            easily as JSON)
-            without additional custom mapping necessary and use the function <code>applyPatch</code> in order to maintain the
-            nominal types of your class structure. It allows to keep your class instances intact and keep using methods on your state.
+            The method <code>applyPatch</code> allows you to fix all the issues above. 
+            It not only allows you to have complex (non-shallow) objects in your state, but also keeps your nominal class instances 
+            (if you have models from a database for example in your state) intact.
+            As a nice side effect you can serialize your whole state (and store it for example easily as JSON)
+            without additional custom mapping necessary.
         </p>
 
         <textarea codeHighlight>
@@ -96,7 +97,7 @@ import { Component } from '@angular/core';
         <p>
             This works with using Proxy objects and recording all changes made to the structure. When the callback to
             <code>applyPatch</code>
-            a clone is created of the given state and all recorded changed replayed to the clone.
+            a clone is created of the given state and all recorded changes replayed to the clone.
         </p>
     `
 })

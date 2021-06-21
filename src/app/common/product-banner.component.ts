@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
                 </div>
                 <a routerLink="/library/{{id}}" routerLinkActive="active">Overview</a>
                 <a routerLink="/documentation/{{id}}">Documentation</a>
-                <a routerLink="/api/{{id}}">API</a>
+                <a href="/assets/api-docs/modules/_deepkit_{{id}}.html">API</a>
             </nav>
 
             <h1>{{header}}</h1>

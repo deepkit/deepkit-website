@@ -51,7 +51,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            An verbose alternative notation is following is:
+            An verbose alternative notation is:
         </p>
 
         <textarea codeHighlight>
@@ -87,7 +87,7 @@ import { Component } from '@angular/core';
         <h4>Factory provider</h4>
 
         <p>
-            If your service is more complex or requires complex setup calls on a newly created instance before it can used,
+            If your service is more complex or requires complex setup calls on a newly created instance before it can be used,
             you can use a factory.
         </p>
 
@@ -117,7 +117,6 @@ import { Component } from '@angular/core';
             requesting this service gets the very same instance. To disable this behavior, you can use transient providers.
             To enable transient you add <code>transient: true</code> to the provider.
         </p>
-
 
         <textarea codeHighlight>
             //class provider with transient

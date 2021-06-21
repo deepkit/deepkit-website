@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
             import { t, getClassSchema } from '@deepkit/type';
             
             class MyModel {
-                @t.optional title?: string;
+                @t title?: string;
             
                 constructor(@t public id: number) {
                 }

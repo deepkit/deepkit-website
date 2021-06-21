@@ -13,6 +13,9 @@ WORKDIR /app
 
 RUN npm install
 
+ADD build-api.sh /app/build-api.sh
+RUN /app/build-api.sh
+
 COPY . /app
 
 RUN npm run build:ssr

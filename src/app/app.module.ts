@@ -67,6 +67,7 @@ import { DocFrameworkConfigurationComponent } from './pages/documentation/framew
 import { DocFrameworkTestingComponent } from './pages/documentation/framework/testing.component';
 import { DocFrameworkDeploymentComponent } from './pages/documentation/framework/deployment.component';
 import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
+import { CommunityPageComponent } from './pages/community.component';
 
 @NgModule({
     declarations: [
@@ -99,6 +100,7 @@ import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framew
         AboutUsComponent,
         BrokerComponent,
         OrmBrowserComponent,
+        CommunityPageComponent,
         DocumentationDefaultPageComponent,
         DocWelcomeComponent,
         DocTypeGettingStartedComponent,

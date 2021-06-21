@@ -130,6 +130,58 @@ import { Component } from '@angular/core';
             If you have several applications that need to communicate between each other (like many micro-services), you could do the same
             by putting all interfaces and models in a package that can be imported by those applications.
         </p>
+
+        <h3>TCP</h3>
+
+        <p>
+            Per default, all RPC controllers in your Deepkit Framework application are using the started HTTP server using Websockets
+            as transport protocol. You can also start a Deepkit RPC server via TCP (or any other transport protocol). 
+            <code>@deepkit/rpc-tcp</code> provides a connection adapter for TCP based on Node's <code>net</code> 
+            and a faster TCP implementation using turbo-tcp.
+        </p>
+        
+        <p>
+            To start the RPC TCP server you should use a new listener and start it on main server bootstrap.
+        </p>
+
+        <textarea codeHighlight title="client.ts">
+            #!/usr/bin/env ts-node-script
+            import 'reflect-metadata';
+            import { Application, onServerMainBootstrap, onServerMainShutdown, WebWorkerFactory } from '@deepkit/framework';
+            import { injectable } from '@deepkit/injector';
+            import { TcpRpcServer } from '@deepkit/rpc-tcp';
+            import { eventDispatcher } from '@deepkit/event';
+            import { Logger } from '@deepkit/logger';
+            
+            @injectable()
+            class RpcTcpBootstrap {
+                server?: TcpRpcServer;
+            
+                constructor(
+                    protected workerFactory: WebWorkerFactory,
+                    protected logger: Logger,
+                ) {
+                }
+            
+                @eventDispatcher.listen(onServerMainBootstrap)
+                bootstrap() {
+                    const host = 'localhost:8081';
+                    this.server = new TcpRpcServer(this.workerFactory.createRpcKernel(), host);
+                    this.server.start();
+                    this.logger.log('RPC TCP server listens on', host);
+                }
+            
+                @eventDispatcher.listen(onServerMainShutdown)
+                shutdown() {
+                    if (this.server) this.server.close();
+                }
+            }
+            
+            Application.create({
+                listeners: [RpcTcpBootstrap]
+            })
+                .run();
+        </textarea>
     `
 })
 export class DocFrameworkRPCControllerComponent {
