@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
 
                 <nav style="justify-content: flex-end;">
                     <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
-                    <a routerLinkActive="active" routerLink="/blog">Blog</a>
+<!--                    <a routerLinkActive="active" routerLink="/blog">Blog</a>-->
                 </nav>
             </nav>
 
