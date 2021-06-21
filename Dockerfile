@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:14-alpine
+FROM --platform=linux/amd64 node:16-alpine
 
 RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python postgresql-dev git
 
