@@ -24,7 +24,7 @@ RUN npm run build:ssr
 RUN npm run server:build
 RUN npm prune --production
 
-RUN apk del g++ gcc linux-headers make python
+RUN apk del g++ gcc linux-headers make python3
 RUN rm -rf /tmp/* /var/tmp/*
 
 CMD node /app/dist/app/server/app.js server:listen
