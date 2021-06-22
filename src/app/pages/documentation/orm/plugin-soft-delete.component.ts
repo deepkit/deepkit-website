@@ -7,11 +7,10 @@ import { Component } from '@angular/core';
         <h2>Soft Delete</h2>
 
         <p>
-            The Soft Delete plugins allows to keep database records hidden. Deleted records are marked
-            as deleted and not really deleted. All queries automatically filter on that deleted property, so
-            to the user it feels like they are non existent.
+            The Soft Delete plugin allows to keep database records hidden without actually deleting them. 
+            When a record is deleted, it only is marked as deleted and not really deleted. All queries automatically filter on that deleted property, so
+            to the user it feels like they are actually deleted.
         </p>
-
 
         <p>
             To use the plugin, you have to instantiated the SoftDelete class and activate it for each entity.
@@ -48,7 +47,7 @@ import { Component } from '@angular/core';
         <h3>Delete</h3>
 
         <p>
-            To delete records, you simply call the usual methods to delete records: <code>deleteOne</code> or <code>deleteMany</code> on a Query, or
+            To soft delete records, you use the usual methods: <code>deleteOne</code> or <code>deleteMany</code> on a Query, or
             you use the unit of work to delete them. The Soft Delete plugin automatically handles in the background the rest.
         </p>
 

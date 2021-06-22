@@ -48,6 +48,7 @@ import { DocORMQueryComponent } from './pages/documentation/orm/query.component'
 import { DocORMRelationsComponent } from './pages/documentation/orm/relations.component';
 import { DocORMEventsComponent } from './pages/documentation/orm/events.component';
 import { DocORMPluginSoftDeleteComponent } from './pages/documentation/orm/plugin-soft-delete.component';
+import { DocBenchmarkComponent } from './pages/documentation/benchmark.component';
 
 
 const routes: Routes = [
@@ -173,6 +174,8 @@ const routes: Routes = [
             { path: 'orm/relations', component: DocORMRelationsComponent },
             { path: 'orm/events', component: DocORMEventsComponent },
             { path: 'orm/plugin/soft-delete', component: DocORMPluginSoftDeleteComponent },
+
+            { path: 'benchmark', component: DocBenchmarkComponent },
 
             { path: '**', component: DocumentationDefaultPageComponent },
         ]

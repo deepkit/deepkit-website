@@ -75,6 +75,7 @@ import { DocORMQueryComponent } from './pages/documentation/orm/query.component'
 import { DocORMRelationsComponent } from './pages/documentation/orm/relations.component';
 import { DocORMEventsComponent } from './pages/documentation/orm/events.component';
 import { DocORMPluginSoftDeleteComponent } from './pages/documentation/orm/plugin-soft-delete.component';
+import { DocBenchmarkComponent } from './pages/documentation/benchmark.component';
 
 @NgModule({
     declarations: [
@@ -144,6 +145,7 @@ import { DocORMPluginSoftDeleteComponent } from './pages/documentation/orm/plugi
         DocORMRelationsComponent,
         DocORMEventsComponent,
         DocORMPluginSoftDeleteComponent,
+        DocBenchmarkComponent,
     ],
     imports: [
         CommonModule,
