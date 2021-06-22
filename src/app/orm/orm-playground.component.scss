@@ -27,6 +27,23 @@
   }
 }
 
+@media(max-width: 750px) {
+  .layout {
+    display: block;
+    height: unset;
+
+    > div {
+      min-height: 300px;
+    }
+
+    .browser {
+      border-left: 0;
+      border-top: 1px solid #666;
+    }
+
+  }
+}
+
 pre {
   padding: 15px;
   margin: 0;

@@ -41,6 +41,13 @@ import { DocFrameworkTestingComponent } from './pages/documentation/framework/te
 import { DocFrameworkDeploymentComponent } from './pages/documentation/framework/deployment.component';
 import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
 import { CommunityPageComponent } from './pages/community.component';
+import { DocORMGettingStartedComponent } from './pages/documentation/orm/getting-started.component';
+import { DocORMSchemaComponent } from './pages/documentation/orm/schema.component';
+import { DocORMSessionComponent } from './pages/documentation/orm/session.component';
+import { DocORMQueryComponent } from './pages/documentation/orm/query.component';
+import { DocORMRelationsComponent } from './pages/documentation/orm/relations.component';
+import { DocORMEventsComponent } from './pages/documentation/orm/events.component';
+import { DocORMPluginSoftDeleteComponent } from './pages/documentation/orm/plugin-soft-delete.component';
 
 
 const routes: Routes = [
@@ -158,6 +165,15 @@ const routes: Routes = [
             { path: 'type/change-detection', component: DocTypeChangeDetectionComponent },
             { path: 'type/state-management', component: DocTypeStateManagementComponent },
             { path: 'type/serialization-target', component: DocTypeSerializationTargetComponent },
+
+            { path: 'orm', component: DocORMGettingStartedComponent },
+            { path: 'orm/schema', component: DocORMSchemaComponent },
+            { path: 'orm/session', component: DocORMSessionComponent },
+            { path: 'orm/query', component: DocORMQueryComponent },
+            { path: 'orm/relations', component: DocORMRelationsComponent },
+            { path: 'orm/events', component: DocORMEventsComponent },
+            { path: 'orm/plugin/soft-delete', component: DocORMPluginSoftDeleteComponent },
+
             { path: '**', component: DocumentationDefaultPageComponent },
         ]
     },

@@ -1,0 +1,21 @@
+import { Component, Input } from '@angular/core';
+
+@Component({
+    selector: 'image',
+    template: `
+        <div class="image">
+            <a target="_blank" href="{{src}}">
+                <img alt="{{alt || altFromSrc}}" src="{{src}}"/>
+            </a>
+        </div>`
+})
+export class ImageComponent {
+    @Input() src!: string;
+    @Input() alt?: string;
+
+    get altFromSrc(): string {
+        let name = this.src.substr(this.src.lastIndexOf('.'));
+        name = name.substr(name.lastIndexOf('/'));
+        return name;
+    }
+}

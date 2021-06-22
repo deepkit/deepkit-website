@@ -234,11 +234,6 @@ pre.console {
 
 .page {
 
-  .package-name {
-    color: gray;
-    margin: 8px 0;
-  }
-
   > .text {
     max-width: 750px;
     margin: 45px auto;
@@ -342,7 +337,7 @@ pre.console {
     }
 
     .breadcrumb {
-      a:first-child {
+      a, a:link {
         margin-left: 0;
       }
     }
@@ -517,6 +512,10 @@ main {
 }
 
 .image {
+  img {
+    max-width: 100%;
+  }
+
   @media(max-width: 540px) {
     text-align: center;
   }

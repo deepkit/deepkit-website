@@ -147,7 +147,7 @@ import { Component } from '@angular/core';
             You can now open <a target="_blank" href="http://localhost:8080/_debug/database/default">http://localhost:8080/_debug/database/default</a>.
         </p>
         
-        <img src="/assets/documentation/framework/debugger-database.png"/>
+        <image src="/assets/documentation/framework/debugger-database.png"></image>
         
         <p>
             You can see the ER diagram. At the moment only one entity is available. If you add more with relations you see 
@@ -160,7 +160,7 @@ import { Component } from '@angular/core';
             This commits all changes to the database and makes all changes persistent. The auto increment ID is automatically assigned.
         </p>
 
-        <img src="/assets/documentation/framework/debugger-database-user.png"/>
+        <image src="/assets/documentation/framework/debugger-database-user.png"></image>
         
         <h3>Use database</h3>
         

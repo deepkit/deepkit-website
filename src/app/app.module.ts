@@ -68,6 +68,13 @@ import { DocFrameworkTestingComponent } from './pages/documentation/framework/te
 import { DocFrameworkDeploymentComponent } from './pages/documentation/framework/deployment.component';
 import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
 import { CommunityPageComponent } from './pages/community.component';
+import { DocORMGettingStartedComponent } from './pages/documentation/orm/getting-started.component';
+import { DocORMSchemaComponent } from './pages/documentation/orm/schema.component';
+import { DocORMSessionComponent } from './pages/documentation/orm/session.component';
+import { DocORMQueryComponent } from './pages/documentation/orm/query.component';
+import { DocORMRelationsComponent } from './pages/documentation/orm/relations.component';
+import { DocORMEventsComponent } from './pages/documentation/orm/events.component';
+import { DocORMPluginSoftDeleteComponent } from './pages/documentation/orm/plugin-soft-delete.component';
 
 @NgModule({
     declarations: [
@@ -130,6 +137,13 @@ import { CommunityPageComponent } from './pages/community.component';
         DocFrameworkTestingComponent,
         DocFrameworkDeploymentComponent,
         DocFrameworkHttpPublicDirComponent,
+        DocORMGettingStartedComponent,
+        DocORMSchemaComponent,
+        DocORMSessionComponent,
+        DocORMQueryComponent,
+        DocORMRelationsComponent,
+        DocORMEventsComponent,
+        DocORMPluginSoftDeleteComponent,
     ],
     imports: [
         CommonModule,

@@ -6,6 +6,7 @@ import { FeatureBoxComponent } from './feature-box.component';
 import { PerformanceChartComponent, PerformanceEntryDirective } from './performance-chart.component';
 import { ProductBannerComponent } from './product-banner.component';
 import { RouterModule } from '@angular/router';
+import { ImageComponent } from './image.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
         PerformanceChartComponent,
         PerformanceEntryDirective,
         ProductBannerComponent,
+        ImageComponent,
     ],
     exports: [
         CodeHighlightComponent,
@@ -24,6 +26,7 @@ import { RouterModule } from '@angular/router';
         PerformanceChartComponent,
         PerformanceEntryDirective,
         ProductBannerComponent,
+        ImageComponent,
     ],
     imports: [
         CommonModule,

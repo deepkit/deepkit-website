@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
         <div class="banner">
             <div class="head">
                 <div class="breadcrumb">
-                    <a routerLink="/library">Deepkit library</a> /
+                    <a routerLink="/library">Deepkit library</a> / <a routerLink="/library/{{id}}" class="package-name">@deepkit/{{id}}</a>
                 </div>
                 <nav>
                     <a routerLink="/library/{{id}}" routerLinkActive="active">Overview</a>
@@ -17,7 +17,7 @@ import { Component, Input } from '@angular/core';
             </div>
 
             <h1>{{header}}</h1>
-            <div class="package-name">@deepkit/{{id}}</div>
+            
             <ng-content></ng-content>
         </div>
     `

@@ -4,38 +4,57 @@
             Runtime type reflection system for TypeScript, with high-performance JIT based serializer and validator.
         </p>
         <p>
-            With built-in JSON serializer, customizable serializer/validator API, reflection, object snapshotting, and change detector.
+            With built-in JSON serializer, customizable serializer/validator API, reflection, object snapshotting, and
+            change detector.
         </p>
     </product-banner>
 
     <div class="line"></div>
 
     <div class="text">
-        <h2>Class annotation</h2>
+        <div style="text-align: center">
+            <h2>High-Performance</h2>
+            <p>
+                The serializer and validator are JIT optimized to enable the highest performance possible.<br/>
+                <a href="https://github.com/deepkit/deepkit-framework/blob/master/packages/benchmark/src/type/serialization/small-deepkit.bench.ts">Simple models</a>
+                have a serialization speed of 32 million ops/s and deserialization speed of 25 million ops/s on a Apple M1.
+                More <a href="https://github.com/deepkit/deepkit-framework/blob/master/packages/benchmark/src/type/serialization/medium-deepkit.bench.ts">complex models</a>
+                are still in the millions of ops/s.
+            </p>
+            <div style="display: flex; justify-content: center; padding: 25px;">
+                <performance-chart yAxis="thousand ops/sec | serialization" sort="asc" format="0.0-0">
+                    <performance-entry title="class-transformer" [value]="317"></performance-entry>
+                    <performance-entry title="cerialize" [value]="3505"></performance-entry>
+                    <performance-entry title="Deepkit Type" [value]="20324"></performance-entry>
+                </performance-chart>
+            </div>
+        </div>
+
+        <h2>Class schema</h2>
         <p>
             Annotate your model classes with <code>@t</code>
             to get runtime type information and allow serialization and validation.
         </p>
 
         <textarea codeHighlight>
-      import { t } from '@deepkit/type';
+          import { t } from '@deepkit/type';
 
-      class User {
-        @t id: number = 0;
+          class User {
+            @t id: number = 0;
 
-        @t createdAt: Date = new Date;
+            @t createdAt: Date = new Date;
 
-        @t firstName?: string;
-        @t lastName?: string;
+            @t firstName?: string;
+            @t lastName?: string;
 
-        @t.pattern(/^\S+@\S+\.\S+$/)
-        email?: string;
+            @t.pattern(/^\S+@\S+\.\S+$/)
+            email?: string;
 
-        constructor(
-          @t.minLength(3) public username: string
-        ) { }
-      }
-      </textarea>
+            constructor(
+              @t.minLength(3) public username: string
+            ) { }
+          }
+        </textarea>
 
 
         <textarea codeHighlight>
@@ -50,30 +69,30 @@
         schema.getProperty('firstName').isOptional; //true
 
         schema.hasProperty('internal'); //false
-      </textarea>
+        </textarea>
 
-        <h2>Schema definition</h2>
+        <h2>Functional schema</h2>
         <p>
-            Made for class-less use-cases as well.
+            Made for class-less functional world as well.
         </p>
+
         <textarea codeHighlight>
+        import { t } from '@deepkit/type';
+
+        const user = t.schema({
+          id: t.number.default(0),
+          createdAt: t.date.default(() => new Date),
+          firstName: t.string.optional,
+          lastName: t.string.optional,
+          username: t.string,
+        });
+
         user.getProperty('id').type; //number
         user.getProperty('username').isOptional; //false
 
         user.getProperty('firstName').type; //string
         user.getProperty('firstName').isOptional; //true
-      </textarea>
-        <textarea codeHighlight>
-      import { t } from '@deepkit/type';
-
-      const user = t.schema({
-        id: t.number.default(0),
-        createdAt: t.date.default(() => new Date),
-        firstName: t.string.optional,
-        lastName: t.string.optional,
-        username: t.string,
-      });
-      </textarea>
+        </textarea>
 
         <h2>Serialization</h2>
         <p>
@@ -205,18 +224,5 @@
         }
       </textarea>
 
-
-        <h2>High-Performance</h2>
-        <p>
-            The serializer and validator are equally JIT optimized to
-            enable the highest performance possible.
-        </p>
-        <div style="display: flex; justify-content: center; padding: 25px;">
-            <performance-chart yAxis="thousand ops/sec | serialization" sort="asc" format="0.0-0">
-                <performance-entry title="class-transformer" [value]="317"></performance-entry>
-                <performance-entry title="cerialize" [value]="3505"></performance-entry>
-                <performance-entry title="Deepkit Type" [value]="20324"></performance-entry>
-            </performance-chart>
-        </div>
     </div>
 </div>

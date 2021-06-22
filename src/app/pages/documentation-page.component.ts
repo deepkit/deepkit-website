@@ -191,7 +191,8 @@ export class DocumentationPageComponent implements AfterViewInit {
         <h2>Not found</h2>
 
         <p>
-            This page has not yet been created. Please try again in a few days.
+            This page has not yet been created. Please note we're in early beta and not all documentation
+            have been created. Please try again in a few days.
         </p>
     `
 })

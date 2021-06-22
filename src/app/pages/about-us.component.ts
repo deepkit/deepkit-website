@@ -14,8 +14,8 @@ import {Component} from '@angular/core';
                 </p>
                 
                 <p>
-                    Deepkit was founded in 2018 in Hamburg, Germany, by <a href="https://marcjschmidt.de">Marc J. Schmidt</a>, a long-term entrepreneur with failures he learnt from 
-                    and successes he humbly appreciated, an open-source contributor, and electrical/software engineer, 
+                    Deepkit was founded in 2018 in Hamburg, Germany, by <a href="https://marcjschmidt.de">Marc J. Schmidt</a>,
+                    an tech entrepreneur since 2008, open-source contributor, and electrical/software engineer, 
                     who believes in the web, open cultures, and the future of a isomorphic tech-stack.
                 </p>
                 

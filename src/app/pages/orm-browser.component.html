@@ -14,7 +14,81 @@
 
     <div class="line"></div>
 
-    <div class="wrapper how-it-works">
+    <div class="text">
+        <h2>Content editing</h2>
 
+        <p>
+            Change all your data from your database ORM models directly in your local browser. Adding, editing, removing,
+            change relations, filtering, sorting, and much more.
+        </p>
+
+        <image alt="content editing" src="/assets/screenshots-orm-browser/content-editing.png"></image>
+
+        <h2>Query</h2>
+
+        <p>
+            Explore your data by using regular JavaScript query commands like you would do
+            in your Typescript source.
+        </p>
+
+        <image alt="content editing" src="/assets/screenshots-orm-browser/query.png"></image>
+
+        <h2>Model diagram</h2>
+
+        <p>
+            See all your models with relations, fields, and primary keys in one big diagram.
+        </p>
+
+        <image alt="content editing" src="/assets/screenshots-orm-browser/model-diagram.png"></image>
+
+        <h2>Seed</h2>
+
+        <p>
+            Seed your database with a powerful faker library directly from within your browser.
+        </p>
+
+        <image alt="content editing" src="/assets/screenshots-orm-browser/seed.png"></image>
+
+        <h3>Easy to use</h3>
+
+        <p>
+            You only have to provide your database as TypeScript source. No configuration files, compilation,
+            or anything else necessary.
+        </p>
+
+        <textarea codeHighlight title="database.ts">
+            import { entity, t } from '@deepkit/type';
+            import { Database } from '@deepkit/orm';
+            import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
+
+            @entity.name('group')
+            export class Group {
+                @t.primary.autoIncrement public id: number = 0;
+                @t created: Date = new Date;
+
+                constructor(
+                    @t public name: string
+                ) {
+                }
+            }
+
+            const database = new Database(new SQLiteDatabaseAdapter('./example.sqlite'), [Group]);
+        </textarea>
+
+        <textarea codeHighlight="bash">
+            $ deepkit-orm-browser database.ts
+            2021-06-22T10:28:13.144Z [LOG] Start HTTP server, using 1 workers.
+            2021-06-22T10:28:13.146Z [LOG] RPC OrmBrowserController orm-browser/controller
+            2021-06-22T10:28:13.146Z [LOG] HTTP OrmBrowserController
+            2021-06-22T10:28:13.146Z [LOG]     GET /_orm-browser/query httpQuery
+            2021-06-22T10:28:13.146Z [LOG] HTTP StaticController
+            2021-06-22T10:28:13.146Z [LOG]     GET /:any serviceApp
+            2021-06-22T10:28:13.146Z [LOG] HTTP listening at http://localhost:9090/
+        </textarea>
+
+        <p>
+            By opening now <code>http://localhost:9090/</code> you can directly start managing content.
+            The ORM Browser is integrated automatically when using Deepkit Framework in its Framework Debugger.
+        </p>
     </div>
 </div>

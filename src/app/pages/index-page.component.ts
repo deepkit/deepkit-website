@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
             <strong>Deepkit</strong>
             <h1>High performance TypeScript framework</h1>
             <p>
-                Modular framework for sophisticated TypeScript applications.
+                Modular open-source framework for sophisticated TypeScript applications.
             </p>
         </div>
 
@@ -22,18 +22,16 @@ import { Component } from '@angular/core';
                     <h3>Framework</h3>
                     <p>Deepkit is a Node.js framework written in and for TypeScript.</p>
                     <p>
-                        It focuses on high performance server side applications while also providing tools and libraries for the whole tech
-                        stack.
+                        It makes it easy to write complex high performance server side applications. 
                     </p>
                 </div>
             </div>
             <div>
                 <div>
                     <h3>Library collection</h3>
-                    <p>Deepkit is a collection of libraries of TypeScript packages that work standalone or in combination.</p>
+                    <p>Deepkit is a collection of TypeScript libraries that work standalone.</p>
                     <p>
-                        Highly optimized for certain use-cases and streamlined in its API, they bring solid solutions for a lot of common
-                        use-cases.
+                        Highly optimized for many use-cases and streamlined in their API.
                     </p>
                 </div>
             </div>
@@ -45,7 +43,7 @@ import { Component } from '@angular/core';
 
             <p>
                 Deepkit libraries is a collection of open source TypeScript libraries under MIT license that work standalone or in
-                combination. Each library lives in its own NPM package, is carefully optimised, and follows modern best practises..
+                combination. Each library lives in its own NPM package, is carefully optimised, and follows modern best practises.
                 You can progressively adopt Deepkit libraries one by one or use all together in the full-fledged Deepkit Framework.
             </p>
         </div>

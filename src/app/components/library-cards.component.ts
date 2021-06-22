@@ -3,12 +3,19 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'library-cards',
     template: `
+
+        <p class="wrapper">
+            Deepkit libraries is a collection of open source TypeScript libraries under MIT license that work standalone or in combination.
+            Each library lives in its own NPM package, is carefully optimised, and follows modern best practises. You can progressively
+            adopt Deepkit libraries one by one or use all together in the full-fledged Deepkit Framework.
+        </p>
+
         <div class="library-cards">
             <library-card package="@deepkit/type" title="Type" sub="Runtime type system">
                 <p>Define TypeScript types for the JavaScript runtime and use those schemas for serialization, validation, and even database
                     entities.</p>
             </library-card>
-            
+
             <library-card package="@deepkit/orm" title="ORM" sub="Database abstraction layer">
                 <p>High performance TypeScript ORM with unit-of-work, migrations, and much more.</p>
                 <p>MySQL, PostreSQL, SQLite, MongoDB.</p>

@@ -47,6 +47,17 @@
         </div>
     </div>
 
+    <div class="wrapper">
+        <h2>Powerful database browser</h2>
+
+        <p style="max-width: 650px; margin: auto">
+            Edit your database content from your models, test queries, view relations, or seed your database
+            directly in the browser using
+            <a routerLink="/library/orm-browser">Deepkit ORM Browser</a>.
+        </p>
+
+        <image alt="content editing" src="/assets/screenshots-orm-browser/content-editing.png"></image>
+    </div>
 
     <div class="line"></div>
 
@@ -79,6 +90,28 @@ class User {
     ) {}
 }
     </textarea>
+
+        <h2>Functional schema</h2>
+        <p>
+            Database entities can also be defined in a functional fashion without the need to use an actual TypeScript class.
+        </p>
+
+        <textarea codeHighlight>
+        import { t } from '@deepkit/type';
+
+        const user = t.schema({
+          id: t.number.primaryKey.autoIncrement,
+          createdAt: t.date.default(() => new Date),
+          firstName: t.string.optional,
+          lastName: t.string.optional,
+          username: t.string,
+        });
+
+        const user = await database.query(user)
+          .filter({username: 'Peter'})
+          .findOne();
+      </textarea>
+
 
 
         <h2>Query API</h2>
@@ -191,32 +224,11 @@ class Book {
     </textarea>
 
 
-        <h2>Class-less</h2>
-        <p>
-            Define entities in a dynamic fashion without the need to use an actual TypeScript class.
-        </p>
-
-        <textarea codeHighlight>
-        import { t } from '@deepkit/type';
-
-        const user = t.schema({
-          id: t.number.primaryKey.autoIncrement,
-          createdAt: t.date.default(() => new Date),
-          firstName: t.string.optional,
-          lastName: t.string.optional,
-          username: t.string,
-        });
-
-        const user = await database.query(user)
-          .filter({username: 'Peter'})
-          .findOne();
-      </textarea>
-
 
         <h2>Unit of Work</h2>
         <p>
             The easiest way to work with your entities. Handle ten-thousands
-            of instances at the same time and let the UoW inserts/updates them in
+            of instances at the same time and let the UoW insert or update them in
             the most efficient way possible.
         </p>
         <p>
@@ -379,7 +391,7 @@ export class SchemaMigration implements Migration {
         }
 
         const deletedUser = await database.query(User)
-          .use(SoftDeleteQuery)
+          .lift(SoftDeleteQuery)
           .findDeleted();
       </textarea>
 
