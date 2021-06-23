@@ -76,6 +76,17 @@ import { DocORMRelationsComponent } from './pages/documentation/orm/relations.co
 import { DocORMEventsComponent } from './pages/documentation/orm/events.component';
 import { DocORMPluginSoftDeleteComponent } from './pages/documentation/orm/plugin-soft-delete.component';
 import { DocBenchmarkComponent } from './pages/documentation/benchmark.component';
+import { DocBSONComponent } from './pages/documentation/bson.component';
+import { DocDebuggerComponent } from './pages/documentation/debugger.component';
+import { DocEventComponent } from './pages/documentation/event.component';
+import { DocInjectorComponent } from './pages/documentation/injector.component';
+import { DocLoggerComponent } from './pages/documentation/logger.component';
+import { DocMongoComponent } from './pages/documentation/mongo.component';
+import { DocTemplateComponent } from './pages/documentation/template.component';
+import { DocTopsortComponent } from './pages/documentation/topsort.component';
+import { DocTypeAngularComponent } from './pages/documentation/type-angular.component';
+import { DocWorkflowComponent } from './pages/documentation/workflow.component';
+import { DocHttpComponent } from './pages/documentation/http.component';
 
 @NgModule({
     declarations: [
@@ -146,6 +157,17 @@ import { DocBenchmarkComponent } from './pages/documentation/benchmark.component
         DocORMEventsComponent,
         DocORMPluginSoftDeleteComponent,
         DocBenchmarkComponent,
+        DocBSONComponent,
+        DocDebuggerComponent,
+        DocEventComponent,
+        DocInjectorComponent,
+        DocLoggerComponent,
+        DocMongoComponent,
+        DocTemplateComponent,
+        DocTopsortComponent,
+        DocTypeAngularComponent,
+        DocWorkflowComponent,
+        DocHttpComponent,
     ],
     imports: [
         CommonModule,

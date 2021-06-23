@@ -60,9 +60,10 @@ export class LibraryCardComponent {
     @Input() package!: string;
     @Input() title!: string;
     @Input() sub!: string;
+    @Input() linkDocumentation: boolean = false;
 
     get url() {
-        return '/library/' + this.package.substr(9);
+        return this.linkDocumentation ? '/documentation/' + this.package.substr(9) : '/library/' + this.package.substr(9);
     }
 
     constructor(public router: Router) {

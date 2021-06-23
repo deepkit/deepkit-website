@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {ControllerClient} from "../../client";
-import {BenchmarkRun} from "../../../shared";
+import {Component, OnInit} from '@angular/core';
+import {ControllerClient} from '../../client';
+import {BenchmarkRun} from '../../../shared';
 
 @Component({
     template: `Hi
@@ -17,6 +17,6 @@ export class BenchmarkComponent implements OnInit {
     }
 
     async ngOnInit() {
-        //this.benchmarkRun = await this.client.framework.getLastBenchmarkRun();
+        // this.benchmarkRun = await this.client.framework.getLastBenchmarkRun();
     }
 }
