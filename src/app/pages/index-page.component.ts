@@ -40,12 +40,6 @@ import { Component } from '@angular/core';
         <div class="wrapper libraries">
             <a name="libraries"></a>
             <h1>Deepkit libraries</h1>
-
-            <p>
-                Deepkit libraries is a collection of open source TypeScript libraries under MIT license that work standalone or in
-                combination. Each library lives in its own NPM package, is carefully optimised, and follows modern best practises.
-                You can progressively adopt Deepkit libraries one by one or use all together in the full-fledged Deepkit Framework.
-            </p>
         </div>
 
         <library-cards></library-cards>
