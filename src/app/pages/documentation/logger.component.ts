@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     template: `
-        <div class="subline">Injector</div>
+        <div class="subline">Logger</div>
         <h2>Getting started</h2>
 
         <p>
