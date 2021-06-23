@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
 
 
         <p>
-            A relations is annotated using the <code>t.reference()</code> decorator. Usually, a relations has also
+            A relation is annotated using the <code>t.reference()</code> decorator. Usually, a relation has also
             a reverse relation, which is annotated using the <code>t.backReference()</code> decorator.
         </p>
 
