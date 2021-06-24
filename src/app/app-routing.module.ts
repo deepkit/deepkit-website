@@ -60,6 +60,7 @@ import { DocTopsortComponent } from './pages/documentation/topsort.component';
 import { DocTypeAngularComponent } from './pages/documentation/type-angular.component';
 import { DocWorkflowComponent } from './pages/documentation/workflow.component';
 import { DocHttpComponent } from './pages/documentation/http.component';
+import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
 
 
 const routes: Routes = [
@@ -157,6 +158,7 @@ const routes: Routes = [
             { path: 'framework/http/controller', component: DocFrameworkHttpControllerComponent },
             { path: 'framework/http/template', component: DocFrameworkHttpTemplateComponent },
             { path: 'framework/http/public-dir', component: DocFrameworkHttpPublicDirComponent },
+            { path: 'framework/http/events', component: DocFrameworkHttpEventsComponent },
 
             { path: 'framework/rpc/controller', component: DocFrameworkRPCControllerComponent },
             { path: 'framework/rpc/client', component: DocFrameworkRPCClientComponent },

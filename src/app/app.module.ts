@@ -87,6 +87,7 @@ import { DocTopsortComponent } from './pages/documentation/topsort.component';
 import { DocTypeAngularComponent } from './pages/documentation/type-angular.component';
 import { DocWorkflowComponent } from './pages/documentation/workflow.component';
 import { DocHttpComponent } from './pages/documentation/http.component';
+import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
 
 @NgModule({
     declarations: [
@@ -141,6 +142,7 @@ import { DocHttpComponent } from './pages/documentation/http.component';
         DocFrameworkDatabaseComponent,
         DocFrameworkHttpControllerComponent,
         DocFrameworkHttpTemplateComponent,
+        DocFrameworkHttpEventsComponent,
         DocFrameworkRPCControllerComponent,
         DocFrameworkRPCClientComponent,
         DocFrameworkRPCSecurityComponent,

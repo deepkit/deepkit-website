@@ -128,6 +128,15 @@ import { Component } from '@angular/core';
                 <td>Assigns arbitrary data to this route.</td>
             </tr>
             <tr>
+                <td>@http.serialization()</td>
+                <td>Assigns serialization options for the serialization process of @deepkit/type types annotated via <code>@t</code>.</td>
+            </tr>
+            <tr>
+                <td>@http.serializer()</td>
+                <td>Assigns a different serializer for the serialization process of @deepkit/type types annotated via <code>@t</code>. 
+                    Default is <code>jsonSerializer</code></td>
+            </tr>
+            <tr>
                 <td>@http.description(string)</td>
                 <td>Assigns a description to this route.</td>
             </tr>
@@ -327,13 +336,240 @@ import { Component } from '@angular/core';
             is finished.
         </p>
         
-        <h3>Parameter validation/conversion</h3>
+        <h3>Parameter validation</h3>
 
         <p>
             Parameters are automatically converted to the annotated type and validated.
             When a complex type is given like union, arrays, etc you have to specify the type via <code>@t</code>.
             See <a routerLink="/documentation/type/schema">Deepkit Type Schema</a> chapter for more information.
         </p>
+
+        <textarea codeHighlight>
+            @http.controller()
+            class MyWebsite {
+                @http.GET(':id')
+                getUser(@t.positive().max(10_000) id: number) {
+                    //...
+                }
+            
+                @http.GET(':id')
+                getUser(@t.union() id: string) {
+                    //...
+                }
+            }
+        </textarea>
+
+        <h3>Parameter resolver</h3>
+
+        <p>
+            The router supports a way to resolve complex parameter types. If you have for example a route like <code>/user/:id</code>
+            you can resolve the <i>id</i> into a <i>User</i> object outside of the route using a resolver.
+        </p>
+        
+        <textarea codeHighlight>
+            #!/usr/bin/env ts-node-script
+            import 'reflect-metadata';
+            import { Application } from '@deepkit/framework';
+            import { injectable } from '@deepkit/injector';
+            import { http, RouteParameterResolverContext, RouteParameterResolverTag } from '@deepkit/http';
+            import { RouteParameterResolver } from '@deepkit/http/src/router';
+            import { ClassType } from '@deepkit/core';
+            
+            
+            class User {
+                constructor(
+                    public username: string,
+                    public id: number = 0,
+                ) {
+                }
+            }
+            
+            class UserDatabase {
+                protected users: User[] = [
+                    new User('User 1', 1),
+                    new User('User 2', 2),
+                ];
+            
+                public getUser(id: number): User | undefined {
+                    return this.users.find(v => v.id === id);
+                }
+            }
+            
+            @injectable()
+            class UserResolver implements RouteParameterResolver {
+                constructor(protected database: UserDatabase) {
+                }
+            
+                resolve(context: RouteParameterResolverContext): any {
+                    if (!context.parameters.id) throw new Error('No :id given');
+                    return this.database.getUser(parseInt(context.parameters.id));
+                }
+            
+                supports(classType: ClassType): boolean {
+                    return classType === User;
+                }
+            
+            }
+            
+            @http.controller()
+            class MyWebsite {
+                @http.GET(':id')
+                getUser(user: User) {
+                    return 'Hello ' + user.username;
+                }
+            }
+            
+            Application.create({
+                controllers: [MyWebsite],
+                providers: [
+                    UserDatabase,
+                    RouteParameterResolverTag.provide(UserResolver)
+                ]
+            })
+                .run();
+        </textarea>
+
+
+        <h3>Response</h3>
+
+        <p>
+            A controller can response various data structure. Some of them are treated in a special way like redirects and templates, and others
+            like simple objects are simply sent as JSON.
+        </p>
+        <textarea codeHighlight="bash">
+            $ curl http://localhost:8080/user -H "Content-Type: application/json" --data '{"username": "peter", "id": 1}'
+            $ curl http://localhost:8080/user
+            [{"username":"peter","id":1}]
+        </textarea>
+        
+        <h4>Primitives and objects</h4>
+
+        <p>
+            Primitives (string, number, boolean) and objects are serialized using JSON.stringify.
+        </p>
+
+        <h4>Deepkit Type</h4>
+        
+        <p>
+            Returned Deepkit Type objects are automatically serialized using JSON serializer and sent using
+            content type <code>application/json; charset=utf-8</code>.
+        </p>
+        
+        <p>
+            The response serializers tries to detect Deepkit Type automatically, however that's not always possible (for example an array of Deepkit Type objects).
+            Annotate the route itself with the correct type in order to get the correct serialization.
+        </p>
+        
+        <textarea codeHighlight>
+            import { t } from '@deepkit/type';
+
+            class User {
+                constructor(
+                    @t public username: string,
+                    @t public id: number = 0,
+                ) {
+                }
+            }
+
+            @http.controller()
+            class MyWebsite {
+                protected users: Users[] = [new User('a', 1)];
+            
+                @http.GET('/user')
+                @t.array(User)
+                getUsers() {
+                    return this.users;
+                }
+            }
+        </textarea>
+        
+        <p>
+            As soon as <code>@t</code> is annotated at a route, this information is used to serialize the controller action result. Make sure the types are in sync.
+        </p>
+        
+        <p>
+            You can additionally define how the result is serialized using <code>serialization</code> and <code>serializer</code>.
+        </p>
+
+        <textarea codeHighlight>
+            class User {
+                @t.group('sensitive') passwordHash?: string;
+            
+                constructor(
+                    @t public username: string,
+                    @t public id: number = 0,
+                ) {
+                }
+            }
+            
+            @http.controller()
+            class MyWebsite {
+                @http.GET('/user').serialization({groupsExclude: ['sensitive']})
+                @t.array(User)
+                getUsers() {
+                    return this.users.list;
+                }
+            }
+        </textarea>
+
+        <h4>Redirect</h4>
+
+        <p>
+            Redirecting a user via the <i>Redirect</i> object. Per default it uses 302 redirects, but that can be changed in the arguments of
+            <code>Redirect.toRoute</code> and <code>Redirect.toUrl</code>.
+        </p>
+
+        <h4>Modification</h4>
+        
+        <p>
+            A response from a controller can be arbitrary changed and reacted on using an event listener.
+        </p>
+        
+        <p>
+            To change the result of a route call, listen to the <code>httpWorkflow.onResponse</code> event
+            and change the <code>event.result</code> accordingly.
+        </p>
+        
+        <textarea codeHighlight>
+            #!/usr/bin/env ts-node-script
+            import 'reflect-metadata';
+            import { Application } from '@deepkit/framework';
+            import { http, httpWorkflow } from '@deepkit/http';
+            import { classToPlain, t } from '@deepkit/type';
+            import { eventDispatcher } from '@deepkit/event';
+            
+            class User {
+                constructor(
+                    @t public username: string,
+                    @t public id: number = 0,
+                ) {
+                }
+            }
+
+            @http.controller()
+            class MyWebsite {
+                @http.GET()
+                getUser() {
+                    return new User('User 1', 1);
+                }
+            }
+
+            class UserResponseMapping {
+                @eventDispatcher.listen(httpWorkflow.onResponse)
+                onResponse(event: typeof httpWorkflow.onResponse.event) {
+                    if (event.result instanceof User) {
+                        event.result = event.result.username;
+                    }
+                }
+            }
+            
+            Application.create({
+                controllers: [MyWebsite],
+                listeners: [UserResponseMapping]
+            })
+                .run();
+
+        </textarea>
     `
 })
 export class DocFrameworkHttpControllerComponent {
