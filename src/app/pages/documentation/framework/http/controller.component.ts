@@ -513,6 +513,49 @@ import { Component } from '@angular/core';
             Redirecting a user via the <i>Redirect</i> object. Per default it uses 302 redirects, but that can be changed in the arguments of
             <code>Redirect.toRoute</code> and <code>Redirect.toUrl</code>.
         </p>
+        
+        <textarea codeHighlight>
+            #!/usr/bin/env ts-node-script
+            import 'reflect-metadata';
+            import { Application } from '@deepkit/framework';
+            import { http, Redirect } from '@deepkit/http';
+            import { t } from '@deepkit/type';
+            
+            class User {
+                constructor(
+                    @t public username: string,
+                    @t public id: number = 0,
+                ) {}
+            }
+            
+            class Users {
+                public list: User[] = [];
+            }
+            
+            @http.controller()
+            class MyWebsite {
+                constructor(protected users: Users) {
+                }
+            
+                @http.GET('/user').name('user_list')
+                @t.array(User)
+                getUsers() {
+                    return this.users.list;
+                }
+            
+                @http.POST('/user')
+                addUser(@http.body() user: User) {
+                    this.users.list.push(user);
+                    return Redirect.toRoute('user_list');
+                }
+            }
+            
+            Application.create({
+                providers: [Users],
+                controllers: [MyWebsite],
+            }).run();
+
+        </textarea>
 
         <h4>Modification</h4>
         
