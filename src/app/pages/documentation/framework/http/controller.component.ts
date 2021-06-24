@@ -433,14 +433,9 @@ import { Component } from '@angular/core';
         <h3>Response</h3>
 
         <p>
-            A controller can response various data structure. Some of them are treated in a special way like redirects and templates, and others
+            A controller can return various data structure. Some of them are treated in a special way like redirects and templates, and others
             like simple objects are simply sent as JSON.
         </p>
-        <textarea codeHighlight="bash">
-            $ curl http://localhost:8080/user -H "Content-Type: application/json" --data '{"username": "peter", "id": 1}'
-            $ curl http://localhost:8080/user
-            [{"username":"peter","id":1}]
-        </textarea>
         
         <h4>Primitives and objects</h4>
 
