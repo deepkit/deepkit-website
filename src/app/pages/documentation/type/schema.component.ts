@@ -75,7 +75,7 @@ import { Component } from '@angular/core';
         <table class="pretty">
             <tr>
                 <th>TypeScript type</th>
-                <th>Class schema needed?</th>
+                <th>Detailed decorator needed?</th>
                 <th>Type decoration</th>
             </tr>
             <tr>
@@ -176,7 +176,7 @@ import { Component } from '@angular/core';
         </table>
 
         <p>
-            "Class schema needed?" indicated whether you have to add the full type decorator on your property. 
+            "Detailed decorator needed?" indicated whether you have to add the full type decorator on your property. 
             For example the following doesn't need a detailed type decorator. <i>@t</i> is enough, since
             the information that it is a string is exported by <i>emitDecoratorMetadata</i>:
 
