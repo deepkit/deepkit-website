@@ -176,7 +176,7 @@ import { Component } from '@angular/core';
         </table>
 
         <p>
-            "Detailed decorator needed?" indicated whether you have to add the full type decorator on your property. 
+            "Detailed decorator needed?" indicates whether you have to add the full type decorator on your property. 
             For example the following doesn't need a detailed type decorator. <i>@t</i> is enough, since
             the information that it is a string is exported by <i>emitDecoratorMetadata</i>:
 
@@ -187,7 +187,7 @@ import { Component } from '@angular/core';
             </textarea>
 
             However, the following codes requires more than simply the <code>@t</code>
-            since those type information are not available in the runtime.
+            since that type information is not available in the runtime.
 
             <textarea codeHighlight>
                 class MyModel {
