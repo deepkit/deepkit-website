@@ -151,7 +151,7 @@ import { Component } from '@angular/core';
             <tr>
                 <td>property: (number | undefined)[];</td>
                 <td>Yes</td>
-                <td>t.array(t.string.optional)</td>
+                <td>t.array(t.number.optional)</td>
             </tr>
             <tr>
                 <td>property: (number | string)[];</td>
