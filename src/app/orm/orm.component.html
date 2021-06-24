@@ -310,7 +310,7 @@ class Book {
 
         //onDeletePost is called after
         //.deleteOne()/.deleteMany() successfully executed
-        database.queryEvents.onFetch.subscribe((event) => {
+        database.queryEvents.onDeletePost.subscribe((event) => {
           //primaryKeys contains each primary key for
           //all affected records
           for (const id of event.deleteResult.primaryKeys) {

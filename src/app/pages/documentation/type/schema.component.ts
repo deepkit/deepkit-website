@@ -131,7 +131,7 @@ import { Component } from '@angular/core';
             <tr>
                 <td>property!: string;</td>
                 <td>Yes</td>
-                <td>t.date.required</td>
+                <td>t.string.required</td>
             </tr>
             <tr>
                 <td>property: string | number;</td>
@@ -175,6 +175,30 @@ import { Component } from '@angular/core';
             </tr>
         </table>
 
+        <p>
+            "Class schema needed?" indicated whether you have to add the full type decorator on your property. 
+            For example the following doesn't need a detailed type decorator. <i>@t</i> is enough, since
+            the information that it is a string is exported by <i>emitDecoratorMetadata</i>:
+
+            <textarea codeHighlight>
+                class MyModel {
+                    @t title: string = 'Wohoo';
+                }
+            </textarea>
+
+            However, the following codes requires more than simply the <code>@t</code>
+            since those type information are not available in the runtime.
+
+            <textarea codeHighlight>
+                class MyModel {
+                    @t.array(t.string) categories: string[] = ['a', 'b'];
+                }
+            </textarea>
+            
+            Only the most basic data types don't required the full type decorator: string, number, bigint, date, custom classes, and built-in classes (like ArrayBuffer).
+            As soon as arrays, unions, and objects are needed, please use the full type decorator.
+        </p>
+
         Additional special modifiers are available (for database mapping for example).
 
         <table class="pretty">
@@ -211,25 +235,6 @@ import { Component } from '@angular/core';
                 <td>Marks this field as a back reference. Needed for the reversed side of a reference.</td>
             </tr>
         </table>
-
-        <p>
-            "Class schema needed?" indicated whether you have to add "Type decoration" in front of your property. 
-            For example this doesn't need a detailed type decorator (it does not <code>@t</code> though):
-
-            <textarea codeHighlight>
-                class MyModel {
-                    @t title: string = 'Wohoo';
-                }
-            </textarea>
-
-            But this requires more than simply the <code>@t</code> since those type information are not available in the runtime:
-
-            <textarea codeHighlight>
-                class MyModel {
-                    @t.array(t.string) categories: string[] = ['a', 'b'];
-                }
-            </textarea>
-        </p>
 
         <p>
             There are even more functions on <code>t</code>, see its definition with its documentation in your code editor
