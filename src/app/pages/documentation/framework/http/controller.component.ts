@@ -451,7 +451,7 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            The response serializers tries to detect Deepkit Type automatically, however that's not always possible (for example an array of Deepkit Type objects).
+            The response serializer tries to detect Deepkit Type automatically, however that's not always possible (for example an array of Deepkit Type objects).
             Annotate the route itself with the correct type in order to get the correct serialization.
         </p>
         
