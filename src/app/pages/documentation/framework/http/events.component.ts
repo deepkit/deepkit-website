@@ -137,7 +137,7 @@ import { Component } from '@angular/core';
             }).run();
         </textarea>
 
-        <textarea>
+        <textarea codeHighlight="bash">
             $ curl http://localhost:8080/
             Welcome
             $ curl http://localhost:8080/admin
