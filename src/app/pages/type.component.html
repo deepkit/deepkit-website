@@ -41,39 +41,55 @@
         </p>
 
         <textarea codeHighlight>
-          import { t } from '@deepkit/type';
+            import { t, validate } from '@deepkit/type';
 
-          class User {
-            @t id: number = 0;
+            class Config {
+                color: string = '#334422';
+            }
 
-            @t createdAt: Date = new Date;
+            class User {
+                @t id: number = 0;
 
-            @t firstName?: string;
-            @t lastName?: string;
+                @t createdAt: Date = new Date;
+                @t modifiedAt: Date = new Date;
 
-            @t.pattern(/^\S+@\S+\.\S+$/)
-            email?: string;
+                @t firstName?: string;
+                @t lastName?: string;
 
-            constructor(
-              @t.minLength(3) public username: string
-            ) { }
-          }
+                @t config: Config = new Config;
+
+                @t.pattern(/^\S+@\S+\.\S+$/)
+                email?: string;
+
+                constructor(@t.minLength(3) public username: string) {}
+
+                public modified() {
+                    this.modifiedAt = new Date;
+                }
+            }
+
+            //deserialize JSON object to real instances
+            const user = plainToClass(User, {
+                username: 'Peter',
+                createdAt: '2021-06-26T12:34:41.061Z',
+                config: {color: '#221122'},
+            });
+
+            user instanceof User; //true
+            user.config instanceof Config; //true
+            user.modified(); //since its a real User instance, all methods are available
+
+            //serialize as JSON
+            const json = JSON.stringify(classToPlain(User, user));
+
+            //deserialize the JSON
+            const back = plainToClass(User, JSON.parse(json));
+
+            //validate. Empty array when successfully validated and
+            //array of detailed validation errors if not.
+            const errors = validate(User, back);
         </textarea>
 
-
-        <textarea codeHighlight>
-        import { getClassSchema } from '@deepkit/type';
-
-        const schema = getClassSchema(User);
-
-        schema.getProperty('id').type; //number
-        schema.getProperty('username').isOptional; //false
-
-        schema.getProperty('firstName').type; //string
-        schema.getProperty('firstName').isOptional; //true
-
-        schema.hasProperty('internal'); //false
-        </textarea>
 
         <h2>Functional schema</h2>
         <p>
@@ -90,12 +106,22 @@
           lastName: t.string.optional,
           username: t.string,
         });
+        </textarea>
 
-        user.getProperty('id').type; //number
-        user.getProperty('username').isOptional; //false
+        <h2>Reflection</h2>
 
-        user.getProperty('firstName').type; //string
-        user.getProperty('firstName').isOptional; //true
+        <textarea codeHighlight>
+        import { getClassSchema } from '@deepkit/type';
+
+        const schema = getClassSchema(User);
+
+        schema.getProperty('id').type; //number
+        schema.getProperty('username').isOptional; //false
+
+        schema.getProperty('firstName').type; //string
+        schema.getProperty('firstName').isOptional; //true
+
+        schema.hasProperty('internal'); //false
         </textarea>
 
         <h2>Serialization</h2>
@@ -108,17 +134,23 @@
         </p>
 
         <textarea codeHighlight>
-        import { classToPlain, plainToClass } from '@deepkit/type';
+            import { classToPlain, plainToClass } from '@deepkit/type';
 
-        const myUser = new User('Daniel');
-        // class instance to json object
-        const json = classToPlain(User, myUser);
+            const myUser = new User('Daniel');
 
-        // json object to class instance
-        const user: User = plainToClass(User, {
-          username: 'Daniel',
-          createdAt: '2021-01-24T15:23:16.582Z'
-        });
+            //class instance to json object
+            const jsonObject = classToPlain(User, myUser);
+
+            //class instance to json string
+            const json = JSON.stringify(classToPlain(User, myUser));
+
+            //json object to class instance
+            const user: User = plainToClass(User, {
+              username: 'Daniel',
+              createdAt: '2021-01-24T15:23:16.582Z'
+            });
+
+            const back = plainToClass(User, JSON.parse(json));
       </textarea>
 
         <h2>Validation</h2>
