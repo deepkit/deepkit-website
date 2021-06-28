@@ -18,20 +18,13 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/orm reflect-metadata rxjs @deepkit/core @deepkit/injector @deepkit/logger @deepkit/stopwatch @deepkit/type
+            npm install @deepkit/orm reflect-metadata @deepkit/type rxjs @deepkit/core @deepkit/injector @deepkit/logger @deepkit/stopwatch
         </textarea>
         
         <h3>Deepkit Type</h3>
         
         <p>
-            Deepkit ORM is based on Deepkit Type.
-            Please read the chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a> to learn
-            how to install it and use <code>t</code> correctly. In short, it requires you to install to use import
-            <code>reflect-metadata</code> to your entry points (e.g. app.ts). 
-        </p>
-
-        <p>
-            Deepkit Type uses reflect-metadata and the decorator metadata of TypeScript.
+            Deepkit ORM is based on Deepkit Type. Deepkit Type uses reflect-metadata and the decorator metadata of TypeScript.
             Make sure you have <code>experimentalDecorators</code> and <code>emitDecoratorMetadata</code> enabled in <code>tsconfig.json</code>:
         </p>
 
@@ -45,6 +38,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
+            Make also sure to always import <code>reflect-metadata</code> at very beginning of your entry point scripts.
             More information about Deepkit Type can be found in chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a>.
         </p>
         
