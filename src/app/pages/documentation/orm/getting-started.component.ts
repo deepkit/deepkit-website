@@ -38,7 +38,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            Make also sure to always import <code>reflect-metadata</code> at very beginning of your entry point scripts.
+            Make also sure to always import <code>reflect-metadata</code> at the very beginning of your entry point scripts.
             More information about Deepkit Type can be found in chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a>.
         </p>
         
