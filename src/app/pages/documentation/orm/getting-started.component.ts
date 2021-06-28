@@ -18,19 +18,40 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/orm reflect-metadata @deepkit/core @deepkit/injector @deepkit/logger
-             @deepkit/stopwatch @deepkit/type
+            npm install @deepkit/orm reflect-metadata rxjs @deepkit/core @deepkit/injector @deepkit/logger @deepkit/stopwatch @deepkit/type
         </textarea>
-
+        
+        <h3>Deepkit Type</h3>
+        
         <p>
-            In order to use Deepkit ORM, you need to install at least one database adapter. There are MongoDB, SQLite,
-            PostgreSQL, and MySQL available.
+            Deepkit ORM is based on Deepkit Type.
+            Please read the chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a> to learn
+            how to install it and use <code>t</code> correctly. In short, it requires you to install to use import
+            <code>reflect-metadata</code> to your entry points (e.g. app.ts). 
         </p>
 
+        <p>
+            Deepkit Type uses reflect-metadata and the decorator metadata of TypeScript.
+            Make sure you have <code>experimentalDecorators</code> and <code>emitDecoratorMetadata</code> enabled in <code>tsconfig.json</code>:
+        </p>
+
+        <textarea codeHighlight="json">
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+        </textarea>
+        
+        <p>
+            More information about Deepkit Type can be found in chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a>.
+        </p>
+        
         <h3>Database</h3>
 
         <p>
-            You primarily work with the <code>Database</code> class. Once instantiated with an adapter (see below),
+            You primarily work with the <code>Database</code> class. Once instantiated with an adapter,
             you can start to query data, persist objects, or create a unit-of-work session.
         </p>
 
