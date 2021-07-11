@@ -14,11 +14,9 @@ WORKDIR /app
 RUN npm install
 
 ADD build-api.sh /app/build-api.sh
-RUN /app/build-api.sh
+RUN /app/build-api.sh && cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
 
 COPY . /app
-
-RUN cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
 
 RUN npm run build:ssr
 RUN npm run server:build
