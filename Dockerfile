@@ -27,4 +27,4 @@ RUN npm prune --production
 RUN apk del g++ gcc linux-headers make python3
 RUN rm -rf /tmp/* /var/tmp/*
 
-CMD node --enable-source-maps /app/dist/app/server/app.js server:listen
+CMD node -r source-map-support/register /app/dist/app/server/app.js server:listen

@@ -1,6 +1,8 @@
 import 'reflect-metadata';
 import {enableProdMode} from '@angular/core';
 
+Error.stackTraceLimit = 100;
+
 enableProdMode();
 
 export {AppServerModule} from './app/app.server.module';
