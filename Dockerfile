@@ -14,7 +14,7 @@ WORKDIR /app
 RUN npm install
 
 ADD build-api.sh /app/build-api.sh
-RUN /app/build-api.sh && cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
+RUN /app/build-api.sh && mkdir -p src/assets/api-docs && cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
 
 COPY . /app
 
