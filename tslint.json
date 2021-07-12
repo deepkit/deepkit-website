@@ -14,6 +14,7 @@
     "deprecation": {
       "severity": "warning"
     },
+    "new-parens": false,
     "component-class-suffix": true,
     "contextual-lifecycle": true,
     "curly": false,
@@ -70,7 +71,7 @@
     ],
     "no-empty": false,
     "no-inferrable-types": false,
-    "no-non-null-assertion": true,
+    "no-non-null-assertion": false,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,

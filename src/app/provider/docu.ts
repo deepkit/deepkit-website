@@ -1,5 +1,5 @@
-import {Inject, Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // import {stack} from "@deepkit/core";
 
 interface Page {
@@ -30,6 +30,8 @@ export class Docu {
 
         this.pages = (await this.http.get(this.baseUrl + 'docu-pages').toPromise()) as any;
         this.pageMap = {};
+        if (!this.pages) return;
+
         for (const page of this.pages.pages) {
             this.pageMap[(page.section ? page.section + '/' : '') + page.url] = page;
         }
@@ -40,6 +42,8 @@ export class Docu {
     }
 
     getSections() {
+        if (!this.pages) return [];
+
         return this.pages.sections.sort((a, b) => {
             if (a.order < b.order) return -1;
             if (a.order > b.order) return 1;

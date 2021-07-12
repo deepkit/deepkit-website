@@ -43,6 +43,7 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
 
     ngDoCheck() {
         queueMicrotask(() => {
+            if (!this.pre) return;
             this.elementRef.nativeElement.after(this.pre);
         });
     }
@@ -62,6 +63,8 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
             this.elementRef.nativeElement.style.display = 'none';
             this.elementRef.nativeElement.after(this.pre);
         }
+
+        if (!this.code) return;
 
         const lang = this.codeHighlight || 'typescript';
         const highlighted = highlight(this.code, languages[lang], lang);

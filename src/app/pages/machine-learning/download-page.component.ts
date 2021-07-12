@@ -140,7 +140,7 @@ export class MLDownloadPageComponent implements OnInit {
         const a = (await this.http.get(this.baseUrl + 'releases').toPromise()) as any;
         const serializer = jsonSerializer.for(Release);
 
-        this.releases = a.releases.map(v => serializer.deserialize(v));
+        this.releases = a.releases.map((v: any) => serializer.deserialize(v));
         this.releases = this.releases.filter(v => !v.hide);
         this.next = this.releases.find(v => v.version === 'next');
 

@@ -21,11 +21,12 @@ export class AppComponent {
         injector: Injector,
         docu: Docu,
         title: TitleService,
-        @Inject(PLATFORM_ID) platformId
+        @Inject(PLATFORM_ID) platformId: any
     ) {
         router.events.subscribe((e) => {
             if (e instanceof NavigationEnd || e instanceof ActivationEnd) {
                 const firstChild = route.firstChild;
+                if (!firstChild) return;
                 setTimeout(() => {
                     if (firstChild.snapshot.data.title) {
                         title.setTitle(firstChild.snapshot.data.title);

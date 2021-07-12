@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
+    "strict": true,
     "importHelpers": true,
     "esModuleInterop": true,
     "module": "es2020",

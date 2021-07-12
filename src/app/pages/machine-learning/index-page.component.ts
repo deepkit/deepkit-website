@@ -1,5 +1,5 @@
-import {Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild} from "@angular/core";
-import {isPlatformBrowser} from "@angular/common";
+import {Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 
 @Component({
     templateUrl: './index-page.component.html',
@@ -9,7 +9,7 @@ export class MLIndexPageComponent implements OnInit {
     @ViewChild('video', {read: ElementRef}) video?: ElementRef;
 
     constructor(
-        @Inject(PLATFORM_ID) protected platformId
+        @Inject(PLATFORM_ID) protected platformId: any
     ) {
     }
 

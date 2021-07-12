@@ -21,7 +21,7 @@ export class AnchorService {
         if (!(element instanceof HTMLAnchorElement)) {
             return;
         }
-        const href = element.getAttribute('href');
+        const href = element.getAttribute('href') || '';
         if (this.isExternalUrl(href) || this.isRouterLink(element)) {
             return;
         }
@@ -66,7 +66,7 @@ export class AnchorService {
 
     private getUrlTree(url: string): UrlTree {
         const urlPath = this.stripFragment(url) || this.stripFragment(this.router.url);
-        const urlFragment = this.router.parseUrl(url).fragment;
+        const urlFragment = this.router.parseUrl(url).fragment || '';
         return this.router.createUrlTree([urlPath], {relativeTo: this.route, fragment: urlFragment});
     }
 
@@ -79,6 +79,8 @@ export class AnchorService {
     }
 
     private stripFragment(url: string): string {
-        return /[^#]*/.exec(url)[0];
+        const match = /[^#]*/.exec(url);
+
+        return match ? match[0] : '';
     }
 }

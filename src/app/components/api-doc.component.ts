@@ -1,6 +1,8 @@
-import { ChangeDetectorRef, Component, Injectable, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Injectable, Input, OnChanges, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+// @ts-ignore
 import {Converter} from 'showdown';
+import { isPlatformBrowser } from '@angular/common';
 
 type ApiDocFlags = {
     isProtected?: true,
@@ -262,19 +264,23 @@ export function typeToString(type?: ApiDocType, d: number = 0): string {
 export class ApiDocProvider {
     protected docs?: any;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(
+        private httpClient: HttpClient,
+        @Inject(PLATFORM_ID) protected platformId: any
+    ) {
     }
 
-    async getDocs(): Promise<ApiDocPackage> {
-        if (this.docs === undefined) {
+    async getDocs(): Promise<ApiDocPackage | undefined> {
+        if (this.docs === undefined && isPlatformBrowser(this.platformId)) {
             this.docs = await this.httpClient.get('assets/docs.json').toPromise();
         }
 
         return this.docs;
     }
 
-    async findDocForComponent(module: string, component: string): Promise<ApiDocItemChildClass> {
+    async findDocForComponent(module: string, component: string): Promise<ApiDocItemChildClass | undefined> {
         const docs = await this.getDocs();
+        if (!docs) return;
 
         for (const child of docs.children) {
             if (JSON.parse(child.name) === module) {
@@ -353,6 +359,7 @@ export class ApiDocComponent implements OnChanges {
     async ngOnChanges(changes: SimpleChanges) {
         const docs = await this.apiDocProvider.findDocForComponent(this.module, this.component);
         this.tableData = [];
+        if (!docs) return;
 
         for (const decorator of docs.decorators) {
             if (decorator.name === 'Component' || decorator.name === 'Directive') {

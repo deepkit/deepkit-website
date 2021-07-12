@@ -129,13 +129,13 @@ console.log('ids', await database.query(User).findField('id'));
 
         if (this.container) {
             (window as any)._require.config({ paths: { vs: `monaco-editor/vs` } });
-            (window as any)._require(['vs/editor/editor.main'], (monaco) => {
+            (window as any)._require(['vs/editor/editor.main'], (monaco: any) => {
                 monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
                     noSemanticValidation: true,
                     noSyntaxValidation: true,
                 });
 
-                this.editor = monaco.editor.create(this.container.nativeElement, {
+                this.editor = monaco.editor.create(this.container!.nativeElement, {
                     roundedSelection: false,
                     renderLineHighlight: 'all',
                     automaticLayout: true,
@@ -156,7 +156,7 @@ console.log('ids', await database.query(User).findField('id'));
         (window as any).SQL = await (window as any).initSqlJs({
             // Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
             // You can omit locateFile completely when running in node
-            locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/${file}`
+            locateFile: (file: any) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/${file}`
         });
 
         this.transpile();
@@ -183,7 +183,11 @@ console.log('ids', await database.query(User).findField('id'));
     }
 
     async transpile() {
-        this.js = transpile(this.editor ? this.editor.getModel().getValue() : this.ts, {
+        if (!this.editor) return;
+        const model = this.editor.getModel();
+        if (!model) return;
+
+        this.js = transpile(this.editor ? model.getValue() : this.ts, {
             target: ScriptTarget.ES2018,
             module: ModuleKind.CommonJS,
             experimentalDecorators: true,

@@ -57,15 +57,15 @@ export class TableComponent {
 
     selectedItems = [];
     itemName = '';
-    remove = function() {
+    remove = () => {
         for (const item of this.selectedItems) {
             this.items.splice(this.items.indexOf(item), 1);
         }
         this.items = this.items.slice(0);
         this.selectedItems = [];
-    };
+    }
 
-    addItem = function() {
+    addItem = () => {
         if (this.itemName) {
             this.items.push({ title: this.itemName, i: this.items.length + 1, created: new Date });
             this.items = this.items.slice(0);
