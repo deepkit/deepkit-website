@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { DuiApp } from '@deepkit/desktop-ui';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     template: `
@@ -15,7 +16,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
                 </p>
             </product-banner>
 
-            <div class="preview">
+            <div class="preview" *ngIf="isBrowser">
                 <div class="wrapper">
                     <dui-window style="height: 600px;">
                         <dui-window-header>
@@ -96,7 +97,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
                 </div>
             </div>
 
-            <div class="text">
+            <div class="text" *ngIf="isBrowser">
                 <h2>Input widgets</h2>
 
                 <p>
@@ -310,8 +311,9 @@ export class DesktopUiComponent {
         surname: new FormControl('', [Validators.required]),
     });
 
+    isBrowser = isPlatformBrowser(this.platformId);
 
-    constructor(public duiApp: DuiApp) {
+    constructor(public duiApp: DuiApp, @Inject(PLATFORM_ID) protected platformId: any) {
         this.duiApp.setPlatform('darwin');
     }
 }
