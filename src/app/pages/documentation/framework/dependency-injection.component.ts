@@ -97,7 +97,7 @@ import { Component } from '@angular/core';
                     {
                         provide: MyService, 
                         deps: [Database], 
-                        factory: (database: Database) => {
+                        useFactory: (database: Database) => {
                             return new MyService(database);
                         }
                     }

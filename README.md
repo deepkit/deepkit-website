@@ -15,7 +15,7 @@ Only angular UI.
 npm run start
 ```
 
-Then open http://localhost:8080/
+Then open http://localhost:4200/
 
 ### full
 
