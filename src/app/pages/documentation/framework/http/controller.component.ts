@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
         <h2>HTTP controller</h2>
 
         <p>
-            A HTTP controller is one of three entry points to your application. A HTTP controller defines HTTP routes using TypeScript
+            An HTTP controller is one of three different types of entry points to your application. An HTTP controller defines HTTP routes using TypeScript
             classes and decorators.
         </p>
 
         <p>
-            A very simple implementation of a HTTP controller looks like the following:
+            A very simple implementation of an HTTP controller looks like the following:
         </p>
 
         <textarea codeHighlight title="app.ts">
@@ -138,9 +138,9 @@ import { Component } from '@angular/core';
             </tr>
             <tr>
                 <td>@http.description(string)</td>
-                <td>Assigns a description to this route.</td>
+                <td>Assigns a description to this route that will be used in developer tooling</td>
             </tr>
-            <tr>
+            <tr>        
                 <td>@http.use(Function)</td>
                 <td>Allows to change the route object and composite multiple properties into one function.</td>
             </tr>
@@ -157,6 +157,13 @@ import { Component } from '@angular/core';
                 <td>Marks a route parameter as a type of all query parameters.</td>
             </tr>
         </table>
+
+        <h4>A Note on Decorator Metadata</h4>
+
+        <p>
+            One of the powerful use cases for decorators is the ability to attach data to parts of your actual application code. This data can then be retrieved and further built upon later.
+            By providing descriptive metadata to your controllers we can enable more powerful tooling like (eventual) OpenAPI support as well as deep integration with the Deepkit API Console GUI
+        </p>
 
         <h3>Parameters</h3>
 

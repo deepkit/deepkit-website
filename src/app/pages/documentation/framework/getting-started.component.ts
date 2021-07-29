@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight="bash">
             npm install @deepkit/framework reflect-metadata rxjs @deepkit/app @deepkit/broker \\
-               @deepkit/core @deepkit/core-rxjs @deepkit/crypto @deepkit/event @deepkit/event \\
+               @deepkit/core @deepkit/core-rxjs @deepkit/crypto @deepkit/event \\
                @deepkit/http @deepkit/injector @deepkit/logger @deepkit/orm @deepkit/rpc \\
                @deepkit/rpc-tcp @deepkit/sql @deepkit/sqlite @deepkit/stopwatch @deepkit/template \\
                @deepkit/type @deepkit/workflow @deepkit/bson
@@ -35,7 +35,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            Alternatively to <code>ts-node</code> is to compile the source via the TypeScript compiler and run the JavaScript source directly.
+            An alternative to using <code>ts-node</code> is to compile the source via the TypeScript compiler and run the JavaScript source directly.
             This has the advantage that the execution time for short commands increases dramatically.
             However, this adds also an additional workflow overhead by either running the compiler manually or by setting
             up a watcher. That's why this documentation uses ts-node in all examples. See the chapter

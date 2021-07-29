@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 
         <h2>Deployment</h2>
         
-        In this chapter is described how you can compile your application to JavaScript, configure it
+        In this chapter we provide instruction on how to compile your application to JavaScript, configure it
         for your production environment, and deploy it via Docker.
 
         <h3>Compile TypeScript</h3>
