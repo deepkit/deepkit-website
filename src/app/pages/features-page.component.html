@@ -211,7 +211,7 @@
 
 
     <feature-block align="center">
-        <h2>We’ve Got You Covered</h2>
+        <h2>We've Got You Covered</h2>
 
         <p>
             A big bandwidth of functionality across various standalone Deepkit libraries — in one code base.
@@ -396,9 +396,9 @@
                 </textarea>
 
                     <textarea codeHighlight>
-                    import {RpcClient} from ‘@deepkit/rpc’;
+                    import {RpcClient} from '@deepkit/rpc';
 
-                    const client = new RpcClient(‘localhost:8080’);
+                    const client = new RpcClient('localhost:8080');
                     const ctrl = client.controller(MyController);
 
                     await ctrl.helloWorld(); //Hello World!
@@ -412,7 +412,7 @@
                     import { Application } from '@deepkit/framework';
                     import { cli } from '@deepkit/cli';
 
-                    @cli.controller(‘my-command’)
+                    @cli.controller('my-command')
                     class MyController {
                         execute() {
                             console.log("Hello World!");
@@ -494,12 +494,12 @@
                 </div>
                 <div style="margin-top: 50px;">
                     <textarea codeHighlight>
-                        test(‘email config’, () => {
+                        test('email config', () => {
                             const emailService = new EmailService({
                                 email: true,
-                                emailSender: ‘root@localhost’
+                                emailSender: 'root@localhost'
                             });
-                            emailService.send(‘me@localhost’, ‘Test’, ‘Hi there!’);
+                            emailService.send('me@localhost', 'Test', 'Hi there!');
                         });
                     </textarea>
                 </div>
