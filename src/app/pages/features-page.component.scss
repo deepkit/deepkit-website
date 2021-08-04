@@ -1,6 +1,7 @@
 .banner {
   height: 200px;
 }
+
 .build {
 
 }
@@ -27,6 +28,7 @@
 
   &.right {
     flex-direction: row-reverse;
+
     h1, .text {
       text-align: right;
       padding-left: 35px;
@@ -93,6 +95,9 @@ ul {
 
   > div:not(:last-child) {
     padding-right: 25px;
+    @media(max-width: 880px) {
+      padding-right: unset;
+    }
   }
 
   @media(max-width: 880px) {
@@ -115,6 +120,25 @@ ul {
     justify-content: center;
     background: #D7ECFF;
     border-radius: 3px;
+  }
+}
+
+.debugger {
+  .text {
+    text-align: left;
+    max-width: 45%;
+  }
+
+  .image {
+    overflow: visible;
+    flex: 0 0 55%;
+    max-width: 535px;
+  }
+
+  @media(max-width: 880px) {
+    .text, .image {
+      max-width: unset;
+    }
   }
 }
 
