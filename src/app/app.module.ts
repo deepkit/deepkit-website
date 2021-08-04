@@ -88,6 +88,7 @@ import { DocTypeAngularComponent } from './pages/documentation/type-angular.comp
 import { DocWorkflowComponent } from './pages/documentation/workflow.component';
 import { DocHttpComponent } from './pages/documentation/http.component';
 import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
+import { FeatureBlockComponent } from './components/feature-block.component';
 
 @NgModule({
     declarations: [
@@ -108,6 +109,8 @@ import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework
         LibraryCardComponent,
         LibraryCardsComponent,
         LibrariesComponent,
+
+        FeatureBlockComponent,
 
         FrameworkFrameComponent,
         MLFrame,

@@ -6,8 +6,6 @@
 @import "./style-code";
 
 * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
 
@@ -28,6 +26,10 @@ body {
   text-align: center;
   background-color: var(--color-bg);
   background: #202020;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  -moz-osx-font-smoothing: grayscale;
 
   letter-spacing: 0;
 

@@ -7,7 +7,13 @@ import { Component, Input } from '@angular/core';
             <a target="_blank" href="{{src}}">
                 <img alt="{{alt || altFromSrc}}" src="{{src}}"/>
             </a>
-        </div>`
+        </div>`,
+    styles: [`
+        :host {
+            display: inline-block;
+            max-width: 100%;
+        }
+    `]
 })
 export class ImageComponent {
     @Input() src!: string;
