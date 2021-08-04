@@ -14,16 +14,15 @@ import { Component } from '@angular/core';
 
         <div class="wrapper cards links">
 
-            <a class="card" target="_blank" href="https://t.me/joinchat/PyyPuxpvp7I3NTYy">
+            <a class="card" target="_blank" href="https://discord.gg/U24mryk7Wq">
                 <div class="icon-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
                 </div>
 
-                <h3>Telegram</h3>
+                <h3>Discord</h3>
             </a>
             
             <a class="card" target="_blank" href="https://github.com/deepkit/deepkit-framework/discussions">
@@ -46,17 +45,6 @@ import { Component } from '@angular/core';
                 </div>
 
                 <h3>Twitter</h3>
-            </a>
-
-            <a class="card" target="_blank" href="https://discord.gg/U24mryk7Wq">
-                <div class="icon-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                </div>
-
-                <h3>Discord</h3>
             </a>
 
 <!--            <a class="card" target="_blank" href="https://www.youtube.com/channel/UCj5Y7-zUm-xVmF49LhuU7Kg">-->
