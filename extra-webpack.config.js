@@ -29,5 +29,5 @@ module.exports = {
     // },
     externals: {
         'better-sqlite3': {root: 'window'}, //just use something that exists, and is NOT better-sqlite3.
-    },
+    }
 }

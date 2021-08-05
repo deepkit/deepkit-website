@@ -1,10 +1,11 @@
-import { AfterViewInit, Directive, DoCheck, ElementRef, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Directive, DoCheck, ElementRef, Inject, OnChanges, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-json';
 import { Input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 function removeIndent(str: string): string {
     const matches = str.match(/^ +/g);
@@ -19,13 +20,17 @@ function removeIndent(str: string): string {
 })
 export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit, DoCheck {
     @Input() codeHighlight: string = 'typescript';
-    @Input() code?: string;
+    @Input() code: string = '';
     @Input() title?: string;
 
     protected pre?: HTMLPreElement;
 
+    isBrowser = isPlatformBrowser(this.platformId);
+
     constructor(
-        protected elementRef: ElementRef<HTMLTextAreaElement | HTMLDivElement>
+        protected elementRef: ElementRef<HTMLTextAreaElement | HTMLDivElement>,
+        protected renderer: Renderer2,
+        @Inject(PLATFORM_ID) protected platformId: any,
     ) {
     }
 
@@ -42,10 +47,10 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
     }
 
     ngDoCheck() {
-        queueMicrotask(() => {
-            if (!this.pre) return;
-            this.elementRef.nativeElement.after(this.pre);
-        });
+        // queueMicrotask(() => {
+        //     if (!this.pre) return;
+        //     this.elementRef.nativeElement.after(this.pre);
+        // });
     }
 
     render() {
@@ -53,21 +58,37 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
             this.code = removeIndent(this.elementRef.nativeElement.value).trim();
         }
 
+        if (!this.isBrowser) {
+            if (this.pre) return;
+
+            this.pre = this.renderer.createElement('pre');
+            this.renderer.addClass(this.pre, 'code');
+            this.renderer.addClass(this.pre, 'codeHighlight');
+            this.renderer.setAttribute(this.pre, 'title', this.title || '');
+
+            this.renderer.insertBefore(this.elementRef.nativeElement.parentNode, this.pre, this.elementRef.nativeElement);
+            const text = this.renderer.createText(this.code);
+            this.renderer.appendChild(this.pre, text);
+            this.renderer.removeChild(this.elementRef.nativeElement.parentNode, this.elementRef.nativeElement);
+            return;
+        }
+
+        if (!this.elementRef.nativeElement.parentNode) return;
+
         if (!this.pre) {
-            this.pre = document.createElement('pre');
-            this.pre.classList.add('code');
-            this.pre.classList.add('codeHighlight');
-            if (this.title) {
-                this.pre.setAttribute('title', this.title);
-            }
-            this.elementRef.nativeElement.style.display = 'none';
-            this.elementRef.nativeElement.after(this.pre);
+            this.pre = this.renderer.createElement('pre');
+
+            this.renderer.addClass(this.pre, 'code');
+            this.renderer.addClass(this.pre, 'codeHighlight');
+            this.renderer.setAttribute(this.pre, 'title', this.title || '');
+            this.renderer.insertBefore(this.elementRef.nativeElement.parentNode, this.pre, this.elementRef.nativeElement);
+            this.renderer.removeChild(this.elementRef.nativeElement.parentNode, this.elementRef.nativeElement);
         }
 
         if (!this.code) return;
 
         const lang = this.codeHighlight || 'typescript';
         const highlighted = highlight(this.code, languages[lang], lang);
-        this.pre.innerHTML = highlighted;
+        this.pre!.innerHTML = highlighted;
     }
 }

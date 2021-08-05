@@ -26,6 +26,7 @@
     "fs": false,
     "os": false,
     "path": false,
+    "perf_hooks": false,
     "stream": false,
     "fast-glob": false,
     "@deepkit/app": false,

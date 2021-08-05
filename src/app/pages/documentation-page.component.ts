@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnchorService } from '../provider/anchor';
 import { TitleService } from '../provider/title';
@@ -119,9 +119,9 @@ import { TitleService } from '../provider/title';
     styleUrls: ['./documentation-page.component.scss']
 })
 export class DocumentationPageComponent implements AfterViewInit {
-    @ViewChild('content') elementRef?: ElementRef<HTMLDivElement>;
+    @ViewChild('content') elementRef?: ElementRef<HTMLElement>;
 
-    public headers: HTMLHeadingElement[] = [];
+    public headers: HTMLElement[] = [];
     public showMenu: boolean = false;
 
     constructor(
@@ -129,6 +129,7 @@ export class DocumentationPageComponent implements AfterViewInit {
         public title: TitleService,
         protected cd: ChangeDetectorRef,
         protected anchorService: AnchorService,
+        protected renderer: Renderer2,
     ) {
         router.events.subscribe(() => {
             this.showMenu = false;
@@ -151,30 +152,42 @@ export class DocumentationPageComponent implements AfterViewInit {
             return;
         }
 
-        this.headers = [];
         let title = '';
         let subline = '';
-        const headers: HTMLHeadingElement[] = Array.from(this.elementRef.nativeElement.querySelectorAll('div.subline, h2, h3, h4'));
 
-        for (const header of headers) {
-            if (header.tagName.toLowerCase() === 'h2') {
-                title = header.innerText;
+        const ngComponent = this.elementRef.nativeElement.children[1];
+
+        for (const header of Array.from(ngComponent.children) as HTMLElement[]) {
+            const tagName = header.tagName.toLowerCase();
+            const text = header.childNodes[0].nodeValue || '';
+
+            if (tagName === 'h2') {
+                title = text;
             }
-            if (header.tagName.toLowerCase() === 'div') {
-                subline = header.innerText;
+
+            if (tagName === 'div' && header.classList.contains('subline')) {
+                subline = text;
                 continue;
             }
 
+            if (tagName !== 'h1' && tagName !== 'h2' && tagName !== 'h3' && tagName !== 'h4') continue;
+
             this.headers.push(header);
             if ((header as any)._addedLink) return;
-            const fragment = this.getFragment(header.innerText);
+            const fragment = this.getFragment(text);
             const a = document.createElement('a');
             a.name = fragment;
             header.appendChild(a);
             (header as any)._addedLink = true;
         }
 
-        this.title.setTitle(`${title} - ${subline} - Documentation`);
+        if (title && subline) {
+            this.title.setTitle(`${title} / ${subline} - Documentation`);
+        } else if (title) {
+            this.title.setTitle(`${title} Documentation`);
+        } else {
+            this.title.setTitle(`Documentation`);
+        }
         this.anchorService.scrollToAnchor();
     }
 

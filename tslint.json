@@ -19,7 +19,7 @@
     "contextual-lifecycle": true,
     "curly": false,
     "object-literal-shorthand": false,
-    "directive-class-suffix": true,
+    "directive-class-suffix": false,
     "directive-selector": [
       true,
       "attribute",

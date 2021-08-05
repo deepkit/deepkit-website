@@ -25,6 +25,16 @@
                 }
               }
             },
+            "allowedCommonJsDependencies": [
+              "@deepkit/crypto",
+              "sqlstring-sqlite",
+              "showdown",
+              "validator",
+              "util",
+              "buffer",
+              "dot-prop",
+              "hammerjs"
+            ],
             "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
