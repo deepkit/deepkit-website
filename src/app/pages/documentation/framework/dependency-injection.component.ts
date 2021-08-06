@@ -333,7 +333,8 @@ import { Component } from '@angular/core';
         
         <p>
             Compiler passes are a very powerful tool to adjust the way your services are built in the dependency injection container.
-            It allows your to change properties or call methods with static arguments or with values from the container. 
+            Compiler passes provides a way to manipulate other service definitions that have been registered with the service container.
+            It allows your to change properties or call methods with static arguments or with values from the container.
         </p>
         
         <p>

@@ -87,11 +87,10 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            For a deployment its important that your TypeScript files are compiling correctly and everything works via <code>node</code>
+            For a deployment its important that TypeScript files are compiling correctly and everything works via <code>node</code>
             directly. You could now simply move your <code>dist</code> folder including your <code>node_modules</code> and run
-            <code>node dist/app.js server:start</code> and your app is successfully deployed. However, we live in 2021+ and nobody would
-            deploy an app like that. First we have to configure it, see the next <i>Configuration</i> chapter and we bundle our code
-            in a fixed environment using Docker containers, see next <i>Docker</i> chapter.
+            <code>node dist/app.js server:start</code> and your app is successfully deployed. You would however use other solutions
+            like Docker to correctly package your application.
         </p>
 
         <h3>Configuration</h3>
@@ -225,18 +224,6 @@ import { Component } from '@angular/core';
             When you start that server now, your HTTP server is available as HTTPS at <code>https://localhost:8080/</code>.
             In chrome when opening that URL you get an error "NET::ERR_CERT_INVALID" now, since self-signed certificates are considered an security risk.
             <code>chrome://flags/#allow-insecure-localhost</code>.
-        </p>
-
-        <h3>Docker</h3>
-        
-        <p>
-            Docker containers gives you the possibility to bundle your application in a way that is environment agnostic. It uses
-            a <i>Dockerfile</i> file and lets you run your bundled app in any environment exactly the same - without installing any
-            system/OS dependencies manually on the host. Instead, you install them in the Dockerfile for your container once.
-        </p>
-        
-        <p>
-            
         </p>
     `
 })

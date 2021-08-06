@@ -61,6 +61,7 @@ import { DocTypeAngularComponent } from './pages/documentation/type-angular.comp
 import { DocWorkflowComponent } from './pages/documentation/workflow.component';
 import { DocHttpComponent } from './pages/documentation/http.component';
 import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
+import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
 
 
 const routes: Routes = [
@@ -168,6 +169,7 @@ const routes: Routes = [
             { path: 'framework/configuration', component: DocFrameworkConfigurationComponent },
             { path: 'framework/testing', component: DocFrameworkTestingComponent },
             { path: 'framework/deployment', component: DocFrameworkDeploymentComponent },
+            { path: 'framework/logger', component: DocFrameworkLoggerComponent },
 
             { path: 'type', component: DocTypeGettingStartedComponent },
             { path: 'type/schema', component: DocTypeSchemaComponent },

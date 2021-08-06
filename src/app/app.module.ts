@@ -89,6 +89,7 @@ import { DocWorkflowComponent } from './pages/documentation/workflow.component';
 import { DocHttpComponent } from './pages/documentation/http.component';
 import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
 import { FeatureBlockComponent } from './components/feature-block.component';
+import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
 
 @NgModule({
     declarations: [
@@ -154,6 +155,7 @@ import { FeatureBlockComponent } from './components/feature-block.component';
         DocFrameworkTestingComponent,
         DocFrameworkDeploymentComponent,
         DocFrameworkHttpPublicDirComponent,
+        DocFrameworkLoggerComponent,
         DocORMGettingStartedComponent,
         DocORMSchemaComponent,
         DocORMSessionComponent,

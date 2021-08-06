@@ -155,11 +155,12 @@ export class DocumentationPageComponent implements AfterViewInit {
         let title = '';
         let subline = '';
 
+        this.headers = [];
         const ngComponent = this.elementRef.nativeElement.children[1];
 
         for (const header of Array.from(ngComponent.children) as HTMLElement[]) {
             const tagName = header.tagName.toLowerCase();
-            const text = header.childNodes[0].nodeValue || '';
+            const text = header.childNodes[0]?.nodeValue || '';
 
             if (tagName === 'h2') {
                 title = text;
