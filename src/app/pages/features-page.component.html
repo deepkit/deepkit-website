@@ -439,8 +439,16 @@
         <h2>One Schema For All</h2>
 
         <p>
-            With <a routerLink="/library/type">Deepkit Type</a> you can define your schemas once and use it in your whole application stack.
-            Use the same schema definition API for all use-cases where typed data/validation is required.
+            With <a routerLink="/library/type">Deepkit Type</a> you can define your data structures once and use it in your whole application stack.
+            Use the same schema API for all use-cases where serialization/validation is required.
+        </p>
+
+        <p>
+            For example could you define an entity <code>User</code> once, decorate it with all necessary information like data type, relation,
+            and validation. Then use the very same class for database, frontend, http route (body) including validation, and more.
+        </p>
+        <p>
+            Class slicing enables you to include/exclude fields allowing you to create new sub classes in DRY-way — never write entities more than once.
         </p>
 
         <div class="columns" style="margin-bottom: 35px;">
@@ -483,6 +491,22 @@
                 });
             </textarea>
             </div>
+        </div>
+
+        <div style="margin-bottom: 35px;">
+        <textarea codeHighlight>
+            import { t } from '@deepkit/type';
+
+            @http.controller('/api')
+            class MyController {
+                @http.GET('/users')
+                async apiUsers(@http.query() @t.positive().maximum(1000) limit: number = 100) {
+                    return await this.database.query(User).limit(limit);
+                }
+            }
+
+            //$ curl http://localhost:8080/api/users?limit=1000
+        </textarea>
         </div>
 
         <ul class="horizontal" style="--color: #E3C3EE">
