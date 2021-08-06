@@ -435,6 +435,74 @@
     </feature-block>
 
 
+    <feature-block bg="#EAD9F0" align="center">
+        <h2>One Schema For All</h2>
+
+        <p>
+            With <a routerLink="/library/type">Deepkit Type</a> you can define your schemas once and use it in your whole application stack.
+            Use the same schema definition API for all use-cases where typed data/validation is required.
+        </p>
+
+        <div class="columns" style="margin-bottom: 35px;">
+            <div>
+                <textarea codeHighlight>
+                import { t, entity } from '@deepkit/type';
+
+                @entity.collection('users')
+                class User {
+                    @t id: number = 0;
+
+                    @t created: Date = new Date;
+
+                    @t firstName?: string;
+                    @t lastName?: string;
+
+                    constructor(
+                        @t.minLength(3).index({unique: true})
+                        public username: string
+                    ) {}
+                }
+            </textarea>
+            </div>
+            <div style="display: flex; flex-direction: column;justify-content: center">
+                <textarea codeHighlight>
+                import { t } from '@deepkit/type';
+
+                const registeredMessage = t.schema({
+                    id: t.number,
+                    created: t.date,
+                    userId: t.number,
+                });
+            </textarea>
+                <textarea codeHighlight>
+                import { t } from '@deepkit/type';
+
+                const config = t.schema({
+                    dbHost: t.string.description('Database host'),
+                    domain: t.string.description('The public domain name')
+                });
+            </textarea>
+            </div>
+        </div>
+
+        <ul class="horizontal" style="--color: #E3C3EE">
+            <li>Configuration System</li>
+            <li>HTTP Query</li>
+            <li>HTTP Parameters</li>
+            <li>HTTP Body</li>
+            <li>Database Entities</li>
+            <li>Message Queue</li>
+            <li>Key/Value Storage</li>
+            <li>RPC Actions</li>
+            <li>RPC Streams</li>
+            <li>CLI Arguments/Flags</li>
+            <li>Binary Storage</li>
+            <li>Frontend Serialization</li>
+        </ul>
+
+    </feature-block>
+
+
     <feature-block bg="#D9F0EF" align="center">
         <h2>Type-safe Configuration System</h2>
 
@@ -506,7 +574,6 @@
             </div>
         </div>
     </feature-block>
-
 
 
     <feature-block bg="#D9F0DE" align="center">

@@ -24,6 +24,10 @@ import { Component } from '@angular/core';
                     <p>
                         It makes it easy to write complex high performance server side applications. 
                     </p>
+                    
+                    <p>
+                        <a routerLink="/framework" class="button">Deepkit Framework</a>
+                    </p>
                 </div>
             </div>
             <div>
@@ -33,16 +37,20 @@ import { Component } from '@angular/core';
                     <p>
                         Highly optimized for many use-cases and streamlined in their API.
                     </p>
+                    
+                    <p>
+                        <a routerLink="/library" class="button">Deepkit Libraries</a>
+                    </p>
                 </div>
             </div>
         </div>
 
-        <div class="wrapper libraries">
-            <a name="libraries"></a>
-            <h1>Deepkit libraries</h1>
-        </div>
+<!--        <div class="wrapper libraries">-->
+<!--            <a name="libraries"></a>-->
+<!--            <h1>Deepkit libraries</h1>-->
+<!--        </div>-->
 
-        <library-cards></library-cards>
+<!--        <library-cards></library-cards>-->
     `,
     styleUrls: ['./index-page.component.scss']
 })
