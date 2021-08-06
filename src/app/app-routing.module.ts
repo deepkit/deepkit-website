@@ -62,6 +62,7 @@ import { DocWorkflowComponent } from './pages/documentation/workflow.component';
 import { DocHttpComponent } from './pages/documentation/http.component';
 import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
 import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
+import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/framework/http/middleware.component';
 
 
 const routes: Routes = [
@@ -160,6 +161,7 @@ const routes: Routes = [
             { path: 'framework/http/template', component: DocFrameworkHttpTemplateComponent },
             { path: 'framework/http/public-dir', component: DocFrameworkHttpPublicDirComponent },
             { path: 'framework/http/events', component: DocFrameworkHttpEventsComponent },
+            { path: 'framework/http/middleware', component: DocFrameworkHttpMiddlewareComponent },
 
             { path: 'framework/rpc/controller', component: DocFrameworkRPCControllerComponent },
             { path: 'framework/rpc/client', component: DocFrameworkRPCClientComponent },

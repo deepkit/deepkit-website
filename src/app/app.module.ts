@@ -90,6 +90,7 @@ import { DocHttpComponent } from './pages/documentation/http.component';
 import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
 import { FeatureBlockComponent } from './components/feature-block.component';
 import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
+import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/framework/http/middleware.component';
 
 @NgModule({
     declarations: [
@@ -147,6 +148,7 @@ import { DocFrameworkLoggerComponent } from './pages/documentation/framework/log
         DocFrameworkHttpControllerComponent,
         DocFrameworkHttpTemplateComponent,
         DocFrameworkHttpEventsComponent,
+        DocFrameworkHttpMiddlewareComponent,
         DocFrameworkRPCControllerComponent,
         DocFrameworkRPCClientComponent,
         DocFrameworkRPCSecurityComponent,

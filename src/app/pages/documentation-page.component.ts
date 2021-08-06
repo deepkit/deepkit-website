@@ -38,6 +38,7 @@ import { TitleService } from '../provider/title';
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/controller">Controller</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/template">Template</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/events">Events</a>
+                        <a routerLinkActive="active" routerLink="/documentation/framework/http/middleware">Middleware</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/security">Security</a>
                         <a routerLinkActive="active" routerLink="/documentation/framework/http/public-dir">Public directory</a>
                     </section>
