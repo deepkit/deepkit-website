@@ -252,7 +252,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight="bash">
-            APP_pageTitle="Other title" ts-node app.ts server:listen
+            APP_pageTitle="Other title" ts-node app.ts server:start
         </textarea>
 
         <h4>JSON environment variable</h4>
@@ -272,7 +272,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight="bash">
-            APP_CONFIG='{"pageTitle": "Other title"}' ts-node app.ts server:listen
+            APP_CONFIG='{"pageTitle": "Other title"}' ts-node app.ts server:start
         </textarea>
 
         <h4>DotEnv files</h4>
@@ -295,7 +295,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight="bash">
             $ cat dotenv
             pageTitle=Other title
-            $ ts-node app.ts server:listen
+            $ ts-node app.ts server:start
         </textarea>
 
         <h3>Configure module</h3>
@@ -311,7 +311,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            $ APP_kernel_port=9999 ts-node app.ts server:listen
+            $ APP_kernel_port=9999 ts-node app.ts server:start
             2021-06-12T18:59:26.363Z [LOG] Start HTTP server, using 1 workers.
             2021-06-12T18:59:26.365Z [LOG] HTTP MyWebsite
             2021-06-12T18:59:26.366Z [LOG]     GET / helloWorld
@@ -327,7 +327,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            $ APP_CONFIG='{"kernel": {"port": 9999}}' ts-node app.ts server:listen
+            $ APP_CONFIG='{"kernel": {"port": 9999}}' ts-node app.ts server:start
         </textarea>
 
         <p>

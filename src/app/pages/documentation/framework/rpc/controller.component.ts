@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
         <p>
             A very simple implementation of a RPC controller looks like the following. You define a class, decorate it with RPC decorators,
             and register the class as controller in your application. Deepkit Framework automatically creates a Deepkit RPC kernel 
-            inside your application once it is started using <code>server:listen</code> based on WebSockets. 
+            inside your application once it is started using <code>server:start</code> based on WebSockets. 
             Its kernel is automatically configured to use the dependency injection container of your application for controllers and security implementations, 
             as well as the message broker of your application.
         </p>
@@ -65,7 +65,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            $ ts-node app.ts server:listen
+            $ ts-node app.ts server:start
             2021-06-11T22:45:05.467Z [LOG] Start HTTP server, using 1 workers.
             2021-06-11T22:45:05.472Z [LOG] RPC MyRpcController my-rpc
             2021-06-11T22:45:05.472Z [LOG] HTTP listening at http://localhost:8080/

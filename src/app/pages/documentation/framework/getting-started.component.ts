@@ -150,7 +150,7 @@ import { Component } from '@angular/core';
         <h3>HTTP server</h3>
         
         <p>
-            When you execute <code>./app.ts server:listen</code> the HTTP/RPC server is starting and waits for incoming requests.
+            When you execute <code>./app.ts server:start</code> the HTTP/RPC server is starting and waits for incoming requests.
             In order to serve requests, please see the chapter <a routerLink="/documentation/framework/http/controller">HTTP Controller</a>
             or <a routerLink="/documentation/framework/rpc/controller">RPC controller</a>. But before you do that, please read the
             chapter <a routerLink="/documentation/framework/fundamentals">Fundamentals</a> first.

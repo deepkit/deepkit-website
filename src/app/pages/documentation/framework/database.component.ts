@@ -131,7 +131,7 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight="bash">
-            $ ts-node app.ts server:listen
+            $ ts-node app.ts server:start
             2021-06-11T15:08:54.330Z [LOG] Start HTTP server, using 1 workers.
             2021-06-11T15:08:54.333Z [LOG] Migrate database default
             2021-06-11T15:08:54.336Z [LOG] RPC DebugController deepkit/debug/controller

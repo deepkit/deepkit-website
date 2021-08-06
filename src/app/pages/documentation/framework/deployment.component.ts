@@ -52,7 +52,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            When started using <code>ts-node app.ts server:listen</code> you see everything works correctly at http://localhost:8080/. In a production environment
+            When started using <code>ts-node app.ts server:start</code> you see everything works correctly at http://localhost:8080/. In a production environment
             you would not start the server using <code>ts-node</code>. You would compile it down to JavaScript and then use regular <code>node</code>.
             To do so you need to have a correct <i>tsconfig.json</i> in place with the right configuration options.
             In the <a routerLink="/documentation/framework">Getting Started</a> is your <code>tsconfig.json</code> configured
@@ -89,7 +89,7 @@ import { Component } from '@angular/core';
         <p>
             For a deployment its important that your TypeScript files are compiling correctly and everything works via <code>node</code>
             directly. You could now simply move your <code>dist</code> folder including your <code>node_modules</code> and run
-            <code>node dist/app.js server:listen</code> and your app is successfully deployed. However, we live in 2021+ and nobody would
+            <code>node dist/app.js server:start</code> and your app is successfully deployed. However, we live in 2021+ and nobody would
             deploy an app like that. First we have to configure it, see the next <i>Configuration</i> chapter and we bundle our code
             in a fixed environment using Docker containers, see next <i>Docker</i> chapter.
         </p>
@@ -212,7 +212,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <textarea codeHighlight="bash">
-            $ ts-node app.ts server:listen
+            $ ts-node app.ts server:start
             2021-06-13T18:04:01.563Z [LOG] Start HTTP server, using 1 workers.
             2021-06-13T18:04:01.598Z [LOG] Self signed certificate for localhost created at var/self-signed-localhost.cert
             2021-06-13T18:04:01.598Z [LOG] Tip: If you want to open this server via chrome for localhost, use chrome://flags/#allow-insecure-localhost

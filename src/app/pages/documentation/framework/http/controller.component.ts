@@ -39,7 +39,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            $ ts-node app.ts server:listen
+            $ ts-node app.ts server:start
             2021-06-11T17:44:52.646Z [LOG] Start HTTP server, using 1 workers.
             2021-06-11T17:44:52.649Z [LOG] HTTP MyPage
             2021-06-11T17:44:52.649Z [LOG]     GET /my-base-url/hello-world helloWorld
