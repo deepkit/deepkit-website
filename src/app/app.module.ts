@@ -92,6 +92,8 @@ import { FeatureBlockComponent } from './components/feature-block.component';
 import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
 import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/framework/http/middleware.component';
 import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
+import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
+import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
 
 @NgModule({
     declarations: [
@@ -167,6 +169,8 @@ import { DocORMTransactionComponent } from './pages/documentation/orm/transactio
         DocORMEventsComponent,
         DocORMPluginSoftDeleteComponent,
         DocORMTransactionComponent,
+        DocORMInheritanceComponent,
+        DocORMCompositePrimaryKeyComponent,
         DocBenchmarkComponent,
         DocBSONComponent,
         DocDebuggerComponent,

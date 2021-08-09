@@ -103,8 +103,8 @@ import { Component } from '@angular/core';
         <h3>Many to many</h3>
         
         <p>
-            A many-to-many relation allows to connect many records with many others. It's usually used for
-            users in groups. A user can be in no, one, or many groups. Ergo has a group zero, one, or many users.
+            A many-to-many relation allows to connect many records with many others. It's can be used for example for
+            users in groups. A user can be in no, one, or many groups. This means a group can have zero, one, or many users.
         </p>
         
         <p>
@@ -129,7 +129,11 @@ import { Component } from '@angular/core';
             @entity.name('group')
             class Group {
                 @t.primary.autoIncrement public id: number = 0;
-        
+            
+                //'() => T' because of circular dependency
+                @t.array(() => User).backReference({via: () => UserGroup})
+                users?: User[];
+
                 constructor(@t public name: string) {
                 }
             }
@@ -147,7 +151,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            You can now create users and groups, and connect them using the pivot entity.
+            With this schema, you can now create users and groups, and connect them using the pivot entity.
             By using a back reference in User we can fetch the groups directly with a User query.
         </p>
         
@@ -165,14 +169,17 @@ import { Component } from '@angular/core';
             //   { id: 1, username: 'User1', groups: [ [Group] ] },
             //   { id: 2, username: 'User2', groups: [ [Group] ] }
             // ]
-            const users = await database.query(User).select('username', 'groups').joinWith('groups').find();
+            const users = await database.query(User)
+                .select('username', 'groups')
+                .joinWith('groups')
+                .find();
         </textarea>
         
         <p>
             To unlink a user from a group, we drop the record of UserGroup:
         </p>
         <textarea codeHighlight>
-            const users = await database.query(User).filter({user: user1, group: group1}).deleteOne();
+            const users = await database.query(UserGroup).filter({user: user1, group: group1}).deleteOne();
         </textarea>
     `
 })

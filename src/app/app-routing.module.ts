@@ -64,6 +64,8 @@ import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework
 import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
 import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/framework/http/middleware.component';
 import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
+import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
+import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
 
 
 const routes: Routes = [
@@ -192,6 +194,8 @@ const routes: Routes = [
             { path: 'orm/relations', component: DocORMRelationsComponent },
             { path: 'orm/events', component: DocORMEventsComponent },
             { path: 'orm/transactions', component: DocORMTransactionComponent },
+            { path: 'orm/inheritance', component: DocORMInheritanceComponent },
+            { path: 'orm/composite-primary-key', component: DocORMCompositePrimaryKeyComponent },
             { path: 'orm/plugin/soft-delete', component: DocORMPluginSoftDeleteComponent },
 
             { path: 'benchmark', component: DocBenchmarkComponent },

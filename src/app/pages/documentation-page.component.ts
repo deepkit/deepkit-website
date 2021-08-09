@@ -86,8 +86,10 @@ import { TitleService } from '../provider/title';
                     <a routerLinkActive="active" routerLink="/documentation/orm/session">Session</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/query">Query</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/transactions">Transactions</a>
+                    <a routerLinkActive="active" routerLink="/documentation/orm/inheritance">Inheritance</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/relations">Relations</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/events">Events</a>
+                    <a routerLinkActive="active" routerLink="/documentation/orm/composite-primary-key">Composite primary key</a>
                     <div class="section-title">Plugins</div>
                     <section>
                         <a routerLinkActive="active" routerLink="/documentation/orm/plugin/soft-delete">Soft-Delete</a>
