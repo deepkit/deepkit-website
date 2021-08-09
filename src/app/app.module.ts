@@ -91,6 +91,7 @@ import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework
 import { FeatureBlockComponent } from './components/feature-block.component';
 import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
 import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/framework/http/middleware.component';
+import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
 
 @NgModule({
     declarations: [
@@ -165,6 +166,7 @@ import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/frame
         DocORMRelationsComponent,
         DocORMEventsComponent,
         DocORMPluginSoftDeleteComponent,
+        DocORMTransactionComponent,
         DocBenchmarkComponent,
         DocBSONComponent,
         DocDebuggerComponent,

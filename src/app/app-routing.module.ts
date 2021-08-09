@@ -63,6 +63,7 @@ import { DocHttpComponent } from './pages/documentation/http.component';
 import { DocFrameworkHttpEventsComponent } from './pages/documentation/framework/http/events.component';
 import { DocFrameworkLoggerComponent } from './pages/documentation/framework/logger.component';
 import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/framework/http/middleware.component';
+import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
 
 
 const routes: Routes = [
@@ -190,6 +191,7 @@ const routes: Routes = [
             { path: 'orm/query', component: DocORMQueryComponent },
             { path: 'orm/relations', component: DocORMRelationsComponent },
             { path: 'orm/events', component: DocORMEventsComponent },
+            { path: 'orm/transactions', component: DocORMTransactionComponent },
             { path: 'orm/plugin/soft-delete', component: DocORMPluginSoftDeleteComponent },
 
             { path: 'benchmark', component: DocBenchmarkComponent },
