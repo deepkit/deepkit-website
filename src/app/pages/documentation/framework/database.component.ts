@@ -91,9 +91,8 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            You can now register this database class in the KernelModule. It makes sure that you can use it
-            with the migration function and other utilities like the ORM Browser. We also enable <code>migrateOnStartup</code>,
-            which creates all tables in your database automatically on bootstrap. Note that you should <strong>not</strong> use this feature
+            You can now register this database class as provider. We also enable <code>migrateOnStartup</code>,
+            which creates all tables in your database automatically on bootstrap. Note that you should <strong>not</strong> use <code>migrateOnStartup</code>
             for a serious project or production setup.
         </p>
         
@@ -105,10 +104,10 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { KernelModule, Application } from '@deepkit/framework';
             
-            Application.create({,
+            Application.create({
+                providers: [SQLiteDatabase],
                 imports: [
                     KernelModule.configure({
-                        databases: [SQLiteDatabase],
                         migrateOnStartup: true,
                         debug: true,
                     })
@@ -241,9 +240,9 @@ import { Component } from '@angular/core';
             
             Application.create({
                 controllers: [TestCommand],
+                providers: [SQLiteDatabase],
                 imports: [
                     KernelModule.configure({
-                        databases: [SQLiteDatabase],
                         migrateOnStartup: true,
                         debug: true,
                     })
