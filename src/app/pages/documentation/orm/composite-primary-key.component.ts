@@ -10,7 +10,8 @@ import { Component } from '@angular/core';
         <p>
             Composite primary keys describe an entity that has multiple primary keys that are automatically combined
             in one "composite primary key". This way of modelling your database has advantages and disadvantages.
-            We believe that composite primary keys have enormous practical disadvantages that don't justify its advantages, and should thus be avoided. 
+            We believe that composite primary keys have enormous practical disadvantages that don't justify its advantages to a point
+            that it should be considered a bad practise, and should thus be avoided. 
             Deepkit ORM does not support composite primary keys.
             In this chapter we explain why and point out (better) alternatives.
         </p>
@@ -118,8 +119,9 @@ import { Component } from '@angular/core';
             By supporting composite primary keys, the code complexity of a high-performance ORM like Deepkit ORM increases
             enormously. Not only is the code and maintenance more complex and thus expensive, but there will also be more edge-cases that
             will arise from users, which need to be fixed and maintained. The complexity of the query layer, the change detection,
-            the migration system, the internal tracking of relations, etc increases substantially. The overall costs that comes with support an ORM
-            with composite primary key is, all things considered, just not worth it, hence why we don't support it.
+            the migration system, the internal tracking of relations, etc increases substantially. 
+            The overall costs that comes with building and supporting an ORM
+            with composite primary key is, all things considered, are too high and not justifiable, hence why Deepkit doesn't support it.
         </p>
 
         <h3>Advantages</h3>
@@ -131,7 +133,7 @@ import { Component } from '@angular/core';
             It also makes the model structure slightly cleaner (by having usually one column less). 
             However, the difference between having a sequentially ordered auto-increment primary key and not is these
             days completely negligible as disk space is cheap 
-            and the operation is usually only a append-only operation, which is very very fast.
+            and the operation is usually only an append-only operation, which is very very fast.
         </p>
 
         <p>

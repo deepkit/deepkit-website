@@ -100,9 +100,8 @@ import { TitleService } from '../provider/title';
                 <div class="category">
                     <div class="category-title">RPC</div>
 
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting
-                        started</a>
-                    <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Server</a>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting started</a>
+                    <a routerLinkActive="active" routerLink="/documentation/rpc/server">Server</a>
                     <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Controller</a>
                     <a routerLinkActive="active" routerLink="/documentation/rpc/client">Client</a>
                     <a routerLinkActive="active" routerLink="/documentation/rpc/query">Stream</a>
