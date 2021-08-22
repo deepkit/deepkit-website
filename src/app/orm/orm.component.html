@@ -103,7 +103,7 @@ class User {
         <textarea codeHighlight>
         import { t } from '@deepkit/type';
 
-        const user = t.schema({
+        const User = t.schema({
           id: t.number.primaryKey.autoIncrement,
           createdAt: t.date.default(() => new Date),
           firstName: t.string.optional,
@@ -111,7 +111,7 @@ class User {
           username: t.string,
         });
 
-        const user = await database.query(user)
+        const user = await database.query(User)
           .filter({username: 'Peter'})
           .findOne();
       </textarea>
