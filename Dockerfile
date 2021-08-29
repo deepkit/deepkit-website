@@ -23,4 +23,4 @@ RUN npm run build:ssr
 RUN npm run server:build
 RUN npm prune --production
 
-CMD node -r source-map-support/register /app/dist/app/server/app.js server:listen
+CMD node -r source-map-support/register /app/dist/app/server/app.js server:start

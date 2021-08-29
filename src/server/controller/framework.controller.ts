@@ -17,7 +17,7 @@ export class FrameworkController implements FrameworkControllerInterface {
     }
 }
 
-@injectable()
+@injectable
 export class FrameworkHttpController {
     constructor(protected db: MongoDatabase) {
     }

@@ -34,7 +34,9 @@ global.cancelAnimationFrame = (id) => {
 
 
 new App({
-    providers: [],
+    providers: [
+        MongoDatabase,
+    ],
     controllers: [
         FrameworkController,
         FrameworkHttpController,
@@ -46,7 +48,6 @@ new App({
     imports: [
         new FrameworkModule({
             publicDir: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
-            databases: [MongoDatabase],
             debug: false,
             host: process.env.HOST || '127.0.0.1',
             workers: 1
