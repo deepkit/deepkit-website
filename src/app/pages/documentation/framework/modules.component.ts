@@ -460,8 +460,8 @@ import { Component } from '@angular/core';
                 <ol>
                     <li>Register middlewares of <code>T</code>.</li>
                     <li>Register listener of <code>T</code> in the event dispatcher.</li>
-                    <li>Call for all found modules from 2. <code>Module.handleController(T, controller)</code>.</li>
-                    <li>Call for all found modules from 2. <code>Module.handleProvider(T, token, provider)</code>.</li>
+                    <li>Call for all found modules from 2. <code>Module.processController(T, controller)</code>.</li>
+                    <li>Call for all found modules from 2. <code>Module.processProvider(T, token, provider)</code>.</li>
                     <li>Repeat 3. for each imported module of <code>T</code>.</li>
                 </ol>
             </li>
@@ -472,7 +472,7 @@ import { Component } from '@angular/core';
         
         <p>
             To use hooks, you can register the 
-            <code>process</code>, <code>handleProvider</code>, <code>postProcess</code> 
+            <code>process</code>, <code>processProvider</code>, <code>postProcess</code> 
             methods in your module class.
         </p>
 
@@ -501,19 +501,19 @@ import { Component } from '@angular/core';
                 }
             
                 //executed for each found provider in all modules
-                handleController(module: AppModule<any>, controller: ClassType) {
+                processController(module: AppModule<any>, controller: ClassType) {
                     //this HttpModule for example checks for each controller whether
                     //a @http decorator was used, and if so extracts all route
                     //information and puts them the router.
                 }
             
                 //executed for each found provider in all modules
-                handleProvider(module: AppModule<any>, token: Token, provider: ProviderWithScope) {
+                processProvider(module: AppModule<any>, token: Token, provider: ProviderWithScope) {
                 }
             
                 //executed when all modules have been processed.
                 //Last chance to setup providers via module.setupProvider/module.setupGlobalProvider based on
-                //information processed in process/handleProvider. 
+                //information processed in process/processProvider. 
                 postProcess() {
                     
                 }
@@ -576,7 +576,7 @@ import { Component } from '@angular/core';
                     this.addProvider({ provide: Registry, useValue: this.registry });
                 }
         
-                handleController(module: AppModule<any>, controller: ClassType) {
+                processController(module: AppModule<any>, controller: ClassType) {
                     //controllers need to be put into the module's providers by the controller consumer
                     if (!module.isProvided(controller)) module.addProvider(controller);
                     this.registry.register(module, controller);
@@ -633,7 +633,7 @@ import { Component } from '@angular/core';
         
         <p>
             The InjectorContext is the dependency injection container. It allows you to request/instantiate services
-            from your own or other modules. This is necessary if for example you have stored a controller in <code>handleControllers</code> and want to correctly instantiate them.
+            from your own or other modules. This is necessary if for example you have stored a controller in <code>processControllers</code> and want to correctly instantiate them.
         </p>
 
     `
