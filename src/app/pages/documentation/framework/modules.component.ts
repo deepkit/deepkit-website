@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
             Deepkit Framework is highly modular and lets you split up your application in several handy modules.
             Each module has its own dependency injection sub container, configuration, commands, and more.
             In fact, in the Getting Started chapter you already created a module - the root module.
-            <code>new Application</code> takes almost the same arguments as a module, because in fact, it creates the root module
+            <code>new App</code> takes almost the same arguments as a module, because in fact, it creates the root module
             in the background for you.
         </p>
 
@@ -40,7 +40,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             import { MyModule } from './module.ts'
             
-            new Application({
+            new App({
                 imports: [
                     new MyModule(),
                 ]
@@ -48,7 +48,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            You can now add features to that module like you would with your <code>Application</code>.
+            You can now add features to that module like you would with <code>App</code>.
             The arguments are the same except that <code>imports</code> is not available in a module definition.
             You can add HTTP/RPC/CLI controllers, services, a configuration, event listeners, as well as use various module hooks to
             make your module more dynamic.
@@ -166,7 +166,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
             import { cli, Command } from '@deepkit/app';
             import { HelloWorldService, MyModule } from './my-module';
             
@@ -180,7 +180,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [TestCommand],
                 imports: [
                     new MyModule(),
@@ -224,7 +224,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             import { MyModule } from './module.ts';
 
-            new Application({
+            new App({
                imports: [new MyModule({title: 'Hello World'}],
             }).run();
         </textarea>
@@ -247,11 +247,11 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            For the application level, it works slightly different, if the root application module is created from a module.
+            For the application level, it works slightly different:
         </p>
 
         <textarea codeHighlight title="app.ts">
-            new Application({
+            new App({
                 imports: [new MyModule({title: 'Hello World'}],
             })
                 .setup((module, config) => {
@@ -261,7 +261,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            If the root application module is created from a regular module, then it works like with regular modules.
+            If the root application module is created from a regular module, it works like with regular modules.
         </p>
 
         <textarea codeHighlight title="app.ts">
@@ -272,7 +272,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.fromModule(new AppModule()).run();
+            App.fromModule(new AppModule()).run();
         </textarea>
 
         <h3>Consume Configuration</h3>
@@ -368,7 +368,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             import { MyModule } from './module';
             
-            new Application({
+            new App({
                 imports: [
                     new MyModule(), //'my' is the default name
                     new MyModule().rename('my2'), //'my2' is now the new name
@@ -386,11 +386,11 @@ import { Component } from '@angular/core';
         <h3>Imports</h3>
 
         <p>
-            Modules can import other modules to extend their functionality. In <code>Application</code> you can import other modules in the module definition object via <code>imports: []</code>:
+            Modules can import other modules to extend their functionality. In <code>App</code> you can import other modules in the module definition object via <code>imports: []</code>:
         </p>
 
         <textarea codeHighlight title="app.ts">
-            new Application({
+            new App({
                 imports: [new Module]
             }).run();
         </textarea>
@@ -502,13 +502,16 @@ import { Component } from '@angular/core';
             
                 //executed for each found provider in all modules
                 processController(module: AppModule<any>, controller: ClassType) {
-                    //this HttpModule for example checks for each controller whether
+                    //HttpModule for example checks for each controller whether
                     //a @http decorator was used, and if so extracts all route
                     //information and puts them the router.
                 }
             
                 //executed for each found provider in all modules
                 processProvider(module: AppModule<any>, token: Token, provider: ProviderWithScope) {
+                    //FrameworkModule for example looks for provided tokens that extend from deepkit/orm Database
+                    //and automatically registers them in a DatabaseRegistry so they can be used in the migration CLI commands
+                    //and Framework Debugger.
                 }
             
                 //executed when all modules have been processed.
@@ -599,7 +602,7 @@ import { Component } from '@angular/core';
             The <code>root</code> property allows you to move the dependency injection container of a module into the root application's container.
             This makes every service available from the module automatically available in the root application itself. It basically moves each
             provider (controller, event listener, provider) into the root container. This could lead to dependency clashes,
-            so should only used for a module that has really only globals. You should prefer exporting each provider manually instead.
+            so should only be used for a module that has really only globals. You should prefer exporting each provider manually instead.
         </p>
 
         <p>
@@ -622,7 +625,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            new Application({
+            new App({
                 imports: [new ThirdPartyModule().forRoot()],
             }).run();
         </textarea>

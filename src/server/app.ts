@@ -1,7 +1,8 @@
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
-import { Application, KernelModule } from '@deepkit/framework';
-import { angularUniversalModule } from '@deepkit/angular-universal';
+import { App } from '@deepkit/app';
+import { FrameworkModule } from '@deepkit/framework';
+import { AngularUniversalModule } from '@deepkit/angular-universal';
 import { MongoDatabase } from './db';
 import { appConfig } from './config';
 import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
@@ -32,7 +33,7 @@ global.cancelAnimationFrame = (id) => {
 (global as any).dispatchEvent = () => {};
 
 
-Application.create({
+new App({
     providers: [],
     controllers: [
         FrameworkController,
@@ -43,14 +44,14 @@ Application.create({
     ],
     config: appConfig,
     imports: [
-        KernelModule.configure({
+        new FrameworkModule({
             publicDir: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
             databases: [MongoDatabase],
             debug: false,
             host: process.env.HOST || '127.0.0.1',
             workers: 1
         }),
-        angularUniversalModule.configure({
+        new AngularUniversalModule({
             browserPath: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
             serverPath: (process.env.DIST || __dirname + '/../../dist/') + 'server',
         }),

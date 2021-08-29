@@ -12,12 +12,11 @@ import { Component } from '@angular/core';
             <i>modules</i>, <i>services</i>, <i>controllers</i>, <i>events</i>, <i>and models</i>. 
         </p>
 
-        <h3>Application</h3>
+        <h3>App</h3>
         
         <p>
             There is usually only one application per project. Each application has at least one module -- the root module, which is automatically
-            created. It can import additional custom modules. In the background it imports system modules like the 
-            <i>KernelModule</i> and <i>HttpModule</i> automatically.
+            created. It can import additional custom modules, like for example the FrameworkModule.
         </p>
         
         <h3>Module</h3>

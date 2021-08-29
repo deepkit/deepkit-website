@@ -84,7 +84,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { cli, Command } from '@deepkit/app';
             
@@ -98,14 +98,14 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [TestCommand]
             }).run();
         </textarea>
 
         <p>
             In this code you see that we defined a <code>test</code> command via the <code>TestCommand</code> class
-            and created a new (Deepkit Framework) Application, which we directly <code>run()</code>. 
+            and created a new app, which we directly <code>run()</code>. 
             By executing this script we execute this application.
         </p>
         

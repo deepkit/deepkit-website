@@ -110,7 +110,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { Logger } from '@deepkit/logger';
             
-            new Application({})
+            new App()
                 .setup((module, config) => {
                     module.setupProvider(Logger).addTransport(new MyTransport);
                 })
@@ -134,7 +134,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({})
+            new App()
                 .setup((module, config) => {
                     module.setupProvider(Logger).setTransport([new MyTransport]);
                 })
@@ -150,7 +150,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { Logger, JSONTransport } from '@deepkit/logger';
             
-            new Application({})
+            new App()
                 .setup((module, config) => {
                     module.setupProvider(Logger).setTransport([new JSONTransport]);
                 })

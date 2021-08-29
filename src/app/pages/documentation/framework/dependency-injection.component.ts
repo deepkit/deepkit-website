@@ -45,7 +45,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 providers: [MyService, Database],
             }).run();
         </textarea>
@@ -79,7 +79,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             const database = new Database();
 
-            new Application({
+            new App({
                 providers: [{provide: MyService, useValue: new MyService(database)}],
             }).run();
         </textarea>
@@ -92,7 +92,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            new Application({
+            new App({
                 providers: [
                     {
                         provide: MyService, 
@@ -193,8 +193,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight="">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
-            import { createModuleConfig } from '@deepkit/app';
+            import { App, createModuleConfig } from '@deepkit/app';
             import { t } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             import { MongoDatabaseAdapter } from '@deepkit/mongo';
@@ -213,7 +212,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 config: config,
                 providers: [MainDatabase]
             }).run();
@@ -235,8 +234,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
-            import { createModuleConfig } from '@deepkit/app';
+            import { App, createModuleConfig } from '@deepkit/app';
             import { t } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             import { MongoDatabaseAdapter } from '@deepkit/mongo';
@@ -257,7 +255,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 config: config,
                 providers: [MainDatabase]
             }).run();
@@ -324,7 +322,7 @@ import { Component } from '@angular/core';
                 }   
             }
             
-            new Application({ to describe how a service needs to be built
+            new App({ to describe how a service needs to be built
                 providers: [{provide: MyHttpSessionHandler, scope: 'http'}]
             }).run();
         </textarea>
@@ -338,12 +336,11 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            Compiler passes are added in the <code>setup</code> callback of your Application object or a module.
+            Compiler passes are added in the <code>setup</code> callback of your app object or a module.
         </p>
         
         <textarea codeHighlight>
-            import { createModuleConfig, } from '@deepkit/app';
-            import { Application } from '@deepkit/framework';
+            import { App, createModuleConfig, } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { injectorReference } from '@deepkit/injector';
             import { t } from '@deepkit/type';
@@ -367,7 +364,7 @@ import { Component } from '@angular/core';
                 migrateOnStartup: t.boolean.default(false),
             });
             
-            new Application({
+            new App({
                 config: config,
                 providers: [DatabaseRegistry, Logger]
             })
@@ -414,7 +411,7 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight title="app.ts">
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
             import { Tag } from '@deepkit/injector';
             import { cli, Command } from '@deepkit/app';
             
@@ -444,7 +441,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [TestCommand],
                 providers: [
                     DatabaseRegistry,

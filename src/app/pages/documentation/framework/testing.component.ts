@@ -193,7 +193,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             import { AppCoreModule } from './app-core.ts';
             
-            new Application({
+            new App({
                 imports: [AppCoreModule]
             }).run();
         </textarea>

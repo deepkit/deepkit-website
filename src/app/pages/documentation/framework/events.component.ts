@@ -101,7 +101,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 listeners: [MyListener],
             }).run();
         </textarea>
@@ -113,7 +113,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
 #!/usr/bin/env ts-node-script
 import 'reflect-metadata';
-import { Application } from '@deepkit/framework';
+import { App } from '@deepkit/app';
 import { cli, Command } from '@deepkit/app';
 import { EventToken, BaseEvent, EventDispatcher, eventDispatcher } from '@deepkit/event';
 
@@ -147,7 +147,7 @@ class MyListener {
     }
 }
 
-new Application({
+new App({
     controllers: [TestCommand],
     listeners: [MyListener],
 }).run();
@@ -156,13 +156,14 @@ new Application({
         <h3>Framework events</h3>
         
         <p>
-            Deepkit Framework itself has several events you can listen to. 
+            Deepkit Framework itself has several events from the application server you can listen to. 
         </p>
 
         <textarea codeHighlight>
-            import { Application, onServerMainBootstrap } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { onServerMainBootstrap } from '@deepkit/framework';
             import { eventDispatcher } from '@deepkit/event';
-            
+
             class MyListener {
                 @eventDispatcher.listen(onServerMainBootstrap)
                 onUserAdded(event: typeof onServerMainBootstrap.event) {
@@ -170,7 +171,7 @@ new Application({
                 }
             }
             
-            new Application({
+            new App({
                 listeners: [MyListener],
             }).run();
         </textarea>

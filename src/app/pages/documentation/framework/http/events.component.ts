@@ -87,7 +87,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { HtmlResponse, http, httpWorkflow } from '@deepkit/http';
             import { eventDispatcher } from '@deepkit/event';
             
@@ -131,9 +132,10 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [MyWebsite],
-                listeners: [SecretRouteListeners]
+                listeners: [SecretRouteListeners],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -153,7 +155,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { http, httpWorkflow } from '@deepkit/http';
             import { classToPlain, t } from '@deepkit/type';
             import { eventDispatcher } from '@deepkit/event';
@@ -183,9 +186,10 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [MyWebsite],
-                listeners: [UserResponseMapping]
+                listeners: [UserResponseMapping],
+                imports: [new FrameworkModule]
             })
                 .run();
         </textarea>

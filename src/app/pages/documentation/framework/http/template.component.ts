@@ -36,7 +36,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.tsx">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application, KernelModule } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { http } from '@deepkit/http';
             
             @http.controller('my-base-url/')
@@ -47,10 +48,10 @@ import { Component } from '@angular/core';
                 }
             }
 
-            new Application({
+            new App({
                 controllers: [MyPage],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         debug: true,
                     })
                 ]

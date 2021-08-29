@@ -18,8 +18,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
-            import { createModuleConfig } from '@deepkit/app';
+            import { App, createModuleConfig } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { t } from '@deepkit/type';
             import { inject } from '@deepkit/injector';
             import { http } from '@deepkit/http';
@@ -41,13 +41,12 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
+                imports: [new FrameworkModule]
             })
-                .loadConfigFromEnvVariables('APP_')
-                .loadConfigFromEnvVariable('APP_CONFIG')
-                .loadConfigFromEnvFile(['production.dotenv', 'dotenv'])
+                .loadConfigFromEnv()
                 .run();
         </textarea>
 
@@ -98,10 +97,9 @@ import { Component } from '@angular/core';
         <p>
             In a production environment, you would not bind the server to <code>localhost</code> but most likely to all devices via <code>0.0.0.0</code>.
             If not behind a reverse proxy you also would adjust the port to be <code>80</code>. To configure those two settings, you have
-            to adjust the <code>KernelModule</code>. This module is automatically loaded and provides several config options. The two we
-            care about are <code>kernel.host</code> and <code>kernel.port</code>. To allow them to be configured from the outside via environment
-            variables or via <i>.dotenv</i> files we first have to allow that. Luckily our code above already did so using the methods
-            <code>loadConfigFrom•</code>.
+            to adjust the <code>FrameworkModule</code>. The two we care about are <code>host</code> and <code>port</code>. 
+            To allow them to be configured from the outside via environment variables or via <i>.dotenv</i> files we first have to allow that. 
+            Luckily our code above already did so using the methods <code>loadConfigFromEnv()</code>.
         </p>
         
         <p>
@@ -117,9 +115,9 @@ import { Component } from '@angular/core';
         <h4>SSL</h4>
         
         <p>
-            Its recommended (and sometimes required) to let your app run at HTTPS using SSL. There are several kernel options to configure
+            Its recommended (and sometimes required) to let your app run at HTTPS using SSL. There are several options to configure
             SSL.
-            To enable ssl use <code>kernel.ssl</code> and to configure its parameters following options.
+            To enable ssl use <code>framework.ssl</code> and to configure its parameters following options.
         </p>
         
         <table class="pretty">
@@ -129,52 +127,53 @@ import { Component } from '@angular/core';
                 <th>Description</th>
             </tr>
             <tr>
-                <td>kernel.ssl</td>
+                <td>framework.ssl</td>
                 <td>boolean</td>
                 <td>Enables HTTPS server when true</td>
             </tr>
             <tr>
-                <td>kernel.httpsPort</td>
+                <td>framework.httpsPort</td>
                 <td>number?</td>
                 <td>If httpsPort and ssl is defined, then the https server is started additional to the http server.</td>
             </tr>
             <tr>
-                <td>kernel.sslKey</td>
+                <td>framework.sslKey</td>
                 <td>string?</td>
                 <td>A file path to a ssl key file for https</td>
             </tr>
             <tr>
-                <td>kernel.sslCertificate</td>
+                <td>framework.sslCertificate</td>
                 <td>string?</td>
                 <td>A file path to a certificate file for https</td>
             </tr>
             <tr>
-                <td>kernel.sslCa</td>
+                <td>framework.sslCa</td>
                 <td>string?</td>
                 <td>A file path to a ca file for https</td>
             </tr>
             <tr>
-                <td>kernel.sslCrl</td>
+                <td>framework.sslCrl</td>
                 <td>string?</td>
                 <td>A file path to a crl file for https</td>
             </tr>
             <tr>
-                <td>kernel.sslOptions</td>
+                <td>framework.sslOptions</td>
                 <td>object?</td>
                 <td>Same interface as tls.SecureContextOptions & tls.TlsOptions. </td>
             </tr>
         </table>
 
         <textarea codeHighlight title="app.ts">
-            import { Application, KernelModule } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             
             // your config and http controller here 
             
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         ssl: true,
                         selfSigned: true,
                         sslKey: __dirname + 'path/ssl.key',
@@ -189,19 +188,20 @@ import { Component } from '@angular/core';
         <h4>Local SSL</h4>
         
         <p>
-            In local dev environment you can activate self-signed HTTPs using the kernel option <code>kernel.selfsigned</code>. 
+            In local dev environment you can activate self-signed HTTPs using the option <code>framework.selfSigned</code>. 
         </p>
 
         <textarea codeHighlight title="app.ts">
-            import { Application, KernelModule } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             
             // your config and http controller here 
             
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         ssl: true,
                         selfSigned: true,
                     })

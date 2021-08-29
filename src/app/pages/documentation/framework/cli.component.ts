@@ -33,7 +33,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { cli, Command } from '@deepkit/app';
             
@@ -49,7 +49,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [TestCommand]
             }).run();
         </textarea>

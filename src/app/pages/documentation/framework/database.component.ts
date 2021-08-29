@@ -102,12 +102,13 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { KernelModule, Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             
-            new Application({
+            new App({
                 providers: [SQLiteDatabase],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         migrateOnStartup: true,
                         debug: true,
                     })
@@ -192,15 +193,14 @@ import { Component } from '@angular/core';
 
         <p>
             As you can see, we inject the <code>SQLiteDatabase</code> directly as constructor argument. 
-            Since we registered this class in <code>KernelModule</code> it will automatically be instantiated and injected 
-            (since it will be added as provided in the background).
             Let's register the TestCommand and execute it.
         </p>
 
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application, KernelModule } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { arg, cli, Command } from '@deepkit/app';
             import { entity, t } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
@@ -215,7 +215,6 @@ import { Component } from '@angular/core';
                 constructor(@t public username: string) {
                 }
             }
-            
             
             export class SQLiteDatabase extends Database {
                 name = 'default';
@@ -238,11 +237,11 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [TestCommand],
                 providers: [SQLiteDatabase],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         migrateOnStartup: true,
                         debug: true,
                     })

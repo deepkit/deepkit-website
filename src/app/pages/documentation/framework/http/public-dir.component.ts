@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
         <h2>Public directory</h2>
 
         <p>
-            The kernel provides a way to serve static files like images, PDFs, binary files, etc. The configuration
-            option <code>kernel.publicDir</code> allows you to specify which folder should be used as default entry point for
+            The FrameworkModule provides a way to serve static files like images, PDFs, binary files, etc. The configuration
+            option <code>publicDir</code> allows you to specify which folder should be used as default entry point for
             requests that don't lead to a HTTP controller route. Per default this behavior is disabled (empty value).
         </p>
         
         <p>
-            To enable serving public files set <code>kernel.publicDir</code> to folder you want. Usually you would pick a name
+            To enable serving public files set <code>publicDir</code> to a folder you want. Usually you would pick a name
             like <code>publicDir</code> to make things obvious.
         </p>
 
@@ -25,19 +25,20 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            To hard configure the  <code>kernel.publicDir</code> you can import <code>KernelModule</code> and modify it via <code>configure</code>.
+            To change the <code>publicDir</code> you can alter the first argument of <code>FrameworkModule</code>.
         </p>
 
         <textarea codeHighlight title="app.ts">
-            import { Application, KernelModule } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             
             // your config and http controller here 
             
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         publicDir: 'publicDir'
                     })
                 ]

@@ -21,8 +21,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
-            import { createModuleConfig } from '@deepkit/app';
+            import { App, createModuleConfig } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { t } from '@deepkit/type';
             import { inject } from '@deepkit/injector';
             import { http } from '@deepkit/http';
@@ -45,9 +45,10 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 config: config,
-                controllers: [MyWebsite]
+                controllers: [MyWebsite],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -161,18 +162,19 @@ import { Component } from '@angular/core';
 
         <p>
             Configuration values of your application and all modules can be shown in the debugger. Activate the <code>debug</code> option in
-            the <i>KernelModule</i> and open
+            the <i>FrameworkModule</i> and open
             <a target="_blank" href="http://localhost:8080/_debug/configuration">http://localhost:8080/_debug/configuration</a>.
         </p>
 
         <textarea codeHighlight>
-            import { Application, KernelModule } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
 
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [
-                    KernelModule.configure({
+                    new FrameworkModule({
                         debug: true,
                     })
                 ]
@@ -200,18 +202,18 @@ import { Component } from '@angular/core';
             │    5    │ 'emailSender' │       undefined        │       undefined        │     ''      │ 'string?' │
             └─────────┴───────────────┴────────────────────────┴────────────────────────┴─────────────┴───────────┘
             Modules config
-            ┌─────────┬───────────────────────────┬─────────────────┬─────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────┐
-            │ (index) │           name            │      value      │  defaultValue   │                                            description                                             │    type    │
-            ├─────────┼───────────────────────────┼─────────────────┼─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┤
-            │    0    │       'kernel.host'       │   'localhost'   │   'localhost'   │                                                 ''                                                 │  'string'  │
-            │    1    │       'kernel.port'       │      8080       │      8080       │                                                 ''                                                 │  'number'  │
-            │    2    │    'kernel.httpsPort'     │    undefined    │    undefined    │ 'If httpsPort and ssl is defined, then the https server is started additional to the http-server.' │ 'number?'  │
-            │    3    │    'kernel.selfSigned'    │    undefined    │    undefined    │           'If for ssl: true the certificate and key should be automatically generated.'            │ 'boolean?' │
-            │    4    │ 'kernel.keepAliveTimeout' │    undefined    │    undefined    │                                                 ''                                                 │ 'number?'  │
-            │    5    │       'kernel.path'       │       '/'       │       '/'       │                                                 ''                                                 │  'string'  │
-            │    6    │     'kernel.workers'      │        1        │        1        │                                                 ''                                                 │  'number'  │
-            │    7    │       'kernel.ssl'        │      false      │      false      │                                       'Enables HTTPS server'                                       │ 'boolean'  │
-            │    8    │    'kernel.sslOptions'    │    undefined    │    undefined    │                   'Same interface as tls.SecureContextOptions & tls.TlsOptions.'                   │   'any'    │
+            ┌─────────┬──────────────────────────────┬─────────────────┬─────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────┐
+            │ (index) │           name               │      value      │  defaultValue   │                                            description                                             │    type    │
+            ├─────────┼──────────────────────────────┼─────────────────┼─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┤
+            │    0    │       'framework.host'       │   'localhost'   │   'localhost'   │                                                 ''                                                 │  'string'  │
+            │    1    │       'framework.port'       │      8080       │      8080       │                                                 ''                                                 │  'number'  │
+            │    2    │    'framework.httpsPort'     │    undefined    │    undefined    │ 'If httpsPort and ssl is defined, then the https server is started additional to the http-server.' │ 'number?'  │
+            │    3    │    'framework.selfSigned'    │    undefined    │    undefined    │           'If for ssl: true the certificate and key should be automatically generated.'            │ 'boolean?' │
+            │    4    │ 'framework.keepAliveTimeout' │    undefined    │    undefined    │                                                 ''                                                 │ 'number?'  │
+            │    5    │       'framework.path'       │       '/'       │       '/'       │                                                 ''                                                 │  'string'  │
+            │    6    │     'framework.workers'      │        1        │        1        │                                                 ''                                                 │  'number'  │
+            │    7    │       'framework.ssl'        │      false      │      false      │                                       'Enables HTTPS server'                                       │ 'boolean'  │
+            │    8    │    'framework.sslOptions'    │    undefined    │    undefined    │                   'Same interface as tls.SecureContextOptions & tls.TlsOptions.'                   │   'any'    │
             ...
         </textarea>
 
@@ -234,25 +236,26 @@ import { Component } from '@angular/core';
         <h4>Environment variables</h4>
 
         <p>
-            To allow setting each configuration option via its own environment variable, use <code>loadConfigFromEnvVariables</code>.
-            The first argument is its prefix.
+            To allow setting each configuration option via its own environment variable, use <code>loadConfigFromEnv</code>.
+            The default prefix is <code>APP_</code>, but you can change tht. It also loads automatically <code>.env</code> files.
+            Per default a <code>uppercase</code> naming strategy is used, but you can change that as well.
         </p>
 
         <p>
-            For configuration options like above <code>pageTitle</code>, you can use <code>APP_pageTitle="Other title"</code>.
+            For configuration options like above <code>pageTitle</code>, you can use <code>APP_PAGE_TITLE="Other title"</code>.
         </p>
 
         <textarea codeHighlight title="app.ts">
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
             })
-                .loadConfigFromEnvVariables('APP_')
+                .loadConfigFromEnv()
                 .run();
         </textarea>
 
         <textarea codeHighlight="bash">
-            APP_pageTitle="Other title" ts-node app.ts server:start
+            APP_PAGE_TITLE="Other title" ts-node app.ts server:start
         </textarea>
 
         <h4>JSON environment variable</h4>
@@ -263,7 +266,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight title="app.ts">
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
             })
@@ -278,40 +281,40 @@ import { Component } from '@angular/core';
         <h4>DotEnv files</h4>
 
         <p>
-            To change multiple configuration options via a dotenv file, use <code>loadConfigFromEnvFile</code>.
+            To change multiple configuration options via a dotenv file, use <code>loadConfigFromEnv</code>.
             The first argument is either a path to a dot env (relative to cwd) or multiple paths. If its an array
             it tries each path until it finds an existing file.
         </p>
 
         <textarea codeHighlight>
-            new Application({
+            new App({
                 config: config,
                 controllers: [MyWebsite],
             })
-                .loadConfigFromEnvFile(['production.dotenv', 'dotenv'])
+                .loadConfigFromEnv({envFilePath: ['production.dotenv', 'dotenv']})
                 .run();
         </textarea>
 
         <textarea codeHighlight="bash">
             $ cat dotenv
-            pageTitle=Other title
+            APP_PAGE_TITLE=Other title
             $ ts-node app.ts server:start
         </textarea>
 
         <h3>Configure module</h3>
 
         <p>
-            Each imported module should have a module id. This id is used for the configuration paths used above.
-            Core modules like <code>KernelModule</code> and <code>HttpModule</code> are imported automatically if not done manually.
+            Each imported module can have a module name. This name is used for the configuration paths used above.
         </p>
 
         <p>
-            For environment variable configuration the path for example for the kernel option <code>port</code> is <code>kernel_port</code>.
+            For environment variable configuration the path for example for the FrameworkModule option <code>port</code> is <code>FRAMEWORK_PORT</code>.
+            All names are per default upper-case.
             If a prefix of <code>APP_</code> is used you can change the port via:
         </p>
 
         <textarea codeHighlight="bash">
-            $ APP_kernel_port=9999 ts-node app.ts server:start
+            $ APP_FRAMEWORK_PORT=9999 ts-node app.ts server:start
             2021-06-12T18:59:26.363Z [LOG] Start HTTP server, using 1 workers.
             2021-06-12T18:59:26.365Z [LOG] HTTP MyWebsite
             2021-06-12T18:59:26.366Z [LOG]     GET / helloWorld
@@ -319,15 +322,15 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            In dotenv files it would become <code>kernel_port=9999</code>.
+            In dotenv files it would be <code>APP_FRAMEWORK_PORT=9999</code> too.
         </p>
 
         <p>
-            In JSON environment variables on the other hand its not separated by an underscore. <code>kernel</code> becomes an object.
+            In JSON environment variables via <code>loadConfigFromEnvVariable('APP_CONFIG')</code> on the other hand its not separated by an underscore nor upper-case. <code>framework</code> becomes an object.
         </p>
 
         <textarea codeHighlight>
-            $ APP_CONFIG='{"kernel": {"port": 9999}}' ts-node app.ts server:start
+            $ APP_CONFIG='{"framework": {"port": 9999}}' ts-node app.ts server:start
         </textarea>
 
         <p>

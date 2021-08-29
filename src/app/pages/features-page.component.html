@@ -175,7 +175,8 @@
             <div style="flex: 0 1 350px">
             <textarea codeHighlight title="app.ts">
                 import 'reflect-metadata';
-                import { Application } from '@deepkit/framework';
+                import { App } from '@deepkit/app';
+                import { FrameworkModule } from '@deepkit/framework';
                 import { http } from '@deepkit/http';
 
                 @http.controller()
@@ -186,8 +187,9 @@
                     }
                 }
 
-                new Application({
+                new App({
                     controllers: [MyPage],
+                    imports: [new FrameworkModule]
                 }).run();
             </textarea>
             </div>
@@ -351,7 +353,8 @@
 
                     <textarea codeHighlight>
                     import 'reflect-metadata';
-                    import { Application } from '@deepkit/framework';
+                    import { App } from '@deepkit/app';
+                    import { FrameworkModule } from '@deepkit/framework';
                     import { http } from '@deepkit/http';
 
                     @http.controller()
@@ -362,8 +365,9 @@
                         }
                     }
 
-                    new Application({
+                    new App({
                         controllers: [MyController],
+                        imports: [new FrameworkModule]
                     }).run();
                 </textarea>
 
@@ -377,7 +381,8 @@
 
                     <textarea codeHighlight>
                     import 'reflect-metadata';
-                    import { Application } from '@deepkit/framework';
+                    import { App } from '@deepkit/app';
+                    import { FrameworkModule } from '@deepkit/framework';
                     import { rpc } from '@deepkit/rpc';
 
                     @rpc.controller()
@@ -388,8 +393,9 @@
                         }
                     }
 
-                    new Application({
+                    new App({
                         controllers: [MyController],
+                        imports: [new FrameworkModule]
                     }).run();
                 </textarea>
 
@@ -407,7 +413,7 @@
 
                     <textarea codeHighlight>
                     import 'reflect-metadata';
-                    import { Application } from '@deepkit/framework';
+                    import { App } from '@deepkit/app';
                     import { cli } from '@deepkit/cli';
 
                     @cli.controller('my-command')
@@ -417,13 +423,12 @@
                         }
                     }
 
-
-                    new Application({
+                    new App({
                         controllers: [MyController],
                     }).run();
                 </textarea>
 
-                    <textarea codeHighlight="bash">
+                <textarea codeHighlight="bash">
                    $ ts-node app.ts my-command
                     Hello world!
                 </textarea>
@@ -532,7 +537,7 @@
             <div>
             <textarea codeHighlight>
                 import { createModuleConfig } from '@deepkit/app';
-                import { Application } from '@deepkit/framework';
+                import { App } from '@deepkit/app';
                 import { t } from '@deepkit/type';
                 import { injectable } from '@deepkit/injector';
 
@@ -557,7 +562,7 @@
                     }
                 }
 
-                new Application({
+                new App({
                     config: config,
                     providers: [EmailService]
                 })

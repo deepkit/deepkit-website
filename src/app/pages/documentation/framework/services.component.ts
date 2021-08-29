@@ -46,7 +46,7 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight title="app.ts">
-            new Application({
+            new App({
                 providers: [UserManager]
             }).run();
         </textarea>

@@ -18,7 +18,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { http } from '@deepkit/http';
             
             @http.controller('my-base-url/')
@@ -29,8 +30,9 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [MyPage],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -376,7 +378,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { injectable } from '@deepkit/injector';
             import { http, RouteParameterResolverContext, RouteParameterResolverTag } from '@deepkit/http';
             import { RouteParameterResolver } from '@deepkit/http/src/router';
@@ -426,12 +429,13 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [MyWebsite],
                 providers: [
                     UserDatabase,
                     RouteParameterResolverTag.provide(UserResolver)
-                ]
+                ],
+                imports: [new FrameworkModule]
             })
                 .run();
         </textarea>
@@ -524,7 +528,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { http, Redirect } from '@deepkit/http';
             import { t } from '@deepkit/type';
             
@@ -557,9 +562,10 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 providers: [Users],
                 controllers: [MyWebsite],
+                imports: [new FrameworkModule]
             }).run();
 
         </textarea>
@@ -578,7 +584,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { http, httpWorkflow } from '@deepkit/http';
             import { classToPlain, t } from '@deepkit/type';
             import { eventDispatcher } from '@deepkit/event';
@@ -608,9 +615,10 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [MyWebsite],
-                listeners: [UserResponseMapping]
+                listeners: [UserResponseMapping],
+                imports: [new FrameworkModule]
             })
                 .run();
 

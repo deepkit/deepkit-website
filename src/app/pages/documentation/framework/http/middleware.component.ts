@@ -34,12 +34,13 @@ import { Component } from '@angular/core';
                 next();
             }
             
-            new Application({
+            new App({
                 providers: [MyMiddleware],
                 middlewares: [
                     httpMiddleware.for(MyMiddleware),
                     httpMiddleware.for(myMiddlewareFunction),
                 ],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -52,11 +53,12 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { httpMiddleware } from '@deepkit/http';
 
-            new Application({
+            new App({
                 providers: [MyMiddleware],
                 middlewares: [
                     httpMiddleware.for(MyMiddleware)
                 ],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -76,12 +78,13 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight>
-            new Application({
+            new App({
                 providers: [MyMiddleware],
                 controllers: [MainController, UsersCommand],
                 middlewares: [
                     httpMiddleware.for(MyMiddleware).forControllers(MyFirstController, MySecondController)
                 ],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -106,12 +109,13 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight>
-            new Application({
+            new App({
                 controllers: [MainController, UsersCommand],
                 providers: [MyMiddleware],
                 middlewares: [
                     httpMiddleware.for(MyMiddleware).forRouteNames('firstRoute', 'secondRoute')
                 ],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -133,7 +137,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight>
-            new Application({
+            new App({
                 controllers: [MainController, UsersCommand],
                 providers: [MyMiddleware],
                 middlewares: [
@@ -141,6 +145,7 @@ import { Component } from '@angular/core';
                         path: 'api/*'
                     })
                 ],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 

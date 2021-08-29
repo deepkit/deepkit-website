@@ -27,7 +27,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { rpc } from '@deepkit/rpc';
             import { MyRPCInterface } from './my-rpc';
             
@@ -40,8 +41,9 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 controllers: [MyRpcController],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -147,7 +149,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="client.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application, onServerMainBootstrap, onServerMainShutdown, WebWorkerFactory } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule, onServerMainBootstrap, onServerMainShutdown, WebWorkerFactory } from '@deepkit/framework';
             import { injectable } from '@deepkit/injector';
             import { TcpRpcServer } from '@deepkit/rpc-tcp';
             import { eventDispatcher } from '@deepkit/event';
@@ -177,8 +180,9 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
-                listeners: [RpcTcpBootstrap]
+            new App({
+                listeners: [RpcTcpBootstrap],
+                imports: [new FrameworkModule]
             })
                 .run();
         </textarea>

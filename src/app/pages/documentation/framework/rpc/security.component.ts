@@ -29,7 +29,8 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
-            import { Application } from '@deepkit/framework';
+            import { App } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             import { rpc, RpcKernelSecurity, Session, RpcAction } from '@deepkit/rpc';
             import { MyRPCInterface } from './my-rpc';
             import { ClassType } from '@deepkit/core';
@@ -62,11 +63,12 @@ import { Component } from '@angular/core';
                 }
             }
             
-            new Application({
+            new App({
                 providers: [
                     {provide: RpcKernelSecurity, useClass: MyRpcSecurity}
                 ],
                 controllers: [MyRpcController],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
