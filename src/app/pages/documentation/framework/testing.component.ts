@@ -164,7 +164,7 @@ import { Component } from '@angular/core';
 
 
         <textarea codeHighlight title="core.ts">
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 items: t.number.default(10)
             });
             
@@ -193,7 +193,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="app.ts">
             import { AppCoreModule } from './app-core.ts';
             
-            Application.create({
+            new Application({
                 imports: [AppCoreModule]
             }).run();
         </textarea>

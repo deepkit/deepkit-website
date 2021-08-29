@@ -62,7 +62,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 providers: [
                     {provide: RpcKernelSecurity, useClass: MyRpcSecurity}
                 ],

@@ -104,7 +104,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { KernelModule, Application } from '@deepkit/framework';
             
-            Application.create({
+            new Application({
                 providers: [SQLiteDatabase],
                 imports: [
                     KernelModule.configure({
@@ -238,7 +238,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [TestCommand],
                 providers: [SQLiteDatabase],
                 imports: [

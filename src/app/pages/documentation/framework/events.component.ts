@@ -101,7 +101,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 listeners: [MyListener],
             }).run();
         </textarea>
@@ -147,7 +147,7 @@ class MyListener {
     }
 }
 
-Application.create({
+new Application({
     controllers: [TestCommand],
     listeners: [MyListener],
 }).run();
@@ -170,7 +170,7 @@ Application.create({
                 }
             }
             
-            Application.create({
+            new Application({
                 listeners: [MyListener],
             }).run();
         </textarea>

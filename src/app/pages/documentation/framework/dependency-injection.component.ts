@@ -45,7 +45,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 providers: [MyService, Database],
             }).run();
         </textarea>
@@ -79,7 +79,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             const database = new Database();
 
-            Application.create({
+            new Application({
                 providers: [{provide: MyService, useValue: new MyService(database)}],
             }).run();
         </textarea>
@@ -92,7 +92,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            Application.create({
+            new Application({
                 providers: [
                     {
                         provide: MyService, 
@@ -194,13 +194,13 @@ import { Component } from '@angular/core';
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
             import { Application } from '@deepkit/framework';
-            import { AppModuleConfig } from '@deepkit/app';
+            import { createModuleConfig } from '@deepkit/app';
             import { t } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             import { MongoDatabaseAdapter } from '@deepkit/mongo';
             import { inject } from '@deepkit/injector';
             
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 database: t.string.default('mongodb://localhost'),
             });
             
@@ -213,7 +213,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 config: config,
                 providers: [MainDatabase]
             }).run();
@@ -236,18 +236,18 @@ import { Component } from '@angular/core';
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
             import { Application } from '@deepkit/framework';
-            import { AppModuleConfig } from '@deepkit/app';
+            import { createModuleConfig } from '@deepkit/app';
             import { t } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             import { MongoDatabaseAdapter } from '@deepkit/mongo';
             import { injectable } from '@deepkit/injector';
             
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 databaseUrl: t.string.default('mongodb://localhost'),
                 pageTitle: t.string.default('My super page'),
             });
             
-            class DatabaseSettings extends config.slice(['databaseUrl']) {
+            class DatabaseSettings extends config.slice('databaseUrl') {
             }
             
             @injectable()
@@ -257,7 +257,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 config: config,
                 providers: [MainDatabase]
             }).run();
@@ -324,7 +324,7 @@ import { Component } from '@angular/core';
                 }   
             }
             
-            Application.create({ to describe how a service needs to be built
+            new Application({ to describe how a service needs to be built
                 providers: [{provide: MyHttpSessionHandler, scope: 'http'}]
             }).run();
         </textarea>
@@ -342,7 +342,7 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { AppModuleConfig, } from '@deepkit/app';
+            import { createModuleConfig, } from '@deepkit/app';
             import { Application } from '@deepkit/framework';
             import { Logger } from '@deepkit/logger';
             import { injectorReference } from '@deepkit/injector';
@@ -363,11 +363,11 @@ import { Component } from '@angular/core';
                 }
             }
             
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 migrateOnStartup: t.boolean.default(false),
             });
             
-            Application.create({
+            new Application({
                 config: config,
                 providers: [DatabaseRegistry, Logger]
             })
@@ -444,7 +444,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [TestCommand],
                 providers: [
                     DatabaseRegistry,

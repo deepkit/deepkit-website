@@ -33,7 +33,7 @@ import { Component } from '@angular/core';
             
             // your config and http controller here 
             
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [

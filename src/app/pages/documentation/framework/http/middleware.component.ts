@@ -34,7 +34,7 @@ import { Component } from '@angular/core';
                 next();
             }
             
-            Application.create({
+            new Application({
                 providers: [MyMiddleware],
                 middlewares: [
                     httpMiddleware.for(MyMiddleware),
@@ -52,7 +52,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { httpMiddleware } from '@deepkit/http';
 
-            Application.create({
+            new Application({
                 providers: [MyMiddleware],
                 middlewares: [
                     httpMiddleware.for(MyMiddleware)
@@ -76,7 +76,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight>
-            Application.create({
+            new Application({
                 providers: [MyMiddleware],
                 controllers: [MainController, UsersCommand],
                 middlewares: [
@@ -106,7 +106,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight>
-            Application.create({
+            new Application({
                 controllers: [MainController, UsersCommand],
                 providers: [MyMiddleware],
                 middlewares: [
@@ -133,7 +133,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight>
-            Application.create({
+            new Application({
                 controllers: [MainController, UsersCommand],
                 providers: [MyMiddleware],
                 middlewares: [

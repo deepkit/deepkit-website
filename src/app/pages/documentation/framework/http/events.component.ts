@@ -131,7 +131,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [MyWebsite],
                 listeners: [SecretRouteListeners]
             }).run();
@@ -183,7 +183,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [MyWebsite],
                 listeners: [UserResponseMapping]
             })

@@ -40,7 +40,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [MyRpcController],
             }).run();
         </textarea>
@@ -177,7 +177,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 listeners: [RpcTcpBootstrap]
             })
                 .run();

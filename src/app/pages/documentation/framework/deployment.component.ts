@@ -19,12 +19,12 @@ import { Component } from '@angular/core';
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
             import { Application } from '@deepkit/framework';
-            import { AppModuleConfig } from '@deepkit/app';
+            import { createModuleConfig } from '@deepkit/app';
             import { t } from '@deepkit/type';
             import { inject } from '@deepkit/injector';
             import { http } from '@deepkit/http';
             
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 title: t.string.default('DEV my Page'),
             });
             
@@ -41,7 +41,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
             })
@@ -170,7 +170,7 @@ import { Component } from '@angular/core';
             
             // your config and http controller here 
             
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [
@@ -197,7 +197,7 @@ import { Component } from '@angular/core';
             
             // your config and http controller here 
             
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [

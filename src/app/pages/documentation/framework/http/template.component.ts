@@ -47,7 +47,7 @@ import { Component } from '@angular/core';
                 }
             }
 
-            Application.create({
+            new Application({
                 controllers: [MyPage],
                 imports: [
                     KernelModule.configure({

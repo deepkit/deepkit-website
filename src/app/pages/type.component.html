@@ -37,14 +37,14 @@
         <h2>Class schema</h2>
         <p>
             Annotate your model classes with <code>@t</code>
-            to get runtime type information and allow serialization and validation.
+            to get runtime type information, allow serialization and validation.
         </p>
 
         <textarea codeHighlight>
             import { t, plainToClass, classToPlain, validate } from '@deepkit/type';
 
             class Config {
-                color: string = '#334422';
+                @t color: string = '#334422';
             }
 
             class User {

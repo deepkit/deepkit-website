@@ -1,4 +1,4 @@
-import { AfterViewInit, ContentChildren, QueryList } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ContentChildren, QueryList } from '@angular/core';
 import { Component, Directive, Input } from '@angular/core';
 
 @Directive({
@@ -101,8 +101,11 @@ export class PerformanceChartComponent implements AfterViewInit {
     @Input() sort: 'asc' | 'desc' = 'desc';
     @Input() format: string = '0.2-2';
 
-
     items: { title: string, value: number, height: number, labelPos: number }[] = [];
+
+    constructor(protected cd: ChangeDetectorRef) {
+    }
+
 
     ngAfterViewInit(): void {
         if (!this.entries) return;
@@ -141,5 +144,6 @@ export class PerformanceChartComponent implements AfterViewInit {
         }
 
         this.items.reverse();
+        this.cd.detectChanges();
     }
 }

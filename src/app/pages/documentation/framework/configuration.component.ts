@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            A configuration can be defined using <code>AppModuleConfig</code> and the <code>t</code> decorator
+            A configuration can be defined using <code>createModuleConfig</code> and the <code>t</code> decorator
             of <code>@deepkit/type</code>. It is a typesafe way to define a configuration for your whole
             application and its values are automatically serialized and validated.
         </p>
@@ -22,12 +22,12 @@ import { Component } from '@angular/core';
             #!/usr/bin/env ts-node-script
             import 'reflect-metadata';
             import { Application } from '@deepkit/framework';
-            import { AppModuleConfig } from '@deepkit/app';
+            import { createModuleConfig } from '@deepkit/app';
             import { t } from '@deepkit/type';
             import { inject } from '@deepkit/injector';
             import { http } from '@deepkit/http';
             
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 pageTitle: t.string.default('Cool site'),
                 domain: t.string.default('example.com'),
             });
@@ -45,7 +45,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite]
             }).run();
@@ -89,7 +89,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="website.ts">
             import { config } from './app-config.ts';
             
-            class WebsiteSettings extends config.slice(['pageTitle']) {
+            class WebsiteSettings extends config.slice('pageTitle') {
             }
             
             @http.controller()
@@ -143,7 +143,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            const config = new AppModuleConfig({
+            const config = createModuleConfig({
                 pageTitle: t.string.default('Cool site'),
                 domain: t.string.default('example.com'),
                 port: t.number.default(8080),
@@ -168,7 +168,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { Application, KernelModule } from '@deepkit/framework';
 
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
                 imports: [
@@ -243,7 +243,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight title="app.ts">
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
             })
@@ -263,7 +263,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight title="app.ts">
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
             })
@@ -284,7 +284,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            Application.create({
+            new Application({
                 config: config,
                 controllers: [MyWebsite],
             })

@@ -49,7 +49,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [TestCommand]
             }).run();
         </textarea>

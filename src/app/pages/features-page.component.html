@@ -186,7 +186,7 @@
                     }
                 }
 
-                Application.create({
+                new Application({
                     controllers: [MyPage],
                 }).run();
             </textarea>
@@ -362,7 +362,7 @@
                         }
                     }
 
-                    Application.create({
+                    new Application({
                         controllers: [MyController],
                     }).run();
                 </textarea>
@@ -388,7 +388,7 @@
                         }
                     }
 
-                    Application.create({
+                    new Application({
                         controllers: [MyController],
                     }).run();
                 </textarea>
@@ -418,7 +418,7 @@
                     }
 
 
-                    Application.create({
+                    new Application({
                         controllers: [MyController],
                     }).run();
                 </textarea>
@@ -531,17 +531,17 @@
         <div class="columns">
             <div>
             <textarea codeHighlight>
-                import { AppModuleConfig } from '@deepkit/app';
+                import { createModuleConfig } from '@deepkit/app';
                 import { Application } from '@deepkit/framework';
                 import { t } from '@deepkit/type';
                 import { injectable } from '@deepkit/injector';
 
-                const config = new AppModuleConfig({
+                const config = createModuleConfig({
                     email: t.boolean.default(false),
                     emailSender: t.string.optional,
                 });
 
-                class EmailSettings extends config.slice(['email', 'emailSender']) {}
+                class EmailSettings extends config.slice('email', 'emailSender') {}
 
                 @injectable()
                 class EmailService {
@@ -557,7 +557,7 @@
                     }
                 }
 
-                Application.create({
+                new Application({
                     config: config,
                     providers: [EmailService]
                 })

@@ -29,7 +29,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [MyPage],
             }).run();
         </textarea>
@@ -426,7 +426,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [MyWebsite],
                 providers: [
                     UserDatabase,
@@ -557,7 +557,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 providers: [Users],
                 controllers: [MyWebsite],
             }).run();
@@ -608,7 +608,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            Application.create({
+            new Application({
                 controllers: [MyWebsite],
                 listeners: [UserResponseMapping]
             })
