@@ -34,17 +34,17 @@
     "crypto": false
   },
   "dependencies": {
-    "@angular-builders/custom-webpack": "^11.0.0",
-    "@angular/animations": "^11.0.2",
-    "@angular/common": "^11.0.2",
-    "@angular/compiler": "^11.0.2",
-    "@angular/core": "^11.0.2",
-    "@angular/elements": "^11.0.2",
-    "@angular/forms": "^11.0.2",
-    "@angular/platform-browser": "^11.0.2",
-    "@angular/platform-browser-dynamic": "^11.0.2",
-    "@angular/platform-server": "^11.0.2",
-    "@angular/router": "^11.0.2",
+    "@angular-builders/custom-webpack": "^12.1.1",
+    "@angular/animations": "^12.2.3",
+    "@angular/common": "^12.2.3",
+    "@angular/compiler": "^12.2.3",
+    "@angular/core": "^12.2.3",
+    "@angular/elements": "^12.2.3",
+    "@angular/forms": "^12.2.3",
+    "@angular/platform-browser": "^12.2.3",
+    "@angular/platform-browser-dynamic": "^12.2.3",
+    "@angular/platform-server": "^12.2.3",
+    "@angular/router": "^12.2.3",
     "@deepkit/angular-universal": "^1.0.1-alpha.52",
     "@deepkit/app": "^1.0.1-alpha.52",
     "@deepkit/broker": "^1.0.1-alpha.52",
@@ -68,7 +68,6 @@
     "@deepkit/template": "^1.0.1-alpha.52",
     "@deepkit/type": "^1.0.1-alpha.52",
     "@deepkit/workflow": "^1.0.1-alpha.52",
-    "@nguniversal/express-engine": "^11.0.0",
     "monaco-editor": "^0.21.3",
     "monaco-editor-webpack-plugin": "^2.1.0",
     "npm-run-all": "^4.1.5",
@@ -82,13 +81,13 @@
     "typedoc": "^0.21.0",
     "universal-analytics": "^0.4.20",
     "webpack-visualizer-plugin": "^0.1.11",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1100.2",
+    "@angular-devkit/build-angular": "^12.2.3",
     "@angular/cli": "^11.0.2",
-    "@angular/compiler-cli": "^11.0.2",
-    "@angular/language-service": "^11.0.2",
+    "@angular/compiler-cli": "^12.2.3",
+    "@angular/language-service": "^12.2.3",
     "@types/jasmine": "~3.4.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^14.0.0",
@@ -109,7 +108,7 @@
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.1",
     "tslint": "~6.1.0",
-    "typescript": "^4.1.2",
+    "typescript": "^4.3.5",
     "webpack-cli": "^3.1.0"
   }
 }
