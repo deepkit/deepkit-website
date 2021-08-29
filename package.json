@@ -14,8 +14,8 @@
     "build:ssr": "ng build --progress=false --configuration production && ng run website:server:production",
     "server-module:watch": "ng run website:server --watch",
     "watch:ssr": "npm-run-all --parallel watch server-module:watch",
-    "server": "ts-node --project ./src/server/tsconfig.json ./src/server/app.ts server:listen",
-    "server:watch": "ts-node-dev --project ./src/server/tsconfig.json ./src/server/app.ts server:listen",
+    "server": "ts-node --project ./src/server/tsconfig.json ./src/server/app.ts server:start",
+    "server:watch": "ts-node-dev --project ./src/server/tsconfig.json ./src/server/app.ts server:start",
     "server:build": "tsc --project ./src/server/tsconfig.json"
   },
   "private": true,
