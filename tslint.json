@@ -20,6 +20,7 @@
     "curly": false,
     "object-literal-shorthand": false,
     "directive-class-suffix": false,
+    "comment-format": false,
     "directive-selector": [
       true,
       "attribute",

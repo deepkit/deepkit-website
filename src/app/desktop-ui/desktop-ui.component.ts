@@ -160,7 +160,7 @@ import { isPlatformBrowser } from '@angular/common';
                 </p>
 
                 <div class="dui-body" style="padding: 16px;">
-                    <form ngForm="form1">
+                    <form [formGroup]="form1">
                         <dui-form-row label="Forename">
                             <dui-input formControlName="forename"></dui-input>
                         </dui-form-row>

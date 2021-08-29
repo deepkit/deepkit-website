@@ -2,7 +2,7 @@
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const webpack = require('webpack');
 const {resolve} = require('path');
-const Visualizer = require('webpack-visualizer-plugin');
+// const Visualizer = require('webpack-visualizer-plugin');
 
 
 module.exports = {
@@ -11,9 +11,9 @@ module.exports = {
         new MonacoWebpackPlugin({
             languages: ['javascript', 'typescript'],
         }),
-        new Visualizer({
-            filename: './statistics.html'
-        }),
+        // new Visualizer({
+        //     filename: './statistics.html'
+        // }),
     ],
     // module: {
     //     rules: [
@@ -27,7 +27,25 @@ module.exports = {
     //         },
     //     ]
     // },
+    resolve: {
+        alias: {
+            util: false,
+            fs: false,
+            path: false,
+            os: false,
+            process: false,
+            stream: false,
+            '@deepkit/logger': false,
+            "sqlite3": false,
+            "electron": false,
+            "ts-node": false,
+            "perf_hooks": false,
+            "fast-glob": false,
+            "@deepkit/app": false,
+            "better-sqlite3": false,
+            "crypto": false
+        }
+    },
     externals: {
-        'better-sqlite3': {root: 'window'}, //just use something that exists, and is NOT better-sqlite3.
     }
 }

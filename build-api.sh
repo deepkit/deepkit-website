@@ -10,7 +10,7 @@ else
   cd /tmp/deepkit-framework-docs;
 fi
 npm i;
-npm run bootstrap -- --scope @deepkit/core --scope @deepkit/core-rxjs --scope @deepkit/app --scope @deepkit/broker \
+npm run bootstrap -- --scope @deepkit/angular-universal --scope @deepkit/core --scope @deepkit/core-rxjs --scope @deepkit/app --scope @deepkit/broker \
   --scope @deepkit/bson --scope @deepkit/crypto --scope @deepkit/desktop-ui --scope @deepkit/event \
   --scope @deepkit/framework --scope @deepkit/http --scope @deepkit/injector --scope @deepkit/logger \
   --scope @deepkit/mongo --scope @deepkit/mysql --scope @deepkit/orm --scope @deepkit/orm-integration --scope @deepkit/postgres \

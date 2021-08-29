@@ -69,6 +69,11 @@
             ]
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "buildOptimizer": false
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -104,6 +109,9 @@
             "browserTarget": "website:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "website:build:development"
+            },
             "production": {
               "browserTarget": "website:build:production"
             }

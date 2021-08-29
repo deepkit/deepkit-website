@@ -1,13 +1,13 @@
-import { DatabaseSession } from '@deepkit/orm';
-import { SQLDatabaseAdapter, SQLDatabaseQueryFactory, SQLPersistence } from '@deepkit/sql';
 import {
     SQLiteConnection,
     SQLiteConnectionPool,
-    SQLiteDatabaseQueryFactory,
-    SQLitePersistence,
     SQLitePlatform,
-    SQLiteStatement
+    SQLiteStatement,
+    SQLiteDatabaseAdapter as OriSQLiteDatabaseAdapter,
+    SQLiteDatabaseTransaction
 } from '@deepkit/sqlite';
+import { DatabaseLogger, DatabaseTransaction } from '@deepkit/orm';
+import { Stopwatch } from '@deepkit/stopwatch';
 
 export class SQLJSStatement extends SQLiteStatement {
     protected stmt: any;
@@ -30,6 +30,20 @@ export class SQLJSStatement extends SQLiteStatement {
 }
 
 export class SQLJSConnection extends SQLiteConnection {
+    getChanges(): Promise<number> {
+        return Promise.resolve(0);
+    }
+
+    constructor(
+        connectionPool: SQLJSConnectionPool,
+        protected dbPath: string,
+        logger?: DatabaseLogger,
+        transaction?: DatabaseTransaction,
+        stopwatch?: Stopwatch,
+    ) {
+        super(connectionPool, dbPath, logger, transaction, stopwatch);
+    }
+
     async prepare(sql: string) {
         return new SQLJSStatement(this.logger, sql, this.db.prepare(sql));
     }
@@ -40,50 +54,23 @@ export class SQLJSConnection extends SQLiteConnection {
 }
 
 export class SQLJSConnectionPool extends SQLiteConnectionPool {
-    async getConnection(): Promise<SQLJSConnection> {
-        this.activeConnections++;
-        return new SQLJSConnection(this, this.db);
+    constructor() {
+        super('');
+    }
+
+
+    protected createConnection(logger?: DatabaseLogger, transaction?: SQLiteDatabaseTransaction, stopwatch?: Stopwatch): SQLiteConnection {
+        return new SQLJSConnection(this, '', logger, transaction, stopwatch);
     }
 }
 
-let lastDb: any;
-
-export class SQLiteDatabaseAdapter extends SQLDatabaseAdapter {
+export class SQLiteDatabaseAdapter extends OriSQLiteDatabaseAdapter {
     public readonly connectionPool: SQLJSConnectionPool;
     public readonly platform = new SQLitePlatform();
-    protected db;
 
     constructor() {
         super();
-        if (lastDb) {
-            lastDb.close();
-        }
 
-        lastDb = this.db = new (window as any).SQL.Database();
-        ;
-        this.connectionPool = new SQLJSConnectionPool(this.db);
-    }
-
-    getName(): string {
-        return 'sqlite';
-    }
-
-    getSchemaName(): string {
-        return '';
-    }
-
-    createPersistence(session: DatabaseSession<any>): SQLPersistence {
-        return new SQLitePersistence(this.platform, this.connectionPool, session);
-    }
-
-    queryFactory(databaseSession: DatabaseSession<any>): SQLDatabaseQueryFactory {
-        return new SQLiteDatabaseQueryFactory(this.connectionPool, this.platform, databaseSession);
-    }
-
-    disconnect(force?: boolean): void {
-        if (this.connectionPool.getActiveConnections() > 0) {
-            throw new Error(`There are still active connections. Please release() any fetched connection first.`);
-        }
-        this.db.close();
+        this.connectionPool = new SQLJSConnectionPool();
     }
 }

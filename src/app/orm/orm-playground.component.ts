@@ -4,11 +4,13 @@ import * as type from '@deepkit/type';
 import { ClassSchema, getGlobalStore } from '@deepkit/type';
 import * as orm from '@deepkit/orm';
 import { Database } from '@deepkit/orm';
+import * as DeepkitSQLite from '@deepkit/sqlite';
 import * as sqlJs from './sql-js-adapter';
 import { ClassType } from '@deepkit/core';
 import type { editor } from 'monaco-editor';
 import { SQLDatabaseAdapter } from '@deepkit/sql';
 import { isPlatformBrowser } from '@angular/common';
+import { SQLiteConnection } from '@deepkit/sqlite';
 
 @Component({
     selector: 'orm-playground',
@@ -127,6 +129,7 @@ console.log('ids', await database.query(User).findField('id'));
             return;
         }
 
+        let Sqlite3: any;
         if (this.container) {
             (window as any)._require.config({ paths: { vs: `monaco-editor/vs` } });
             (window as any)._require(['vs/editor/editor.main'], (monaco: any) => {
@@ -147,17 +150,16 @@ console.log('ids', await database.query(User).findField('id'));
                     language: 'typescript',
                 });
 
-                // this.editor.onDidChangeModelContent((event) => {
-                //     this.transpile();
-                // });
+                if (Sqlite3) this.transpile();
             });
         }
 
-        (window as any).SQL = await (window as any).initSqlJs({
+        Sqlite3 = (window as any).SQL = await (window as any).initSqlJs({
             // Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
             // You can omit locateFile completely when running in node
             locateFile: (file: any) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/${file}`
         });
+        SQLiteConnection.DatabaseConstructor = Sqlite3.Database;
 
         this.transpile();
     }
