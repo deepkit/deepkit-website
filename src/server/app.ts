@@ -1,4 +1,4 @@
-import 'zone.js/dist/zone-node';
+import 'zone.js/node';
 import 'reflect-metadata';
 import { App } from '@deepkit/app';
 import { FrameworkModule } from '@deepkit/framework';
