@@ -144,7 +144,7 @@ import { Component } from '@angular/core';
             import { rpc, RpcKernelSecurity } from '@deepkit/rpc';
             import { MyDatabase, User, hash } from './my-database.ts';
             
-            @injectable()
+            @injectable
             class MyRpcSecurity extends RpcKernelSecurity {
                 constructor(protected database: MyDatabase) {
                 }

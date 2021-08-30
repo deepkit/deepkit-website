@@ -26,7 +26,7 @@ import { Component } from '@angular/core';
 
         <p>
             A class provider is a simple class. It's automatically instantiated and dependencies are automatically resolved once that
-            class is requested. Classes with dependencies (constructor arguments) need the <code>@injectable()</code> decorator.
+            class is requested. Classes with dependencies (constructor arguments) need the <code>@injectable</code> decorator.
             Only with this decorator is it possible for the dependency injection container to extract the dependencies during runtime.
         </p>
 
@@ -39,7 +39,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @injectable()
+            @injectable
             class MyService {
                 constructor(protected database: Database) {
                 }
@@ -143,7 +143,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { injectable } from '@deepkit/injector';
             
-            @injectable()
+            @injectable
             class MyService {
                 constructor(protected database: Database) {
                 }
@@ -157,7 +157,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { injectable, inject } from '@deepkit/injector';
             
-            @injectable()
+            @injectable
             class MyService {
                 constructor(@inject().optional protected database?: Database) {
                 }
@@ -172,7 +172,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { injectable, inject } from '@deepkit/injector';
             
-            @injectable()
+            @injectable
             class MyService {
                 //required 
                 @inject() protected database!: Database;
@@ -248,7 +248,7 @@ import { Component } from '@angular/core';
             class DatabaseSettings extends config.slice('databaseUrl') {
             }
             
-            @injectable()
+            @injectable
             class MainDatabase extends Database {
                 constructor(protected database: DatabaseSettings) {
                     super(new MongoDatabaseAdapter(database.databaseUrl), []);
@@ -274,7 +274,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            @injectable()
+            @injectable
             class MainDatabase extends Database {
                 constructor(
                     @inject(config.all())
@@ -313,7 +313,7 @@ import { Component } from '@angular/core';
             import { injectable } from '@deepkit/injector';
             import { HttpRequest } from '@deepkit/http';
             
-            @injectable()
+            @injectable
             class MyHttpSessionHandler {
                 constructor(protected request: HttpRequest) {}
             

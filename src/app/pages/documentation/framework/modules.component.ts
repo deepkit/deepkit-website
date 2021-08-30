@@ -68,7 +68,7 @@ import { Component } from '@angular/core';
             import { http } from '@deepkit/http';
             import { injectable } from '@deepkit/injector';
 
-            @injectable()
+            @injectable
             class MyHttpController {
                 @http.GET('/hello)
                 hello() {
@@ -105,7 +105,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @injectable()
+            @injectable
             class MyHttpController {
                 constructor(private helloService: HelloWorldService) {}
             

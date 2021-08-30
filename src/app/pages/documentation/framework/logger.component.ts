@@ -63,7 +63,7 @@ import { Component } from '@angular/core';
             import { Logger } from '@deepkit/logger';
             import { injectable } from '@deepkit/injector';
             
-            @injectable()
+            @injectable
             class MyService {
                 constructor(protected logger: Logger) {}
             

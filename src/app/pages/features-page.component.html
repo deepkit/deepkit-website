@@ -548,7 +548,7 @@
 
                 class EmailSettings extends config.slice('email', 'emailSender') {}
 
-                @injectable()
+                @injectable
                 class EmailService {
                     constructor(protected emailSettings: EmailSettings) {
                     }

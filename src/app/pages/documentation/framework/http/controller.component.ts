@@ -405,7 +405,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @injectable()
+            @injectable
             class UserResolver implements RouteParameterResolver {
                 constructor(protected database: UserDatabase) {
                 }

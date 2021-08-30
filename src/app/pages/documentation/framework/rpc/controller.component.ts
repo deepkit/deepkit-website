@@ -156,7 +156,7 @@ import { Component } from '@angular/core';
             import { eventDispatcher } from '@deepkit/event';
             import { Logger } from '@deepkit/logger';
             
-            @injectable()
+            @injectable
             class RpcTcpBootstrap {
                 server?: TcpRpcServer;
             
