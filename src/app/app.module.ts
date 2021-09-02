@@ -94,6 +94,12 @@ import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/frame
 import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
 import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
 import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { BenchmarksComponent } from './pages/benchmarks.component';
+import { MarkdownModule } from 'ngx-markdown';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
     declarations: [
@@ -129,7 +135,10 @@ import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/co
         BrokerComponent,
         OrmBrowserComponent,
         CommunityPageComponent,
+        BenchmarksComponent,
+
         DocumentationDefaultPageComponent,
+
         DocWelcomeComponent,
         DocTypeGettingStartedComponent,
         DocTypeSchemaComponent,
@@ -192,9 +201,11 @@ import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/co
         // MarkdownModule.forRoot({
         //     sanitize: SecurityContext.NONE
         // }),
+        PlotlyModule,
         AppRoutingModule,
         HttpClientModule,
         TransferHttpCacheModule,
+        MarkdownModule.forRoot(),
     ],
     providers: [
         Docu,
@@ -202,7 +213,7 @@ import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/co
         TitleService,
         AnchorService,
         { provide: 'ORIGIN_URL', useValue: '' },
-        { provide: DeepkitClient, useFactory: () => new DeepkitClient('ws://' + location.host) },
+        { provide: DeepkitClient, useFactory: () => new DeepkitClient(ControllerClient.getServerHost()) },
         ControllerClient,
     ],
     bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import { FrameworkController, FrameworkHttpController } from './controller/frame
 import { AuthListener } from './auth';
 
 // this stuff is needed for desktop-ui
-(global as any).requestAnimationFrame = (callback, element) => {
+(global as any).requestAnimationFrame = (callback: any, element: any) => {
     let lastTime = 0;
     const currTime = new Date().getTime();
     const timeToCall = Math.max(0, 16 - (currTime - lastTime));
@@ -50,7 +50,7 @@ new App({
             publicDir: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
             debug: false,
             host: process.env.HOST || '127.0.0.1',
-            workers: 1
+            migrateOnStartup: true,
         }),
         new AngularUniversalModule({
             browserPath: (process.env.DIST || __dirname + '/../../dist/') + 'browser',

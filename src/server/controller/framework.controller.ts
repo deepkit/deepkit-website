@@ -12,8 +12,8 @@ export class FrameworkController implements FrameworkControllerInterface {
 
     @rpc.action()
     @t.array(BenchmarkRun)
-    async getLastBenchmarkRun(): Promise<BenchmarkRun> {
-        return await this.db.query(BenchmarkRun).sort({id: 'desc'}).findOne();
+    async getLastBenchmarkRuns(): Promise<BenchmarkRun[]> {
+        return await this.db.query(BenchmarkRun).sort({id: 'desc'}).limit(30).find();
     }
 }
 
@@ -24,19 +24,14 @@ export class FrameworkHttpController {
 
     @http.POST('benchmark/add').group('benchmarkAuth')
     async postBenchmark(@http.body() body: BenchmarkRun) {
-        const session = this.db.createSession();
         const dataSize = Object.keys(body.data).length;
+
+        console.log('benchmark add', body);
         if (!dataSize) {
             throw new Error('Data empty');
         }
 
-        if (dataSize === 1) {
-            console.log('benchmark not added, since only one data point');
-            return false;
-        }
-
-        session.add(body);
-        await session.commit();
+        await this.db.persist(body);
 
         console.log('benchmark added', body);
         return true;

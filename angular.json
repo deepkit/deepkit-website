@@ -57,7 +57,9 @@
               "node_modules/cookieconsent/build/cookieconsent.min.css",
               "node_modules/@deepkit/desktop-ui/src/scss/icon.scss",
               "node_modules/@deepkit/desktop-ui/src/scss/dui.scss",
-              "node_modules/monaco-editor/min/vs/editor/editor.main.css"
+              "node_modules/monaco-editor/min/vs/editor/editor.main.css",
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-typescript.min.js"
             ],
             "scripts": [
               "node_modules/sql.js/dist/sql-wasm.js",
@@ -65,6 +67,8 @@
               "node_modules/cookieconsent/build/cookieconsent.min.js",
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-typescript.min.js",
+              "node_modules/prismjs/components/prism-bash.min.js",
+              "node_modules/prismjs/components/prism-json.min.js",
               "node_modules/prismjs/components/prism-sql.min.js"
             ]
           },

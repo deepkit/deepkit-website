@@ -8,4 +8,10 @@ export class ControllerClient {
     }
 
     public readonly framework = this.client.controller(FrameworkControllerInterface);
+
+    static getServerHost(): string {
+        const proto = location.protocol === 'https:' ? 'wss://' : 'ws://';
+        return proto + (location.port === '4200' ? location.hostname + ':8080' : location.host);
+    }
+
 }

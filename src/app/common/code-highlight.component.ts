@@ -1,9 +1,5 @@
 import { AfterViewInit, Directive, DoCheck, ElementRef, Inject, OnChanges, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { highlight, languages } from 'prismjs';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-json';
 import { Input } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -87,7 +83,8 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
 
         if (!this.code) return;
 
-        const lang = this.codeHighlight || 'typescript';
+        let lang = this.codeHighlight || 'typescript';
+        if (!languages[lang]) lang = 'text';
         const highlighted = highlight(this.code, languages[lang], lang);
         this.pre!.innerHTML = highlighted;
     }

@@ -1,0 +1,74 @@
+.benchmark-run {
+  border-bottom: 1px solid silver;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+
+  .description {
+    font-size: 14px;
+
+    ::ng-deep pre {
+      border-radius: 3px;
+      padding: 7px 5px !important;
+      font-size: 13px !important;
+    }
+  }
+
+  .link {
+    padding: 5px 0;
+    font-size: 13px;
+  }
+
+  .layout {
+    display: flex;
+
+    .plot {
+      flex: 1;
+    }
+
+    .text {
+      min-width: 300px;
+    }
+  }
+
+  .how-to-run {
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 14px;
+
+    pre {
+      margin: 0;
+    }
+  }
+}
+
+.hardware {
+  font-size: 13px;
+  margin: 15px 0;
+}
+
+.benchmark-selection {
+  columns: 200px auto;
+  font-size: 13px;
+  border-bottom: 1px solid silver;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+
+  > div {
+  }
+}
+
+.last-results {
+  width: 100%;
+  font-size: 13px;
+  .y {
+    text-align: right;
+  }
+}
+
+.results-info {
+  margin-top: 6px;
+  font-size: 12px;
+  color: grey;
+  text-align: right;
+}
