@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ControllerClient } from '../client';
 import type { Data, Layout } from 'plotly.js-dist-min';
 import { BenchmarkEntry, BenchmarkRun } from '../../shared';
+import { AnchorService } from '../provider/anchor';
 
 type PlotData = Data & { x: number[], y: number[], first: number };
 type Graph = { title: string, visible: boolean, id: string, markdown?: string, showMs?: true, data: PlotData[], layout: Partial<Layout> };
@@ -67,8 +68,8 @@ function sortByMS(a: PlotData, b: PlotData) {
 
             <div class="benchmark-selection">
                 <div *ngFor="let g of graphs">
-                    <input [id]="g.id" [(ngModel)]="g.visible" (ngModelChange)="cd.detectChanges()"
-                           type="checkbox"/> <label [for]="g.id">{{g.title}}</label>
+                    <input [id]="'c' + g.id" [(ngModel)]="g.visible" (ngModelChange)="cd.detectChanges()"
+                           type="checkbox"/> <label [for]="'c' + g.id">{{g.title}}</label>
                 </div>
             </div>
 
@@ -86,7 +87,7 @@ function sortByMS(a: PlotData, b: PlotData) {
                     </div>
 
                     <div class="link">
-                        <a href="benchmarks#{{g.id}}">Direct link</a>.
+                        <a routerLink="/benchmarks" [fragment]="g.id">Direct link</a>.
                         Link to source:
                         <a href="https://github.com/deepkit/deepkit-framework/tree/master/packages/benchmark/src/{{pathFromId(g.id)}}">github.com/deepkit/deepkit-framework</a>.<br/>
                     </div>
@@ -136,7 +137,11 @@ export class BenchmarksComponent implements OnInit {
 
     protected graphFeeder: ((file: string, suit: { [entry: string]: BenchmarkEntry }) => void)[] = [];
 
-    constructor(protected client: ControllerClient, public cd: ChangeDetectorRef) {
+    constructor(
+        protected client: ControllerClient,
+        public cd: ChangeDetectorRef,
+        public anchor: AnchorService
+    ) {
     }
 
     pathFromId(id: string) {
@@ -467,6 +472,7 @@ export class BenchmarksComponent implements OnInit {
 
         this.graphs = this.graphs.slice();
         this.cd.detectChanges();
+        this.anchor.scrollToAnchor();
     }
 
 }

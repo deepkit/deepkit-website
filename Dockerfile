@@ -6,16 +6,16 @@ ENV DIST=/app/dist/
 ENV HOST=0.0.0.0
 EXPOSE 8080
 
-ADD package.json /app/package.json
-ADD package-lock.json /app/package-lock.json
-
 WORKDIR /app
-
-RUN npm install
 
 ADD build-api.sh /app/build-api.sh
 RUN /app/build-api.sh
 RUN mkdir -p src/assets && cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
+
+ADD package.json /app/package.json
+ADD package-lock.json /app/package-lock.json
+
+RUN npm ci
 
 COPY . /app
 
