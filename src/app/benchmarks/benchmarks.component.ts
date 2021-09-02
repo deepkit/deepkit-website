@@ -59,7 +59,7 @@ function sortByMS(a: PlotData, b: PlotData) {
                     </tr>
                     <tr>
                         <td>Memory</td>
-                        <td>{{lastRun.memoryTotal / 1024 / 1024 / 1024}}GB</td>
+                        <td>{{lastRun.memoryTotal / 1024 / 1024 / 1024|number}}GB</td>
                     </tr>
                 </table>
             </div>
@@ -274,7 +274,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/mongo/', 'ORM MongoDB Fetch 10k', {
-            'orm/end-to-end/mongo/deepkit-10k': { label: 'deepkit/type', entry: 'fetch' },
+            'orm/end-to-end/mongo/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch' },
             'orm/end-to-end/mongo/type-orm-10k': { label: 'TypeORM', entry: 'fetch' },
             'orm/end-to-end/mongo/mongoose-10k': { label: 'mongoose', entry: 'fetch' },
             'orm/end-to-end/mongo/mongo-10k': { label: 'node-mongodb-native', entry: 'fetch' },
@@ -287,7 +287,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/mongo/:1', 'ORM MongoDB Fetch 1', {
-            'orm/end-to-end/mongo/deepkit-10k': { label: 'deepkit/type', entry: 'fetch-1' },
+            'orm/end-to-end/mongo/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch-1' },
             'orm/end-to-end/mongo/type-orm-10k': { label: 'TypeORM', entry: 'fetch-1' },
             'orm/end-to-end/mongo/mongoose-10k': { label: 'mongoose', entry: 'fetch-1' },
             'orm/end-to-end/mongo/mongo-10k': { label: 'node-mongodb-native', entry: 'fetch-1' },
@@ -300,7 +300,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/mongo/:insert', 'ORM MongoDB Insert 10k', {
-            'orm/end-to-end/mongo/deepkit-10k': { label: 'deepkit/type', entry: 'insert' },
+            'orm/end-to-end/mongo/deepkit-10k': { label: 'deepkit/orm', entry: 'insert' },
             'orm/end-to-end/mongo/type-orm-10k': { label: 'TypeORM', entry: 'insert' },
             'orm/end-to-end/mongo/mongoose-10k': { label: 'mongoose', entry: 'insert' },
             'orm/end-to-end/mongo/mongo-10k': { label: 'node-mongodb-native', entry: 'insert' },
@@ -315,7 +315,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/sqlite/', 'ORM SQLite Fetch 10k', {
-            'orm/end-to-end/sqlite/deepkit-10k': { label: 'deepkit/type', entry: 'fetch' },
+            'orm/end-to-end/sqlite/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch' },
             'orm/end-to-end/sqlite/sequelize-orm-10k': { label: 'Sequelize', entry: 'fetch' },
             'orm/end-to-end/sqlite/type-orm-10k': { label: 'TypeORM', entry: 'fetch' },
             'orm/end-to-end/sqlite/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'fetch' },
@@ -328,7 +328,7 @@ export class BenchmarksComponent implements OnInit {
 
 
         this.createGraph('orm/end-to-end/sqlite/1:', 'ORM SQLite Fetch 1', {
-            'orm/end-to-end/sqlite/deepkit-10k': { label: 'deepkit/type', entry: 'fetch-1' },
+            'orm/end-to-end/sqlite/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch-1' },
             'orm/end-to-end/sqlite/sequelize-orm-10k': { label: 'Sequelize', entry: 'fetch-1' },
             'orm/end-to-end/sqlite/type-orm-10k': { label: 'TypeORM', entry: 'fetch-1' },
             'orm/end-to-end/sqlite/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'fetch-1' },
@@ -340,7 +340,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/sqlite/:insert', 'ORM SQLite Insert 10k', {
-            'orm/end-to-end/sqlite/deepkit-10k': { label: 'deepkit/type', entry: 'insert' },
+            'orm/end-to-end/sqlite/deepkit-10k': { label: 'deepkit/orm', entry: 'insert' },
             'orm/end-to-end/sqlite/sequelize-orm-10k': { label: 'Sequelize', entry: 'insert' },
             'orm/end-to-end/sqlite/type-orm-10k': { label: 'TypeORM', entry: 'insert' },
             'orm/end-to-end/sqlite/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'insert' },
@@ -352,7 +352,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/mysql/', 'ORM MySQL Fetch 10k', {
-            'orm/end-to-end/mysql/deepkit-10k': { label: 'deepkit/type', entry: 'fetch' },
+            'orm/end-to-end/mysql/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch' },
             'orm/end-to-end/mysql/sequelize-orm-10k': { label: 'Sequelize', entry: 'fetch' },
             'orm/end-to-end/mysql/prisma-10k': { label: 'Prisma', entry: 'fetch' },
             'orm/end-to-end/mysql/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'fetch' },
@@ -365,7 +365,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/mysql/:1', 'ORM MySQL Fetch 1', {
-            'orm/end-to-end/mysql/deepkit-10k': { label: 'deepkit/type', entry: 'fetch-1' },
+            'orm/end-to-end/mysql/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch-1' },
             'orm/end-to-end/mysql/sequelize-orm-10k': { label: 'Sequelize', entry: 'fetch-1' },
             'orm/end-to-end/mysql/prisma-10k': { label: 'Prisma', entry: 'fetch-1' },
             'orm/end-to-end/mysql/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'fetch-1' },
@@ -378,7 +378,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/mysql/:insert', 'ORM MySQL Insert 10k', {
-            'orm/end-to-end/mysql/deepkit-10k': { label: 'deepkit/type', entry: 'insert' },
+            'orm/end-to-end/mysql/deepkit-10k': { label: 'deepkit/orm', entry: 'insert' },
             'orm/end-to-end/mysql/sequelize-orm-10k': { label: 'Sequelize', entry: 'insert' },
             'orm/end-to-end/mysql/prisma-10k': { label: 'Prisma', entry: 'insert' },
             'orm/end-to-end/mysql/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'insert' },
@@ -391,7 +391,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/postgresql/', 'ORM PostgreSQL Fetch 10k', {
-            'orm/end-to-end/postgresql/deepkit-10k': { label: 'deepkit/type', entry: 'fetch' },
+            'orm/end-to-end/postgresql/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch' },
             'orm/end-to-end/postgresql/sequelize-orm-10k': { label: 'Sequelize', entry: 'fetch' },
             'orm/end-to-end/postgresql/prisma-10k': { label: 'Prisma', entry: 'fetch' },
             'orm/end-to-end/postgresql/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'fetch' },
@@ -404,7 +404,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/postgresql/:1', 'ORM PostgreSQL Fetch 1', {
-            'orm/end-to-end/postgresql/deepkit-10k': { label: 'deepkit/type', entry: 'fetch-1' },
+            'orm/end-to-end/postgresql/deepkit-10k': { label: 'deepkit/orm', entry: 'fetch-1' },
             'orm/end-to-end/postgresql/sequelize-orm-10k': { label: 'Sequelize', entry: 'fetch-1' },
             'orm/end-to-end/postgresql/prisma-10k': { label: 'Prisma', entry: 'fetch-1' },
             'orm/end-to-end/postgresql/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'fetch-1' },
@@ -417,7 +417,7 @@ export class BenchmarksComponent implements OnInit {
         });
 
         this.createGraph('orm/end-to-end/postgresql/:insert', 'ORM PostgreSQL Insert 10k', {
-            'orm/end-to-end/postgresql/deepkit-10k': { label: 'deepkit/type', entry: 'insert' },
+            'orm/end-to-end/postgresql/deepkit-10k': { label: 'deepkit/orm', entry: 'insert' },
             'orm/end-to-end/postgresql/sequelize-orm-10k': { label: 'Sequelize', entry: 'insert' },
             'orm/end-to-end/postgresql/prisma-10k': { label: 'Prisma', entry: 'insert' },
             'orm/end-to-end/postgresql/mikro-orm-10k': { label: 'Mikro-ORM', entry: 'insert' },
