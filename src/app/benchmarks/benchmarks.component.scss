@@ -20,13 +20,23 @@
 
   .layout {
     display: flex;
+    overflow: hidden;
 
     .plot {
       flex: 1;
+      overflow: hidden;
+
+      ::ng-deep .svg-container {
+        max-width: 100%;
+      }
     }
 
     .text {
       min-width: 300px;
+    }
+
+    @media(max-width: 780px) {
+      display: block;
     }
   }
 
@@ -35,12 +45,14 @@
     border-radius: 3px;
     padding: 8px;
     font-size: 14px;
+    overflow: hidden;
 
     pre {
       margin: 0;
     }
   }
 }
+
 
 .hardware {
   font-size: 13px;

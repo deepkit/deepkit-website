@@ -94,6 +94,7 @@ import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/frame
 import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
 import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
 import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
+import { ImageSliderComponent } from './common/image-slider.component';
 
 @NgModule({
     declarations: [
@@ -103,6 +104,7 @@ import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/co
         HeaderComponent,
         FooterComponent,
         ImageComponent,
+        ImageSliderComponent,
         DataProtectionPageComponent,
         MLDownloadPageComponent,
         MLIndexPageComponent,
