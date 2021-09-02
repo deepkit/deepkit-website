@@ -57,4 +57,6 @@ new App({
             serverPath: (process.env.DIST || __dirname + '/../../dist/') + 'server',
         }),
     ]
-}).run();
+})
+    .loadConfigFromEnv()
+    .run();
