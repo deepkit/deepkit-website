@@ -33,13 +33,23 @@ function sortByMS(a: PlotData, b: PlotData) {
             <h1>Benchmarks</h1>
 
             <p>
-                Here you see last 30 benchmark runs (x axis) and their results (y axis). On the y axis you either see
+                Here you see the last 30 benchmark runs (x axis) and their results (y axis). On the y axis you either see
                 operations/second or milliseconds/operation. In each section you find more information, the link to
                 the benchmark as well as the command to run to execute the benchmark on your machine.
             </p>
+            
+            <p>
+                All benchmarks run every night on a prepared server with all databases locally available (no Docker).
+            </p>
 
             <p>
-                To prepare a local Deepkit Framework checkout, please follow <a routerLink="/documentation/benchmark">documentation/benchmark</a>.
+                To run benchmarks on your machine, you have to prepare a local Deepkit Framework checkout, 
+                please follow <a routerLink="/documentation/benchmark">documentation/benchmark</a>.
+            </p>
+            
+            <p>
+                If you have any improvements/fixes, please provide them via a pull-request in the Github repository 
+                <a target="_blank" href="https://github.com/deepkit/deepkit-framework">github.com/deepkit/deepkit-framework</a>.
             </p>
 
             <div *ngIf="graphs.length === 0">
