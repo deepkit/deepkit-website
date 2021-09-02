@@ -54,9 +54,12 @@
 }
 
 
-.hardware {
+.info {
   font-size: 13px;
   margin: 15px 0;
+
+  table-layout: fixed;
+  width: 100%;
 }
 
 .benchmark-selection {

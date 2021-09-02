@@ -410,6 +410,26 @@
         }
     }
 
+    .columns {
+        display: flex;
+        justify-content: space-between;
+
+        > div {
+            flex: 1 1 50%;
+        }
+
+        > div:not(:last-child) {
+            padding-right: 25px;
+            @media(max-width: 880px) {
+                padding-right: unset;
+            }
+        }
+
+        @media(max-width: 880px) {
+            display: block;
+        }
+    }
+
     button.primary,
     a.button.primary {
         background: #FF662A;

@@ -37,18 +37,18 @@ function sortByMS(a: PlotData, b: PlotData) {
                 operations/second or milliseconds/operation. In each section you find more information, the link to
                 the benchmark as well as the command to run to execute the benchmark on your machine.
             </p>
-            
+
             <p>
-                All benchmarks run every night on a prepared server with all databases locally available (no Docker).
+                All benchmarks run every night on a prepared server with all databases locally available (via Docker).
             </p>
 
             <p>
-                To run benchmarks on your machine, you have to prepare a local Deepkit Framework checkout, 
+                To run benchmarks on your machine, you have to prepare a local Deepkit Framework checkout,
                 please follow <a routerLink="/documentation/benchmark">documentation/benchmark</a>.
             </p>
-            
+
             <p>
-                If you have any improvements/fixes, please provide them via a pull-request in the Github repository 
+                If you have any improvements/fixes, please provide them via a pull-request in the Github repository
                 <a target="_blank" href="https://github.com/deepkit/deepkit-framework">github.com/deepkit/deepkit-framework</a>.
             </p>
 
@@ -56,22 +56,59 @@ function sortByMS(a: PlotData, b: PlotData) {
                 Loading ...
             </div>
 
-            <div *ngIf="runs[0] as lastRun">
-                <h4>Hardware used</h4>
-                <table class="hardware">
-                    <tr>
-                        <td>CPU</td>
-                        <td>{{lastRun.cpuName}}</td>
-                    </tr>
-                    <tr>
-                        <td>CPU clock</td>
-                        <td>{{lastRun.cpuCores}}x {{lastRun.cpuClock}}Ghz</td>
-                    </tr>
-                    <tr>
-                        <td>Memory</td>
-                        <td>{{lastRun.memoryTotal / 1024 / 1024 / 1024|number}}GB</td>
-                    </tr>
-                </table>
+            <div class="last-run" *ngIf="runs[0] as lastRun">
+                <h4>Hardware and software used</h4>
+
+                <div class="columns">
+                    <div>
+                        <table class="info">
+                            <tr>
+                                <td>CPU:</td>
+                                <td>{{lastRun.cpuName}}</td>
+                            </tr>
+                            <tr>
+                                <td>CPU clock:</td>
+                                <td>{{lastRun.cpuCores}}x {{lastRun.cpuClock}}Ghz</td>
+                            </tr>
+                            <tr>
+                                <td>Memory:</td>
+                                <td>{{lastRun.memoryTotal / 1024 / 1024 / 1024|number}}GB</td>
+                            </tr>
+                            <tr>
+                                <td>OS:</td>
+                                <td>{{lastRun.os}}</td>
+                            </tr>
+                            <tr>
+                                <td>Last run:</td>
+                                <td>#{{lastRun.id}} {{lastRun.created|date:'short'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Last run commit:</td>
+                                <td><a target="_blank" href="https://github.com/deepkit/deepkit-framework/commit/{{lastRun.commit}}">{{lastRun.commit|slice:0:9}}</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="info">
+                            <tr>
+                                <td>MySQL version:</td>
+                                <td>4.2</td>
+                            </tr>
+                            <tr>
+                                <td>PostgreSQL:</td>
+                                <td>13.4</td>
+                            </tr>
+                            <tr>
+                                <td>MySQL:</td>
+                                <td>8.0.26</td>
+                            </tr>
+                            <tr>
+                                <td>SQLite:</td>
+                                <td>3.36.0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <h4>Available benchmarks</h4>
