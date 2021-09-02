@@ -3,7 +3,9 @@ import {BenchmarkRun, FrameworkControllerInterface} from '../../shared';
 import {MongoDatabase} from '../db';
 import {t} from '@deepkit/type';
 import { injectable } from '@deepkit/injector';
-import { http } from '@deepkit/http';
+import { HtmlResponse, http } from '@deepkit/http';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 @rpc.controller(FrameworkControllerInterface)
 export class FrameworkController implements FrameworkControllerInterface {
@@ -20,6 +22,13 @@ export class FrameworkController implements FrameworkControllerInterface {
 @injectable
 export class FrameworkHttpController {
     constructor(protected db: MongoDatabase) {
+    }
+
+    @http.GET('benchmarks')
+    async benchmarks() {
+        //we serve it manually to not have SSR. We should add this as feature in @deepkit/angular-universal
+        const path = join((process.env.DIST || __dirname + '/../../../dist/') + 'browser', 'index.html');
+        return new HtmlResponse(await readFile(path, 'utf8'));
     }
 
     @http.POST('benchmark/add').group('benchmarkAuth')

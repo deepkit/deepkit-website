@@ -66,7 +66,6 @@ import { DocFrameworkHttpMiddlewareComponent } from './pages/documentation/frame
 import { DocORMTransactionComponent } from './pages/documentation/orm/transaction.component';
 import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
 import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
-import { BenchmarksComponent } from './pages/benchmarks.component';
 
 
 const routes: Routes = [
@@ -95,10 +94,9 @@ const routes: Routes = [
     },
     {
         path: 'benchmarks',
-        component: BenchmarksComponent,
+        loadChildren: () => import('./benchmarks/benchmarks.module').then(m => m.BenchmarksModule),
         data: { title: 'Benchmarks' },
     },
-
     {
         path: 'library/type',
         component: TypeComponent,

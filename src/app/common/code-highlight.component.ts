@@ -1,5 +1,9 @@
 import { AfterViewInit, Directive, DoCheck, ElementRef, Inject, OnChanges, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { highlight, languages } from 'prismjs';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-json';
 import { Input } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
