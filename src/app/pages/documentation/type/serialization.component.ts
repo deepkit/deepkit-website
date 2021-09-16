@@ -8,20 +8,20 @@ import { Component } from '@angular/core';
 
         <p>
             Serialization is the process of converting data types to a format suited for example for transportation or storage.
-            Deserialization is the process that reverts that. This happens lossless, which means the data can be converted
+            Deserialization is the process that reverts that. This happens losslessly, which means the data can be converted
             to and from a serialization target without losing data type information or data itself.
         </p>
 
         <p>
-            In JavaScript serialization happens usually between JavaScript objects and JSON. JSON supports only string, number, boolean,
-            object, and arrays. Whereas JavaScript supports many more like BigInt, ArrayBuffer, typed arrays, Date, custom class instances,
-            and much more. To transmit now JavaScript data to a server using JSON you need a serialization process (on the client) and a
-            deserialization process (on the receiving server), or vice-versa if the servers sends data serialized as JSON to the client.
+            In JavaScript, serialization usually occurs between JavaScript objects and JSON. JSON supports only string, number, boolean,
+            object, and arrays. JavaScript, on the other hand, supports many more types such as BigInt, ArrayBuffer, typed arrays, Date, custom class instances,
+            and many more. Now, to transmit JavaScript data to a server using JSON you need a serialization process (on the client) and a
+            deserialization process (on the receiving server), or vice-versa if the server sends data serialized as JSON to the client.
         </p>
 
         <p>
             Deepkit Type supports custom serialization targets but comes pre-bundled with a JSON serialization target. Using @deepkit/bson
-            you could also use BSON as serialization target. To build you own serialization target (for example for a database driver),
+            you could also use BSON as serialization target. To build your own serialization target (for example for a database driver),
             see the chapter <a href="/documentation/type/serialization-target">Serialization target</a>.
         </p>
 
@@ -68,7 +68,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            The above deserialization call via <code>plainToClass</code> is equal to this code:
+            The above deserialization call via <code>plainToClass</code> is equivalent to this code:
         </p>
 
         <textarea codeHighlight>
@@ -77,16 +77,15 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            When JavaScript types are passed they are used as is. For example, if you'd pass a <code>Date</code> object to
-            <code>created</code>, then the works as well.
+            When JavaScript types are passed, they are used as-is. For example, if you pass a <code>Date</code> object to
+            <code>created</code>, then it works as well.
         </p>
 
 
-        <h5>Soft type convertion</h5>
+        <h5>Soft type conversion</h5>
 
         <p>
-            The deserialization processes has a soft type convertion implemented. This means it accept strings and numbers for number
-            property,
+            The deserialization processes has soft type conversion implemented. This means it can accept strings and numbers for number properties,
             or a number for a string property. This is useful for example when accepting data via a URL query and passing
             it to the schema deserializer. Since URL query is string only, Deepkit Type tries to resolve the types nonetheless for numbers
             and booleans.
@@ -94,13 +93,12 @@ import { Component } from '@angular/core';
 
         <ul>
             <li>
-                <strong>t.number</strong>: Properties marked as number accept string numbers. It will be tried to convert to number via
-                <code>parseFloat</code>.
+                <strong>t.number</strong>: Properties marked as number accept string numbers. <code>parseFloat</code> will be used to attempt conversion.
             </li>
             <li>
                 <strong>t.boolean</strong>: Properties marked as boolean accept numbers and strings. <br/>
                 0, '0', 'false' will be interpreted as boolean <code>false</code>.<br/>
-                1, '1', 'falsetrue' will be interpreted as boolean <code>true</code>.
+                1, '1', 'true' will be interpreted as boolean <code>true</code>.
             </li>
         </ul>
 
@@ -140,7 +138,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            The above serialization call via <code>classToPlain</code> is equal to this code:
+            The above serialization call via <code>classToPlain</code> is equivalent to this code:
         </p>
 
         <textarea codeHighlight>
@@ -151,13 +149,13 @@ import { Component } from '@angular/core';
         <h4>Function <code>validatedPlainToClass</code></h4>
 
         <p>
-            <code>validatedPlainToClass</code> validates given data and when successfull converts JSON data types to JavaScript types using
+            <code>validatedPlainToClass</code> validates given data and when successful, converts JSON data types to JavaScript types using
             a created schema.
-            Throws a detailed error object when validation fails.
+            It throws a detailed error object when validation fails.
         </p>
 
         <p>
-            The above deserialization call via <code>validatedPlainToClass</code> is equal to this code:
+            The above deserialization call via <code>validatedPlainToClass</code> is equivalent to this code:
         </p>
 
         <textarea codeHighlight>
@@ -170,6 +168,7 @@ import { Component } from '@angular/core';
         <p>
             The serialization and deserialization functions support a few options, two of which are: <code>groups</code> and <code>excludeGroups</code>,
             which allows you to exclude or limit the de-/serialization process to a group of properties.
+            Among other uses, this can be used to limit which fields to transmit to a browser.
         </p>
 
         <textarea codeHighlight>

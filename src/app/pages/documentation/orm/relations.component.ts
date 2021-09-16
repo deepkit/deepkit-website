@@ -8,12 +8,12 @@ import { Component } from '@angular/core';
 
         <p>
             Relations allow you to connect two entities in a certain way. This is usually
-            done in databases using Foreign Keys. Deepkit ORM supports relations for all official databases adapters.
+            done in databases using Foreign Keys. Deepkit ORM supports relations for all official database adapters.
         </p>
 
 
         <p>
-            A relation is annotated using the <code>t.reference()</code> decorator. Usually, a relation has also
+            A relation is annotated using the <code>t.reference()</code> decorator. Usually, a relation also has
             a reverse relation, which is annotated using the <code>t.backReference()</code> decorator.
         </p>
 
@@ -21,9 +21,9 @@ import { Component } from '@angular/core';
         <h3>One to many</h3>
 
         <p>
-            The entity who stores a reference is usually called the "owning side" or the one who "owns" the reference.
-            The following shows two entities with an one-to-many relation between <i>User</i> and <i>Post</i>.
-            It means one user can have multiple posts. The Post entity is owning the relation of Post->User. In the database itself is now a field Post."author" that
+            The entity that stores a reference is usually called the "owning side" or the one that "owns" the reference.
+            The following shows two entities with a one-to-many relation between <i>User</i> and <i>Post</i>.
+            It means one user can have multiple posts. The Post entity owns the relation of Post->User. In the database itself, there is now a field Post."author" that
             holds the primary key of User. 
         </p>
 
@@ -68,14 +68,14 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Owning sides are annotated using <code>t.reference()</code>. References are not selected in queries per default.
+            Owning sides are annotated using <code>t.reference()</code>. References are not selected in queries by default.
             See chapter <a routerLink="/documentation/orm/query" fragment="joins">ORM Query / Joins</a> for more information.
         </p>
 
         <h3>Many to one</h3>
 
         <p>
-            A owning reference can have a revered reference which is usually called many-to-one. It's a virtual reference only, since its not reflected in the database itself.
+            An owning reference typically has a reverse reference which is usually called many-to-one. It's a virtual reference only, since it's not reflected in the database itself.
             A back reference is annotated using <code>t.backReference()</code> and is mainly used for reflection
             and query joins. If you add a back reference from User to Post, you will be able to join Posts directly from User queries.
         </p>
@@ -103,13 +103,13 @@ import { Component } from '@angular/core';
         <h3>Many to many</h3>
         
         <p>
-            A many-to-many relation allows to connect many records with many others. It's can be used for example for
-            users in groups. A user can be in no, one, or many groups. This means a group can have zero, one, or many users.
+            A many-to-many relation allows you to connect many records with many others. It can be used for example for
+            users in groups. A user can be in no, one, or many groups. Consequently, a group can have zero, one, or many users in it.
         </p>
         
         <p>
-            Many to many relations are usually implemented via a pivot entity. The pivot entity holds the actual owning
-            references and User and Group have only back references.
+            Many-to-many relations are usually implemented via a pivot entity. The pivot entity holds the actual owning
+            references to "real" entities, and "real" entities only have back references to the pivot entity.
         </p>
         
         <textarea codeHighlight>

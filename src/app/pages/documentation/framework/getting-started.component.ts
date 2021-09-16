@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Make sure all peer dependencies are installed. Per default NPM 7+ installs them automatically.
+            Make sure all peer dependencies are installed. By default NPM 7+ installs them automatically.
             For older versions, use this command:
         </p>
 
@@ -36,8 +36,8 @@ import { Component } from '@angular/core';
         
         <p>
             An alternative to using <code>ts-node</code> is to compile the source via the TypeScript compiler and run the JavaScript source directly.
-            This has the advantage that the execution time for short commands increases dramatically.
-            However, this adds also an additional workflow overhead by either running the compiler manually or by setting
+            This has the advantage that the execution speed for short commands increases dramatically.
+            However, this also adds additional workflow overhead by either running the compiler manually or by setting
             up a watcher. That's why this documentation uses ts-node in all examples. See the chapter
             <a routerLink="/documentation/framework/deployment">Deployment</a> to learn about compilation.
         </p>
@@ -46,7 +46,7 @@ import { Component } from '@angular/core';
         
         <p>
             Since Deepkit Framework does not use any configuration files or special folder structure, you can
-            structure your project the way you want. The only two files you need to get started is a TypeScript file
+            structure your project the way you want. The only two files you need to get started are a TypeScript file
             <code>app.ts</code> and the TypeScript config <code>tsconfig.json</code>.
         </p>
         
@@ -150,7 +150,7 @@ import { Component } from '@angular/core';
         <h3>HTTP server</h3>
         
         <p>
-            When you execute <code>./app.ts server:start</code> the HTTP/RPC server is starting and waits for incoming requests.
+            When you execute <code>./app.ts server:start</code> the HTTP/RPC server starts and waits for incoming requests.
             In order to serve requests, please see the chapter <a routerLink="/documentation/framework/http/controller">HTTP Controller</a>
             or <a routerLink="/documentation/framework/rpc/controller">RPC controller</a>. But before you do that, please read the
             chapter <a routerLink="/documentation/framework/fundamentals">Fundamentals</a> first.

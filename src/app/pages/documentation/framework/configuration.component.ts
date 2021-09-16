@@ -64,7 +64,7 @@ import { Component } from '@angular/core';
         <h4>Configuration tokens</h4>
 
         <p>
-            Configuration tokens are injected one per one. You can quickly add configuration options but have to keep
+            Configuration tokens are injected one by one. You can quickly add configuration options but have to keep
             their data type in sync. For more serious applications you should use <i>configuration slice</i>.
         </p>
 

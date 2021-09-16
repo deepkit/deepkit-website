@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
         
         <p>
             Deepkit framework consists of 6 fundamental concepts you need to be aware of to write
-            efficient and well structured applications. There is a single <i>application</i> and there are 
-            <i>modules</i>, <i>services</i>, <i>controllers</i>, <i>events</i>, <i>and models</i>. 
+            efficient and well-structured applications. There is a single <i>application</i> and there are 
+            <i>modules</i>, <i>services</i>, <i>controllers</i>, <i>events</i>, and <i>models</i>. 
         </p>
 
         <h3>App</h3>
@@ -31,7 +31,7 @@ import { Component } from '@angular/core';
         
         <p>
             A service is typically a class with a narrow, well-defined purpose. It should do something specific and do it well.
-            Services are usually unit tested, consume configuration options, models, and other services. This is where your most functionality/code lives.
+            Services are usually unit tested, consume configuration options, models, and other services. This is where most of your functionality/code lives.
             See the chapter <a routerLink="/documentation/framework/services">Services</a> for more information.
         </p>
         
@@ -53,8 +53,8 @@ import { Component } from '@angular/core';
         <h3>Events</h3>
         
         <p>
-            Event listener are special services that receive events based on <i>event tokens</i>. 
-            They usually react on events by using models or calling actions on other services.
+            Event listeners are special services that receive events based on <i>event tokens</i>. 
+            They usually react to events by using models or calling actions on other services.
             Events can be dispatched by services, controllers, and event listeners using the <i>EventDispatcher</i>.
             See the chapter <a routerLink="/documentation/framework/events">Events</a> for more information.
         </p>
@@ -64,7 +64,7 @@ import { Component } from '@angular/core';
         <p>
             A model is the instantiation and loaded interface for specific data. They can be received from database abstraction libraries like Deepkit ORM and many others.
             Usually services and controllers load models based on an action/event and work with their content, probably saving changes
-            back to where the model was loaded.
+            back to where the model was loaded from.
             See the chapter <a routerLink="/documentation/framework/database">Database</a> for more information.
         </p>
     `

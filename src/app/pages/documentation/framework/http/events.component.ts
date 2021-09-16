@@ -72,16 +72,16 @@ import { Component } from '@angular/core';
         </p>
             
         <p>
-            The HTTP kernel uses its own events to implement the requesting handling. 
-            All those HTTP event listeners have a priority of 100, which means when you listen to an event per default
+            The HTTP kernel uses its own events to implement request handling. 
+            All those HTTP event listeners have a priority of 100, which means when you listen to an event, by default
             your listener runs first (since default priority is 0). Add a priority of over 100 to run after
             the HTTP kernel's listeners.
         </p>
         
         <p>
-            For example, lets say you want to intercept the event where a controller is called.
+            For example, let's say you want to intercept the event where a controller is called.
             When a certain controller should be called, we check whether the user has access to it.
-            If the user has access, we continue. If not we jump to the next workflow state <i>accessDenied</i>. 
+            If the user has access, we continue. If not, we jump to the next workflow state <i>accessDenied</i>. 
         </p>
         
         <textarea codeHighlight>

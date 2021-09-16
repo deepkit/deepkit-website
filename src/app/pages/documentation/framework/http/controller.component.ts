@@ -49,7 +49,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Request your first route with curl returns your returned string.
+            Request your first route with curl to see your returned string.
         </p>
 
         <textarea codeHighlight="bash">
@@ -58,7 +58,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            HTTP controllers are handled and instantiated by the dependency injection container, like services and event listeners, and have thus access
+            HTTP controllers are handled and instantiated by the dependency injection container, like services and event listeners, and thus have access
             to all other registered services.
             See the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more details.
         </p>
@@ -67,7 +67,7 @@ import { Component } from '@angular/core';
 
         <p>
             Each class needs at least the <code>@http.controller</code> decorator and each route at least one HTTP method decorator.
-            Decorators on routes (methods) can be chains, for example:
+            Decorators on routes (methods) may be chained, for example:
         </p>
 
         <textarea codeHighlight>
@@ -171,7 +171,7 @@ import { Component } from '@angular/core';
 
         <p>
             Routes can have arbitrary parameters. Path parameters are expressed in the route's path and query as well as body parameters in
-            the method signature itself. Path parameter's name map directly to method arguments with the same name.
+            the method signature itself. Path parameter's name maps directly to method arguments with the same name.
         </p>
 
         
@@ -222,11 +222,11 @@ import { Component } from '@angular/core';
 
         <p>
             Warning: Parameters are not escaped/sanitized. Returning them directly in a string opens a security hole (XSS).
-            Make sure to never trust external input and filter/sanitize/convert where necessary.
+            Make sure never to trust external input and filter/sanitize/convert where necessary.
         </p>
         
         <p>
-            Per default query parameters are required.<br/> 
+            By default, query parameters are required.<br/> 
             To make them optional, use <code>@http.query().optional text: string</code>.<br/>
             To remap a parameter name use <code>@http.query('incomingName') text: string</code>.
         </p>
@@ -234,18 +234,18 @@ import { Component } from '@angular/core';
         <h4>Query parameters model</h4>
         
         <p>
-            Instead of specifying each query parameter as method parameter, you can use a class schema instead.
+            Instead of specifying each query parameter as a method parameter, you can use a class schema instead.
         </p>
         
         <textarea codeHighlight>
-        class HelloWordQuery {
+        class HelloWorldQuery {
             @t.required text!: string;
         }
         
         @http.controller('my-base-url/')
         class MyPage {
             @http.GET('hello-world')
-            helloWorld(@http.queries() query: HelloWordQuery) {
+            helloWorld(@http.queries() query: HelloWorldQuery) {
                 return 'Hello ' + query.text;
             }
         }
@@ -260,14 +260,14 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            class HelloWordBody {
+            class HelloWorldBody {
                 @t.required text!: string;
             }
             
             @http.controller('my-base-url/')
             class MyPage {
                 @http.POST('hello-world')
-                helloWorld(@http.body() body: HelloWordBody) {
+                helloWorld(@http.body() body: HelloWorldBody) {
                     return 'Hello ' + body.text;
                 }
             }
@@ -279,14 +279,14 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            To react on body validation errors in the same route, you can include the service <code>BodyValidation</code>.
+            To react to body validation errors in the same route, you can include the service <code>BodyValidation</code>.
         </p>
         
         <textarea codeHighlight>
             @http.POST('hello-world')
-            helloWorld(bodyValidation: BodyValidation, @http.body() body: HelloWordBody) {
+            helloWorld(bodyValidation: BodyValidation, @http.body() body: HelloWorldBody) {
                 if (bodyValidation.hasErrors()) {
-                    //We got errors.
+                    // Houston, we got some errors.
                     const textError = bodyValidation.getErrorMessageForPath('text');
                     return 'Text is invalid, please fix it. ' + textError;
                 }
@@ -296,8 +296,8 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            As soon as <code>hasErrors()</code> returns true the injected body representation <code>body</code> can be in faulty state
-            when the validation fails. When you don't inject <code>BodyValidation</code> and a faulty request the whole route would return a error
+            As soon as <code>hasErrors()</code> returns true ,the injected body representation <code>body</code> can be in a faulty state
+            when the validation fails. When you don't inject <code>BodyValidation</code> and a faulty request, the whole route would return an error
             and your route code would never execute. Use <code>BodyValidation</code> only when you want to for example display error messages 
             regarding the body manually in the same route.
         </p>
@@ -341,7 +341,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            The router per default stores all uploaded files in the temp folder and will be removed as soon as your route method
+            By default, the router stores all uploaded files in the temp folder and will be removed as soon as your route method
             is finished.
         </p>
         
@@ -349,7 +349,7 @@ import { Component } from '@angular/core';
 
         <p>
             Parameters are automatically converted to the annotated type and validated.
-            When a complex type is given like union, arrays, etc you have to specify the type via <code>@t</code>.
+            When a complex type is given, such as union, arrays, etc., you have to specify the type via <code>@t</code>.
             See <a routerLink="/documentation/type/schema">Deepkit Type Schema</a> chapter for more information.
         </p>
 
@@ -444,7 +444,7 @@ import { Component } from '@angular/core';
         <h3>Response</h3>
 
         <p>
-            A controller can return various data structure. Some of them are treated in a special way like redirects and templates, and others
+            A controller can return various data structures. Some of them are treated in a special way like redirects and templates, and others
             like simple objects are simply sent as JSON.
         </p>
         
@@ -521,7 +521,7 @@ import { Component } from '@angular/core';
         <h4>Redirect</h4>
 
         <p>
-            Redirecting a user via the <i>Redirect</i> object. Per default it uses 302 redirects, but that can be changed in the arguments of
+            Redirecting a user may be done via the <i>Redirect</i> object. By default it uses 302 redirects, but that can be changed in the arguments of
             <code>Redirect.toRoute</code> and <code>Redirect.toUrl</code>.
         </p>
         
@@ -573,7 +573,7 @@ import { Component } from '@angular/core';
         <h4>Modification</h4>
         
         <p>
-            A response from a controller can be arbitrary changed and reacted on using an event listener.
+            A response from a controller can be arbitrarily changed and reacted on using an event listener.
         </p>
         
         <p>

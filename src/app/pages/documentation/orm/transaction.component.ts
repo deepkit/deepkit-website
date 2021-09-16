@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            Deepkit supports for all official supported databases transactions. Per default for each query and
+            Deepkit supports transactions for all official supported databases. By default for each query and
             <a routerLink="/documentation/orm/session">database session</a>
             no transactions are used. To enable transactions there are two main methods.
         </p>
@@ -26,9 +26,9 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            A typical call structure is to wrap all operations in a try-catch block and execute <code>commit()</code>
+            A typical pattern is to wrap all operations in a try-catch block and execute <code>commit()</code>
             in the very last line (that is only executed when all previous commands succeeded) and <code>rollback()</code>
-            in the catch block to rollback all changes made between <code>assignTransaction()</code> and the error.
+            in the catch block to roll back all changes.
         </p>
 
         <p>
@@ -71,7 +71,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            As soon as a transaction is still assigned to a session, a call to <code>session.useTransaction()</code>
+            If a session is already associated with a transaction, a call to <code>session.useTransaction()</code>
             always returns the same object. Use <code>session.isTransaction()</code> to check whether the session
             has a transaction assigned.
         </p>
@@ -105,9 +105,9 @@ import { Component } from '@angular/core';
         <h3>Transaction isolation</h3>
 
         <p>
-            Many databases support different kind of transactions. To change the transaction behaviour, you can
+            Many databases support different kinds of transactions. To change the transaction behavior, you can
             call various methods on the returned transaction object from <code>useTransaction()</code>. The interface of this transaction
-            object depends on the database adapter being used. This means, that MySQL for example has other options than for example MongoDB.
+            object depends on the database adapter being used. For example, the transaction object returned from a MySQL database has different options from one returned from a MongoDB database.
             Use code-completion or look at the database adapter interface to get a list of potential options.
         </p>
 
@@ -137,7 +137,7 @@ import { Component } from '@angular/core';
         <h3>MongoDB</h3>
 
         <p>
-            While transactions work for MySQL, PostgreSQL, and SQLite out of the box, MongoDB requires you to setup it as "replica set" first.
+            While transactions work for MySQL, PostgreSQL, and SQLite out of the box, MongoDB requires you to set it up as "replica set" first.
         </p>
 
         <p>

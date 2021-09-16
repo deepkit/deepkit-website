@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         <h2>Modules</h2>
 
         <p>
-            Deepkit Framework is highly modular and lets you split up your application in several handy modules.
+            Deepkit Framework is highly modular and lets you split up your application into several handy modules.
             Each module has its own dependency injection sub container, configuration, commands, and more.
             In fact, in the Getting Started chapter you already created a module - the root module.
             <code>new App</code> takes almost the same arguments as a module, because in fact, it creates the root module
@@ -33,7 +33,7 @@ import { Component } from '@angular/core';
 
         <p>
             It has basically no functionality at this point since its module definition is an empty object and it has no methods,
-            but demonstrates the relationship between modules and your application (your root module).
+            but this demonstrates the relationship between modules and your application (your root module).
             This module <code>MyModule</code> can then be imported in your application or in other modules.
         </p>
 
@@ -48,7 +48,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            You can now add features to that module like you would with <code>App</code>.
+            You can now add features to that module as you would with <code>App</code>.
             The arguments are the same except that <code>imports</code> is not available in a module definition.
             You can add HTTP/RPC/CLI controllers, services, a configuration, event listeners, as well as use various module hooks to
             make your module more dynamic.
@@ -58,8 +58,8 @@ import { Component } from '@angular/core';
 
         <p>
             Modules can define controllers that will be handled by other modules. For example, if you add a controller with decorators from the
-            <code>@deepkit/http</code> package, its module <code>HttpModule</code> will pick that up and registers the found routes in its router.
-            A single controller can have multiple such decorators attached. Its up to the module author that gives your those decorators
+            <code>@deepkit/http</code> package, its module <code>HttpModule</code> will pick that up and register the found routes in its router.
+            A single controller can have multiple such decorators attached. It's up to the module author who gives you those decorators
             how to process the controllers.
         </p>
 
@@ -84,7 +84,7 @@ import { Component } from '@angular/core';
         <h3>Providers</h3>
 
         <p>
-            If you define a provider in your application's <code>providers</code> section, you have those per default accessible
+            If you define a provider in your application's <code>providers</code> section, they will be accessible
             in your whole application. With modules on the other hand those services/providers are automatically encapsulated in the dependency injection
             sub container of this module. You have to manually export each provider in order to make them available to a module/application
             that imports this module.
@@ -122,7 +122,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            If a user imports this module, they won't have access to the <code>HelloWorldService</code> provider as its encapsulated to the MyModule's sub dependency injection container.
+            If a user imports this module, they won't have access to the <code>HelloWorldService</code> provider as it's encapsulated in the MyModule's sub dependency injection container.
         </p>
 
 
@@ -130,7 +130,7 @@ import { Component } from '@angular/core';
 
         <p>
             To make providers available in the importer's module, you can put the class type of the provider in <code>exports</code>. This essentially moves the provider
-            on level up, to the dependency injection container of the parent - the importer.
+            one level up, to the dependency injection container of the parent - the importer.
         </p>
 
         <textarea codeHighlight title="module.ts">
@@ -144,7 +144,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            If you have other providers like FactoryProvider, useClassProvider, etc, you still should only use the class type in the exports.
+            If you have other providers like FactoryProvider, useClassProvider, etc, you should still only use the class type in the exports.
         </p>
 
         <textarea codeHighlight title="module.ts">
@@ -192,7 +192,7 @@ import { Component } from '@angular/core';
         <h3>Configuration schema</h3>
 
         <p>
-            A module can have type-safe configuration options. The values of those options can partially and completely injected to services
+            A module can have type-safe configuration options. The values of those options can be partially or completely injected to services
             from that module. To define a configuration schema, use <code>createModuleConfig</code>.
         </p>
 
@@ -231,8 +231,8 @@ import { Component } from '@angular/core';
 
         <p>
             To dynamically change the configuration options of a imported module, you can use the <code>process</code> module hook.
-            This is a good place to either redirect configuration options or setup a imported module depending on the current module
-            config or other module instance information.
+            This is a good place to either redirect configuration options or set up an imported module depending on the current module
+            config, or other module instance information.
         </p>
 
         <textarea codeHighlight title="main.module.ts">
@@ -247,7 +247,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            For the application level, it works slightly different:
+            For the application level, it works slightly differently:
         </p>
 
         <textarea codeHighlight title="app.ts">
@@ -261,7 +261,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            If the root application module is created from a regular module, it works like with regular modules.
+            If the root application module is created from a regular module, it works similarly to regular modules.
         </p>
 
         <textarea codeHighlight title="app.ts">
@@ -278,7 +278,7 @@ import { Component } from '@angular/core';
         <h3>Consume Configuration</h3>
 
         <p>
-            To use a configuration option in a service, you can use regular dependency injection. Its possible to either
+            To use a configuration option in a service, you can use regular dependency injection. It's possible to either
             inject the whole configuration object, a single value, or a slice of the configuration.
         </p>
 
@@ -355,8 +355,8 @@ import { Component } from '@angular/core';
 
         <p>
             All configuration options can also be changed via environment variables. This works only if the module has a name assigned.
-            A module name can be defined via <code>createModule</code> and later changed dynamically on the instance creation. Latter
-            is useful if you have imported the same module twice and want to differentiate between them by setting a new name.
+            A module name can be defined via <code>createModule</code> and later changed dynamically on the instance creation. The latter
+            pattern is useful if you have imported the same module twice and want to differentiate between them by setting a new name.
         </p>
 
         <textarea codeHighlight title="module.ts">
@@ -439,7 +439,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            The whole process of loading the service container looks like that:
+            The whole process of loading the service container is as follows:
         </p>
         
         <ol>
