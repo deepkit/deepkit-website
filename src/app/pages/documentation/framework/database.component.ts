@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            Although you can use whatever database library you want, we recommend Deepkit ORM as its the fastest TypeScript database
+            Although you can use whatever database library you want, we recommend Deepkit ORM as it's the fastest TypeScript database
             abstraction library that is perfectly integrated into the Deepkit Framework and has a lot of features that improve your
             workflow and efficiency.
         </p>
@@ -43,13 +43,13 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            This is how a model aka entity looks like. Your define its name (which is per default its table or collection name) using
+            This is how a model (a.k.a. entity) looks. You define its name (which is by default its table or collection name) using
             <code>@entity.name()</code> and then annotate each property with <code>@t</code>. See the chapter
             <a routerLink="/documentation/type/schema">Deepkit Type: Schema</a> for more information on how to decorate your class.
         </p>
 
         <p>
-            You can write your schema also in a functional approach.
+            You can also write your schema using a functional approach.
         </p>
 
         <textarea codeHighlight>
@@ -68,8 +68,8 @@ import { Component } from '@angular/core';
         <p>
             In order to use the created model, you have to specify a data source. This is done using classes extending 
             the <code>Database</code> class of <code>@deepkit/orm</code> and using adapters. 
-            Currently MySQL, SQLite, PostgreSQL, and MongoDB are supported, each has its own adapter.
-            We use in this example SQLite and <code>@deepkit/sqlite</code>. Luckily, those dependencies are already installed with
+            Currently MySQL, SQLite, PostgreSQL, and MongoDB are supported; each has its own adapter.
+            In this example we use SQLite and <code>@deepkit/sqlite</code>. Luckily, those dependencies are already installed with
             the Deepkit Framework since it uses SQLite under the hood for its debugger storage.
         </p>
         
@@ -87,13 +87,13 @@ import { Component } from '@angular/core';
         
         <p>
             You create a new class you name however you like and specify in its constructor the adapter with its parameters,
-            and add all entities aka models that should be associated with that database to the second parameter.
+            and add all entities/models that should be associated with that database to the second parameter.
         </p>
         
         <p>
             You can now register this database class as provider. We also enable <code>migrateOnStartup</code>,
-            which creates all tables in your database automatically on bootstrap. Note that you should <strong>not</strong> use <code>migrateOnStartup</code>
-            for a serious project or production setup.
+            which creates all tables in your database automatically on bootstrap. This is ideal for rapid prototyping, but is
+            <strong>not recommended</strong> for a serious project or production setup.
         </p>
         
         <p>
@@ -119,10 +119,10 @@ import { Component } from '@angular/core';
         <h3>Manage data</h3>
         
         <p>
-            You have everything setup to be able to manage your database data now using the Deepkit ORM Browser. 
+            You have everything set up to be able to manage your database data now using the Deepkit ORM Browser. 
             
             In order to open the ORM Browser and manage the content, write all the steps from above into the <code>app.ts</code> file.
-            At the bottom of this chapter you find the full source code example.
+            At the bottom of this chapter you will find the full source code example.
         </p>
         
         
@@ -151,12 +151,12 @@ import { Component } from '@angular/core';
         
         <p>
             You can see the ER diagram. At the moment only one entity is available. If you add more with relations you see 
-            all those information at one glance.
+            all information at a glance.
         </p>
         
         <p>
             When you click on "User" in the left sidebar, you can manage its content. Click on the "+", and change the title of
-            the new record. After change required values (like the username), press "Commit". 
+            the new record. After changing required values (like the username), press "Commit". 
             This commits all changes to the database and makes all changes persistent. The auto increment ID is automatically assigned.
         </p>
 
@@ -166,11 +166,11 @@ import { Component } from '@angular/core';
         
         <p>
             In order to use the created database class in your code, you can use the <code>TestCommand</code> again from the Getting Started.
-            We adjust it slightly so it takes your class <code>SQLiteDatabase</code> as dependency.
+            We'll adjust it slightly so it takes your class <code>SQLiteDatabase</code> as dependency.
         </p>
         
         <p>
-            You can inject <code>SQLiteDatabase</code> also in services, event listeners, and all other controllers.
+            You can also inject <code>SQLiteDatabase</code> in services, event listeners, and all other controllers.
         </p>
         
         <textarea codeHighlight>
@@ -255,14 +255,14 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            A new user has added and the auto-incremented primary is 2. You can start the server again and take a look into the data browser.
-            You will see two records being in the database.
+            A new user has been added and the auto-incremented primary key is 2. You can start the server again and take a look into the data browser.
+            You will see two records in the database.
         </p>
         
         <h3>More databases</h3>
         
         <p>
-            You can add as many database classes as you want and name it the way you like. Make sure to change the <code>name</code> 
+            You can add as many database classes as you want and name them the way you like. Make sure to change the <code>name</code> 
             of each database, so it doesn't conflict with others when using the ORM Browser.
         </p>
         
@@ -270,7 +270,7 @@ import { Component } from '@angular/core';
         
         <p>
             To learn more about how the <code>SQLiteDatabase</code> works, please read the chapter <a routerLink="/documentation/orm">Deepkit ORM</a>
-            and it sub chapters like how to query data, how to manipulate data via sessions, how to define relations, and more.
+            and its sub chapters like how to query data, how to manipulate data via sessions, how to define relations, and more.
             Please note that the chapters there are related to the standalone library <code>@deepkit/orm</code> and does not contain documentation
             about the Deepkit Framework part that you've read above from this chapter. In the standalone library you instantiate your database
             class manually like via <code>new SQLiteDatabase()</code>, however in your Deepkit Framework application this is done 

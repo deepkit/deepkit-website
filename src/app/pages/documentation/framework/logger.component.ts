@@ -48,7 +48,7 @@ import { Component } from '@angular/core';
         </table>
         
         <p>
-            Per default a Logger has a level of "info", which means it only handles info messages and below (thus log, warning, error, but not debug).
+            By default a Logger has a level of "info", which means it only handles info messages and above (i.e. log, warning, error, but not debug).
             To change the log level, call for example <code>logger.level = 5</code>.
         </p>
 
@@ -88,7 +88,7 @@ import { Component } from '@angular/core';
         <p>
             For transporters that don't support colors, the color information is automatically removed.
             In the default transporter (ConsoleTransport) the color is displayed.
-            Following colors are available:
+            The following colors are available:
 
             <code>black</code>,
             <code>red</code>,
@@ -118,7 +118,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            To replace all transporters with a new set of transporter, use set
+            To replace all transporters with a new set of transporters, use set
         </p>
 
         <textarea codeHighlight>
@@ -160,7 +160,7 @@ import { Component } from '@angular/core';
         <h4>Formatter</h4>
         
         <p>
-            Formatter allow you to change the message format, like for example adding the timestamp as string.
+            Formatters allow you to change the message format, like adding the timestamp as string.
             When an application starts via <code>server:start</code>, a <code>DefaultFormatter</code> is automatically
             added (that adds timestamp, scope, and log level) when no other formatter is present.
         </p>
@@ -168,8 +168,8 @@ import { Component } from '@angular/core';
         <h4>Scoped Logger</h4>
         
         <p>
-            Scoped logger add an arbitrary scope name to each log entry, that can be helpful to see from which sub section
-            for your application the log entry comes from.
+            Scoped loggers add an arbitrary scope name to each log entry, which can be helpful to diagnose which subsection
+            of your application the log entry comes from.
         </p>
 
 
@@ -181,8 +181,8 @@ import { Component } from '@angular/core';
         <h4>Context Data</h4>
         
         <p>
-            To add context data to a log entry, use as last argument an plain object literal. 
-            Only log calls with at least two arguments can have context data.  
+            To add contextual data to a log entry, add a plain object literal as the last argument. 
+            Only log calls with at least two arguments can have contextual data.  
         </p>
 
         <textarea codeHighlight>

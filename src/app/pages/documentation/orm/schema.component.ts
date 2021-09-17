@@ -8,19 +8,20 @@ import { Component } from '@angular/core';
 
         <p>
             Deepkit ORM is based on Deepkit Type and uses <a routerLink="/documentation/type/schema">its schema definition</a>.
-            It has already everything needed to decorate your entity with schema definition information necessary to
+            It already has everything needed to decorate your entity with schema definition information necessary to
             describe database tables/collections.
         </p>
 
         <p>
-            A entity can be described as TypeScript class schema or functional schema. Each entity needs to
-            have at least one primary key using <code>t.primary</code> and an entity name.
+            An entity can be described as TypeScript class schema or as functional schema. Each entity needs to
+            have at least one primary key (currently <i>only</i> one primary key is supported) 
+            using <code>t.primary</code> and an entity name.
         </p>
 
         <h3>Class schema</h3>
 
         <p>
-            The entity name (first argument in <code>@entity.name()</code>) is per default the table/collection name. To change
+            The entity name (first argument in <code>@entity.name()</code>) is also the table/collection name, by default. To change
             the table/collection name, use <code>collectionName</code>.
         </p>
 
@@ -87,7 +88,7 @@ import { Component } from '@angular/core';
             import { plainToClass, t } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
 
-            //userSchema = t.schema({}) here
+            //const userSchema = t.schema({...}) here
         
             const database = new Database(new SQLiteDatabaseAdapter(':memory:'), [userSchema]);
             await database.migrate();
@@ -101,7 +102,7 @@ import { Component } from '@angular/core';
         <h3>Database types</h3>
 
         <p>
-            Each database adapters has its mapping of JavaScript runtime types to database engine types.
+            Each database adapter has its mapping of JavaScript runtime types to database engine types.
         </p>
 
         <table class="pretty">
@@ -185,7 +186,7 @@ import { Component } from '@angular/core';
         </table>
 
         <p>
-            To change the mapped type to something else, use its database decorator method. For example for MySQL its <code>@t.mysql({{"{"}}type: 'VARCHAR(255)'{{"}"}})</code>.
+            To change the mapped type to something else, use its database decorator method. For example for MySQL it's <code>@t.mysql({{"{"}}type: 'VARCHAR(255)'{{"}"}})</code>.
         </p>
 
         <table class="pretty">
@@ -218,13 +219,13 @@ import { Component } from '@angular/core';
         <p>
             Optional fields are annotated using the <code>t.optional</code> or <code>t.nullable</code> decorator. Only use one of them.
             Both decorators result in having the column NULLABLE for SQL adapters. In any case a null or undefined value is represented
-            in the database as NULL, and only converted to undefined or null during runtime. So the only difference between those decorators
-            is that they are different represented during runtime.
+            in the database as NULL, and only converted to undefined or null at runtime. So the only difference between those decorators
+            is that they are represented differently at runtime.
         </p>
         
         <p>
-            In the following example is the <code>modified</code> field optional and can thus be <code>undefined</code>, although
-            in the database its always represented as null.
+            In the following example, the <code>modified</code> field is optional and can thus be <code>undefined</code>, although
+            in the database it's always represented as null.
         </p>
 
         <textarea codeHighlight>
@@ -246,8 +247,9 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            This example shows how the nullable decorator works. It uses in both, the runtime and database, the datatype <code>null</code>.
-            Its more verbose than <code>t.optional</code> and is not frequently used.
+            This example shows how the nullable decorator works. In both the database and in the javascript
+            runtime, null will be used.
+            This is more verbose than <code>t.optional</code> and is not frequently used.
         </p>
         
         <textarea codeHighlight>
@@ -270,7 +272,7 @@ import { Component } from '@angular/core';
         <h4>Auto increment</h4>
 
         <p>
-            Fields that should be auto increment on insert are annotated using the <code>t.autoIncrement</code> decorator.
+            Fields that should be auto-incremented on insert are annotated using the <code>t.autoIncrement</code> decorator.
             All adapters support auto increment values. The MongoDB adapter uses a additional collection to track auto increment counter.
         </p>
         
@@ -293,8 +295,8 @@ import { Component } from '@angular/core';
 
         <p>
             Fields that should be of type UUID (v4) are annotated using the <code>t.uuid</code> decorator.
-            The runtime type is <code>string</code> and databases store them usually in a binary type.
-            Use the <code>uuid()</code> to generate a UUID v4.
+            The runtime type is <code>string</code> and databases usually store them in a binary type.
+            Use the <code>uuid()</code> function to generate a new UUID v4.
         </p>
 
         <textarea codeHighlight>
@@ -320,7 +322,7 @@ import { Component } from '@angular/core';
         <h3>More</h3>
         
         <p>
-            There are many more schema definition decorators available like validators
+            There are many more schema definition decorators available like validators.
         </p>
     `
 })

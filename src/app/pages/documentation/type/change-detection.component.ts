@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         <h2>Change detection</h2>
 
         <p>
-            Change detection is a process to create a delta of two objects from the same schema. It allows you to for example create
+            Change detection is a process that creates a delta of two objects from the same schema. It allows you to create
             a patch structure, store only the deltas, or just detect all changes in general and react however you want.
         </p>
 

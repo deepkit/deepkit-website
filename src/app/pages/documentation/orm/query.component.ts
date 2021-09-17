@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
         <h2>Query</h2>
 
         <p>
-            A query is an object that described how data should be fetched from the database or modified.
+            A query is an object that describes how data should be fetched from the database or modified.
             It has multiple methods to describe your query and termination methods that execute it.
         </p>
 
         <p>
-            You can create a query by using <code>Database.query(T)</code> or <code>Session.query(T)</code>. You should
-            prefer <a routerLink="/documentation/orm/session">sessions</a> as it improves performance.
+            You can create a query by using <code>Database.query(T)</code> or <code>Session.query(T)</code>. We recommend
+            <a routerLink="/documentation/orm/session">sessions</a> as it improves performance.
         </p>
 
         <textarea codeHighlight title="database.ts">
@@ -41,43 +41,43 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="">
-            //simply filters
+            //simple filters
             const users = await database.query(User).filter({name: 'User1'}).find();
             
             //multiple filters, all AND
             const users = await database.query(User).filter({name: 'User1', id: 2}).find();
             
             //range filter: $gt, $lt, $gte, $lte (greater than, lower than, ...)
-            //equal to WHERE created < NOW()
+            //equivalent to WHERE created < NOW()
             const users = await database.query(User).filter({created: {$lt: new Date}}).find();
-            //equal to WHERE id > 500
+            //equivalent to WHERE id > 500
             const users = await database.query(User).filter({id: {$gt: 500}}).find();
-            //equal to WHERE id >= 500
+            //equivalent to WHERE id >= 500
             const users = await database.query(User).filter({id: {$gte: 500}}).find();
             
             //set filter: $in, $nin (in, not in)
-            //equal to WHERE id IN (1, 2, 3)
+            //equivalent to WHERE id IN (1, 2, 3)
             const users = await database.query(User).filter({id: {$in: [1, 2, 3]}}).find();
             
             //regex filter
             const users = await database.query(User).filter({username: {$regex: /User[0-9]+/}}).find();
             
             //grouping: $and, $nor, $or
-            //equal to WHERE (username = 'User1') OR (username = 'User2')
+            //equivalent to WHERE (username = 'User1') OR (username = 'User2')
             const users = await database.query(User).filter({
                 $or: [{username: 'User1'}, {username: 'User2'}]
             }).find();
 
             
             //nested grouping
-            //equal to WHERE username = 'User1' OR (username = 'User2' and id > 0)
+            //equivalent to WHERE username = 'User1' OR (username = 'User2' and id > 0)
             const users = await database.query(User).filter({
                 $or: [{username: 'User1'}, {username: 'User2', id: {$gt: 0}}]
             }).find();
             
             
             //nested grouping
-            //equal to WHERE username = 'User1' AND (created < NOW() OR id > 0)
+            //equivalent to WHERE username = 'User1' AND (created < NOW() OR id > 0)
             const users = await database.query(User).filter({
                 $and: [{username: 'User1'}, {$or: [{created: {$lt: new Date}, id: {$gt: 0}}]}]
             }).find();
@@ -99,7 +99,7 @@ import { Component } from '@angular/core';
         <h4>has()</h4>
 
         <p>
-            <code>has()</code> returns a boolean of true when there is at least one record found, and false when no records found.
+            <code>has()</code> returns a boolean of true when there is at least one record found, and false when no records are found.
         </p>
 
         <h4>find()</h4>
@@ -115,7 +115,7 @@ import { Component } from '@angular/core';
         <h4>findOne()</h4>
 
         <p>
-            <code>findOne()</code> returns a single entity instance and throws an <code>ItemNotFound</code> if not found.
+            <code>findOne()</code> returns the first entity instance, and throws an <code>ItemNotFound</code> if none are found.
         </p>
 
         <textarea codeHighlight="">
@@ -125,12 +125,12 @@ import { Component } from '@angular/core';
         <h4>findOneOrUndefined()</h4>
 
         <p>
-            <code>findOneOrUndefined()</code> returns a single entity instance or undefined when not found.
+            <code>findOneOrUndefined()</code> returns the first entity instance or undefined when not found.
         </p>
         <textarea codeHighlight="">
             const user = await database.query(User).findOneOrUndefined();
             if (!users) {
-                throw new Error('Sorry, not user found.');
+                throw new Error('Sorry, no user found.');
             }
         </textarea>
 
@@ -160,9 +160,9 @@ import { Component } from '@angular/core';
             <code>findOneFieldOrUndefined()</code> returns a field of a single entity instance or undefined when not found.
         </p>
 
-        <h3>Order</h3>
+        <h3>Ordering</h3>
         <p>
-            With <code>orderBy(field, order)</code> the order can be changed.
+            With <code>orderBy(field, order)</code> the order of returned records can be changed.
         </p>
 
         <textarea codeHighlight>
@@ -172,7 +172,7 @@ import { Component } from '@angular/core';
         <h3>Paging</h3>
 
         <p>
-            With the methods <code>itemsPerPage()</code> and <code>page()</code> can the results be paginated.
+            With the methods <code>itemsPerPage()</code> and <code>page()</code>, the results can be paginated.
             Page starts at 1.
         </p>
 
@@ -189,16 +189,16 @@ import { Component } from '@angular/core';
         </textarea>
 
 
-        <h3>Joins</h3>
+        <h3>Joining</h3>
 
         <p>
-            Per default references from the schema are neither included in queries nor loaded. To include
+            By default, references from the schema are neither included in queries nor loaded. To include
             a join in the query without loading the reference, use <code>join()</code> (left join) or <code>innerJoin</code>.
             To include a join in the query <i>and</i> load the reference use <code>joinWith</code> or <code>innerJoinWith</code>.
         </p>
 
         <p>
-            All following examples assume this model schemas:
+            All following examples assume these model schemas:
         </p>
 
         <textarea codeHighlight>
@@ -242,7 +242,7 @@ import { Component } from '@angular/core';
         <p>
             To change join queries, use the same methods but with the <i>use</i> prefix: <code>useJoin</code>,
             <code>useInnerJoin</code>, <code>useJoinWith</code>, or <code>useInnerJoinWith</code>.
-            To end the modification of the join query, use on it <code>end()</code> to get the parent
+            To end the modification of the join query, use <code>end()</code> to get the parent
             query back.
         </p>
 
@@ -251,7 +251,7 @@ import { Component } from '@angular/core';
             const users = await session.query(User)
                 .useInnerJoinWith('group')
                     .filter({name: 'admins'})
-                    .end()
+                    .end()  // returns to the parent query
                 .find();
             
             for (const user of users) {
@@ -259,14 +259,14 @@ import { Component } from '@angular/core';
             }
         </textarea>
 
-        <h3>Aggregation</h3>
+        <h3>Aggregating</h3>
 
         <p>
             Aggregation methods allow you to count records and aggregate fields.
         </p>
 
         <p>
-            Following examples assume this model schema:
+            The following examples assume this model schema:
         </p>
 
         <textarea codeHighlight>
@@ -312,6 +312,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
+            // first let's update some of the records:
             await database.query(File).filter({path: 'images/file1'}).patchOne({$inc: {downloads: 15}});
             await database.query(File).filter({path: 'images/file2'}).patchOne({$inc: {downloads: 5}});
         
@@ -325,12 +326,12 @@ import { Component } from '@angular/core';
             await session.query(File).groupBy('category').withCount('id', 'amount').find();
         </textarea>
 
-        <h3>Lift</h3>
+        <h3>Lifting</h3>
 
         <p>
             Lifting a query means adding new functionality to it. This is usually used by either
-            plugins or complex architectures in order to split bigger query classes up in
-            multiple handy ones.
+            plugins or complex architectures in order to split bigger query classes up into
+            multiple handy reusable ones.
         </p>
 
         <textarea codeHighlight>
@@ -350,7 +351,7 @@ import { Component } from '@angular/core';
             await session.query(User).lift(UserQuery).hasBirthday().find();
         </textarea>
 
-        <h3>Patch</h3>
+        <h3>Patching</h3>
 
         <p>
             Patch is a modification query that patches records that the query describes. 
@@ -381,11 +382,11 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            All official database adapters support the <i>returning</i> feature. Its a way to return
+            All official database adapters support the <i>returning</i> feature. It's a way to return
             changed fields from a patch query.
         </p>
 
-        <h3>Delete</h3>
+        <h3>Deleting</h3>
         
         <p>
             Delete is a modification query that deletes records that the query describes.

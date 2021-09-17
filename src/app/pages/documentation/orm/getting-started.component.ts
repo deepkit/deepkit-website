@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Make sure all peer dependencies are installed. Per default NPM 7+ installs them automatically.
+            Make sure all peer dependencies are installed. By default NPM 7+ installs them automatically.
             For older versions, use this command:
         </p>
 
@@ -38,7 +38,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            Make also sure to always import <code>reflect-metadata</code> at the very beginning of your entry point scripts.
+            Also make sure to always import <code>reflect-metadata</code> at the very beginning of your entry point scripts.
             More information about Deepkit Type can be found in chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a>.
         </p>
         

@@ -9,16 +9,16 @@ import { Component } from '@angular/core';
         <p>
             The heart of Deepkit Framework is a very powerful dependency injection container, <a routerLink="/library/injector">Deepkit
             Injector</a>.
-            Its a compiling container with scopes, typesafe configuration system,
+            It's a compiling container with scopes, typesafe configuration system,
             automatic dependency resolving, compiler passes, tagged providers, various providers and more. 
-            Its where all class instances of your application are created and live.
+            It's where all class instances of your application are created and live.
         </p>
 
         <h3>Provider</h3>
 
         <p>
             A provider is used to describe how a service needs to be built. It defines what happens when a service is requested by your
-            code, either through a dependency injection or through manually requesting the service from the container.
+            code, either through a dependency injection or when manually requesting the service from the container.
             There are several providers that allow you to register a service and define its behavior.
         </p>
 
@@ -27,7 +27,7 @@ import { Component } from '@angular/core';
         <p>
             A class provider is a simple class. It's automatically instantiated and dependencies are automatically resolved once that
             class is requested. Classes with dependencies (constructor arguments) need the <code>@injectable</code> decorator.
-            Only with this decorator is it possible for the dependency injection container to extract the dependencies during runtime.
+            This decorator must be used for the dependency injection container to extract the dependencies during runtime.
         </p>
 
         <textarea codeHighlight>
@@ -73,7 +73,7 @@ import { Component } from '@angular/core';
 
         <p>
             Instead of letting the dependency injection container instantiate your class, you can do so manually before the
-            actual container is created. All dependencies need to be created manually as well.
+            actual container is created. All dependencies need to be resolved manually as well.
         </p>
 
         <textarea codeHighlight>
@@ -107,13 +107,13 @@ import { Component } from '@angular/core';
 
         <p>
             You can use <code>deps</code> to retrieve dependencies that should be built by the container.
-            A factory function is only called once per default, since provider are per default singletons.
+            A factory function is normally only called once, since providers are singletons by default.
         </p>
 
         <h4>Transient provider</h4>
 
         <p>
-            Per default all services are singletons, which means a service is only instantiated once (per scope). Every other class
+            All services are singletons unless otherwise specified, meaning a service is only instantiated once (per scope). Every other class
             requesting this service gets the very same instance. To disable this behavior, you can use transient providers.
             To enable transient you add <code>transient: true</code> to the provider.
         </p>
@@ -151,7 +151,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Optional arguments should be marked as such, otherwise an error is thrown.
+            Optional arguments should be marked as such, otherwise an error could be thrown if no instance could be resolved.
         </p>
 
         <textarea codeHighlight>
@@ -187,7 +187,7 @@ import { Component } from '@angular/core';
         <p>
             In Deepkit Framework modules and your application can have configuration options. 
             A configuration could be database urls, passwords, IPs, and so on. 
-            To retrieve those information in your services, you can use configuration injection.
+            To retrieve that information in your services, you can use configuration injection.
         </p>
         
         <textarea codeHighlight="">
@@ -263,13 +263,13 @@ import { Component } from '@angular/core';
         
         <p>
             Configuration slices are the most typesafe way and also enable refactoring quite easily.
-            You can reuse sliced configuration classes across your code base and and shape them as you need it. 
+            You can reuse sliced configuration classes across your code base and shape them as you need. 
         </p>
         
         <p>
             You can also request all configuration options using <code>@inject(config.all())</code>.
             This is however not recommended since it does not separate your class from the configuration system enough.
-            In unit testing of your class you have to provide all configuration options even if you don't use them.
+            For example, when unit testing your class you would have to provide all configuration options, even if you don't use them.
             Thus you should prefer token based or slice based configuration injection.
         </p>
 
@@ -288,17 +288,17 @@ import { Component } from '@angular/core';
         <h3>Scopes</h3>
         
         <p>
-            Per default services don't live in any scope. If you have multiple scopes and put a service into that scope,
+            By default, services don't live in any scope. If you have multiple scopes and put a service into that scope,
             that service is instantiated per scope. 
             Your application can create custom scopes by creating a new InjectorContext. This is done automatically in your
             Deepkit Framework applications: For HTTP requests <code>http</code>, for RCP sessions <code>rpc</code>, 
             and CLI commands <code>cli</code>. A new HTTP scope is created for each incoming request and closed when done.
-            The same for a RPC session: As soon as a new client connects a RPC scope is created and closed when the client disconnects.
-            For CLI commands a CLI scope is created for each executed command.
+            The same is true for an RPC session: As soon as a new client connects, an RPC scope is created and closed when the client disconnects.
+            For CLI commands, a CLI scope is created for each executed command.
         </p>
         
         <p>
-            When you put for example a service into the <code>http</code> scope, your service can only be requested by
+            For example, if you put a service into the <code>http</code> scope, your service can only be requested by
             other services living in the same scope. Your HTTP controllers are automatically in the <code>http</code> scope,
             so they would be able to request that service. The objects <code>HttpRequest</code> and <code>HttpResponse</code>
             are only available in the <code>http</code> scope.
@@ -332,7 +332,7 @@ import { Component } from '@angular/core';
         <p>
             Compiler passes are a very powerful tool to adjust the way your services are built in the dependency injection container.
             Compiler passes provides a way to manipulate other service definitions that have been registered with the service container.
-            It allows your to change properties or call methods with static arguments or with values from the container.
+            It allows you to change properties or call methods with static arguments or with values from the container.
         </p>
         
         <p>
@@ -383,25 +383,25 @@ import { Component } from '@angular/core';
         <p>
             With <code>module.setupProvider()</code> you request a Proxy object from the provider interface and call each method on it.
             All calls will be scheduled and executed once the real service behind that provider has been built. If you change
-            properties this assignments will be scheduled as well and then as well be replayed for each newly created service. 
+            properties, these assignments will be scheduled as well, and will also be replayed for each newly created service. 
         </p>
         
         <p>
-            Use <code>injectorReference</code> to reference to other services. They will be replaced with the real service instance
+            Use <code>injectorReference</code> to reference other services. They will be replaced with the real service instance
             when your scheduled calls are executed.
         </p>
         
         <p>
             Using the <code>config</code> parameter in the <code>setup</code> callback allows you to configure your services
-            depending on configuration values. This makes it possible to setup your dependency injection container very dynamically for a 
-            big variety of use cases.
+            depending on configuration values. This makes it possible to set up your dependency injection container very dynamically for a 
+            large variety of use cases.
         </p>
 
         <h3>Tagged providers</h3>
         
         <p>
-            Dependency injection tags allow service authors to provide users a hook point to provide additional service for a specific purpose.
-            For example could a user provide several <i>Transport</i> services and tag them via a already defined tag <i>LogTransporterTag</i>
+            Dependency injection tags allow service authors to provide users a hook point to provide additional services for a specific purpose.
+            For example, a user could provide several <i>Transport</i> services and tag them via an already defined tag <i>LogTransporterTag</i>
             from a <i>Logger</i> service. The Logger service can then request all services defined by the user for the tag <i>LogTransporterTag</i>.  
         </p>
         

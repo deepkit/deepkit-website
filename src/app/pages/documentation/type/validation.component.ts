@@ -54,7 +54,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            There can be many errors in the returning array, but only one for each property (the first encountered validation error).
+            There can be many errors in the returned array, but only one for each property (the first encountered validation error).
         </p>
 
         <h3>Type guarding with <code>validates</code></h3>

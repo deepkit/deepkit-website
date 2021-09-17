@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
         <p>
             CLI stands for command line interface and is a way to interact with your application through the terminal/console.
             It's one of three entry points into your application.
-            In Deepkit Framework your applications starts always via a command line program that you write yourself in TypeScript.
-            Its how you start the HTTP/RPC server, execute migrations, and execute your own commands. Its all via the same entry
+            In Deepkit Framework your applications always start via a command line program that you write yourself in TypeScript.
+            It's how you start the HTTP/RPC server, execute migrations, and execute your own commands. It's all via the same entry
             point, the same file.
         </p>
 

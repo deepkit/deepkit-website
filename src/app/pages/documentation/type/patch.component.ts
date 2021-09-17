@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         <h2>Patch</h2>
         
         <p>
-            Patching is a process to update data only partially. Deepkit Type supports de-/serializing patch structures with deep paths.
+            Patching is a process to update data only partially. Deepkit Type supports (de-)serializing patch structures with deep paths.
             This allows for example to correctly deserialize incoming JSON patch structures, or custom patch structures.
         </p>
         

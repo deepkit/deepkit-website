@@ -7,10 +7,11 @@ import { Component } from '@angular/core';
         <h2>Session</h2>
 
         <p>
-            Sessions are sessions of a unit of work (UoW) instance. A Unit of Work keeps track of everything you do during
-            a session and automatically persists changes once you call <code>commit()</code>.
-            Its the preferred way to execute inserts and updates to your database since it batches inserts and updates in a way to makes it very fast.
-            A session is very light weight and can be easily created for example in a request-response life-cycle.
+            A session is akin to a Unit of Work. It keeps track of everything you do, 
+            and automatically persists changes once you call <code>commit()</code>.
+            It's the preferred way to execute inserts and updates to your database, 
+            since it batches inserts and updates in a way that makes it very fast.
+            A session is very lightweight and can easily be created in a request-response life-cycle, for example.
         </p>
 
         <textarea codeHighlight title="database.ts">
@@ -48,7 +49,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            Add new entity instances to the session via <code>session.add(T)</code> or schedule already existing via <code>session.remove(T)</code>.
+            Add new entity instances to the session via <code>session.add(T)</code>, or remove already existing instances via <code>session.remove(T)</code>.
             Once you are done with the session object, simply dereference it everywhere so that the garbage collector can remove it.  
         </p>
         
@@ -62,24 +63,25 @@ import { Component } from '@angular/core';
                 user.name += ' changed';
             }
         
-            await session.commit();
+            await session.commit();   // magic!
         </textarea>
         
         <p>
-            Every time you call <code>commit</code> all fetched entity instances are checked for changes, added entity instances via <code>add()</code> are inserted to the
+            Every time you call <code>commit</code>, all fetched entity instances are checked for changes, added entity instances via <code>add()</code> are inserted to the
             database, and removed entity instances via <code>remove()</code> are deleted. 
         </p>
         
         <h4>Identity map</h4>
         
         <p>
-            A identity map is a feature that makes sure you work always with the same entity instances. If you for example
-            execute <code>session.query(User).find()</code> twice, you get two different arrays but with the same entity instances in it.
-            When commit a scheduled <code>session.add(entity1)</code> and fetch it again, you receive the very same entity instance <i>entity1</i>.
+            Sessions provide an Identity map, which ensures that there is only ever one javascript object per
+            database id. For example, if you execute <code>session.query(User).find()</code> twice
+            within the same session, you get two different arrays but with the same entity instances in it.
+            If you add a new entity using <code>session.add(entity1)</code> and fetch it again, you receive the very same entity instance <i>entity1</i>.
         </p>
         
         <p>
-            It's important that once you start using sessions, you should use its <code>Session.query</code> method instead of <code>Database.query</code>. 
+            Important: once you start using sessions, you should use its <code>Session.query</code> method instead of <code>Database.query</code>. 
             Only session queries have the identity map feature activated.
         </p>
     `
