@@ -87,6 +87,7 @@ import { Component } from '@angular/core';
             import { App } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { cli, Command } from '@deepkit/app';
+            import { FrameworkModule } from '@deepkit/framework';
             
             @cli.controller('test')
             export class TestCommand implements Command {
@@ -99,7 +100,8 @@ import { Component } from '@angular/core';
             }
             
             new App({
-                controllers: [TestCommand]
+                controllers: [TestCommand],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
