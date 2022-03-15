@@ -7,48 +7,54 @@ import { Router } from '@angular/router';
         '(click)': 'router.navigateByUrl(url)',
     },
     template: `
-        <div class="package">{{package}}</div>
-        <div class="title">{{title}}</div>
-        <div class="sub">{{sub}}</div>
+        <h3 class="title">{{title}}</h3>
         <div class="content">
             <ng-content></ng-content>
         </div>
+        <div class="package">{{package}}</div>
     `,
     styles: [`
         :host {
-            background: #FFFFFF;
-            box-shadow: 0 0 16px rgba(0, 0, 0, 0.13);
-            border-radius: 5px;
-            text-align: left;
-            padding: 35px 22px;
+            align-items: flex-start;
+            padding: 25px;
         }
         
+        :host:hover .package {
+            color: white;
+        }
+
         a, a:link {
             color: black;
         }
-        
-        a:hover{
+
+        a:hover {
             text-decoration: none;
         }
         
+        .page, .title, .content {
+            transition: color 0.2s ease-out;
+        }
+
         .package {
             color: gray;
             font-size: 14px;
         }
 
         .title {
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-        .sub {
-            margin-top: 34px;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 800;
+            font-size: 28px;
+            text-transform: uppercase;
+            color: #000000;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
         }
 
         .content {
+            font-weight: 600;
             font-size: 14px;
+            color: var(--color-dark2);
+            letter-spacing: 0;
+            line-height: 28px;
         }
 
         .content p:first-child {

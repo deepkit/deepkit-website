@@ -18,7 +18,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="client.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { DeepkitClient } from '@deepkit/rpc';
             import { MyRPCInterface } from './my-rpc';
             

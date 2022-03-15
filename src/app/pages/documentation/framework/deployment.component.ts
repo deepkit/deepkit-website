@@ -17,22 +17,17 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
-            import { App, createModuleConfig } from '@deepkit/app';
+            import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
-            import { t } from '@deepkit/type';
-            import { inject } from '@deepkit/injector';
             import { http } from '@deepkit/http';
             
-            const config = createModuleConfig({
-                title: t.string.default('DEV my Page'),
-            });
+            class Config {
+                title: string = 'DEV my Page';
+            }
             
             @http.controller()
             class MyWebsite {
-                constructor(
-                    @inject(config.token('title')) protected title: string
-                ) {
+                constructor(protected title: Config['title']) {
                 }
             
                 @http.GET()
@@ -42,7 +37,7 @@ import { Component } from '@angular/core';
             }
             
             new App({
-                config: config,
+                config: Config,
                 controllers: [MyWebsite],
                 imports: [new FrameworkModule]
             })
@@ -170,7 +165,7 @@ import { Component } from '@angular/core';
             // your config and http controller here 
             
             new App({
-                config: config,
+                config: Config,
                 controllers: [MyWebsite],
                 imports: [
                     new FrameworkModule({

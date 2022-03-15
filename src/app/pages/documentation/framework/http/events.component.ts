@@ -86,7 +86,6 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { HtmlResponse, http, httpWorkflow } from '@deepkit/http';
@@ -154,17 +153,15 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { http, httpWorkflow } from '@deepkit/http';
-            import { classToPlain, t } from '@deepkit/type';
             import { eventDispatcher } from '@deepkit/event';
             
             class User {
                 constructor(
-                    @t public username: string,
-                    @t public id: number = 0,
+                    public username: string,
+                    public id: number = 0,
                 ) {
                 }
             }

@@ -26,20 +26,16 @@ import { Component } from '@angular/core';
 
         <p>
             A class provider is a simple class. It's automatically instantiated and dependencies are automatically resolved once that
-            class is requested. Classes with dependencies (constructor arguments) need the <code>@injectable</code> decorator.
-            This decorator must be used for the dependency injection container to extract the dependencies during runtime.
+            class is requested.
         </p>
 
         <textarea codeHighlight>
-            import { injectable } from '@deepkit/injector';
-            
             class Database {
                 getUsers(): {username: string}[] {
                     return [{username: 'Peter'}];
                 }
             }
             
-            @injectable
             class MyService {
                 constructor(protected database: Database) {
                 }
@@ -141,9 +137,6 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            import { injectable } from '@deepkit/injector';
-            
-            @injectable
             class MyService {
                 constructor(protected database: Database) {
                 }
@@ -155,11 +148,8 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            import { injectable, inject } from '@deepkit/injector';
-            
-            @injectable
             class MyService {
-                constructor(@inject().optional protected database?: Database) {
+                constructor(protected database?: Database) {
                 }
             }
         </textarea>
@@ -170,15 +160,14 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            import { injectable, inject } from '@deepkit/injector';
+            import { Inject } from '@deepkit/injector';
             
-            @injectable
             class MyService {
                 //required 
-                @inject() protected database!: Database;
+                protected database!: Inject<Database>;
             
                 //or optional
-                @inject().optional protected database?: Database;
+                protected database?: Inject<Database>;
             }
         </textarea>
 
@@ -192,23 +181,17 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight="">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
-            import { App, createModuleConfig } from '@deepkit/app';
-            import { t } from '@deepkit/type';
+            import { App } from '@deepkit/app';
             import { Database } from '@deepkit/orm';
             import { MongoDatabaseAdapter } from '@deepkit/mongo';
-            import { inject } from '@deepkit/injector';
             
-            const config = createModuleConfig({
-                database: t.string.default('mongodb://localhost'),
-            });
+            class Config {
+                database: string = 'mongodb://localhost';
+            }
             
             class MainDatabase extends Database {
-                constructor(
-                    @inject(config.token('database')) 
-                    protected databaseUrl: string
-                ) {
-                    super(new MongoDatabaseAdapter(databaseUrl), []);
+                constructor(url: Config['database']) {
+                    super(new MongoDatabaseAdapter(url), []);
                 }
             }
             
@@ -219,67 +202,50 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            The easiest way is to use <code>@inject(config.token(name))</code> as decorator on your argument. You have to make sure 
-            that your annotated parameter type is equal to the requested config token. 
+            The easiest way is to use the TypeScript index access operator <code>Config['database']</code> as dependency in the constructor.
+            This will automatically inject the value of 'database'.
         </p>
         
-        <h4>Configuration slice</h4>
-
         <p>
-            An alternative is to use <i>configuration slices</i>. Those are classes containing only the options you need. This 
-            is perfect when you have more than one configuration option needed in your service. It lets you easily reuse a sub collection
-            of configuration options across your services using simple constructor injection.
+            An alternative is to use <i>configuration partials</i>. Those are types containing only the options you need. This 
+            is perfect when you have more than one configuration option needed in your service.
         </p>
 
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
-            import { App, createModuleConfig } from '@deepkit/app';
-            import { t } from '@deepkit/type';
+            import { App } from '@deepkit/app';
             import { Database } from '@deepkit/orm';
             import { MongoDatabaseAdapter } from '@deepkit/mongo';
-            import { injectable } from '@deepkit/injector';
             
-            const config = createModuleConfig({
-                databaseUrl: t.string.default('mongodb://localhost'),
-                pageTitle: t.string.default('My super page'),
-            });
-            
-            class DatabaseSettings extends config.slice('databaseUrl') {
+            class Config {
+                databaseUrl: string = 'mongodb://localhost';
+                pageTitle: string = 'My super page';
+                domain: string = 'example.com';
             }
-            
-            @injectable
+
             class MainDatabase extends Database {
-                constructor(protected database: DatabaseSettings) {
-                    super(new MongoDatabaseAdapter(database.databaseUrl), []);
+                constructor(databaseSettings: Partial<Config, 'databaseUrl'>) {
+                    super(new MongoDatabaseAdapter(databaseSettings), []);
                 }
             }
             
+            //or use multiple values and define as type alias
+            type DBConfig = Partial<Config, 'databaseUrl' | 'anotherOption'>;
+            class MainDatabase extends Database {
+                constructor(databaseSettings: DBConfig) {
+            }
+            
             new App({
-                config: config,
+                config: Config,
                 providers: [MainDatabase]
             }).run();
         </textarea>
-        
-        <p>
-            Configuration slices are the most typesafe way and also enable refactoring quite easily.
-            You can reuse sliced configuration classes across your code base and shape them as you need. 
-        </p>
-        
-        <p>
-            You can also request all configuration options using <code>@inject(config.all())</code>.
-            This is however not recommended since it does not separate your class from the configuration system enough.
-            For example, when unit testing your class you would have to provide all configuration options, even if you don't use them.
-            Thus you should prefer token based or slice based configuration injection.
-        </p>
 
+        <p>Or request the whole configuration object.</p>
+            
         <textarea codeHighlight>
-            @injectable
             class MainDatabase extends Database {
-                constructor(
-                    @inject(config.all())
-                    protected database: typeof config.type
-                ) {
+                constructor(protected database: Config) {
                     super(new MongoDatabaseAdapter(database.databaseUrl), []);
                 }
             }
@@ -290,8 +256,9 @@ import { Component } from '@angular/core';
         <p>
             By default, services don't live in any scope. If you have multiple scopes and put a service into that scope,
             that service is instantiated per scope. 
-            Your application can create custom scopes by creating a new InjectorContext. This is done automatically in your
-            Deepkit Framework applications: For HTTP requests <code>http</code>, for RCP sessions <code>rpc</code>, 
+            Your application can create custom scopes by creating a new InjectorContext. 
+            Deepkit Framework applications have already a few scopes define:
+            For HTTP requests <code>http</code>, for RCP sessions <code>rpc</code>, 
             and CLI commands <code>cli</code>. A new HTTP scope is created for each incoming request and closed when done.
             The same is true for an RPC session: As soon as a new client connects, an RPC scope is created and closed when the client disconnects.
             For CLI commands, a CLI scope is created for each executed command.
@@ -310,10 +277,9 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { injectable } from '@deepkit/injector';
             import { HttpRequest } from '@deepkit/http';
+            import { FrameworkModule } from '@deepkit/framework';
             
-            @injectable
             class MyHttpSessionHandler {
                 constructor(protected request: HttpRequest) {}
             
@@ -322,8 +288,9 @@ import { Component } from '@angular/core';
                 }   
             }
             
-            new App({ to describe how a service needs to be built
-                providers: [{provide: MyHttpSessionHandler, scope: 'http'}]
+            new App({
+                providers: [{provide: MyHttpSessionHandler, scope: 'http'}],
+                imports: [new FrameworkModule]
             }).run();
         </textarea>
 
@@ -340,10 +307,9 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { App, createModuleConfig, } from '@deepkit/app';
+            import { App, } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { injectorReference } from '@deepkit/injector';
-            import { t } from '@deepkit/type';
             
             class Database {
             }
@@ -360,12 +326,12 @@ import { Component } from '@angular/core';
                 }
             }
             
-            const config = createModuleConfig({
-                migrateOnStartup: t.boolean.default(false),
-            });
+            class Config {
+                migrateOnStartup: boolean = false;
+            }
             
             new App({
-                config: config,
+                config: Config,
                 providers: [DatabaseRegistry, Logger]
             })
             .setup((module, config) => {
@@ -382,7 +348,7 @@ import { Component } from '@angular/core';
         
         <p>
             With <code>module.setupProvider()</code> you request a Proxy object from the provider interface and call each method on it.
-            All calls will be scheduled and executed once the real service behind that provider has been built. If you change
+            All calls will be scheduled and executed once the real service behind that provider is being built. If you change
             properties, these assignments will be scheduled as well, and will also be replayed for each newly created service. 
         </p>
         
@@ -392,7 +358,7 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            Using the <code>config</code> parameter in the <code>setup</code> callback allows you to configure your services
+            Using the <code>config</code> parameter in the <code>setup()</code> callback allows you to configure your services
             depending on configuration values. This makes it possible to set up your dependency injection container very dynamically for a 
             large variety of use cases.
         </p>
@@ -410,7 +376,6 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight title="app.ts">
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { Tag } from '@deepkit/injector';
             import { cli, Command } from '@deepkit/app';

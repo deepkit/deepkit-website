@@ -38,8 +38,8 @@ import { InputComponent } from './pages/input.component';
 import { DialogComponent } from './pages/dialog.component';
 import { MenuComponent } from './pages/menu.component';
 import { WindowComponent } from './pages/window.component';
-import { CodeFrameComponent } from '../components/doc-code-frame.component';
 import { WindowToolbarComponent } from './pages/window-toolbar.component';
+import { DemoCodeFrameComponent } from '../components/demo-code-frame.component';
 
 
 const routes: Routes = [
@@ -69,7 +69,7 @@ const routes: Routes = [
         DialogComponent,
         MenuComponent,
         WindowComponent,
-        CodeFrameComponent,
+        DemoCodeFrameComponent,
         WindowToolbarComponent,
     ],
     providers: [

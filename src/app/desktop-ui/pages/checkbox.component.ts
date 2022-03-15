@@ -18,8 +18,6 @@ import { Component } from '@angular/core';
             <dui-checkbox [(ngModel)]="active" disabled>Disabled</dui-checkbox>
             <br/>
         </p>
-
-        <api-doc module="components/checkbox/checkbox.component" component="CheckboxComponent"></api-doc>
     `
 })
 export class CheckboxComponent {

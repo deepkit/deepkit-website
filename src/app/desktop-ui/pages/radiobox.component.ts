@@ -19,8 +19,6 @@ import { Component } from '@angular/core';
         <dui-radiobox [(ngModel)]="radioValue" disabled value="a">Radio A</dui-radiobox><br/>
         <dui-radiobox [(ngModel)]="radioValue" disabled value="b">Radio B</dui-radiobox><br/>
         <dui-radiobox [(ngModel)]="radioValue" disabled value="c">Radio C</dui-radiobox>
-
-        <api-doc module="components/radiobox/radiobox.component" component="RadioboxComponent"></api-doc>
     `
 })
 export class RadioboxComponent {

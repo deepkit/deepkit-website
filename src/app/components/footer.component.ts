@@ -7,8 +7,7 @@ import {Component} from '@angular/core';
             <div class="copyright">
                 <img src="../../assets/images/deepkit_white_text.svg"/>
                 <div class="text">
-                    © {{year}} Deepkit®<br/>
-                    All rights reserved.
+                    © {{year}} Deepkit®
                 </div>
             </div>
             <nav class="social">

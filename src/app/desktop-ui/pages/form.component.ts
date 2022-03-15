@@ -90,10 +90,6 @@ import { Component } from '@angular/core';
         <dui-form-row label="">
             <dui-checkbox [(ngModel)]="disabledAll">Disable all</dui-checkbox>
         </dui-form-row>
-
-        <api-doc module="components/form/form.component" component="FormComponent"></api-doc>
-
-        <api-doc module="components/form/form.component" component="FormRowComponent"></api-doc>
     `
 })
 export class FormComponent {

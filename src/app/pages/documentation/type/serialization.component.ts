@@ -22,171 +22,131 @@ import { Component } from '@angular/core';
         <p>
             Deepkit Type supports custom serialization targets but comes pre-bundled with a JSON serialization target. Using @deepkit/bson
             you could also use BSON as serialization target. To build your own serialization target (for example for a database driver),
-            see the chapter <a href="/documentation/type/serialization-target">Serialization target</a>.
-        </p>
-
-        <h3>JSON</h3>
-
-        For JSON there are three main functions available: <code>plainToClass</code>, <code>classToPlain</code>, and <code>validatedPlainToClass</code>.
-        Under the hood of these functions the globally available JSON serializer <code>jsonSerializer</code> is used.
-
-        <p>
-            Note that properties that are not decorated with <code>@t</code> for classes are not included in the de-/serialization process.
+            see the chapter <a href="/documentation/type/custom-serializer">Customer Serializer</a>.
         </p>
 
         <p>
-            Note that validation is not run automatically. Use <code>validatedPlainToClass</code> to use validation while deserializing.
-            You can use the functions <code>validate</code> or <code>validates</code> on instantiated schemas, see chapter 
+        There are three main functions available: <code>serialize</code>, <code>deserialize</code>, and <code>validatedDeserialize</code>.
+        Under the hood of these functions the globally available JSON serializer <code>import {{"{"}} serializer {{"}"}} from '@deepkit/type'</code> is used.
+        </p>
+
+        <p>
+            Note that validation is not run automatically. Use <code>validatedDeserialize</code> to use validation while deserializing.
+            You can use the functions <code>validate</code> or <code>validates</code> on deserialized data, see chapter 
             <a href="/documentation/type/validation">Validation</a>. 
         </p>
 
-        <h4>Function <code>plainToClass</code></h4>
+        <h3><code>deserialize</code></h3>
 
-        <code>plainToClass</code> converts JSON data types to JavaScript types using a created schema or decorated class.
-        This is usually called deserialization, as it converts data from our serialization target (in our case JSON) to the data types
-        of the runtime.
+        <p>
+            <code>deserialize</code> converts data to JavaScript types based on the given type.
+            Per default is uses the JSON <code>serializer</code>.
+            This is usually called deserialization, as it converts data from our serialization target (in our case JSON) to the data types
+            of the runtime. <code>cast</code> is an alias to <code>deserialize</code>.
+        </p>
 
         <textarea codeHighlight title="app.ts">
-            import 'reflect-metadata';
-            import { t, plainToClass, uuid } from '@deepkit/type';
+            import { deserialize } from '@deepkit/type';
 
             class MyModel {
-                @t.primary.uuid
-                id: string = uuid();
-
-                @t created: Date = new Date;
+                id: number = 0;
+                created: Date = new Date;
             
-                constructor(@t public name: string) {
+                constructor(public name: string) {
                 }
             }
 
             const myModel = plainToClass(MyModel, {
-                id: 'f2ee05ad-ca77-49ea-a571-8f0119e03038',
+                id: 5,
                 created: 'Sat Oct 13 2018 14:17:35 GMT+0200',
                 name: 'Peter',
             });
         </textarea>
 
         <p>
-            The above deserialization call via <code>plainToClass</code> is equivalent to this code:
+            When data can not be converted correctly a <code>ValidationError</code> is thrown.
         </p>
-
-        <textarea codeHighlight>
-            import { jsonSerializer } from '@deepkit/type';
-            jsonSerializer.for(MyModel).deserialize(myModel);
-        </textarea>
 
         <p>
             When JavaScript types are passed, they are used as-is. For example, if you pass a <code>Date</code> object to
             <code>created</code>, then it works as well.
         </p>
 
-
-        <h5>Soft type conversion</h5>
+        <h4>Soft type conversion</h4>
 
         <p>
-            The deserialization processes has soft type conversion implemented. This means it can accept strings and numbers for number properties,
-            or a number for a string property. This is useful for example when accepting data via a URL query and passing
+            The deserialization processes has soft type conversion implemented. This means it can accept strings and numbers for number types,
+            or a number for a string type. This is useful for example when accepting data via a URL query and passing
             it to the schema deserializer. Since URL query is string only, Deepkit Type tries to resolve the types nonetheless for numbers
             and booleans.
         </p>
 
         <ul>
             <li>
-                <strong>t.number</strong>: Properties marked as number accept string numbers. <code>parseFloat</code> will be used to attempt conversion.
+                <strong>number|bigint</strong>: Properties marked as number or bigint accept string numbers. <code>parseFloat</code> will be used.
             </li>
             <li>
-                <strong>t.boolean</strong>: Properties marked as boolean accept numbers and strings. <br/>
+                <strong>boolean</strong>: Properties marked as boolean accept numbers and strings. <br/>
                 0, '0', 'false' will be interpreted as boolean <code>false</code>.<br/>
                 1, '1', 'true' will be interpreted as boolean <code>true</code>.
             </li>
         </ul>
 
-        <h4>Function <code>classToPlain</code></h4>
+        <textarea codeHighlight>
+            import { deserialize } from '@deepkit/type';
+            
+            deserialize<boolean>('false')).toBe(false);
+            deserialize<boolean>('0')).toBe(false);
+            deserialize<boolean>('1')).toBe(true);
+            
+            deserialize<number>('1')).toBe(1);
+        </textarea>
 
-        <code>classToPlain</code> converts JavaScript data types to JSON using a created schema or decorated class.
-        This is usually called serialization, as it serializes a data structure to a target format (in our case JSON).
+        <h3><code>serialize</code></h3>
+
+        <p>
+            <code>serialize</code> converts JavaScript data types to the serialization formation. 
+            Per default is uses the JSON <code>serializer</code>.
+            This is usually called serialization, as it serializes a data structure to a target format (in our case JSON).
+        </p>
+
+        <p>
+            In order to produce a JSON string, you have to call the JSON serializer, and then on the result JSON.stringify().
+        </p>
 
         <textarea codeHighlight title="app.ts">
-            import 'reflect-metadata';
-            import { t, classToPlain, uuid } from '@deepkit/type';
+            import { serialize } from '@deepkit/type';
             
             class MyModel {
-                @t.primary.uuid
-                id: string = uuid();
-
-                @t created: Date = new Date;
+                id: number = 0;
+                created: Date = new Date;
             
-                constructor(@t public name: string) {
+                constructor(public name: string) {
                 }
             }
             
-            const myModel = new MyModel('Peter');
+            const model = new MyModel('Peter');
             
-            const jsonObject = classToPlain(MyModel, myModel);
+            const jsonObject = serialize<MyModel>(model);
             console.log(jsonObject);
+            const json = JSON.stringify(jsonObject);
         </textarea>
 
         This would output:
 
         <textarea codeHighlight="json">
             {
-              id: '826151dd-fb02-4717-82a6-b319328695a2',
+              id: 0,
               created: '2021-06-10T15:07:24.292Z',
               name: 'Peter'
             }
         </textarea>
 
-        <p>
-            The above serialization call via <code>classToPlain</code> is equivalent to this code:
-        </p>
-
-        <textarea codeHighlight>
-            import { jsonSerializer } from '@deepkit/type';
-            jsonSerializer.for(MyModel).serialize(myModel);
-        </textarea>
-
-        <h4>Function <code>validatedPlainToClass</code></h4>
+        <h3><code>validatedDeserialize</code></h3>
 
         <p>
-            <code>validatedPlainToClass</code> validates given data and when successful, converts JSON data types to JavaScript types using
-            a created schema.
+            <code>validatedDeserialize</code> deserializes the data and runs all validators.
             It throws a detailed error object when validation fails.
-        </p>
-
-        <p>
-            The above deserialization call via <code>validatedPlainToClass</code> is equivalent to this code:
-        </p>
-
-        <textarea codeHighlight>
-            import { jsonSerializer } from '@deepkit/type';
-            jsonSerializer.for(MyModel).validatedDeserialize(myModel);
-        </textarea>
-
-        <h3>Groups</h3>
-
-        <p>
-            The serialization and deserialization functions support a few options, two of which are: <code>groups</code> and <code>excludeGroups</code>,
-            which allows you to exclude or limit the de-/serialization process to a group of properties.
-            Among other uses, this can be used to limit which fields to transmit to a browser.
-        </p>
-
-        <textarea codeHighlight>
-            import { jsonSerializer, plainToClass, t } from '@deepkit/type';
-
-            const schema = t.schema({
-                title: t.string,
-                password: t.string.group('private'),
-            });
-            
-            const instance1 = plainToClass(schema, { title: 'Peter' }, { groupsExclude: ['a'] });
-            
-            const instance2 = jsonSerializer.for(schema).deserialize({ title: 'Peter' }, { groupsExclude: ['a'] });
-        </textarea>
-
-        <p>
-            Note: Using grouped serialization is much slower than regular serialization. If performance is important, consider rearranging
-            your data into multiple classes instead.
         </p>
     `
 })

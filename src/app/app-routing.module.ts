@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { IndexPageComponent } from './pages/index-page.component';
 import { ContactPageComponent } from './pages/contact-page.component';
 import { DataProtectionPageComponent } from './pages/data-protection-page.component';
@@ -13,15 +13,13 @@ import { BrokerComponent } from './pages/broker.component';
 import { LibrariesComponent } from './pages/libraries.component';
 import { OrmBrowserComponent } from './pages/orm-browser.component';
 import { DocTypeGettingStartedComponent } from './pages/documentation/type/getting-started.component';
-import { DocTypeSchemaComponent } from './pages/documentation/type/schema.component';
+import { DocTypeTypesComponent } from './pages/documentation/type/types.component';
 import { DocTypeSerializationComponent } from './pages/documentation/type/serialization.component';
 import { DocTypeReflectionComponent } from './pages/documentation/type/reflection.component';
 import { DocTypeValidationComponent } from './pages/documentation/type/validation.component';
 import { DocTypePerformanceComponent } from './pages/documentation/type/performance.component';
-import { DocTypePatchComponent } from './pages/documentation/type/patch.component';
 import { DocTypeChangeDetectionComponent } from './pages/documentation/type/change-detection.component';
-import { DocTypeStateManagementComponent } from './pages/documentation/type/state-management.component';
-import { DocTypeSerializationTargetComponent } from './pages/documentation/type/serialization-target.component';
+import { DocTypeCustomSerializerComponent } from './pages/documentation/type/custom-serializer.component';
 import { DocFrameworkGettingStartedComponent } from './pages/documentation/framework/getting-started.component';
 import { DocFrameworkModulesComponent } from './pages/documentation/framework/modules.component';
 import { DocFrameworkServicesComponent } from './pages/documentation/framework/services.component';
@@ -42,7 +40,7 @@ import { DocFrameworkDeploymentComponent } from './pages/documentation/framework
 import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
 import { CommunityPageComponent } from './pages/community.component';
 import { DocORMGettingStartedComponent } from './pages/documentation/orm/getting-started.component';
-import { DocORMSchemaComponent } from './pages/documentation/orm/schema.component';
+import { DocORMEntityComponent } from './pages/documentation/orm/entity.component';
 import { DocORMSessionComponent } from './pages/documentation/orm/session.component';
 import { DocORMQueryComponent } from './pages/documentation/orm/query.component';
 import { DocORMRelationsComponent } from './pages/documentation/orm/relations.component';
@@ -69,7 +67,7 @@ import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/co
 
 
 const routes: Routes = [
-    { path: '', pathMatch: 'full', component: IndexPageComponent, data: { title: 'Welcome' } },
+    { path: '', pathMatch: 'full', component: IndexPageComponent, data: { title: 'Welcome', startPage: true } },
     { path: 'contact', pathMatch: 'full', component: ContactPageComponent, data: { title: 'Contact' } },
     {
         path: 'data-protection',
@@ -128,6 +126,12 @@ const routes: Routes = [
     },
 
     {
+        path: 'blog',
+        loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
+        data: { title: 'Blog' },
+    },
+
+    {
         path: 'library/desktop-ui',
         loadChildren: () => import('./desktop-ui/desktop-ui.module').then(m => m.DesktopUiModule),
         data: { title: 'Angular Desktop UI' },
@@ -155,7 +159,7 @@ const routes: Routes = [
     // },
 
     {
-        path: 'documentation', component: DocumentationPageComponent, children: [
+        path: 'documentation', component: DocumentationPageComponent, data: {header: false, documentation: true}, children: [
             { path: '', component: DocWelcomeComponent },
             { path: 'framework', component: DocFrameworkGettingStartedComponent },
             { path: 'framework/fundamentals', component: DocFrameworkFundamentalsComponent },
@@ -181,18 +185,18 @@ const routes: Routes = [
             { path: 'framework/logger', component: DocFrameworkLoggerComponent },
 
             { path: 'type', component: DocTypeGettingStartedComponent },
-            { path: 'type/schema', component: DocTypeSchemaComponent },
+            { path: 'type/types', component: DocTypeTypesComponent },
             { path: 'type/serialization', component: DocTypeSerializationComponent },
             { path: 'type/reflection', component: DocTypeReflectionComponent },
             { path: 'type/validation', component: DocTypeValidationComponent },
             { path: 'type/performance', component: DocTypePerformanceComponent },
-            { path: 'type/patch', component: DocTypePatchComponent },
+            // { path: 'type/patch', component: DocTypePatchComponent },
             { path: 'type/change-detection', component: DocTypeChangeDetectionComponent },
-            { path: 'type/state-management', component: DocTypeStateManagementComponent },
-            { path: 'type/serialization-target', component: DocTypeSerializationTargetComponent },
+            // { path: 'type/state-management', component: DocTypeStateManagementComponent },
+            { path: 'type/custom-serializer', component: DocTypeCustomSerializerComponent },
 
             { path: 'orm', component: DocORMGettingStartedComponent },
-            { path: 'orm/schema', component: DocORMSchemaComponent },
+            { path: 'orm/entity', component: DocORMEntityComponent },
             { path: 'orm/session', component: DocORMSessionComponent },
             { path: 'orm/query', component: DocORMQueryComponent },
             { path: 'orm/relations', component: DocORMRelationsComponent },
@@ -201,6 +205,11 @@ const routes: Routes = [
             { path: 'orm/inheritance', component: DocORMInheritanceComponent },
             { path: 'orm/composite-primary-key', component: DocORMCompositePrimaryKeyComponent },
             { path: 'orm/plugin/soft-delete', component: DocORMPluginSoftDeleteComponent },
+
+            {
+                path: 'desktop-ui',
+                loadChildren: () => import('./pages/documentation/desktop-ui/desktop-ui.module').then(m => m.DocDesktopUIModule),
+            },
 
             { path: 'benchmark', component: DocBenchmarkComponent },
 

@@ -69,8 +69,6 @@ import { Component } from '@angular/core';
                 <dui-option *ngFor="let item of manyItems" [value]="item">Option #{{item}}</dui-option>
             </dui-select>
         </p>
-
-        <api-doc module="components/select/selectbox.component" component="SelectboxComponent"></api-doc>
     `
 })
 export class SelectboxComponent {

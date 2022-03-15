@@ -26,7 +26,6 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { rpc } from '@deepkit/rpc';
@@ -79,7 +78,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="client.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { DeepkitClient } from '@deepkit/rpc';
             import { MyRPCInterface } from './my-rpc';
             
@@ -148,15 +146,12 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="client.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule, onServerMainBootstrap, onServerMainShutdown, WebWorkerFactory } from '@deepkit/framework';
-            import { injectable } from '@deepkit/injector';
             import { TcpRpcServer } from '@deepkit/rpc-tcp';
             import { eventDispatcher } from '@deepkit/event';
             import { Logger } from '@deepkit/logger';
             
-            @injectable
             class RpcTcpBootstrap {
                 server?: TcpRpcServer;
             

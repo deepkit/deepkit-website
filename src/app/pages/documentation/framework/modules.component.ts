@@ -26,8 +26,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="module.ts">
             import { createModule } from '@deepkit/app';
             
-            export class MyModule extends createModule({
-            }) {
+            export class MyModule extends createModule({}) {
             }
         </textarea>
 
@@ -68,7 +67,6 @@ import { Component } from '@angular/core';
             import { http } from '@deepkit/http';
             import { injectable } from '@deepkit/injector';
 
-            @injectable
             class MyHttpController {
                 @http.GET('/hello)
                 hello() {
@@ -105,7 +103,6 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @injectable
             class MyHttpController {
                 constructor(private helloService: HelloWorldService) {}
             
@@ -165,7 +162,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { cli, Command } from '@deepkit/app';
             import { HelloWorldService, MyModule } from './my-module';
@@ -193,30 +189,30 @@ import { Component } from '@angular/core';
 
         <p>
             A module can have type-safe configuration options. The values of those options can be partially or completely injected to services
-            from that module. To define a configuration schema, use <code>createModuleConfig</code>.
+            from that module using simply the class reference or type functions like <code>Partial&lt;Config, 'url'&gt;</code>. 
+            To define a configuration schema write a class with properties.
         </p>
 
         <textarea codeHighlight title="module.config.ts">
-            import { createModuleConfig } from '@deepkit/app';
-            import { t } from '@deepkit/type';
             
-            export const config = createModuleConfig({
-                title: t.string,
-                host: t.string.optional
-            });
+            export class Config {
+                title!: string; //this makes it required and needs to be provided
+                host?: string;
+            
+                debug: boolean = false; //default values are supported as well
+            }
         </textarea>
 
         <textarea codeHighlight title="module.ts">
             import { createModule } from '@deepkit/app';
-            import { config } from './module.config.ts';
+            import { Config } from './module.config.ts';
 
             export class MyModule extends createModule({
-               config: config
+               config: Config
             }) {}
         </textarea>
 
         <p>
-            Required values (not marked with <code>.optional</code> or <code>.default(T)</code>) will be required in order to use the module.
             Configuration option values can be provided either by the constructor of your module, with the <code>.configure()</code> method,
             or via configuration loaders (e.g. environment variables loaders).
         </p>
@@ -279,23 +275,20 @@ import { Component } from '@angular/core';
 
         <p>
             To use a configuration option in a service, you can use regular dependency injection. It's possible to either
-            inject the whole configuration object, a single value, or a slice of the configuration.
+            inject the whole configuration object, a single value, or a partial of the configuration.
         </p>
 
-        <h4>Slice</h4>
+        <h4>Partial</h4>
 
         <p>
-            To inject only a single value, use <code>config.token(name)</code>.
+            To inject only a sub section of configuration values use the <code>Pick</code> type function.
         </p>
 
         <textarea codeHighlight title="my-service.ts">
-            import { config } from './module.config';
+            import { Config } from './module.config';
 
-            class ServiceConfig extends config.slice('title', 'host') {}
-            
             export class MyService {
-                 //ServiceConfig is of type {title: string, host: string | undefined}
-                 constructor(private config: ServiceConfig) {
+                 constructor(private config: Pick<Config, 'title' | 'host'}) {
                  } 
             
                  getTitle() {
@@ -305,20 +298,26 @@ import { Component } from '@angular/core';
             
             //In unit tests, it can be instantiated via
             new MyService({title: 'Hello', host: '0.0.0.0'});
+
+            //or you can use type aliases
+            type MyServiceConfig = Pick<Config, 'title' | 'host'};
+            export class MyService {
+                 constructor(private config: MyServiceConfig) {
+                 } 
+            }
         </textarea>
 
-        <h4>Token</h4>
+        <h4>Single value</h4>
 
         <p>
-            To inject only a single value, use <code>config.token(name)</code>.
+            To inject only a single value, use the index access type operator.
         </p>
 
         <textarea codeHighlight title="my-service.ts">
-            import { inject } from '@deepkit/injector';
-            import { config } from './module.config';
+            import { Config } from './module.config';
 
             export class MyService {
-                 constructor(@inject(config.token('title') private title: string) {
+                 constructor(private title: Config['title']) {
                  } 
             
                  getTitle() {
@@ -329,19 +328,18 @@ import { Component } from '@angular/core';
 
         <h4>All</h4>
         <p>
-            To inject all config values, use <code>config.all()</code>.
+            To inject all config values, use the class as dependency.
         </p>
 
         <textarea codeHighlight title="my-service.ts">
-            import { inject } from '@deepkit/injector';
-            import { config } from './module.config';
+            import { Config } from './module.config';
             
             export class MyService {
-                 constructor(@inject(config.all()) private config: typeof config.type) {
+                 constructor(private config: Config) {
                  } 
             
                  getTitle() {
-                     return this.title;
+                     return this.config.title;
                  }
             }
         </textarea>
@@ -551,7 +549,6 @@ import { Component } from '@angular/core';
                 }
             }
         
-            @injectable
             class Router {
                 constructor(
                     protected injectorContext: InjectorContext,

@@ -29,10 +29,10 @@
             </div>
         </div>
     </div>
+
     <div class="wrapper benchmark-link">
         <a routerLink="/benchmarks">More information about our benchmarks</a>
     </div>
-
 
     <div class="line"></div>
 
@@ -89,8 +89,8 @@ class MyController implements MyControllerInterface {
             <textarea codeHighlight>
 @entity.name('user')
 export class User {
-    @t username: string = '';
-    constructor(@t public id: number) {}
+    username: string = '';
+    constructor(public id: number) {}
 }
 
 export MyControllerInterface = Controller<MyControllerInterface>('my', [User]);
@@ -108,7 +108,7 @@ export interface MyControllerInterface {
 
     <div class="line"></div>
 
-    <div class="text">
+    <div class="page-text">
         <div class="line"></div>
 
         <h2>Simple class methods</h2>
@@ -127,20 +127,13 @@ import {MyControllerInterface, User} from 'common';
 
 @rpc.controller(MyControllerInterface)
 class MyController implements MyControllerInterface {
-    // simple types can be inferred automatically
     @rpc.action()
     async getUser(id: number): Promise<User> {
         return new User(id);
     }
 
-    // more complex types need to be annotated using @t
-    // since they are not emitted by TypeScript.
     @rpc.action()
-    @t.map(t.number)
-    async labelUser(
-        id: number,
-        @t.array(t.string) labels: string[]
-    ): Promise<{[name: string]: number}> {
+    async labelUser(id: number, labels: string[]): Promise<{[name: string]: number}> {
         return labels.map(v => {
             return {v: 1};
         });
@@ -190,23 +183,17 @@ class MyController implements MyControllerInterface {
         <textarea codeHighlight>
 class MyController implements MyControllerInterface {
     @rpc.action()
-    async getUser(
-        @t.positive().max(100000) id: number
-    ): Promise<User> {
+    async getUser(id: number & Positive & Maximum<10000>): Promise<User> {
         return new User(id);
     }
 
     @rpc.action()
-    hello(
-        @t.pattern(/[a-zA-Z0-9\-]+/) name: string
-    ): string {
+    hello(name: string & Exclude<' '>): string {
         return 'Hello ' + name;
     }
 
     @rpc.action()
-    async uploadFile(
-        @.maxLength(1024*1024) data: Uint8Array
-    ): Promise<boolean> {
+    async uploadFile(data: Uint8Array & MaxLength<1048000>): Promise<boolean> {
         return true;
     }
 }
@@ -333,7 +320,7 @@ try {
 //common.ts
 @entity.name('@error/my-custom')
 class MyCustomError extends Error {
-    @t.array(t.string) codes: string[] = [];
+    codes: string[] = [];
 }
       </textarea>
 

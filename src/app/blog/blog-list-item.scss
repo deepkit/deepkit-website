@@ -1,0 +1,31 @@
+a, a:link {
+  display: block;
+  padding: 5px;
+
+  &:hover {
+    background: #eee;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+img {
+  min-width: 100%;
+  background-color: black;
+}
+
+.title {
+  font-size: 26px;
+  color: var(--color-blue-dark);
+  line-height: 33px;
+  margin: 18px 0;
+}
+
+.below {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 600;
+  color: var(--color-grey2);
+  font-size: 15px;
+}

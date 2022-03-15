@@ -13,29 +13,29 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            A configuration can be defined using <code>createModuleConfig</code> and the <code>t</code> decorator
-            of <code>@deepkit/type</code>. It is a typesafe way to define a configuration for your whole
+            A configuration can be defined by defining a class with properties. 
+            It is a typesafe way to define a configuration for your whole
             application and its values are automatically serialized and validated.
         </p>
 
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
-            import { App, createModuleConfig } from '@deepkit/app';
+            import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { t } from '@deepkit/type';
             import { inject } from '@deepkit/injector';
             import { http } from '@deepkit/http';
             
-            const config = createModuleConfig({
-                pageTitle: t.string.default('Cool site'),
-                domain: t.string.default('example.com'),
-            });
-            
+            class Config {
+                pageTitle: string = 'Cool site';
+                domain: string = 'example.com';
+                debug: boolean = false;
+            }
+
             @http.controller()
             class MyWebsite {
                 constructor(
-                    @inject(config.all()) protected allSettings: typeof config.type
+                    protected allSettings: Config
                 ) {
                 }
             
@@ -46,7 +46,7 @@ import { Component } from '@angular/core';
             }
             
             new App({
-                config: config,
+                config: Config,
                 controllers: [MyWebsite],
                 imports: [new FrameworkModule]
             }).run();
@@ -61,42 +61,39 @@ import { Component } from '@angular/core';
             There are several ways to read those configuration values in your services and controllers.
         </p>
 
-        <h4>Configuration tokens</h4>
+        <h4>Configuration option</h4>
 
         <p>
-            Configuration tokens are injected one by one. You can quickly add configuration options but have to keep
-            their data type in sync. For more serious applications you should use <i>configuration slice</i>.
+            You can inject a single configuration option by using the TypeScript index access type operator.
         </p>
 
         <textarea codeHighlight title="app.ts">
-            import { inject } from '@deepkit/injector';
-            import { config } from './app-config.ts';
+            import { http } from '@deepkit/http';
+            import { Config } from './app-config.ts';
             
             @http.controller()
             class MyWebsite {
-                constructor(@inject(config.token('pageTitle')) pageTitle: string) {
+                constructor(pageTitle: Config['pageTitle']) {
                 }
             }
         </textarea>
 
-        <h4>Configuration slice</h4>
+        <h4>Configuration partial</h4>
 
         <p>
-            Configuration slices are the recommended way to provide your configuration options to services and controllers.
-            They are fully type-safe, can be reused, and are easy to inject by simply using the class as type.
-            They are also easy to test in your unit tests.
+            To inject a partial of configuration options, use the <code>Partial</code> TypeScript type function.
         </p>
 
         <textarea codeHighlight title="website.ts">
-            import { config } from './app-config.ts';
+            import { Config } from './app-config.ts';
             
-            class WebsiteSettings extends config.slice('pageTitle') {
-            }
+            type WebsiteSettings = Partial<Config, 'pageTitle' | 'domain'>
             
             @http.controller()
             class MyWebsite {
-                constructor(protected settings: WebsiteSettings) {
-                }
+                constructor(protected settings: WebsiteSettings) {}
+                //or
+                // constructor(protected settings: Partial<Config, 'pageTitle' | 'domain'>) {}
             
                 @http.GET()
                 helloWorld() {
@@ -105,6 +102,11 @@ import { Component } from '@angular/core';
             }
         </textarea>
 
+        <p>
+            In unit tests you have to provide only the options you picked. The type itself comes from your
+            configuration class.
+        </p>
+        
         <textarea codeHighlight title="website.spec.ts">
             import { MyWebsite } from './app-config.ts';
             
@@ -118,15 +120,15 @@ import { Component } from '@angular/core';
         <h4>All configuration options</h4>
         
         <p>
-            Another option is to inject the whole configuration object. This is not recommended but makes prototyping easy and fast.
+            Another option is to inject the whole configuration object.
         </p>
 
         <textarea codeHighlight title="website.ts">
-            import { config } from './app-config.ts';
+            import { Config } from './app-config.ts';
 
             @http.controller()
             class MyWebsite {
-                constructor(@inject(config.all()) protected settings: typeof config.type) {
+                constructor(protected settings: Config) {
                 }
             
                 @http.GET()
@@ -139,27 +141,61 @@ import { Component } from '@angular/core';
         <h3>Configuration schema</h3>
 
         <p>
-            The configuration schema is defined via <a routerLink="/documentation/type">Deepkit Type</a> and its <code>t</code> decorator.
-            It allows you to define almost all possible data structures with default values, deserialization, validation, and description.
+            The configuration schema is a simple class with type definitions. It allows your to define
+            descriptions and validations.
         </p>
 
         <textarea codeHighlight>
-            const config = createModuleConfig({
-                pageTitle: t.string.default('Cool site'),
-                domain: t.string.default('example.com'),
-                port: t.number.default(8080),
-                databaseUrl: t.string.default('mongodb://localhost/'),
+            export class Config {
+                pageTitle: string = 'Cool site';
+            
+                domain: string = 'example.com';
+                port: number = 8080;
+                databaseUrl: string = 'mongodb://localhost/';
                 
-                email: t.boolean.default(false),
-                emailSender: t.string.optional,
-            });
+                email: boolean = false;
+                emailServer?: string;
+            
+                requiredValue!: string;
+            }
         </textarea>
 
+        <h4>Validation</h4>
+        
         <p>
-            Its important to provide always a default value as the validation fails otherwise. For optional values use
-            <code>.optional</code>.
+            All correctly typed properties are automatically validated in the bootstrap phase before any service
+            is instantiated.
+        </p>
+        
+        <p>
+            Required properties with the ! are required and need to be provided or else the configuration validation fails.
+            Also adding validators from @deepkit/type allows your to further validate the configuration values before they are
+            used.
         </p>
 
+        <textarea codeHighlight>
+            import { Validate, MinLength, ValidatorError } from '@deepkit/type';
+            
+            function emailValidation(value: any) {
+                if ('string' === typeof value && value.test(/^\\S+@\\S+$/) return;
+                return new ValidatorError('email', 'Not an email');
+            }
+            
+            export class Config {
+                /**
+                 * @description this is a description that shows up in app:config command.
+                 */
+                pageTitle: string & MinLength<3> = 'Cool site';
+                emailServer?: string & Validate<typeof emailValidation>;
+            }
+        </textarea>
+        
+        <p>
+            See the <a href="/documentation/type/validation">@deepkit/type validation</a> documentation for more information.
+        </p>
+
+        <h3>Debugger</h3>
+        
         <p>
             Configuration values of your application and all modules can be shown in the debugger. Activate the <code>debug</code> option in
             the <i>FrameworkModule</i> and open
@@ -171,7 +207,7 @@ import { Component } from '@angular/core';
             import { FrameworkModule } from '@deepkit/framework';
 
             new App({
-                config: config,
+                config: Config,
                 controllers: [MyWebsite],
                 imports: [
                     new FrameworkModule({
@@ -326,7 +362,8 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            In JSON environment variables via <code>loadConfigFromEnvVariable('APP_CONFIG')</code> on the other hand its not separated by an underscore nor upper-case. <code>framework</code> becomes an object.
+            In JSON environment variables via <code>loadConfigFromEnvVariable('APP_CONFIG')</code> on the other hand 
+            its the structure of the actual configuration class. <code>framework</code> becomes an object.
         </p>
 
         <textarea codeHighlight>

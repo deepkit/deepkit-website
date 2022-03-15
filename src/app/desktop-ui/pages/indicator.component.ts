@@ -17,8 +17,6 @@ import { Component } from '@angular/core';
         <p>
             <dui-slider [(ngModel)]="progress"></dui-slider>
         </p>
-
-        <api-doc module="components/indicator/indicator.component" component="IndicatorComponent"></api-doc>
     `
 })
 export class IndicatorComponent {

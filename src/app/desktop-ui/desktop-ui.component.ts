@@ -97,7 +97,7 @@ import { isPlatformBrowser } from '@angular/common';
                 </div>
             </div>
 
-            <div class="text" *ngIf="isBrowser">
+            <div class="page-text" *ngIf="isBrowser">
                 <h2>Input widgets</h2>
 
                 <p>
@@ -106,11 +106,11 @@ import { isPlatformBrowser } from '@angular/common';
                 </p>
 
                 <div class="dui-body" style="padding: 16px;">
-                    <p>
+                    <div>
                         <dui-input placeholder="Input text" style="margin-right: 5px;"></dui-input>
                         <dui-button>Button</dui-button>
-                    </p>
-                    <p style="display: flex; justify-content: space-between; max-width: 400px;">
+                    </div>
+                    <div style="display: flex; margin-top: 20px; justify-content: space-between; max-width: 400px;">
                         <dui-select [(ngModel)]="select1">
                             <dui-option value="a">Option A</dui-option>
                             <dui-option value="b">Option B</dui-option>
@@ -118,7 +118,7 @@ import { isPlatformBrowser } from '@angular/common';
                         <dui-radiobox>Radio</dui-radiobox>
                         <dui-checkbox>Checkbox</dui-checkbox>
                         <dui-slider style="width: 100px;" [ngModel]="0.4"></dui-slider>
-                    </p>
+                    </div>
                 </div>
 
                 <h2>Table</h2>
@@ -254,38 +254,6 @@ import { isPlatformBrowser } from '@angular/common';
                         </dui-window-footer>
                     </dui-window>
                 </div>
-                
-                <div class="line"></div>
-                
-                <div style="text-align: center;">
-                    <h1>Showcase</h1>
-
-                    <p>
-                        Desktop UI is used in a complex desktop application for
-                        <a target="_blank" href="https://deepkit.ai/">machine learning experiment management</a>.
-                        The framework enabled to develop this kind of application on a budget and time frame that wasn't possible before.
-                    </p>
-
-                    <p>
-                        Live demonstration in the browser can be seen here:
-                        <a target="_blank"
-                           href="https://app.deepkit.ai/public/marcj/deepkit-python-sdk?projectView[tab]=experiments&experimentView[filter][list]=0b3e5215-289b-48b3-8108-284337766eb2">Demo</a>.
-                    </p>
-                </div>
-            </div>
-
-            <div style="background: #020607; padding: 150px 0;">
-                <div class="wrapper" style="max-width: 1300px;">
-                    <video id="my-video" muted="" oncanplay="this.muted=true" loop="" controls="" autoplay=""
-                           preload="auto" poster="https://deepkit.ai/assets/images/video-screen-min.png"
-                           data-setup="{&quot;fluid&quot;: true}"
-                           class="video-js vjs-default-skin" style="max-width: 100%; max-height: 100%; margin: auto;">
-                        <source src="https://deepkit.ai/assets/images/deepkit-v2020.mp4" type="video/mp4">
-                        <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                        </p>
-                    </video>
-                </div>
             </div>
         </div>
 
@@ -315,5 +283,7 @@ export class DesktopUiComponent {
 
     constructor(public duiApp: DuiApp, @Inject(PLATFORM_ID) protected platformId: any) {
         this.duiApp.setPlatform('darwin');
+        this.duiApp.themeDetection = true;
+        this.duiApp.setAutoDarkMode();
     }
 }

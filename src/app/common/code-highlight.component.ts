@@ -1,4 +1,14 @@
-import { AfterViewInit, Directive, DoCheck, ElementRef, Inject, OnChanges, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import {
+    AfterViewInit,
+    Directive,
+    DoCheck,
+    ElementRef,
+    Inject,
+    OnChanges,
+    OnInit,
+    PLATFORM_ID,
+    Renderer2
+} from '@angular/core';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
@@ -47,13 +57,20 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
     }
 
     ngDoCheck() {
-        // queueMicrotask(() => {
-        //     if (!this.pre) return;
-        //     this.elementRef.nativeElement.after(this.pre);
-        // });
+        queueMicrotask(() => {
+            if (!this.elementRef.nativeElement.parentNode) return;
+            if (!this.pre) {
+                this.render();
+            }
+
+            if (!this.pre) return;
+            this.elementRef.nativeElement.after(this.pre);
+            this.renderer.removeChild(this.elementRef.nativeElement.parentNode, this.elementRef.nativeElement);
+        });
     }
 
     render() {
+        if (!this.elementRef.nativeElement.parentNode) return;
         if (this.elementRef.nativeElement instanceof HTMLTextAreaElement) {
             this.code = removeIndent(this.elementRef.nativeElement.value).trim();
         }
@@ -64,7 +81,9 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
             this.pre = this.renderer.createElement('pre');
             this.renderer.addClass(this.pre, 'code');
             this.renderer.addClass(this.pre, 'codeHighlight');
-            this.renderer.setAttribute(this.pre, 'title', this.title || '');
+            if (this.title) {
+                this.renderer.setAttribute(this.pre, 'title', this.title);
+            }
 
             this.renderer.insertBefore(this.elementRef.nativeElement.parentNode, this.pre, this.elementRef.nativeElement);
             const text = this.renderer.createText(this.code);
@@ -73,17 +92,18 @@ export class CodeHighlightComponent implements OnInit, OnChanges, AfterViewInit,
             return;
         }
 
-        if (!this.elementRef.nativeElement.parentNode) return;
-
         if (!this.pre) {
             this.pre = this.renderer.createElement('pre');
 
             this.renderer.addClass(this.pre, 'code');
             this.renderer.addClass(this.pre, 'codeHighlight');
-            this.renderer.setAttribute(this.pre, 'title', this.title || '');
+            if (this.title) {
+                this.renderer.setAttribute(this.pre, 'title', this.title);
+            }
             this.renderer.insertBefore(this.elementRef.nativeElement.parentNode, this.pre, this.elementRef.nativeElement);
             this.renderer.removeChild(this.elementRef.nativeElement.parentNode, this.elementRef.nativeElement);
         }
+        if (!this.pre!.parentNode) return;
 
         if (!this.code) return;
 

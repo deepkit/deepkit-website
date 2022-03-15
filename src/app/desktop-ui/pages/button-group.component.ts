@@ -51,8 +51,6 @@ import {DuiButtonModule} from '@deepkit/desktop-ui';
             </div>
         </dui-dropdown>
     </div>
-
-    <api-doc module="components/button/button.component" component="ButtonGroupComponent"></api-doc>
     `
 })
 export class ButtonGroupComponent {

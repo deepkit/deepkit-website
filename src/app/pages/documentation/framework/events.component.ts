@@ -112,7 +112,6 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
 #!/usr/bin/env ts-node-script
-import 'reflect-metadata';
 import { App } from '@deepkit/app';
 import { cli, Command } from '@deepkit/app';
 import { EventToken, BaseEvent, EventDispatcher, eventDispatcher } from '@deepkit/event';
@@ -182,20 +181,41 @@ new App({
                 <th>Description</th>
             </tr>
             <tr>
+                <td>onServerBootstrap</td>
+                <td>Called only once for application server bootstrap (for main process and workers).</td>
+            </tr>
+            <tr>
+                <td>onServerBootstrapDone</td>
+                <td>Called only once for application server bootstrap (for main process and workers) 
+                    as soon as the application server has started.</td>
+            </tr>
+            <tr>
                 <td>onServerMainBootstrap</td>
-                <td>Bootstrap event for the main process.</td>
+                <td>Called only once for application server bootstrap (in the main process).</td>
             </tr>
             <tr>
                 <td>onServerMainBootstrapDone</td>
-                <td>Boostrap done event for the main process</td>
+                <td>Called only once for application server bootstrap (in the main process) as soon as the application server has started</td>
             </tr>
             <tr>
                 <td>onServerWorkerBootstrap</td>
-                <td>Bootstrap event for each worker process.</td>
+                <td>Called only once for application server bootstrap (in the worker process).</td>
+            </tr>
+            <tr>
+                <td>onServerWorkerBootstrapDone</td>
+                <td>Called only once for application server bootstrap (in the worker process) as soon as the application server has started.</td>
             </tr>
             <tr>
                 <td>ServerShutdownEvent</td>
-                <td>Shutdown event for the main process.</td>
+                <td>Called when application server shuts down (in master process and each worker).</td>
+            </tr>
+            <tr>
+                <td>onServerMainShutdown</td>
+                <td>Called when application server shuts down in the main process.</td>
+            </tr>
+            <tr>
+                <td>onServerWorkerShutdown</td>
+                <td>Called when application server shuts down in the worker process.</td>
             </tr>
         </table>
     `

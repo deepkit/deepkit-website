@@ -36,14 +36,6 @@ import { Component } from '@angular/core';
         <dui-button [disabled]="!selectedItems.length" (click)="remove()" square icon="remove"></dui-button>
         <dui-button (click)="addItem()" [disabled]="!itemName" square icon="add"></dui-button>
     </dui-button-group>
-
-    <api-doc module="components/table/table.component" component="TableComponent"></api-doc>
-
-    <api-doc module="components/table/table.component" component="TableHeaderDirective"></api-doc>
-
-    <api-doc module="components/table/table.component" component="TableColumnDirective"></api-doc>
-
-    <api-doc module="components/table/table.component" component="TableCellDirective"></api-doc>
     `
 })
 export class TableComponent {

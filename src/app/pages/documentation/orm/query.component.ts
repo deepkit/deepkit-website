@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
         <p>
             A query is an object that describes how data should be fetched from the database or modified.
             It has multiple methods to describe your query and termination methods that execute it.
+            The database adapter can enhance the query API in many ways to support database specific features.
         </p>
 
         <p>
@@ -17,14 +18,14 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight title="database.ts">
-            @entity.name('user').collectionName('users')
+            @entity.name('user')
             class User {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
-                @t birthdate?: Date;
-                @t visits: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
+                birthdate?: Date;
+                visits: number = 0;
         
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
             
@@ -204,21 +205,21 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             @entity.name('group')
             class Group {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
         
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
         
-            @entity.name('user').collectionName('users')
+            @entity.name('user')
             class User {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
                 
-                @t.reference() group?: Group;
+                group?: Group & Reference;
         
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
         </textarea>
@@ -272,14 +273,14 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             @entity.name('file')
             class File {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
         
-                @t downloads: number = 0;
+                downloads: number = 0;
             
-                @t category: string = 'none';
+                category: string = 'none';
         
-                constructor(@t.index() public path: string) {
+                constructor(public path: string & Index) {
                 }
             }
         </textarea>
@@ -297,7 +298,6 @@ import { Component } from '@angular/core';
             
             //[ { category: 'images' }, { category: 'pdfs' } ]
             await session.query(File).groupBy('category').find();
-            
         </textarea>
 
         <p>
@@ -390,7 +390,7 @@ import { Component } from '@angular/core';
         
         <p>
             Delete is a modification query that deletes records that the query describes.
-            The methods <code>deleteOne</code> and <code>deletemany</code> terminate the query and execute the delete.
+            The methods <code>deleteOne</code> and <code>deleteMany</code> terminate the query and execute the delete.
         </p>
         
         <textarea codeHighlight="">

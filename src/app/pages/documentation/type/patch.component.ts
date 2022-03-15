@@ -12,7 +12,6 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import 'reflect-metadata';
             import { jsonSerializer, t } from '@deepkit/type';
             class Config {
                 @t backgroundColor: number = 0x002200;

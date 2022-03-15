@@ -40,7 +40,7 @@ import { CodeHighlightComponent } from '../common/code-highlight.component';
         }
     `]
 })
-export class CodeFrameComponent implements AfterViewInit {
+export class DemoCodeFrameComponent implements AfterViewInit {
     @ContentChildren(CodeHighlightComponent) highlights!: QueryList<CodeHighlightComponent>;
 
     @Input() height = 300;

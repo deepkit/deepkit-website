@@ -1,11 +1,12 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'dw-header',
     template: `
         <div class="wrapper" [class.showMenu]="showMenu">
-            <a class="logo" routerLink="/"><img src="/assets/images/deepkit_white.svg"/></a>
+            <a class="logo" *ngIf="!startPage" routerLink="/"><img src="/assets/images/deepkit_text.svg"/></a>
+            <a class="logo fadeIn" *ngIf="startPage" routerLink="/"><img src="/assets/images/deepkit_white_text.svg"/></a>
 
             <a class="burger" (click)="toggleMenu()">
                 <svg width="21px" height="16px" viewBox="0 0 21 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -22,19 +23,28 @@ import { Router } from '@angular/router';
                 <a routerLinkActive="active" routerLink="/framework">Framework</a>
                 <a routerLinkActive="active" routerLink="/library">Libraries</a>
                 <a routerLinkActive="active" routerLink="/community">Community</a>
+                <a routerLinkActive="active" routerLink="/blog">Blog</a>
+                <a routerLinkActive="active" routerLink="/documentation">Docs</a>
 
-                <nav style="justify-content: flex-end;">
-                    <a routerLinkActive="active" routerLink="/documentation">Documentation</a>
-<!--                    <a routerLinkActive="active" routerLink="/blog">Blog</a>-->
-                </nav>
+                <!--                <nav style="justify-content: flex-end;">-->
+                <!--                    <a routerLinkActive="active" routerLink="/blog">Blog</a>-->
+                <!--                    <a routerLinkActive="active" routerLink="/documentation">Documentation</a>-->
+                <!--&lt;!&ndash;                    <a routerLinkActive="active" routerLink="/blog">Blog</a>&ndash;&gt;-->
+                <!--                </nav>-->
             </nav>
 
         </div>
     `,
+    host: {
+        '[class.fromStartPage]': 'fromStartPage',
+        '[class.startPage]': 'startPage',
+    },
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
     public menu = '';
+    @Input() startPage: boolean = false;
+    @Input() fromStartPage: boolean = false;
 
     protected lastTimeout: any;
 

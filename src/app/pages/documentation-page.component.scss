@@ -2,22 +2,48 @@
 :host {
   display: block;
   color: #3C3C3C;
-  min-height: 1500px;
 }
 
 .wrapper {
   display: flex;
-  padding-top: 35px;
+  max-width: 1140px;
+  padding: 0;
+}
+
+.docs-header {
+  padding: 30px 0;
+}
+
+.docs-logo {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #171B1E;
+  letter-spacing: 1px;
+
+  img {
+    height: 26px;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  div {
+    margin-left: 10px;
+    position: relative;
+  }
 }
 
 main {
   text-align: left;
-  font-weight: 500;
-  font-size: 15px;
+  padding: 50px;
+  margin: 0;
+  font-size: 16px;
   color: #313131;
-  line-height: 22px;
-  margin: 0 auto;
+  line-height: 1.625;
   flex: 1;
+  //box-shadow: -1px 0 1px 0 rgba(196, 196, 196, 0.50);
 
   ::ng-deep {
 
@@ -30,6 +56,7 @@ main {
     h1, h2 {
       margin-top: 0;
       font-weight: 600;
+      letter-spacing: 4px;
     }
 
     h2 {
@@ -40,7 +67,7 @@ main {
       max-width: 100%;
     }
 
-    h3 {
+    h3, h4 {
       font-weight: bold;
     }
 
@@ -52,17 +79,9 @@ main {
 
 .table-of-content {
   text-align: left;
-  max-width: 180px;
-
-  @media(min-width: 1450px) {
-    position: absolute;
-    right: 30px;
-    left: calc(100%/2 + 1040px / 2);
-  }
-
-  @media(max-width: 850px) {
-    display: none;
-  }
+  max-width: 250px;
+  padding-top: 80px;
+  margin-right: 20px;
 
   a {
     display: block;
@@ -80,20 +99,64 @@ main {
 }
 
 nav {
-  flex: 0 0 160px;
-  margin-right: 5px;
-  min-height: 100%;
+  position: sticky;
+  top: 0;
+  flex-basis: 220px;
+  margin-left: 20px;
+  max-width: 300px;
   text-align: left;
+  max-height: 100vh;
+
+  overflow: auto;
+  overflow: overlay;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(169, 173, 175, 0.77);
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.01);
+    background-clip: padding-box;
+
+    &:hover {
+      background: #727475;
+      border: 2px solid rgba(0, 0, 0, 0.01);
+      background-clip: padding-box;
+    }
+  }
 
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0;
+
+  &.showMenu {
+    position: absolute;
+    z-index: 1000;
+    margin-left: 0;
+    top: 35px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 25px;
+    max-width: unset;
+    background-color: white;
+    text-align: center;
+
+    .docs-logo {
+      justify-content: center;
+    }
+  }
 }
 
-.table-of-content, nav {
+.table-of-content, nav .category {
   a, a:link {
     display: block;
-    color: #3C3C3C;
+    color: black;
     font-weight: 500;
     margin-top: 1px;
     text-decoration: none;
@@ -114,7 +177,7 @@ nav {
     color: black;
   }
 
-  .category {
+  &.category {
     margin-bottom: 35px;
   }
 
@@ -143,17 +206,7 @@ nav {
   }
 }
 
-@media(max-width: 768px) {
-  nav {
-    margin-right: 8px;
-  }
-
-  main {
-    padding: 0 5px;
-  }
-}
-
-@media(max-width: 600px) {
+@media(max-width: 800px) {
   .chapters {
     display: flex;
     cursor: pointer;
@@ -167,11 +220,15 @@ nav {
     display: none;
   }
 
+  .table-of-content {
+    display: none;
+  }
+
   nav.showMenu {
     display: block;
   }
 
   main {
-    padding: 0;
+    padding: 15px;
   }
 }

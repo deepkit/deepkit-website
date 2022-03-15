@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
         </p>
 
         <p>
-            To create a simple service, you just write a class with a purpose:
+            To create a simple service, you write a class with a purpose:
         </p>
         
         <textarea codeHighlight title="services/user-manager.ts">
@@ -70,6 +70,11 @@ import { Component } from '@angular/core';
                 }
             }
         </textarea>
+        
+        <p>
+            There are several ways to define how the services is instantiated.
+            See the chapter <a routerLink="/documentation/framework/dependency-injection">Dependency injection</a> for more details.
+        </p>
     `
 })
 export class DocFrameworkServicesComponent {

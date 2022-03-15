@@ -17,14 +17,13 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { http } from '@deepkit/http';
             
-            @http.controller('my-base-url/')
+            @http.controller()
             class MyPage {
-                @http.GET('hello-world')
+                @http.GET('/')
                 helloWorld() {
                     return "Hello World!";
                 }
@@ -44,7 +43,7 @@ import { Component } from '@angular/core';
             $ ts-node app.ts server:start
             2021-06-11T17:44:52.646Z [LOG] Start HTTP server, using 1 workers.
             2021-06-11T17:44:52.649Z [LOG] HTTP MyPage
-            2021-06-11T17:44:52.649Z [LOG]     GET /my-base-url/hello-world helloWorld
+            2021-06-11T17:44:52.649Z [LOG]     GET / helloWorld
             2021-06-11T17:44:52.649Z [LOG] HTTP listening at http://localhost:8080/
         </textarea>
 
@@ -53,7 +52,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight="bash">
-            $ curl http://localhost:8080/my-base-url/hello-world
+            $ curl http://localhost:8080/
             Hello World!
         </textarea>
 
@@ -78,7 +77,7 @@ import { Component } from '@angular/core';
 
         <table class="pretty">
             <tr>
-                <th style="width:250px;">Decorator</th>
+                <th style="width:250px;">Decorator/Type</th>
                 <th>Description</th>
             </tr>
             <tr>
@@ -131,12 +130,12 @@ import { Component } from '@angular/core';
             </tr>
             <tr>
                 <td>@http.serialization()</td>
-                <td>Assigns serialization options for the serialization process of @deepkit/type types annotated via <code>@t</code>.</td>
+                <td>Assigns serialization options for the serialization process of @deepkit/type types.</td>
             </tr>
             <tr>
                 <td>@http.serializer()</td>
-                <td>Assigns a different serializer for the serialization process of @deepkit/type types annotated via <code>@t</code>. 
-                    Default is <code>jsonSerializer</code></td>
+                <td>Assigns a different serializer for the serialization process of @deepkit/type types. 
+                    Default is <code>serializer</code></td>
             </tr>
             <tr>
                 <td>@http.description(string)</td>
@@ -146,20 +145,29 @@ import { Component } from '@angular/core';
                 <td>@http.use(Function)</td>
                 <td>Allows to change the route object and composite multiple properties into one function.</td>
             </tr>
-            <tr>
-                <td>@http.query()</td>
-                <td>Marks a route parameter as query parameter.</td>
-            </tr>
-            <tr>
-                <td>@http.query().optional</td>
-                <td>Marks a route parameter as optional</td>
-            </tr>
-            <tr>
-                <td>@http.queries()</td>
-                <td>Marks a route parameter as a type of all query parameters.</td>
-            </tr>
         </table>
 
+        <h3>Types</h3>
+
+        <table class="pretty">
+            <tr>
+                <td>HttpQuery</td>
+                <td>Marks a route parameter as query parameter (so it is read from the query string).</td>
+            </tr>
+            <tr>
+                <td>HttpQueries</td>
+                <td>Marks a route parameter as a type of all query parameters (parsed query string as an object).</td>
+            </tr>
+            <tr>
+                <td>HttpBody</td>
+                <td>Marks a route parameter as body object (so the parsed body is passed)</td>
+            </tr>
+            <tr>
+                <td>HttpBodyValidation</td>
+                <td>Marks a route parameter as body object (so the parsed body is passed) with custom validation handling.</td>
+            </tr>
+        </table>
+        
         <h4>A Note on Decorator Metadata</h4>
 
         <p>
@@ -178,9 +186,9 @@ import { Component } from '@angular/core';
         <h4>Path parameters</h4>
         
         <textarea codeHighlight>
-            @http.controller('my-base-url/')
+            @http.controller()
             class MyPage {
-                @http.GET('hello-world/:text')
+                @http.GET('/:text')
                 helloWorld(text: string) {
                     return 'Hello ' + text;
                 }
@@ -188,7 +196,7 @@ import { Component } from '@angular/core';
         </textarea>
 
         <textarea codeHighlight="bash">
-            $ curl http://localhost:8080/my-base-url/hello-world/galaxy
+            $ curl http://localhost:8080/galaxy
             Hello galaxy
         </textarea>
         
@@ -206,49 +214,69 @@ import { Component } from '@angular/core';
         <h4>Query parameters</h4>
         
         <textarea codeHighlight>
-            @http.controller('my-base-url/')
+            import { HttpQuery } from '@deepkit/http';
+
+            @http.controller()
             class MyPage {
-                @http.GET('hello-world')
-                helloWorld(@http.query() text: string) {
+                @http.GET('/')
+                helloWorld(text: HttpQuery<string>) {
                     return 'Hello ' + text;
                 }
             }
         </textarea>
 
         <textarea codeHighlight="bash">
-            $ curl http://localhost:8080/my-base-url/hello-world\\?text\\=galaxy
+            $ curl http://localhost:8080/\\?text\\=galaxy
             Hello galaxy
+        </textarea>
+        
+        <p>
+            Parameter types are automatically deserialized and validated. So you can add validators of @deepkit/type
+            at your parameters.
+        </p>
+
+        <textarea codeHighlight>
+            import { HttpQuery, MinLength } from '@deepkit/http';
+
+            class MyPage {
+                @http.GET('/')
+                helloWorld(text: HttpQuery<string> & MinLength<3>) {
+                    return 'Hello ' + text;
+                }
+            }
+        </textarea>
+
+        <textarea codeHighlight="bash">
+            $ curl http://localhost:8080/\\?text\\=galaxy
+            Hello galaxy
+            $ curl http://localhost:8080/\\?text\\=ga
+            error
         </textarea>
 
         <p>
-            Warning: Parameters are not escaped/sanitized. Returning them directly in a string opens a security hole (XSS).
+            Warning: Parameter values are not escaped/sanitized. Returning them directly in a string opens a security hole (XSS).
             Make sure never to trust external input and filter/sanitize/convert where necessary.
-        </p>
-        
-        <p>
-            By default, query parameters are required.<br/> 
-            To make them optional, use <code>@http.query().optional text: string</code>.<br/>
-            To remap a parameter name use <code>@http.query('incomingName') text: string</code>.
         </p>
         
         <h4>Query parameters model</h4>
         
         <p>
-            Instead of specifying each query parameter as a method parameter, you can use a class schema instead.
+            Instead of specifying each query parameter as a method parameter, you can use a type instead.
         </p>
         
         <textarea codeHighlight>
-        class HelloWorldQuery {
-            @t.required text!: string;
-        }
-        
-        @http.controller('my-base-url/')
-        class MyPage {
-            @http.GET('hello-world')
-            helloWorld(@http.queries() query: HelloWorldQuery) {
-                return 'Hello ' + query.text;
+            class HelloWorldQuery {
+                text!: string;
+                page: number = 0;
             }
-        }
+            
+            @http.controller()
+            class MyPage {
+                @http.GET('/')
+                helloWorld(query: HttpQueries<HelloWorldQuery>) {
+                    return 'Hello ' + query.text + ' at page ' + query.page;
+                }
+            }
         </textarea>
         
         <h4>Body parameters</h4>
@@ -264,30 +292,30 @@ import { Component } from '@angular/core';
                 @t.required text!: string;
             }
             
-            @http.controller('my-base-url/')
+            @http.controller()
             class MyPage {
-                @http.POST('hello-world')
-                helloWorld(@http.body() body: HelloWorldBody) {
+                @http.POST('/')
+                helloWorld(body: HttpBody<HelloWorldBody>) {
                     return 'Hello ' + body.text;
                 }
             }
         </textarea>
         
         <textarea codeHighlight="bash">
-            $ curl http://localhost:8080/my-base-url/hello-world -H "Content-Type: application/json" --data '{"text": "galaxy"}'
+            $ curl http://localhost:8080/ -H "Content-Type: application/json" --data '{"text": "galaxy"}'
             Hello galaxy
         </textarea>
         
         <p>
-            To react to body validation errors in the same route, you can include the service <code>BodyValidation</code>.
+            To react to body validation errors in the same route, you use <code>HttpBodyValidation</code>.
         </p>
         
         <textarea codeHighlight>
             @http.POST('hello-world')
-            helloWorld(bodyValidation: BodyValidation, @http.body() body: HelloWorldBody) {
-                if (bodyValidation.hasErrors()) {
+            helloWorld(body: HttpBodyValidation<HelloWorldBody>) {
+                if (!body.valid()) {
                     // Houston, we got some errors.
-                    const textError = bodyValidation.getErrorMessageForPath('text');
+                    const textError = body.getErrorMessageForPath('text');
                     return 'Text is invalid, please fix it. ' + textError;
                 }
         
@@ -296,9 +324,9 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            As soon as <code>hasErrors()</code> returns true ,the injected body representation <code>body</code> can be in a faulty state
-            when the validation fails. When you don't inject <code>BodyValidation</code> and a faulty request, the whole route would return an error
-            and your route code would never execute. Use <code>BodyValidation</code> only when you want to for example display error messages 
+            As soon as <code>valid()</code> returns false, the injected body representation <code>body</code> can be in a faulty state
+            since the validation failed. When you don't use <code>HttpBodyValidation</code> and a faulty request comes in, the whole route would return an error
+            and your route code would never execute. Use <code>HttpBodyValidation</code> only when you want to for example display error messages 
             regarding the body manually in the same route.
         </p>
 
@@ -307,17 +335,17 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { http, UploadedFile } from '@deepkit/http';
+            import { http, UploadedFile, HttpBody } from '@deepkit/http';
             import { readFileSync } from 'fs';
 
             class HelloWordBody {
-                @t.required file!: UploadedFile;
+                file!: UploadedFile;
             }
 
-            @http.controller('my-base-url/')
+            @http.controller()
             class MyPage {
-                @http.POST('hello-world')
-                helloWorld(@http.body() body: HelloWordBody) {
+                @http.POST('/')
+                helloWorld(body: HttpBody<HelloWordBody>) {
                     const content = readFileSync(body.file.path);
 
                     return {
@@ -328,7 +356,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <textarea codeHighlight="bash">
-            $ curl http://localhost:8080/my-base-url/hello-world -X POST -H "Content-Type: multipart/form-data" -F "file=@Downloads/23931.png"
+            $ curl http://localhost:8080/ -X POST -H "Content-Type: multipart/form-data" -F "file=@Downloads/23931.png"
             {
                 "uploadedFile": {
                     "size":6430,
@@ -349,20 +377,16 @@ import { Component } from '@angular/core';
 
         <p>
             Parameters are automatically converted to the annotated type and validated.
-            When a complex type is given, such as union, arrays, etc., you have to specify the type via <code>@t</code>.
-            See <a routerLink="/documentation/type/schema">Deepkit Type Schema</a> chapter for more information.
+            See <a routerLink="/documentation/type/types">Deepkit Types</a> chapter for more information.
         </p>
 
         <textarea codeHighlight>
+            import { Positive, Max } from '@deepkit/type';
+            
             @http.controller()
             class MyWebsite {
                 @http.GET(':id')
-                getUser(@t.positive().max(10_000) id: number) {
-                    //...
-                }
-            
-                @http.GET(':id')
-                getUser(@t.union() id: string) {
+                getUser(id: number & Positive & Max<10000>) {
                     //...
                 }
             }
@@ -377,14 +401,10 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
-            import { injectable } from '@deepkit/injector';
-            import { http, RouteParameterResolverContext, RouteParameterResolverTag } from '@deepkit/http';
-            import { RouteParameterResolver } from '@deepkit/http/src/router';
+            import { http, RouteParameterResolverContext, RouteParameterResolverTag, RouteParameterResolver } from '@deepkit/http';
             import { ClassType } from '@deepkit/core';
-            
             
             class User {
                 constructor(
@@ -405,23 +425,17 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @injectable
             class UserResolver implements RouteParameterResolver {
                 constructor(protected database: UserDatabase) {
                 }
             
-                resolve(context: RouteParameterResolverContext): any {
+                async resolve(context: RouteParameterResolverContext) {
                     if (!context.parameters.id) throw new Error('No :id given');
-                    return this.database.getUser(parseInt(context.parameters.id));
+                    return await this.database.getUser(parseInt(context.parameters.id));
                 }
-            
-                supports(classType: ClassType): boolean {
-                    return classType === User;
-                }
-            
             }
             
-            @http.controller()
+            @http.controller().resolveParameter(User, UserResolver)
             class MyWebsite {
                 @http.GET(':id')
                 getUser(user: User) {
@@ -433,7 +447,7 @@ import { Component } from '@angular/core';
                 controllers: [MyWebsite],
                 providers: [
                     UserDatabase,
-                    RouteParameterResolverTag.provide(UserResolver)
+                    UserResolver,
                 ],
                 imports: [new FrameworkModule]
             })
@@ -447,50 +461,12 @@ import { Component } from '@angular/core';
             A controller can return various data structures. Some of them are treated in a special way like redirects and templates, and others
             like simple objects are simply sent as JSON.
         </p>
-        
-        <h4>Primitives and objects</h4>
 
-        <p>
-            Primitives (string, number, boolean) and objects are serialized using JSON.stringify.
-        </p>
-
-        <h4>Deepkit Type</h4>
+        <h4>Types</h4>
         
         <p>
-            Returned Deepkit Type objects are automatically serialized using JSON serializer and sent using
+            If they route has a return type defined the returning value is automatically serialized using JSON serializer and sent using
             content type <code>application/json; charset=utf-8</code>.
-        </p>
-        
-        <p>
-            The response serializer tries to detect Deepkit Type automatically, however that's not always possible (for example an array of Deepkit Type objects).
-            Annotate the route itself with the correct type in order to get the correct serialization.
-        </p>
-        
-        <textarea codeHighlight>
-            import { t } from '@deepkit/type';
-
-            class User {
-                constructor(
-                    @t public username: string,
-                    @t public id: number = 0,
-                ) {
-                }
-            }
-
-            @http.controller()
-            class MyWebsite {
-                protected users: Users[] = [new User('a', 1)];
-            
-                @http.GET('/user')
-                @t.array(User)
-                getUsers() {
-                    return this.users;
-                }
-            }
-        </textarea>
-        
-        <p>
-            As soon as <code>@t</code> is annotated at a route, this information is used to serialize the controller action result. Make sure the types are in sync.
         </p>
         
         <p>
@@ -498,12 +474,14 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
+            import { Group } from '@deepkit/type';
+            
             class User {
-                @t.group('sensitive') passwordHash?: string;
+                passwordHash?: string & Group<'sensitive'>;
             
                 constructor(
-                    @t public username: string,
-                    @t public id: number = 0,
+                    public username: string,
+                    public id: number = 0,
                 ) {
                 }
             }
@@ -511,8 +489,7 @@ import { Component } from '@angular/core';
             @http.controller()
             class MyWebsite {
                 @http.GET('/user').serialization({groupsExclude: ['sensitive']})
-                @t.array(User)
-                getUsers() {
+                getUsers(): User[] {
                     return this.users.list;
                 }
             }
@@ -527,16 +504,14 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { http, Redirect } from '@deepkit/http';
-            import { t } from '@deepkit/type';
             
             class User {
                 constructor(
-                    @t public username: string,
-                    @t public id: number = 0,
+                    public username: string,
+                    public id: number = 0,
                 ) {}
             }
             
@@ -583,17 +558,15 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { http, httpWorkflow } from '@deepkit/http';
-            import { classToPlain, t } from '@deepkit/type';
             import { eventDispatcher } from '@deepkit/event';
             
             class User {
                 constructor(
-                    @t public username: string,
-                    @t public id: number = 0,
+                    public username: string,
+                    public id: number = 0,
                 ) {
                 }
             }

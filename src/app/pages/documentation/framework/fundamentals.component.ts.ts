@@ -58,15 +58,6 @@ import { Component } from '@angular/core';
             Events can be dispatched by services, controllers, and event listeners using the <i>EventDispatcher</i>.
             See the chapter <a routerLink="/documentation/framework/events">Events</a> for more information.
         </p>
-        
-        <h3>Model</h3>
-        
-        <p>
-            A model is the instantiation and loaded interface for specific data. They can be received from database abstraction libraries like Deepkit ORM and many others.
-            Usually services and controllers load models based on an action/event and work with their content, probably saving changes
-            back to where the model was loaded from.
-            See the chapter <a routerLink="/documentation/framework/database">Database</a> for more information.
-        </p>
     `
 })
 export class DocFrameworkFundamentalsComponent {

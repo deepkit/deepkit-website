@@ -14,33 +14,17 @@ import { Component } from '@angular/core';
 
         <p>
             Make sure all peer dependencies are installed. By default NPM 7+ installs them automatically.
-            For older versions, use this command:
         </p>
 
-        <textarea codeHighlight="bash">
-            npm install @deepkit/orm reflect-metadata @deepkit/type rxjs @deepkit/core @deepkit/injector @deepkit/logger @deepkit/stopwatch
-        </textarea>
-        
         <h3>Deepkit Type</h3>
-        
-        <p>
-            Deepkit ORM is based on Deepkit Type. Deepkit Type uses reflect-metadata and the decorator metadata of TypeScript.
-            Make sure you have <code>experimentalDecorators</code> and <code>emitDecoratorMetadata</code> enabled in <code>tsconfig.json</code>:
-        </p>
 
         <textarea codeHighlight="json">
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "experimentalDecorators": true
   }
 }
         </textarea>
-        
-        <p>
-            Also make sure to always import <code>reflect-metadata</code> at the very beginning of your entry point scripts.
-            More information about Deepkit Type can be found in chapter <a routerLink="/documentation/type">Deepkit Type Getting Started</a>.
-        </p>
         
         <h3>Database</h3>
 
@@ -50,20 +34,17 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight title="database.ts">
-            import 'reflect-metadata';
             import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
-            import { entity, t } from '@deepkit/type';
+            import { entity, PrimaryKey, AutoIncrement } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
 
             async function main() {
                 @entity.name('user')
                 class User {
-                    @t.primary.autoIncrement public id: number = 0;
-                    @t created: Date = new Date;
+                    public id: number & PrimaryKey & AutoIncrement = 0;
+                    created: Date = new Date;
                 
-                    constructor(
-                        @t public name: string
-                    ) {
+                    constructor(public name: string) {
                     }
                 }
                 
@@ -96,17 +77,15 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight>
             import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
-            import { entity, t } from '@deepkit/type';
+            import { entity, PrimaryKey, AutoIncrement } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
                         
             @entity.name('user')
             export class User {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
             
-                constructor(
-                    @t public name: string
-                ) {
+                constructor(public name: string) {
                 }
             }
             

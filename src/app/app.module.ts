@@ -40,7 +40,7 @@ import { LibraryCardsComponent } from './components/library-cards.component';
 import { LibrariesComponent } from './pages/libraries.component';
 import { OrmBrowserComponent } from './pages/orm-browser.component';
 import { DocTypeGettingStartedComponent } from './pages/documentation/type/getting-started.component';
-import { DocTypeSchemaComponent } from './pages/documentation/type/schema.component';
+import { DocTypeTypesComponent } from './pages/documentation/type/types.component';
 import { DocTypeSerializationComponent } from './pages/documentation/type/serialization.component';
 import { DocTypeReflectionComponent } from './pages/documentation/type/reflection.component';
 import { DocTypeValidationComponent } from './pages/documentation/type/validation.component';
@@ -48,7 +48,7 @@ import { DocTypePerformanceComponent } from './pages/documentation/type/performa
 import { DocTypePatchComponent } from './pages/documentation/type/patch.component';
 import { DocTypeChangeDetectionComponent } from './pages/documentation/type/change-detection.component';
 import { DocTypeStateManagementComponent } from './pages/documentation/type/state-management.component';
-import { DocTypeSerializationTargetComponent } from './pages/documentation/type/serialization-target.component';
+import { DocTypeCustomSerializerComponent } from './pages/documentation/type/custom-serializer.component';
 import { DocFrameworkGettingStartedComponent } from './pages/documentation/framework/getting-started.component';
 import { DocFrameworkModulesComponent } from './pages/documentation/framework/modules.component';
 import { DocFrameworkServicesComponent } from './pages/documentation/framework/services.component';
@@ -62,14 +62,16 @@ import { DocFrameworkHttpTemplateComponent } from './pages/documentation/framewo
 import { DocFrameworkRPCControllerComponent } from './pages/documentation/framework/rpc/controller.component';
 import { DocFrameworkRPCClientComponent } from './pages/documentation/framework/rpc/client.component';
 import { DocFrameworkRPCSecurityComponent } from './pages/documentation/framework/rpc/security.component';
-import { DocFrameworkDependencyInjectionComponent } from './pages/documentation/framework/dependency-injection.component';
+import {
+    DocFrameworkDependencyInjectionComponent
+} from './pages/documentation/framework/dependency-injection.component';
 import { DocFrameworkConfigurationComponent } from './pages/documentation/framework/configuration.component';
 import { DocFrameworkTestingComponent } from './pages/documentation/framework/testing.component';
 import { DocFrameworkDeploymentComponent } from './pages/documentation/framework/deployment.component';
 import { DocFrameworkHttpPublicDirComponent } from './pages/documentation/framework/http/public-dir.component';
 import { CommunityPageComponent } from './pages/community.component';
 import { DocORMGettingStartedComponent } from './pages/documentation/orm/getting-started.component';
-import { DocORMSchemaComponent } from './pages/documentation/orm/schema.component';
+import { DocORMEntityComponent } from './pages/documentation/orm/entity.component';
 import { DocORMSessionComponent } from './pages/documentation/orm/session.component';
 import { DocORMQueryComponent } from './pages/documentation/orm/query.component';
 import { DocORMRelationsComponent } from './pages/documentation/orm/relations.component';
@@ -95,6 +97,7 @@ import { DocORMTransactionComponent } from './pages/documentation/orm/transactio
 import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
 import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
 import { ImageSliderComponent } from './common/image-slider.component';
+import { NgAisModule } from 'angular-instantsearch';
 
 @NgModule({
     declarations: [
@@ -136,7 +139,7 @@ import { ImageSliderComponent } from './common/image-slider.component';
 
         DocWelcomeComponent,
         DocTypeGettingStartedComponent,
-        DocTypeSchemaComponent,
+        DocTypeTypesComponent,
         DocTypeSerializationComponent,
         DocTypeReflectionComponent,
         DocTypeValidationComponent,
@@ -144,7 +147,7 @@ import { ImageSliderComponent } from './common/image-slider.component';
         DocTypePatchComponent,
         DocTypeChangeDetectionComponent,
         DocTypeStateManagementComponent,
-        DocTypeSerializationTargetComponent,
+        DocTypeCustomSerializerComponent,
         DocFrameworkGettingStartedComponent,
         DocFrameworkModulesComponent,
         DocFrameworkServicesComponent,
@@ -166,7 +169,7 @@ import { ImageSliderComponent } from './common/image-slider.component';
         DocFrameworkHttpPublicDirComponent,
         DocFrameworkLoggerComponent,
         DocORMGettingStartedComponent,
-        DocORMSchemaComponent,
+        DocORMEntityComponent,
         DocORMSessionComponent,
         DocORMQueryComponent,
         DocORMRelationsComponent,
@@ -193,6 +196,7 @@ import { ImageSliderComponent } from './common/image-slider.component';
         AppCommonModule,
         FormsModule,
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        NgAisModule.forRoot(),
         // MarkdownModule.forRoot({
         //     sanitize: SecurityContext.NONE
         // }),

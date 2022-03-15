@@ -35,7 +35,6 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            import 'reflect-metadata';
             import { t, applyPatch } from '@deepkit/type';
             
             class MyState {
