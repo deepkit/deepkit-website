@@ -190,7 +190,7 @@ export class DocumentationPageComponent implements AfterViewInit {
     }
 
     loadTableOfContent() {
-        if (!this.elementRef) {
+        if (!this.elementRef || 'undefined' === typeof document) {
             return;
         }
 

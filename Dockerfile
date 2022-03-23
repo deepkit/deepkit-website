@@ -1,4 +1,4 @@
-FROM node:16.14.2-alpine3.15
+FROM node:16.10.0-alpine3.13
 
 RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python3 postgresql-dev git
 
@@ -23,4 +23,4 @@ RUN npm run build:ssr
 RUN npm run server:build
 RUN npm prune --production
 
-CMD node --experimental-specifier-resolution=node -r source-map-support/register /app/dist/app/server/app.js server:start
+CMD node -r source-map-support/register /app/dist/app/server/app.js server:start

@@ -1,4 +1,10 @@
 import 'zone.js/node';
+// (global as any).Zone = {
+//     current: {
+//         get(): void { }
+//     },
+//     assertZonePatched: () => void 0,
+// };
 import 'reflect-metadata';
 import { App } from '@deepkit/app';
 import { FrameworkModule } from '@deepkit/framework';
