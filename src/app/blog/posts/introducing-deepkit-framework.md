@@ -1,11 +1,17 @@
 # Introducing Deepkit Framework
-TypeScript has taken over the web and is here to stay. But we believe that TypeScript's capabilities are not yet fully utilized and we want to fill this gap with a completely new framework that has never existed before in this form.
 
-TypeScript has an incredibly flexible and ergonomic type system that many developers love. Unfortunately, however, its capabilities in this regard are virtually non-existent in runtime. Types have value, but we simply throw them away at compile time. Keeping types at runtime would have huge implications - and a lot of positive ones.
+TypeScript has taken over the web and is here to stay. Its positive impact on how people and companies write web applications these days was and is massive.
+But we believe that TypeScript's capabilities are not yet fully utilized, and we want to fill this gap with a completely new framework that has never existed before in this form.
+
+TypeScript has an incredibly flexible and ergonomic type system that many developers love. 
+Unfortunately, however, its capabilities in this regard are virtually non-existent in runtime. 
+Types have a value, but we simply throw it away at compile time. 
+Keeping types at runtime would have huge positive implications.
 
 ## Runtime Types
+
 Having type information at runtime changes everything.
-Serializers, validators, GraphQL/RPC frameworks, encoders, database abstractions, and many other solutions need type information to work properly. Many of the solutions somehow try to work around this problem and then rely on TypeScript decorators, others on completely custom domain specific languages (DSL) and even require code generators to work correctly. Some people try to convince you that this is a "modern workflow", but we consider this a fundamental flaw we should not accept. There's a better way.
+Serializers, validators, GraphQL/RPC frameworks, encoders, database abstractions, and many other solutions need type information to work properly. Many of the solutions somehow try to work around this problem and then rely on TypeScript decorators, others on completely custom domain specific languages (DSL) and even require code generators to work correctly. Some people try to convince the world that this is a "modern workflow", but we consider this a fundamental flaw we should not accept. There's a better way.
 
 All this enormously increases the complexity of a project and - as it now turns out - is not necessary at all. We have now developed a compiler that converts TypeScript into bytecode and can thus not only dynamically compute types at runtime, but also retrieve all type information using a reflection API.
 
@@ -70,7 +76,6 @@ interface User {
     username: string;
 }
 ```
-
 
 At runtime, the meta-information is then retrievable so that tools like validators, serializers, or database libraries can work with it.
 
@@ -214,7 +219,7 @@ The type compiler is, at its core, a TypeScript transformer that extracts explic
 
 Once `@deepkit/type-compiler` is installed, the transformer is installed in the local installed `typescript` package, so it works right off the bat with Angular, ts-node, Webpack & co. Alternatively you can also configure the transformer manually in a build system like webpack and ts-loader.
 
-If you want to have a very detailed explanation of how all this works read <a target="_blank"> href="https://github.com/microsoft/TypeScript/issues/47658">TypeScript Bytecode Interpreter / Runtime Types</a>
+If you want to have a very detailed explanation of how all this works read <a target="_blank" href="https://github.com/microsoft/TypeScript/issues/47658">TypeScript Bytecode Interpreter / Runtime Types</a>
 
 ## And more
 I hope what has already been shown gives a good overview of the new features that the Deepkit framework provides. Based on these fundamental new approaches are quite a few other Deepkit libraries: ORM, RPC, Broker, Desktop UI, and more. However, we would like to introduce these to you in detail in future blog posts.
