@@ -1,6 +1,8 @@
 {
   "@deepkit/core": "../deepkit-framework/packages/core",
   "@deepkit/core-rxjs": "../deepkit-framework/packages/core-rxjs",
+  "@deepkit/api-console-module": "../deepkit-framework/packages/api-console-module",
+  "@deepkit/api-console-api": "../deepkit-framework/packages/api-console-api",
   "@deepkit/angular-universal": "../deepkit-framework/packages/angular-universal",
   "@deepkit/framework-debug-gui": "../deepkit-framework/packages/framework-debug-gui",
   "@deepkit/fs": "../deepkit-framework/packages/fs",

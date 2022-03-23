@@ -7,7 +7,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2020",
-    "module": "CommonJS",
+    "module": "ES2020",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "typeRoots": [
@@ -20,6 +20,7 @@
       "dom"
     ]
   },
+  "reflection": true,
   "include": [
     "**/*.ts",
     "../shared/index.ts"

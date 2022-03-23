@@ -158,10 +158,16 @@
           "builder": "@angular-builders/custom-webpack:server",
           "options": {
             "customWebpackConfig": {
-              "path": "./extra-webpack-server.config.js"
+              "path": "./extra-webpack-server.config.js",
+              "mergeRules": {
+                "resolve": {
+                  "alias": "prepend"
+                }
+              }
             },
             "outputPath": "dist/server",
             "main": "server.ts",
+            "preserveSymlinks": true,
             "tsConfig": "tsconfig.server.json"
           },
           "configurations": {

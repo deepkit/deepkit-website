@@ -29,6 +29,8 @@ module.exports = {
     // },
     resolve: {
         alias: {
+            '@angular/platform-serve': false,
+            domino: false,
             util: false,
             fs: false,
             path: false,

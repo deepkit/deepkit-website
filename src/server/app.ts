@@ -4,9 +4,11 @@ import { App } from '@deepkit/app';
 import { FrameworkModule } from '@deepkit/framework';
 import { AngularUniversalModule } from '@deepkit/angular-universal';
 import { MongoDatabase } from './db';
-import { appConfig } from './config';
+import { Config } from './config';
 import { FrameworkController, FrameworkHttpController } from './controller/framework.controller';
 import { AuthListener } from './auth';
+import { dirname } from "path";
+import { getCurrentFileName } from '@deepkit/core';
 
 // this stuff is needed for desktop-ui
 (global as any).requestAnimationFrame = (callback: any, element: any) => {
@@ -44,17 +46,17 @@ new App({
     listeners: [
         AuthListener
     ],
-    config: appConfig,
+    config: Config,
     imports: [
         new FrameworkModule({
-            publicDir: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
+            publicDir: (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'browser',
             debug: false,
             host: process.env.HOST || '127.0.0.1',
             migrateOnStartup: true,
         }),
         new AngularUniversalModule({
-            browserPath: (process.env.DIST || __dirname + '/../../dist/') + 'browser',
-            serverPath: (process.env.DIST || __dirname + '/../../dist/') + 'server',
+            browserPath: (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'browser',
+            serverPath: (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'server',
         }),
     ]
 })

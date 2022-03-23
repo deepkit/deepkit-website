@@ -125,6 +125,7 @@ export class OrmPlaygroundComponent implements AfterViewInit, OnDestroy {
         @Inject(PLATFORM_ID) protected platformId: any,
     ) {
         this.isBrowser = isPlatformBrowser(platformId);
+        console.log('OrmPlaygroundComponent', this.isBrowser);
     }
 
     openTab(tab: string) {

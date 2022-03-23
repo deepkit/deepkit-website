@@ -1,12 +1,9 @@
 import { eventDispatcher } from '@deepkit/event';
 import { httpWorkflow } from '@deepkit/http';
-import { inject } from '@deepkit/injector';
-import {appConfig} from './config';
+import { Config } from './config';
 
 export class AuthListener {
-    constructor(
-        @inject(appConfig.token('benchmarkAuthToken')) protected authToken: string
-    ) {
+    constructor(protected authToken: Config['benchmarkAuthToken']) {
     }
 
     @eventDispatcher.listen(httpWorkflow.onAuth)

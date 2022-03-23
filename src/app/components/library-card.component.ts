@@ -3,15 +3,14 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'library-card',
-    host: {
-        '(click)': 'router.navigateByUrl(url)',
-    },
     template: `
-        <h3 class="title">{{title}}</h3>
-        <div class="content">
-            <ng-content></ng-content>
-        </div>
-        <div class="package">{{package}}</div>
+        <a [routerLink]="url">
+            <h3 class="title">{{title}}</h3>
+            <div class="content">
+                <ng-content></ng-content>
+            </div>
+            <div class="package">{{package}}</div>
+        </a>
     `,
     styles: [`
         :host {

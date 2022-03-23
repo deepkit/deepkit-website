@@ -2,6 +2,7 @@
 node_modules
 .idea
 dist
+!dist/app/package.json
 var
 deepkit-framework-docs
 src/assets/api-docs
