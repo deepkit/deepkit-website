@@ -1,6 +1,6 @@
-FROM --platform=linux/amd64 node:16.14-alpine
+FROM node:16.14.2-alpine3.15
 
-RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python3 postgresql-dev git autoconf build-base coreutils libtool pkgconf python3-dev
+RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python3 postgresql-dev git
 
 ENV DIST=/app/dist/
 ENV HOST=0.0.0.0
