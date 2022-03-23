@@ -214,6 +214,8 @@ The type compiler is, at its core, a TypeScript transformer that extracts explic
 
 Once `@deepkit/type-compiler` is installed, the transformer is installed in the local installed `typescript` package, so it works right off the bat with Angular, ts-node, Webpack & co. Alternatively you can also configure the transformer manually in a build system like webpack and ts-loader.
 
+If you want to have a very detailed explanation of how all this works read <a target="_blank"> href="https://github.com/microsoft/TypeScript/issues/47658">TypeScript Bytecode Interpreter / Runtime Types</a>
+
 ## And more
 I hope what has already been shown gives a good overview of the new features that the Deepkit framework provides. Based on these fundamental new approaches are quite a few other Deepkit libraries: ORM, RPC, Broker, Desktop UI, and more. However, we would like to introduce these to you in detail in future blog posts.
 
