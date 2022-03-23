@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         <h3>Installation</h3>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/framework @deepkit/type @deepkit/type-compiler
+            npm install typescript ts-node @deepkit/framework @deepkit/type @deepkit/type-compiler
         </textarea>
 
         <p>
@@ -23,12 +23,7 @@ import { Component } from '@angular/core';
         
         <p>
             To compile your application we need the TypeScript compiler and recommend <code>ts-node</code> to run it easily. 
-            Install it with this command:
         </p>
-
-        <textarea codeHighlight="bash">
-            $ npm install typescript ts-node
-        </textarea>
         
         <p>
             An alternative to using <code>ts-node</code> is to compile the source via the TypeScript compiler and run the JavaScript source directly.
