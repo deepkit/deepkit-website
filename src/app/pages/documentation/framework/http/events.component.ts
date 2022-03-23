@@ -91,7 +91,6 @@ import { Component } from '@angular/core';
             import { HtmlResponse, http, httpWorkflow } from '@deepkit/http';
             import { eventDispatcher } from '@deepkit/event';
             
-            @http.controller()
             class MyWebsite {
                 @http.GET('/')
                 open() {
@@ -166,7 +165,6 @@ import { Component } from '@angular/core';
                 }
             }
 
-            @http.controller()
             class MyWebsite {
                 @http.GET()
                 getUser() {

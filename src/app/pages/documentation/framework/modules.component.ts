@@ -49,8 +49,8 @@ import { Component } from '@angular/core';
         <p>
             You can now add features to that module as you would with <code>App</code>.
             The arguments are the same except that <code>imports</code> is not available in a module definition.
-            You can add HTTP/RPC/CLI controllers, services, a configuration, event listeners, as well as use various module hooks to
-            make your module more dynamic.
+            Add HTTP/RPC/CLI controllers, services, a configuration, event listeners, as well as use various module hooks to
+            make modules more dynamic.
         </p>
 
         <h3>Controllers</h3>

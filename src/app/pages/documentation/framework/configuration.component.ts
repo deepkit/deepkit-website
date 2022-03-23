@@ -32,7 +32,6 @@ import { Component } from '@angular/core';
                 debug: boolean = false;
             }
 
-            @http.controller()
             class MyWebsite {
                 constructor(
                     protected allSettings: Config
@@ -71,7 +70,6 @@ import { Component } from '@angular/core';
             import { http } from '@deepkit/http';
             import { Config } from './app-config.ts';
             
-            @http.controller()
             class MyWebsite {
                 constructor(pageTitle: Config['pageTitle']) {
                 }
@@ -89,7 +87,6 @@ import { Component } from '@angular/core';
             
             type WebsiteSettings = Partial<Config, 'pageTitle' | 'domain'>
             
-            @http.controller()
             class MyWebsite {
                 constructor(protected settings: WebsiteSettings) {}
                 //or
@@ -126,7 +123,6 @@ import { Component } from '@angular/core';
         <textarea codeHighlight title="website.ts">
             import { Config } from './app-config.ts';
 
-            @http.controller()
             class MyWebsite {
                 constructor(protected settings: Config) {
                 }

@@ -132,7 +132,6 @@ import { Component } from '@angular/core';
                 }
             }
 
-            @http.controller()
             class MyPage {
                 @http.GET('')
                 listUsers() {

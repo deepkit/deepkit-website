@@ -281,6 +281,17 @@
     font-size: 15px;
     padding: 0 10px;
 
+
+    h1, h2 {
+      margin-top: 0;
+      font-weight: 600;
+      letter-spacing: 4px;
+    }
+
+    h2 {
+      font-weight: bold;
+    }
+
     > h2 {
       margin-top: 36px;
     }

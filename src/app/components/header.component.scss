@@ -87,6 +87,14 @@ nav {
   }
 }
 
+:host.startPage {
+  @media(max-width: 600px) {
+    .burger {
+      display: none;
+    }
+  }
+}
+
 @media(max-width: 600px) {
   a.logo {
     text-align: center;
@@ -99,7 +107,7 @@ nav {
     display: block;
     position: absolute;
     right: 15px;
-    top: 10px;
+    top: 33px;
     border: 10px solid transparent;
   }
   nav {
@@ -113,14 +121,14 @@ nav {
 
   nav.main {
     display: none;
-    background: #202020;
+    background: white;
     padding-top: 25px;
   }
 
   .showMenu {
     nav.main {
       position: absolute;
-      top: 50px;
+      top: 70px;
       left: 0;
       bottom: 0;
       right: 0;

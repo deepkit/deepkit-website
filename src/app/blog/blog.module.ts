@@ -10,7 +10,7 @@ const blogPosts = (require as any).context('!!raw-loader!src/app/blog/posts', tr
 @Component({
     template: `
         <div class="page wrapper">
-            <div class="page-text">
+            <div class="page-text" style="max-width: 700px;">
                 <markdown [data]="markdown"></markdown>
             </div>
         </div>

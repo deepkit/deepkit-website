@@ -32,7 +32,7 @@ main {
 
     @media(max-width: 660px) {
       left: 0;
-      height: 350px;
+      overflow: auto;
     }
   }
 }

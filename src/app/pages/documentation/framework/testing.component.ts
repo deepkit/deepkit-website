@@ -119,7 +119,6 @@ import { Component } from '@angular/core';
             import { http, HttpRequest } from '@deepkit/http';
             
             test('http controller', async () => {
-                @http.controller()
                 class MyController {
             
                     @http.GET()

@@ -25,7 +25,6 @@ import { Component } from '@angular/core';
                 title: string = 'DEV my Page';
             }
             
-            @http.controller()
             class MyWebsite {
                 constructor(protected title: Config['title']) {
                 }

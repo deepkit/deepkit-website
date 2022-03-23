@@ -21,7 +21,6 @@ import { Component } from '@angular/core';
             import { FrameworkModule } from '@deepkit/framework';
             import { http } from '@deepkit/http';
             
-            @http.controller()
             class MyPage {
                 @http.GET('/')
                 helloWorld() {
@@ -186,7 +185,6 @@ import { Component } from '@angular/core';
         <h4>Path parameters</h4>
         
         <textarea codeHighlight>
-            @http.controller()
             class MyPage {
                 @http.GET('/:text')
                 helloWorld(text: string) {
@@ -216,7 +214,6 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { HttpQuery } from '@deepkit/http';
 
-            @http.controller()
             class MyPage {
                 @http.GET('/')
                 helloWorld(text: HttpQuery<string>) {
@@ -270,7 +267,6 @@ import { Component } from '@angular/core';
                 page: number = 0;
             }
             
-            @http.controller()
             class MyPage {
                 @http.GET('/')
                 helloWorld(query: HttpQueries<HelloWorldQuery>) {
@@ -292,7 +288,6 @@ import { Component } from '@angular/core';
                 @t.required text!: string;
             }
             
-            @http.controller()
             class MyPage {
                 @http.POST('/')
                 helloWorld(body: HttpBody<HelloWorldBody>) {
@@ -342,7 +337,6 @@ import { Component } from '@angular/core';
                 file!: UploadedFile;
             }
 
-            @http.controller()
             class MyPage {
                 @http.POST('/')
                 helloWorld(body: HttpBody<HelloWordBody>) {
@@ -383,7 +377,6 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { Positive, Max } from '@deepkit/type';
             
-            @http.controller()
             class MyWebsite {
                 @http.GET(':id')
                 getUser(id: number & Positive & Max<10000>) {
@@ -435,7 +428,7 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @http.controller().resolveParameter(User, UserResolver)
+            @http.resolveParameter(User, UserResolver)
             class MyWebsite {
                 @http.GET(':id')
                 getUser(user: User) {
@@ -486,7 +479,6 @@ import { Component } from '@angular/core';
                 }
             }
             
-            @http.controller()
             class MyWebsite {
                 @http.GET('/user').serialization({groupsExclude: ['sensitive']})
                 getUsers(): User[] {
@@ -519,7 +511,6 @@ import { Component } from '@angular/core';
                 public list: User[] = [];
             }
             
-            @http.controller()
             class MyWebsite {
                 constructor(protected users: Users) {
                 }
@@ -571,7 +562,6 @@ import { Component } from '@angular/core';
                 }
             }
 
-            @http.controller()
             class MyWebsite {
                 @http.GET()
                 getUser() {
