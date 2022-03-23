@@ -71,7 +71,7 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            @http.controller().middleware(MyMiddleware)
+            @http.middleware(MyMiddleware)
             class MyFirstController {
                 
             }
@@ -96,7 +96,6 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            @http.controller()
             class MyFirstController {
                 @http.GET('/hello').name('firstRoute')
                 myAction() {
@@ -128,7 +127,6 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            @http.controller()
             class MyFirstController {
                 @http.GET('/hello').middleware(MyMiddleware)
                 myAction() {
@@ -200,12 +198,11 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            @http.controller().category('myCategory')
+            @http.category('myCategory')
             class MyFirstController {
                 
             }
             
-            @http.controller()
             class MySecondController {
                 @http.GET().category('myCategory')
                 myAction() {
@@ -226,12 +223,11 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            @http.controller().group('myGroup')
+            @http.group('myGroup')
             class MyFirstController {
                 
             }
             
-            @http.controller()
             class MySecondController {
                 @http.GET().group('myGroup')
                 myAction() {

@@ -14,16 +14,7 @@ import { Component } from '@angular/core';
 
         <p>
             Make sure all peer dependencies are installed. By default NPM 7+ installs them automatically.
-            For older versions, use this command:
         </p>
-
-        <textarea codeHighlight="bash">
-            npm install @deepkit/framework reflect-metadata rxjs @deepkit/app @deepkit/broker \\
-               @deepkit/core @deepkit/core-rxjs @deepkit/crypto @deepkit/event \\
-               @deepkit/http @deepkit/injector @deepkit/logger @deepkit/orm @deepkit/rpc \\
-               @deepkit/rpc-tcp @deepkit/sql @deepkit/sqlite @deepkit/stopwatch @deepkit/template \\
-               @deepkit/type @deepkit/workflow @deepkit/bson
-        </textarea>
 
         <p>
             To compile your application we need the TypeScript compiler and recommend <code>ts-node</code> to run it easily. 
@@ -49,11 +40,11 @@ import { Component } from '@angular/core';
             structure your project the way you want. The only two files you need to get started are a TypeScript file
             <code>app.ts</code> and the TypeScript config <code>tsconfig.json</code>.
         </p>
-        
+
         <p>
-            We should have the following files in our project folder:
+            We aim have the following files in our project folder:
         </p>
-        
+
         <textarea codeHighlight="bash">
             .
             ├── app.ts
@@ -62,7 +53,7 @@ import { Component } from '@angular/core';
             └── tsconfig.json
         </textarea>
 
-
+        
         <textarea codeHighlight="json" title="tsconfig.json">
             {
               "compilerOptions": {
@@ -83,7 +74,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { cli, Command } from '@deepkit/app';
@@ -104,7 +94,6 @@ import { Component } from '@angular/core';
                 imports: [new FrameworkModule]
             }).run();
         </textarea>
-
         <p>
             In this code you see that we defined a <code>test</code> command via the <code>TestCommand</code> class
             and created a new app, which we directly <code>run()</code>. 

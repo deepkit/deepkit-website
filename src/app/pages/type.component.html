@@ -1,25 +1,24 @@
-<div class="page">
+<div class="page wrapper">
     <product-banner header="Type" id="type">
-        <p>
-            Runtime type reflection system for TypeScript, with high-performance JIT based serializer and validator.
+        <p class="feature-text">
+            Runtime TypeScript types with reflection system and high-performance JIT based serializer and validator.
         </p>
-        <p>
-            With built-in JSON serializer, customizable serializer/validator API, reflection, object snapshotting, and
-            change detector.
+        <p class="feature-text">
+            Built-in JSON serializer, rich type reflection API, customizable serializer/validator API, object snapshotting, and change detector.
         </p>
     </product-banner>
 
     <div class="line"></div>
 
-    <div class="text">
+    <div class="page-text">
         <div style="text-align: center">
-            <h2>High-Performance</h2>
+            <h2>High Performance</h2>
             <p>
                 The serializer and validator are JIT optimized to enable the highest performance possible.<br/>
                 <a href="https://github.com/deepkit/deepkit-framework/blob/master/packages/benchmark/src/type/serialization/small-deepkit.bench.ts">Simple models</a>
                 have a serialization speed of 32 million ops/s and deserialization speed of 25 million ops/s on a Apple M1.
-                More <a href="https://github.com/deepkit/deepkit-framework/blob/master/packages/benchmark/src/type/serialization/medium-deepkit.bench.ts">complex models</a>
-                are still in the millions of ops/s.
+                More <a href="https://github.com/deepkit/deepkit-framework/blob/master/packages/benchmark/src/type/serialization/medium-deepkit.bench.ts">complex
+                models</a> are still in the millions of ops/s.
             </p>
             <div style="display: flex; justify-content: center; padding: 25px;">
                 <performance-chart yAxis="thousand ops/sec | serialization" sort="asc" format="0.0-0">
@@ -33,35 +32,32 @@
             <a routerLink="/benchmarks">More information about our benchmarks</a>
         </div>
 
-
-        <h2>Class schema</h2>
+        <h2>Classes</h2>
         <p>
-            Annotate your model classes with <code>@t</code>
-            to get runtime type information, allow serialization and validation.
+            Serialize from your TypeScript classes to JSON or deserialize back to real class instances.
         </p>
 
         <textarea codeHighlight>
-            import { t, plainToClass, classToPlain, validate } from '@deepkit/type';
+            import { serialize, deserialize, validate, Email, MinLength } from '@deepkit/type';
 
             class Config {
-                @t color: string = '#334422';
+                color: string = '#334422';
             }
 
             class User {
-                @t id: number = 0;
+                id: number = 0;
 
-                @t createdAt: Date = new Date;
-                @t modifiedAt: Date = new Date;
+                createdAt: Date = new Date;
+                modifiedAt: Date = new Date;
 
-                @t firstName?: string;
-                @t lastName?: string;
+                firstName?: string;
+                lastName?: string;
 
-                @t config: Config = new Config;
+                config: Config = new Config;
 
-                @t.pattern(/^\S+@\S+\.\S+$/)
-                email?: string;
+                email?: string & Email;
 
-                constructor(@t.minLength(3) public username: string) {}
+                constructor(public username: string & MinLength<3>) {}
 
                 public modified() {
                     this.modifiedAt = new Date;
@@ -69,7 +65,7 @@
             }
 
             //deserialize JSON object to real instances
-            const user = plainToClass(User, {
+            const user = deserialize<User>({
                 username: 'Peter',
                 createdAt: '2021-06-26T12:34:41.061Z',
                 config: {color: '#221122'},
@@ -80,61 +76,65 @@
             user.modified(); //since its a real User instance, all methods are available
 
             //serialize as JSON
-            const json = JSON.stringify(classToPlain(User, user));
+            const json = JSON.stringify(serialize<User>(user));
 
             //deserialize the JSON
-            const back = plainToClass(User, JSON.parse(json));
+            const back: User = deserialize<User>(JSON.parse(json));
 
             //validate. Empty array when successfully validated and
             //array of detailed validation errors if not.
-            const errors = validate(User, back);
+            const errors = validate<User>(back);
         </textarea>
 
-
-        <h2>Functional schema</h2>
+        <h2>TypeScript types</h2>
 
         <p>
-            Made for class-less functional schemas as well.
+            All TypeScript types are available in runtime and can be used: Interfaces, generics, type aliases, type functions, and more are supported.
         </p>
 
         <textarea codeHighlight>
-            import { t, plainToClass } from '@deepkit/type';
+            import { deserialize } from '@deepkit/type';
 
-            const config = t.schema({
-                color: t.string,
-            });
+            interface Config {
+                color: string;
+            }
 
-            const user = t.schema({
-                id: t.number.default(0),
-                createdAt: t.date.default(() => new Date),
-                firstName: t.string.optional,
-                lastName: t.string.optional,
-                config: t.type(config),
-                username: t.string,
-            });
+            interface User {
+                id: number;
+                createdAt: Date;
+                firstName?: string;
+                lastName?: string;
+                config: Config;
+                username: string;
+            }
 
             //deserialize JSON object to real instances
-            const user = plainToClass(user, {
-                username: 'Peter',
+            const user = deserialize<User>({
+                id: 0,
+                username: 'peter',
                 createdAt: '2021-06-26T12:34:41.061Z',
                 config: {color: '#221122'},
+            });
+
+            type SubUser = Pick<User, 'username' | 'createdAt'>;
+            const user = deserialize<SubUser>({
+                username: 'peter',
+                createdAt: '2021-06-26T12:34:41.061Z',
             });
         </textarea>
 
         <h2>Reflection</h2>
 
         <textarea codeHighlight>
-        import { getClassSchema } from '@deepkit/type';
+        import { ReflectionClass } from '@deepkit/type';
 
-        const schema = getClassSchema(User);
+        const schema = ReflectionClass.from<User>();
 
-        schema.getProperty('id').type; //number
-        schema.getProperty('username').isOptional; //false
+        schema.getProperty('id').type; //{kind: ReflectionKind.number}
+        schema.getProperty('username').isOptional(); //false
 
-        schema.getProperty('firstName').type; //string
-        schema.getProperty('firstName').isOptional; //true
-
-        schema.hasProperty('internal'); //false
+        schema.getProperty('firstName').type; //{kind: ReflectionKind.string}
+        schema.getProperty('firstName').isOptional(); //true
         </textarea>
 
         <h2>Serialization</h2>
@@ -147,24 +147,24 @@
         </p>
 
         <textarea codeHighlight>
-            import { classToPlain, plainToClass } from '@deepkit/type';
+            import { serialize, deserialize } from '@deepkit/type';
 
             const myUser = new User('Daniel');
 
             //class instance to json object
-            const jsonObject = classToPlain(User, myUser);
+            const jsonObject = serialize<User>(, myUser);
 
             //class instance to json string
-            const json = JSON.stringify(classToPlain(User, myUser));
+            const json = JSON.stringify(serialize<User>(myUser));
 
             //json object to class instance
-            const user: User = plainToClass(User, {
+            const user: User = deserialize<User>({
               username: 'Daniel',
               createdAt: '2021-01-24T15:23:16.582Z'
             });
 
-            const back = plainToClass(User, JSON.parse(json));
-      </textarea>
+            const back = deserialize<User>(JSON.parse(json));
+        </textarea>
 
         <h2>Validation</h2>
         <p>
@@ -174,11 +174,11 @@
         </p>
         <textarea codeHighlight>
         import {
-          validatedPlainToClass,
+          validatedDeserialize,
           validate
         } from '@deepkit/type';
 
-        const user: User = validatedPlainToClass(User, {
+        const user: User = validatedDeserialize<User>({
           username: 'Daniel',
           email: 'invalid',
         }); //throws an ValidationFailedError if invalid
@@ -188,89 +188,87 @@
         user.email = 'invalid';
 
         //empty array if valid
-        const errors = validate(User, user);
+        const errors = validate<User>(user);
         errors[0] === {
           path: 'email',
           code: 'pattern',
           message: 'Pattern /^\S+@\S+\.\S+$/ does not match'
         };
-      </textarea>
+        </textarea>
 
-        <h2>Class re-use</h2>
+        <h2>Type guards</h2>
+        <p>
+            Fully automatic type guards for all types. It's like magic.
+        </p>
+
+        <textarea codeHighlight>
+        import { is } from '@deepkit/type';
+
+        const user = await fetch('/user/1');
+        if (is<User>(user)) {
+            user.username; //user object has been validated and its safe to assume its 'User'
+        }
+
+        is<number>(variable); //primitive types work, too
+        </textarea>
+
+        <h2>Type re-use</h2>
         <p>
             Avoid code duplication and make refactoring easier by re-using
-            models.
+            types, like you know from TypeScript.
         </p>
         <textarea codeHighlight>
-        import { t, mixin } from '@deepkit/type';
-
-        class User extends mixin(UUID, Timestamp, SoftDelete) {
-          @t firstName?: string;
-          @t lastName?: string;
-
-          @t.pattern(/^\S+@\S+\.\S+$/)
-          email?: string;
-
-          constructor(
-            @t.minLength(3) public username: string
-          ) {
-            super();
-          }
-        }
-      </textarea>
-        <textarea codeHighlight>
-        import { uuid } from '@deepkit/type';
+        import { mixin } from '@deepkit/type';
 
         class Timestamp {
-           @t createdAt: Date = new Date;
-           @t updatedAt: Date = new Date;
+           createdAt: Date = new Date;
+           updatedAt: Date = new Date;
         }
 
         class SoftDelete {
-           @t deletedAt?: Date;
-           @t deletedBy?: string;
+           deletedAt?: Date;
+           deletedBy?: string;
         }
 
         class UUID {
            @t.uuid uuid: string = uuid();
         }
+
+        class User extends mixin(UUID, Timestamp, SoftDelete) {
+          firstName?: string;
+          lastName?: string;
+
+          email?: string;
+
+          constructor(public username: string) {
+            super();
+          }
+        }
       </textarea>
 
-        <h2>Class slicing</h2>
-        <p>
-            Slice your classes the way you want to avoid code-duplication.
-        </p>
         <textarea codeHighlight>
-        import { t, sliceClass } from '@deepkit/type';
+        import { UUID } from '@deepkit/type';
 
-        class FrontendUser extends
-          sliceClass(User).exclude('password', 'salt') {
-
-          // when user sets this, we handle it correctly
-          //by hashing it accordingly and update `User`
-          @t newPassword?: string;
+        interface Timestamp {
+           createdAt: Date;
+           updatedAt: Date;
         }
 
-      </textarea>
-        <textarea codeHighlight>
-        import { t } from '@deepkit/type';
+        interface SoftDelete {
+           deletedAt?: Date;
+           deletedBy?: string;
+        }
 
-        class User {
-          @t id: number = 0;
+        interface UUIDModel {
+           uuid: UUID;
+        }
 
-          // this field should never reach
-          // the frontend
-          @t password?: string;
-          @t salt?: string;
+        interface User implements UUIDModel, Timestamp, SoftDelete {
+          firstName?: string;
+          lastName?: string;
 
-          @t createdAt: Date = new Date;
-
-          @t firstName?: string;
-          @t lastName?: string;
-
-          constructor(
-            @t.minLength(3) public username: string
-          ) { }
+          email?: string;
+          username: string;
         }
       </textarea>
 

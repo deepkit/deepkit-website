@@ -14,11 +14,12 @@
 
     <div class="line"></div>
 
-    <div class="text">
+    <div class="page-text">
         <h2>Content editing</h2>
 
         <p>
-            Change all your data from your database ORM models directly in your local browser. Adding, editing, removing,
+            Change all your data from your database ORM models directly in your local browser. Adding, editing,
+            removing,
             change relations, filtering, sorting, and much more.
         </p>
 
@@ -57,22 +58,36 @@
         </p>
 
         <textarea codeHighlight title="database.ts">
-            import { entity, t } from '@deepkit/type';
+            import { entity, PrimaryKey, AutoIncrement } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
 
-            @entity.name('group')
+            @entity.collection('groups')
             export class Group {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                public id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
 
                 constructor(
-                    @t public name: string
+                    public name: string
                 ) {
                 }
             }
 
             const database = new Database(new SQLiteDatabaseAdapter('./example.sqlite'), [Group]);
+        </textarea>
+
+        <textarea codeHighlight title="database.ts">
+            import { Entity, PrimaryKey, AutoIncrement } from '@deepkit/type';
+            import { Database } from '@deepkit/orm';
+            import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
+
+            export interface Group extends Entity<{collection: 'groups'}> {
+                id: number & PrimaryKey & AutoIncrement;
+                created: Date;
+                name: string;
+            }
+
+            const database = new Database(new SQLiteDatabaseAdapter('./example.sqlite')).register<Group>();
         </textarea>
 
         <textarea codeHighlight="bash">

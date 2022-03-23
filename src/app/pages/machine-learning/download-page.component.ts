@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {t, jsonSerializer} from '@deepkit/type';
+import { deserialize } from '@deepkit/type';
 
 class Release {
-    @t version!: string;
-    @t hide!: boolean;
-    @t.type(Date) released!: Date;
-    @t releasenotes!: string;
+    version!: string;
+    hide!: boolean;
+    released!: Date;
+    releasenotes!: string;
 }
 
 @Component({
@@ -137,10 +137,8 @@ export class MLDownloadPageComponent implements OnInit {
     }
 
     async ngOnInit() {
-        const a = (await this.http.get(this.baseUrl + 'releases').toPromise()) as any;
-        const serializer = jsonSerializer.for(Release);
-
-        this.releases = a.releases.map((v: any) => serializer.deserialize(v));
+        const res = (await this.http.get(this.baseUrl + 'releases').toPromise()) as any;
+        this.releases = res.releases.map((v: any) => deserialize<Release>(v));
         this.releases = this.releases.filter(v => !v.hide);
         this.next = this.releases.find(v => v.version === 'next');
 

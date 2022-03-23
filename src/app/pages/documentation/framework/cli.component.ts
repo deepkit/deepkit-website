@@ -32,7 +32,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { Logger } from '@deepkit/logger';
             import { cli, Command } from '@deepkit/app';
@@ -158,7 +157,7 @@ import { Component } from '@angular/core';
             
                 async execute(
                     @arg title: string,
-                    @flag.optional color: boolean = false,
+                    @flag color: boolean = false,
                 ) {
                     if (color) {
                         this.logger.log('Colored: <yellow>Hello', title, '</yellow>');
@@ -176,19 +175,15 @@ import { Component } from '@angular/core';
 
         <p>
             All flags are per default required. That means that the command above would throw an error when you omit the <code>--color</code> flag.
-            To make it optional, you can either using <code>@flag.optional</code> with a default value:
+            To make it optional, you can provide a default value or mark the parameter as option
         </p>
         
         <textarea codeHighlight>
-            @flag.optional color: boolean = false
+            @flag color?: boolean
         </textarea>
         
-        <p>
-            Or you use <code>@flag.default(value)</code>:
-        </p>
-        
         <textarea codeHighlight>
-            @flag.default(false) color: boolean
+            @flag color: boolean = false
         </textarea>
 
         <p>
@@ -213,7 +208,7 @@ import { Component } from '@angular/core';
         
         <p>
             All decorators of the same type can be chained together. For example <code>@arg.optional.description('text')</code>
-            or <code>@flag.optional.multiple.description('text')</code>
+            or <code>@flag.multiple.description('text')</code>
         </p>
         
         <table class="pretty">
@@ -250,16 +245,8 @@ import { Component } from '@angular/core';
                 <td>Hides the flag from the --help page</td>
             </tr>
             <tr>
-                <td>@flag.optional</td>
-                <td>Register the parameter as optional flag</td>
-            </tr>
-            <tr>
                 <td>@flag.description(string)</td>
                 <td>Sets the description of a flag</td>
-            </tr>
-            <tr>
-                <td>@flag.default(any)</td>
-                <td>Sets the a default value for a flag</td>
             </tr>
         </table>
         

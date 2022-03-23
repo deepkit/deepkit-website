@@ -2,55 +2,30 @@ import { Component } from '@angular/core';
 
 @Component({
     template: `
-        <div class="wrapper banner">
-            <strong>Deepkit</strong>
-            <h1>High performance TypeScript framework</h1>
-            <p>
-                Modular open-source framework for sophisticated TypeScript applications.
-            </p>
-        </div>
-
-        <div class="separator">
-            <div class="left"></div>
-            <img src="../../assets/images/rectangle.svg"/>
-            <div class="right"></div>
-        </div>
-
-        <div class="what">
-            <div>
-                <div>
-                    <h3>Framework</h3>
-                    <p>Deepkit is a Node.js framework written in and for TypeScript.</p>
-                    <p>
-                        It makes it easy to write complex high performance server side applications. 
-                    </p>
-                    
-                    <p>
-                        <a routerLink="/framework" class="button">Deepkit Framework</a>
-                    </p>
-                </div>
+        <div class="page">
+            <div class="wrapper fadeIn" style="position: relative;">
+                <img class="bg" src="/assets/images/startpage-bg.svg"/>
             </div>
-            <div>
-                <div>
-                    <h3>Library collection</h3>
-                    <p>Deepkit is a collection of TypeScript libraries that work standalone.</p>
-                    <p>
-                        Highly optimized for many use-cases and streamlined in their API.
-                    </p>
-                    
-                    <p>
-                        <a routerLink="/library" class="button">Deepkit Libraries</a>
-                    </p>
-                </div>
+            <div class="wrapper text">
+                <div class="overline fadeIn" style="--delay: 1s">INTRODUCING</div>
+
+                <h1 class="fadeIn" style="--delay: 1s">HIGH PERFORMANCE<br/>TYPESCRIPT FRAMEWORK</h1>
             </div>
+
+            <main>
+                <div class="overline fadeIn" style="--delay: 2s">ALPHA</div>
+                <p class="tagline fadeIn" style="--delay: 2.5s">
+                    High-quality TypeScript libraries and a framework that brings everything together.<br/>
+                    Precisely aligned, gently optimised, solid engineered.
+                </p>
+                <p class="buttons fadeIn" style="--delay: 3s">
+                    <a class="button big" routerLink="/framework">Framework</a>
+                    <a class="button big" routerLink="/library">Libraries</a>
+                </p>
+            </main>
+            
+            <dw-footer class="fadeIn" style="--delay: 4s"></dw-footer>
         </div>
-
-<!--        <div class="wrapper libraries">-->
-<!--            <a name="libraries"></a>-->
-<!--            <h1>Deepkit libraries</h1>-->
-<!--        </div>-->
-
-<!--        <library-cards></library-cards>-->
     `,
     styleUrls: ['./index-page.component.scss']
 })

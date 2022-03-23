@@ -7,9 +7,10 @@ import { Component } from '@angular/core';
         <h2>Soft Delete</h2>
 
         <p>
-            The Soft Delete plugin allows to keep database records hidden without actually deleting them. 
-            When a record is deleted, it only is marked as deleted and not really deleted. All queries automatically filter on that deleted property, so
-            to the user it feels like they are actually deleted.
+            The Soft Delete plugin allows to keep database records hidden without actually deleting them.
+            When a record is deleted, it only is marked as deleted and not really deleted.
+            All queries automatically filter on that deleted property, so to the user it feels like they are actually
+            deleted.
         </p>
 
         <p>
@@ -17,22 +18,22 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
+            import { entity, PrimaryKey, AutoIncrement } from '@deepkit/type';
             import { SoftDelete } from '@deepkit/orm';
             
             @entity.name('user')
             class User {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
             
                 // this field is used as indicator whether the record is deleted.
-                @t deletedAt?: Date;
+                deletedAt?: Date;
             
                 // this field is optional and can be used to track who/what deleted the record.
-                @t deletedBy?: string;
-            
+                deletedBy?: string;
             
                 constructor(
-                    @t public name: string
+                    public name: string
                 ) {
                 }
             }
@@ -47,8 +48,10 @@ import { Component } from '@angular/core';
         <h3>Delete</h3>
 
         <p>
-            To soft delete records, you use the usual methods: <code>deleteOne</code> or <code>deleteMany</code> on a Query, or
-            you use the unit of work to delete them. The Soft Delete plugin automatically handles in the background the rest.
+            To soft delete records, you use the usual methods: <code>deleteOne</code> or <code>deleteMany</code> on a
+            Query, or
+            you use the unit of work to delete them. The Soft Delete plugin automatically handles in the background the
+            rest.
         </p>
 
         <h3>Restore</h3>

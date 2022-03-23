@@ -7,19 +7,9 @@ import { Component } from '@angular/core';
 
         <p>
             <dui-button [disabled]="disabled">Default Button</dui-button>
-        </p>
-
-        <p>
             <dui-button [active]="true" [disabled]="disabled">Active Button</dui-button>
-        </p>
-
-        <p>
             <dui-button textured [disabled]="disabled">Textured button</dui-button>
-        </p>
-
-        <p>
             <dui-button square [disabled]="disabled">Square button</dui-button>
-            <br/>
         </p>
 
         <p>
@@ -51,8 +41,6 @@ import { Component } from '@angular/core';
         </p>
 
         <dui-checkbox [(ngModel)]="disabled">Disable all</dui-checkbox>
-
-        <api-doc module="components/button/button.component" component="ButtonComponent"></api-doc>
     `
 })
 export class ButtonComponent {

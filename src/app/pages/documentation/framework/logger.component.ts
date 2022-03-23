@@ -63,7 +63,6 @@ import { Component } from '@angular/core';
             import { Logger } from '@deepkit/logger';
             import { injectable } from '@deepkit/injector';
             
-            @injectable
             class MyService {
                 constructor(protected logger: Logger) {}
             
@@ -108,7 +107,18 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { Logger } from '@deepkit/logger';
+            import { Logger, LoggerTransport } from '@deepkit/logger';
+            
+            
+            export class MyTransport implements LoggerTransport {
+                write(message: string, level: LoggerLevel, rawMessage: string) {
+                    process.stdout.write(JSON.stringify({message: rawMessage, level, time: new Date}) + '\\n');
+                }
+            
+                supportsColor() {
+                    return false;
+                }
+            }
             
             new App()
                 .setup((module, config) => {
@@ -122,18 +132,8 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            import { Logger, LoggerTransport } from '@deepkit/logger';
-            
-            export class MyTransport implements LoggerTransport {
-                write(message: string, level: LoggerLevel, rawMessage: string) {
-                    process.stdout.write(JSON.stringify({message: rawMessage, level, time: new Date}) + '\\n');
-                }
-            
-                supportsColor() {
-                    return false;
-                }
-            }
-            
+            import { Logger } from '@deepkit/logger';
+
             new App()
                 .setup((module, config) => {
                     module.setupProvider(Logger).setTransport([new MyTransport]);

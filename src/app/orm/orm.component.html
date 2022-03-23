@@ -8,19 +8,19 @@
             more.
         </p>
         <p>
-            Use plain TypeScript — no code-generation, schema or config files required.
+            Use plain TypeScript — no code-generation, schema, or config files required.
         </p>
     </product-banner>
 
     <div class="line"></div>
-    <div style="margin-top: 45px;">
+    <div style="margin-top: 45px; text-align: center">
         <h2>Playground</h2>
 
         <p>Interactive TypeScript playground with SQLite database — in your browser.</p>
 
         <orm-playground></orm-playground>
     </div>
-    <div class="wrapper banner-features">
+    <div class="wrapper banner-features" style="text-align: center">
         <div>
             <h3>High performance</h3>
             <div>
@@ -51,7 +51,7 @@
         <a routerLink="/benchmarks">More information about our benchmarks</a>
     </div>
 
-    <div class="wrapper">
+    <div class="wrapper" style="text-align: center; margin-top: 130px;">
         <h2>Powerful database browser</h2>
 
         <p style="max-width: 650px; margin: auto">
@@ -65,57 +65,48 @@
 
     <div class="line"></div>
 
-    <div class="text">
-        <h2>TypeScript classes</h2>
+    <div class="page-text">
+        <h2>TypeScript</h2>
         <p>
-            Use already defined TypeScript classes, annotate with database related information,
-            and share with the rest of the application (even frontend). With support for strict TypeScript.
-        </p>
-        <p>
-            All database related information are declared using <code>@deepkit/type</code> so
-            no ORM/database related code is imported to other users of this model.
+            Just write your ORM entities as regular TypeScript classes or interfaces, and annotate
+            properties with database specific features.
+            It's that simple.
         </p>
         <textarea codeHighlight>
-import { entity, t } from '@deepkit/type';
+import { PrimaryKey, AutoIncrement, Email, Index, MinLength, Unique } from '@deepkit/type';
 
-@entity.name('user')
 class User {
-    @t.primary.autoIncrement id: number = 0;
-    @t createdAt: Date = new Date;
+    id: number & PrimaryKey & AutoIncrement = 0;
+    createdAt: Date = new Date;
 
-    @t lastName?: string;
-    @t firstName?: string;
+    lastName?: string;
+    firstName?: string;
 
-    @t.pattern(/^\S+@\S+\.\S+$/).index()
-    email?: string;
+    email?: string & Email & Index;
 
     constructor(
-       @t.minLength(3) public username: string
+       public username: string & MinLength<3> & Unique
     ) {}
 }
     </textarea>
 
-        <h2>Functional schema</h2>
+        <h2>Interfaces</h2>
         <p>
-            Database entities can also be defined in a functional fashion without the need to use an actual TypeScript class.
+            Database entities can also be defined in a interfaces or computed types without the need to use an actual class.
         </p>
 
         <textarea codeHighlight>
-        import { t } from '@deepkit/type';
+import { PrimaryKey, AutoIncrement, Email, Index, MinLength, Unique } from '@deepkit/type';
 
-        const user = t.schema({
-          id: t.number.primaryKey.autoIncrement,
-          createdAt: t.date.default(() => new Date),
-          firstName: t.string.optional,
-          lastName: t.string.optional,
-          username: t.string,
-        });
-
-        const user = await database.query(user)
-          .filter({username: 'Peter'})
-          .findOne();
+interface User {
+    id: number & PrimaryKey;
+    createdAt: Date;
+    lastName?: string;
+    firstName?: string;
+    email?: string & Email & Index;
+    username: string & MinLength<3> & Unique;
+}
       </textarea>
-
 
 
         <h2>Query API</h2>
@@ -196,37 +187,34 @@ class User {
       </textarea>
 
         <textarea codeHighlight>
-import { entity, t } from '@deepkit/type';
+import { PrimaryKey, Reference, BackReference, MinLength } from '@deepkit/type';
 
 class Author {
-    @t.primary.autoIncrement id: number = 0;
-    @t createdAt: Date = new Date;
+    id: number & PrimaryKey = 0;
+    createdAt: Date = new Date;
 
-    @t lastName?: string;
-    @t firstName?: string;
+    lastName?: string;
+    firstName?: string;
 
-    @t.array(Book).backReference()
-    books: Book[] = [];
+    books: Book[] & BackReference = [];
 
     constructor(
-        @t.minLength(3)
-        public username: string
+        public username: string & MinLength<3>
     ) {}
 }
 
 class Book {
-    @t.primary.autoIncrement id: number = 0;
-    @t createdAt: Date = new Date;
+    id: number & PrimaryKey = 0;
+    createdAt: Date = new Date;
 
-    @t description: string = '';
+    description: string = '';
 
     constructor(
-        @t.minLength(3) public title: string,
-        @t.reference() public author: Author,
+        public title: string & MinLength<3>,
+        public author: Author & Reference,
     ) {}
 }
     </textarea>
-
 
 
         <h2>Unit of Work</h2>
@@ -268,13 +256,12 @@ class Book {
             a Database object.
         </p>
         <textarea codeHighlight>
-        import { entity, t } from '@deepkit/type';
+        import { PrimaryKey } from '@deepkit/type';
         import { ActiveRecord } from '@deepkit/orm';
 
-        @entity.name('user')
         class User extends ActiveRecord {
-            @t.primary.autoIncrement id: number = 0;
-            @t createdAt: Date = new Date;
+            id: number & PrimaryKey = 0;
+            createdAt: Date = new Date;
             //...
         }
 
@@ -339,16 +326,16 @@ class Book {
         </p>
         <textarea codeHighlight>
         class User {
-          @t.number.primary.autoIncrement id:number = 0;
-          @t username: string = '';
+          id: number & PrimaryKey & AutoIncrement = 0;
+          username: string = '';
         }
 
         //version 2 adds new fields
         class User {
-          @t.number.primary.autoIncrement id:number = 0;
-          @t username: string = '';
-          @t lastName: string = '';
-          @t firstName: string = '';
+          id: number & PrimaryKey & AutoIncrement = 0;
+          username: string = '';
+          lastName: string = '';
+          firstName: string = '';
         }
       </textarea>
         <textarea codeHighlight lang="sql">
@@ -397,12 +384,7 @@ export class SchemaMigration implements Migration {
         const deletedUser = await database.query(User)
           .lift(SoftDeleteQuery)
           .findDeleted();
-      </textarea>
-
-        <h2>Plugins</h2>
-        <p>
-            Soft-Delete, Versioning.
-        </p>
+        </textarea>
 
     </div>
 </div>

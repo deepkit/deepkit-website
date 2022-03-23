@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 
         <h2>Inheritance</h2>
 
+        
     `
 })
 export class DocORMInheritanceComponent {

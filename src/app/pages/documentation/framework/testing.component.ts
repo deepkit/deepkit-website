@@ -119,7 +119,6 @@ import { Component } from '@angular/core';
             import { http, HttpRequest } from '@deepkit/http';
             
             test('http controller', async () => {
-                @http.controller()
                 class MyController {
             
                     @http.GET()
@@ -164,12 +163,12 @@ import { Component } from '@angular/core';
 
 
         <textarea codeHighlight title="core.ts">
-            const config = createModuleConfig({
-                items: t.number.default(10)
-            });
+            class Config {
+                items: number = 10;
+            }
             
             export class MyService {
-                constructor(@inject(config.token('item')) protected items: number) {
+                constructor(protected items: Config['items']) {
             
                 }
             
@@ -183,7 +182,6 @@ import { Component } from '@angular/core';
                 config: config,
                 provides: [MyService]
             }, 'core');
-            
         </textarea>
 
         <p>
@@ -194,7 +192,7 @@ import { Component } from '@angular/core';
             import { AppCoreModule } from './app-core.ts';
             
             new App({
-                imports: [AppCoreModule]
+                imports: [new AppCoreModule]
             }).run();
         </textarea>
         
@@ -207,7 +205,7 @@ import { Component } from '@angular/core';
             import { AppCoreModule, MyService } from './app-core.ts';
             
             test('service simple', async () => {
-                const testing = createTestingApp({ imports: [AppCoreModule] });
+                const testing = createTestingApp({ imports: [new AppCoreModule] });
 
                 const myService = testing.app.get(MyService);
                 expect(myService.doIt()).toBe(true);
@@ -216,7 +214,7 @@ import { Component } from '@angular/core';
             test('service simple big', async () => {
                 // you change configurations of your module for specific test scenarios
                 const testing = createTestingApp({ 
-                    imports: [AppCoreModule.configure({items: 100})]
+                    imports: [new AppCoreModule({items: 100})]
                 });
 
                 const myService = testing.app.get(MyService);

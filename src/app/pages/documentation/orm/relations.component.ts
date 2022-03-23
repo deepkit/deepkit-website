@@ -8,49 +8,49 @@ import { Component } from '@angular/core';
 
         <p>
             Relations allow you to connect two entities in a certain way. This is usually
-            done in databases using Foreign Keys. Deepkit ORM supports relations for all official database adapters.
+            done in databases using the concept of <a href="https://en.wikipedia.org/wiki/Foreign_key">foreign keys</a>. 
+            Deepkit ORM supports relations for all official database adapters.
         </p>
-
 
         <p>
-            A relation is annotated using the <code>t.reference()</code> decorator. Usually, a relation also has
-            a reverse relation, which is annotated using the <code>t.backReference()</code> decorator.
+            A relation is annotated using the <code>Reference</code> type decorator. Usually, a relation also has
+            a reverse relation, which is annotated using the <code>BackReference</code> type, but is only
+            needed if the back relation wants to be used in a database query. Back references are only virtual.
         </p>
-
 
         <h3>One to many</h3>
 
         <p>
             The entity that stores a reference is usually called the "owning side" or the one that "owns" the reference.
             The following shows two entities with a one-to-many relation between <i>User</i> and <i>Post</i>.
-            It means one user can have multiple posts. The Post entity owns the relation of Post->User. In the database itself, there is now a field Post."author" that
-            holds the primary key of User. 
+            It means one user can have multiple posts. The Post entity owns the relation of Post->User. 
+            In the database itself, there is now a field Post."author" that holds the primary key of User. 
         </p>
 
         <textarea codeHighlight="">
-            import 'reflect-metadata';
             import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
-            import { entity, t } from '@deepkit/type';
+            import { entity, PrimaryKey, AutoIncrement, Reference } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             
             async function main() {
                 @entity.name('user').collectionName('users')
                 class User {
-                    @t.primary.autoIncrement public id: number = 0;
-                    @t created: Date = new Date;
+                    id: number & PrimaryKey & AutoIncrement = 0;
+                    created: Date = new Date;
             
-                    constructor(@t public username: string) {
+                    constructor(public username: string) {
                     }
                 }
             
                 @entity.name('post')
                 class Post {
-                    @t.primary.autoIncrement public id: number = 0;
-                    @t created: Date = new Date;
+                    id: number & PrimaryKey & AutoIncrement = 0;
+                    created: Date = new Date;
             
                     constructor(
-                        @t.reference() public author: User,
-                        @t public title: string) {
+                        public author: User & Reference,
+                        public title: string
+                    ) {
                     }
                 }
             
@@ -68,29 +68,28 @@ import { Component } from '@angular/core';
         </textarea>
 
         <p>
-            Owning sides are annotated using <code>t.reference()</code>. References are not selected in queries by default.
+            Owning sides are annotated using <code>Reference</code>. References are not selected in queries by default.
             See chapter <a routerLink="/documentation/orm/query" fragment="joins">ORM Query / Joins</a> for more information.
         </p>
 
         <h3>Many to one</h3>
 
         <p>
-            An owning reference typically has a reverse reference which is usually called many-to-one. It's a virtual reference only, since it's not reflected in the database itself.
-            A back reference is annotated using <code>t.backReference()</code> and is mainly used for reflection
+            An owning reference typically has a reverse reference which is usually called many-to-one. 
+            It's a virtual reference only, since it's not reflected in the database itself.
+            A back reference is annotated using <code>BackReference</code> and is mainly used for reflection
             and query joins. If you add a back reference from User to Post, you will be able to join Posts directly from User queries.
         </p>
 
         <textarea codeHighlight>
             @entity.name('user').collectionName('users')
             class User {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
             
-                //'() => T' is used because of circular dependency
-                @t.array(() => Post).backReference()
-                posts?: Post[];
+                posts?: Post[] & BackReference;
 
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
         </textarea>
@@ -109,49 +108,46 @@ import { Component } from '@angular/core';
         
         <p>
             Many-to-many relations are usually implemented via a pivot entity. The pivot entity holds the actual owning
-            references to "real" entities, and "real" entities only have back references to the pivot entity.
+            references to two other entities, and those two entities have back references to the pivot entity.
         </p>
         
         <textarea codeHighlight>
             @entity.name('user')
             class User {
-                @t.primary.autoIncrement public id: number = 0;
-                @t created: Date = new Date;
+                id: number & PrimaryKey & AutoIncrement = 0;
+                created: Date = new Date;
         
-                //'() => T' because of circular dependency
-                @t.array(() => Group).backReference({via: () => UserGroup})
-                groups?: Group[];
+                groups?: Group[] & BackReference<{via: typeof UserGroup}>;
         
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
         
             @entity.name('group')
             class Group {
-                @t.primary.autoIncrement public id: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
             
-                //'() => T' because of circular dependency
-                @t.array(() => User).backReference({via: () => UserGroup})
-                users?: User[];
+                users?: User[] & BackReference<{via: typeof UserGroup}>;
 
-                constructor(@t public name: string) {
+                constructor(public name: string) {
                 }
             }
         
+            //the pivot entity
             @entity.name('userGroup')
             class UserGroup {
-                @t.primary.autoIncrement public id: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
         
                 constructor(
-                    @t.reference() public user: User, 
-                    @t.reference() public group: Group, 
+                    public user: User & Reference, 
+                    public group: Group & Reference,
                 ) {
                 }
             }
         </textarea>
         
         <p>
-            With this schema, you can now create users and groups, and connect them using the pivot entity.
+            With these types you can now create users and groups, and connect them using the pivot entity.
             By using a back reference in User we can fetch the groups directly with a User query.
         </p>
         

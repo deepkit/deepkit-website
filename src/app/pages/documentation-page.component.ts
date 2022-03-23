@@ -2,6 +2,12 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Renderer2, Vie
 import { Router } from '@angular/router';
 import { AnchorService } from '../provider/anchor';
 import { TitleService } from '../provider/title';
+import algoliasearch from 'algoliasearch/lite';
+
+const searchClient = algoliasearch(
+    'B1G2GM9NG0',
+    'aadef574be1f9252bb48d4ea09b5cfe5'
+);
 
 @Component({
     template: `
@@ -10,22 +16,29 @@ import { TitleService } from '../provider/title';
                 <div>Documentation chapters</div>
                 <svg *ngIf="showMenu" width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g id="arrow_up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <path d="M11.8443139,6.21655734 C12.0945582,5.9426926 12.5163616,5.92638983 12.7864381,6.18014409 C13.0565147,6.43389835 13.072592,6.86161807 12.8223477,7.13548282 L9.4890169,10.7834457 C9.22518123,11.0721848 8.77481877,11.0721848 8.5109831,10.7834457 L5.17765229,7.13548282 C4.92740802,6.86161807 4.94348529,6.43389835 5.21356186,6.18014409 C5.48363844,5.92638983 5.90544182,5.9426926 6.15568608,6.21655734 L9,9.32934519 L11.8443139,6.21655734 Z" id="Arrows" fill="#000000" fill-rule="nonzero" transform="translate(9.000000, 8.500000) scale(1, -1) translate(-9.000000, -8.500000) "></path>
+                        <path d="M11.8443139,6.21655734 C12.0945582,5.9426926 12.5163616,5.92638983 12.7864381,6.18014409 C13.0565147,6.43389835 13.072592,6.86161807 12.8223477,7.13548282 L9.4890169,10.7834457 C9.22518123,11.0721848 8.77481877,11.0721848 8.5109831,10.7834457 L5.17765229,7.13548282 C4.92740802,6.86161807 4.94348529,6.43389835 5.21356186,6.18014409 C5.48363844,5.92638983 5.90544182,5.9426926 6.15568608,6.21655734 L9,9.32934519 L11.8443139,6.21655734 Z"
+                              id="Arrows" fill="#000000" fill-rule="nonzero" transform="translate(9.000000, 8.500000) scale(1, -1) translate(-9.000000, -8.500000) "></path>
                     </g>
                 </svg>
                 <svg *ngIf="!showMenu" width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g id="arrow_down" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <path d="M11.8443139,6.21655734 C12.0945582,5.9426926 12.5163616,5.92638983 12.7864381,6.18014409 C13.0565147,6.43389835 13.072592,6.86161807 12.8223477,7.13548282 L9.4890169,10.7834457 C9.22518123,11.0721848 8.77481877,11.0721848 8.5109831,10.7834457 L5.17765229,7.13548282 C4.92740802,6.86161807 4.94348529,6.43389835 5.21356186,6.18014409 C5.48363844,5.92638983 5.90544182,5.9426926 6.15568608,6.21655734 L9,9.32934519 L11.8443139,6.21655734 Z" id="Arrows" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M11.8443139,6.21655734 C12.0945582,5.9426926 12.5163616,5.92638983 12.7864381,6.18014409 C13.0565147,6.43389835 13.072592,6.86161807 12.8223477,7.13548282 L9.4890169,10.7834457 C9.22518123,11.0721848 8.77481877,11.0721848 8.5109831,10.7834457 L5.17765229,7.13548282 C4.92740802,6.86161807 4.94348529,6.43389835 5.21356186,6.18014409 C5.48363844,5.92638983 5.90544182,5.9426926 6.15568608,6.21655734 L9,9.32934519 L11.8443139,6.21655734 Z"
+                              id="Arrows" fill="#000000" fill-rule="nonzero"></path>
                     </g>
                 </svg>
             </div>
-            
+
             <nav [class.showMenu]="showMenu">
+                <div class="docs-header">
+                    <a class="docs-logo" routerLink="/framework">
+                        <img src="/assets/images/deepkit_text.svg"/>
+                    </a>
+                </div>
+
                 <div class="category">
                     <div class="category-title">Framework</div>
 
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/framework">Getting
-                        started</a>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/framework">Getting started</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/fundamentals">Fundamentals</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/modules">Modules</a>
                     <a routerLinkActive="active" routerLink="/documentation/framework/services">Services</a>
@@ -63,18 +76,17 @@ import { TitleService } from '../provider/title';
 
                     <a routerLinkActive="active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                        routerLink="/documentation/type">Getting started</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/schema">Schema</a>
+                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/types">Types</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/reflection">Reflection</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/serialization">Serialization</a>
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/validation">Validation</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/performance">Performance</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/patch">Patch</a>
+                    <!--                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/performance">Performance</a>-->
+                    <!--                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/patch">Patch</a>-->
                     <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/change-detection">Change
                         detection</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/state-management">State
-                        management</a>
-                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/serialization-target">Serialization
-                        target</a>
+                    <!--                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/state-management">State-->
+                    <!--                        management</a>-->
+                    <a routerLinkActive="active" routerLinkActive="active" routerLink="/documentation/type/custom-serializer">Custom serializer</a>
                 </div>
 
                 <div class="category">
@@ -82,7 +94,7 @@ import { TitleService } from '../provider/title';
 
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/orm">Getting
                         started</a>
-                    <a routerLinkActive="active" routerLink="/documentation/orm/schema">Schema</a>
+                    <a routerLinkActive="active" routerLink="/documentation/orm/entity">Entity</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/session">Session</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/query">Query</a>
                     <a routerLinkActive="active" routerLink="/documentation/orm/transactions">Transactions</a>
@@ -96,22 +108,44 @@ import { TitleService } from '../provider/title';
                     </section>
                 </div>
 
+<!--                <div class="category">-->
+<!--                    <div class="category-title">RPC</div>-->
+
+<!--                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting started</a>-->
+<!--                    <a routerLinkActive="active" routerLink="/documentation/rpc/server">Server</a>-->
+<!--                    <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Controller</a>-->
+<!--                    <a routerLinkActive="active" routerLink="/documentation/rpc/client">Client</a>-->
+<!--                    <a routerLinkActive="active" routerLink="/documentation/rpc/query">Stream</a>-->
+<!--                    <a routerLinkActive="active" routerLink="/documentation/rpc/events">Security</a>-->
+<!--                </div>-->
 
                 <div class="category">
-                    <div class="category-title">RPC</div>
+                    <div class="category-title">Desktop UI</div>
 
-                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/rpc">Getting started</a>
-                    <a routerLinkActive="active" routerLink="/documentation/rpc/server">Server</a>
-                    <a routerLinkActive="active" routerLink="/documentation/rpc/controller">Controller</a>
-                    <a routerLinkActive="active" routerLink="/documentation/rpc/client">Client</a>
-                    <a routerLinkActive="active" routerLink="/documentation/rpc/query">Stream</a>
-                    <a routerLinkActive="active" routerLink="/documentation/rpc/events">Security</a>
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/documentation/desktop-ui">Getting started</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/button">Button</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/button-group">Button group</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/dropdown">Dropdown</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/icons">Icons</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/input">Input</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/slider">Slider</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/radiobox">Radiobox</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/selectbox">Selectbox</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/checkbox">Checkbox</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/list">List</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/table">Table</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/window">Window</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/window-menu">Window menu</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/window-toolbar">Window toolbar</a>
+                    <a routerLinkActive="active" routerLink="/documentation/desktop-ui/dialog">Dialog</a>
                 </div>
             </nav>
-            <main #content>
-                <router-outlet (activate)="onOutlet($event)"></router-outlet>
+            <main>
+                <div #content>
+                    <router-outlet (activate)="onOutlet($event)"></router-outlet>
+                </div>
             </main>
-            <div class="table-of-content">
+            <div class="table-of-content" *ngIf="headers.length > 1">
                 <a [routerLink]="router.url.split('#')[0]" [fragment]="getFragment(h.innerText)"
                    *ngFor="let h of headers" class="{{h.tagName.toLowerCase()}}">
                     {{h.innerText}}
@@ -126,6 +160,11 @@ export class DocumentationPageComponent implements AfterViewInit {
 
     public headers: HTMLElement[] = [];
     public showMenu: boolean = false;
+
+    config = {
+        indexName: 'demo_ecommerce',
+        searchClient
+    };
 
     constructor(
         public router: Router,

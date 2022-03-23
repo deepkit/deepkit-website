@@ -60,8 +60,6 @@ import { Component } from '@angular/core';
         <p>
             <dui-input icon="check" placeholder="Good job"></dui-input>
         </p>
-
-        <api-doc module="components/input/input.component" component="InputComponent"></api-doc>
     `
 })
 export class InputComponent {

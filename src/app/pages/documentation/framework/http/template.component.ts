@@ -35,7 +35,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="app.tsx">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { http } from '@deepkit/http';
@@ -133,7 +132,6 @@ import { Component } from '@angular/core';
                 }
             }
 
-            @http.controller()
             class MyPage {
                 @http.GET('')
                 listUsers() {

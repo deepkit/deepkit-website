@@ -12,7 +12,6 @@ import { Component } from '@angular/core';
             use both to support both ways to manipulate data.
         </p>
 
-
         <h3>Query events</h3>
 
         <p>

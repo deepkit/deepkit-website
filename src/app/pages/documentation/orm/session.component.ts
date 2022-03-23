@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         <h2>Session</h2>
 
         <p>
-            A session is akin to a Unit of Work. It keeps track of everything you do, 
+            A session is akin to a Unit of Work. It keeps track of everything you do 
             and automatically persists changes once you call <code>commit()</code>.
             It's the preferred way to execute inserts and updates to your database, 
             since it batches inserts and updates in a way that makes it very fast.
@@ -15,21 +15,18 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight title="database.ts">
-            import 'reflect-metadata';
             import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
-            import { entity, t } from '@deepkit/type';
+            import { entity, PrimaryKey, AutoIncrement } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             
             async function main() {
             
-                @entity.name('user').collectionName('users')
+                @entity.name('user')
                 class User {
-                    @t.primary.autoIncrement public id: number = 0;
-                    @t created: Date = new Date;
+                    id: number & PrimaryKey & AutoIncrement = 0;
+                    created: Date = new Date;
             
-                    constructor(
-                        @t public name: string
-                    ) {
+                    constructor(public name: string) {
                     }
                 }
             

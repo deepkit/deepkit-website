@@ -2,11 +2,10 @@ import {Component} from '@angular/core';
 
 @Component({
     template: `
-        <main class="text-page">
+        <main class="text-page" style="text-align: left">
             <div style="max-width: 700px;">
-                <p style="margin-bottom: 50px;" class="image">
-                    <img src="assets/images/deepkit_text.svg" style="width: 400px;"/>
-                </p>
+                <div class="overline">INSIGHTS</div>
+                <h1>ABOUT US</h1>
 
 
                 <p class="image">

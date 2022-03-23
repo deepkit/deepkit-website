@@ -28,7 +28,6 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight title="app.ts">
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { rpc, RpcKernelSecurity, Session, RpcAction } from '@deepkit/rpc';
@@ -144,7 +143,6 @@ import { Component } from '@angular/core';
             import { rpc, RpcKernelSecurity } from '@deepkit/rpc';
             import { MyDatabase, User, hash } from './my-database.ts';
             
-            @injectable
             class MyRpcSecurity extends RpcKernelSecurity {
                 constructor(protected database: MyDatabase) {
                 }

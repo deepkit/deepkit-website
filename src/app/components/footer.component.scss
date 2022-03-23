@@ -1,21 +1,21 @@
 :host {
   display: block;
   user-select: none;
-  background: #202020;
+  background-color: var(--color-dark2);
+  flex: 1;
 }
 
 .wrapper {
-  margin-top: 50px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 50px;
+  padding: 50px 0;
 }
 
 .wrapper.made-in {
   margin-top: 0;
   font-size: 13px;
-  color: white;
+  color: var(--color-grey2);
   padding-top: 0px;
   padding-bottom: 43px;
   justify-content: center;
@@ -24,12 +24,17 @@
 .copyright {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   font-size: 13px;
   text-align: left;
   width: 170px;
 
+  img {
+    height: 26px;
+  }
+
   .text {
-    color: #FFFFFF;
+    color: var(--color-grey2);
     margin-top: 20px;
   }
 }
@@ -40,8 +45,10 @@ nav {
   flex-direction: column;
 
   a, a:link {
-    color: white;
-    font-size: 14px;
+    color: var(--color-grey2);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 16px;
     text-align: right;
     text-decoration: none;
   }

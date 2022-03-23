@@ -29,39 +29,24 @@ import { Component } from '@angular/core';
         </p>
 
         <textarea codeHighlight>
-            import { entity, t } from '@deepkit/type';
+            import { entity, AutoIncrement, PrimaryKey } from '@deepkit/type';
                         
             @entity.name('user')
             class User {
-                @t.primary.autoIncrement id: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
                 
-                @t created: Date = new Date;
+                created: Date = new Date;
                 
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
         </textarea>
 
         <p>
-            This is how a model (a.k.a. entity) looks. You define its name (which is by default its table or collection name) using
-            <code>@entity.name()</code> and then annotate each property with <code>@t</code>. See the chapter
-            <a routerLink="/documentation/type/schema">Deepkit Type: Schema</a> for more information on how to decorate your class.
+            This is how a model (aka entity) looks. You define its name (which is by default its table or collection name) using
+            <code>@entity.name()</code> and declare each property with a type. See the chapter
+            <a routerLink="/documentation/type/types">Deepkit Type: Types</a> for more information.
         </p>
-
-        <p>
-            You can also write your schema using a functional approach.
-        </p>
-
-        <textarea codeHighlight>
-            import { t } from '@deepkit/type';
-            
-            const userSchema = t.schema({
-                id: t.primary.autoIncrement.default(0),
-                created: t.date.default(() => new Date),
-                username: t.string,
-            }, {name: 'User', collectionName: 'user'});
-            type User = InstanceType<typeof userSchema.classType>;
-        </textarea>
         
         <h3>Database class</h3>
         
@@ -86,7 +71,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            You create a new class you name however you like and specify in its constructor the adapter with its parameters,
+            Create a new class and specify in its constructor the adapter with its parameters,
             and add all entities/models that should be associated with that database to the second parameter.
         </p>
         
@@ -104,6 +89,7 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
+            import { SQLiteDatabase } from './database.ts';
             
             new App({
                 providers: [SQLiteDatabase],
@@ -116,6 +102,24 @@ import { Component } from '@angular/core';
             }).run();
         </textarea>
         
+        <p>
+            You can now access the SQLiteDatabase everywhere using dependency injection:
+        </p>
+
+        <textarea codeHighlight>
+            import { SQLiteDatabase } from './database.ts';
+            
+            export class Controller {
+                constructor(protected database: SQLiteDatabase) {}
+            
+                @http.GET()
+                async startPage(): User[] {
+                    //return all users
+                    return await this.database.query(User).find();
+                }
+            }
+        </textarea>
+        
         <h3>Manage data</h3>
         
         <p>
@@ -124,7 +128,6 @@ import { Component } from '@angular/core';
             In order to open the ORM Browser and manage the content, write all the steps from above into the <code>app.ts</code> file.
             At the bottom of this chapter you will find the full source code example.
         </p>
-        
         
         <p>
             And start the server: 
@@ -170,7 +173,7 @@ import { Component } from '@angular/core';
         </p>
         
         <p>
-            You can also inject <code>SQLiteDatabase</code> in services, event listeners, and all other controllers.
+            You can also inject <code>SQLiteDatabase</code> in CLI commands, event listeners, and all other services.
         </p>
         
         <textarea codeHighlight>
@@ -198,21 +201,20 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight>
             #!/usr/bin/env ts-node-script
-            import 'reflect-metadata';
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
             import { arg, cli, Command } from '@deepkit/app';
-            import { entity, t } from '@deepkit/type';
+            import { entity, AutoIncrement, PrimaryKey } from '@deepkit/type';
             import { Database } from '@deepkit/orm';
             import { SQLiteDatabaseAdapter } from '@deepkit/sqlite';
             
             @entity.name('user')
             class User {
-                @t.primary.autoIncrement id: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
             
-                @t created: Date = new Date;
+                created: Date = new Date;
             
-                constructor(@t public username: string) {
+                constructor(public username: string) {
                 }
             }
             

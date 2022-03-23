@@ -11,19 +11,19 @@
 
 .layout {
   display: flex;
-  height: 460px;
+  height: 500px;
   text-align: left;
   //border: 1px solid #b5b5b5;
   background-color: #1e1e1e;
   border-radius: 4px;
   color: #eee;
   //box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  overflow: visible;
 
   > * {
     flex: 0 0 50%;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
 }
 
@@ -83,6 +83,8 @@ table th, table td {
     flex: 1;
     border-top: 1px solid #666;
     font-size: 13px;
+    overflow: auto;
+    overflow: overlay;
 
     > div {
       padding: 0 5px;
@@ -98,6 +100,11 @@ table th, table td {
 
 .actions {
   display: flex;
+  align-items: center;
+
+  select {
+    height: 22px;
+  }
 
   button {
     padding: 4px 12px;

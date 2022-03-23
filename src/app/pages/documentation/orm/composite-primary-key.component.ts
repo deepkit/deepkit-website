@@ -162,9 +162,9 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             class User {
-                @t.primary.autoIncrement id: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
             
-                constructor(@t public username: string) {}
+                constructor(public username: string) {}
             }
         </textarea>
 
@@ -175,11 +175,11 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             @entity.index(['tenancyId', 'username'], {unique: true})
             class User {
-                @t.primary.autoIncrement id: number = 0;
+                id: number & PrimaryKey & AutoIncrement = 0;
             
                 constructor(
-                    @t public tenancyId: number,
-                    @t public username: string,
+                    public tenancyId: number,
+                    public username: string,
                 ) {}
             }
         </textarea>
@@ -196,13 +196,13 @@ import { Component } from '@angular/core';
         <p>
             Composite primary keys essentially mean that once it is introduced all future changes and practical usage have a much greater cost.
             While it looks at the beginning like a clean architecture to have (because you have one less column), 
-            it leads to substantial practical costs once the project is actually developed and keeps increasing the bigger the project gets.
+            it leads to substantial practical costs once the project is actually developed and the costs keep increasing the bigger the project gets.
         </p>
 
         <p>
             By looking at the asymmetries of advantages vs disadvantages it clearly shows that having composite
             primary keys are most of the time just not justifiable. The cost is much bigger than the benefit. Not only for you as 
-            use, but also for us as author and maintainer of the ORM code. Hence why Deepkit ORM does not support composite primary keys.
+            user, but also for us as author and maintainer of the ORM code. Hence why Deepkit ORM does not support composite primary keys.
         </p>
 
     `

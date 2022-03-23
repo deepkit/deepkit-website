@@ -4,21 +4,16 @@ import { Component, Input } from '@angular/core';
     selector: 'product-banner',
 
     template: `
-        <div class="banner">
-            <div class="head">
-                <div class="breadcrumb">
-                    <a routerLink="/library">Deepkit library</a> / <a routerLink="/library/{{id}}" class="package-name">@deepkit/{{id}}</a>
-                </div>
-                <nav>
-                    <a routerLink="/library/{{id}}" routerLinkActive="active">Overview</a>
-                    <a routerLink="/documentation/{{id}}">Documentation</a>
-                    <a href="/assets/api-docs/modules/_deepkit_{{id}}.html">API</a>
-                </nav>
+        <div class="wrapper" style="margin-bottom: 50px; padding-bottom: 50px; border-bottom: 1px solid var(--color-line)">
+            <div class="overline">LIBRARY</div>
+            <h2>{{header}}</h2>
+            <div style="font-size: 14px; color: grey">@deepkit/{{id}}</div>
+
+            <div style="max-width: 650px;">
+                <ng-content></ng-content>
             </div>
 
-            <h1>{{header}}</h1>
-            
-            <ng-content></ng-content>
+            <a class="button " routerLink="/documentation/{{id}}">read documentation</a>
         </div>
     `
 })

@@ -1,7 +1,7 @@
 :host {
   display: block;
   z-index: 1000;
-  background: #202020;
+  //background: #202020;
   user-select: none;
 
   a.logo {
@@ -12,11 +12,29 @@
   }
 }
 
+:host.startPage {
+  background-color: var(--color-dark2);
+  .wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+    position: relative;
+    top: 100px;
+  }
+
+  nav {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInHeader {
+}
+
 .wrapper {
-  height: 55px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  height: 65px;
   display: flex;
   align-items: center;
-  position: static !important;
 
   > a {
     line-height: 0;
@@ -35,15 +53,20 @@
 nav {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   flex: 1;
 
   a, a:link {
-    font-size: 13px;
-    font-weight: 600;
     text-decoration: none;
-    color: #FFFFFF;
     text-align: right;
-    margin: 0 20px;
+    font-size: 14px;
+    //font-size: 14px;
+    //letter-spacing: 0.8px;
+    //font-weight: 700;
+    font-weight: 600;
+    color: #171B1E;
+    line-height: 26px;
+    margin: 0 14px;
 
     &:last-child {
       margin-right: 0;
@@ -64,6 +87,14 @@ nav {
   }
 }
 
+:host.startPage {
+  @media(max-width: 600px) {
+    .burger {
+      display: none;
+    }
+  }
+}
+
 @media(max-width: 600px) {
   a.logo {
     text-align: center;
@@ -76,7 +107,7 @@ nav {
     display: block;
     position: absolute;
     right: 15px;
-    top: 10px;
+    top: 33px;
     border: 10px solid transparent;
   }
   nav {
@@ -90,14 +121,14 @@ nav {
 
   nav.main {
     display: none;
-    background: #202020;
+    background: white;
     padding-top: 25px;
   }
 
   .showMenu {
     nav.main {
       position: absolute;
-      top: 50px;
+      top: 70px;
       left: 0;
       bottom: 0;
       right: 0;

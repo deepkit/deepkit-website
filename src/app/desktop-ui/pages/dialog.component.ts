@@ -84,8 +84,6 @@ import { Component } from '@angular/core';
             <dui-button textured confirm="Really delete?" (click)="confirmed = confirmed+1">Confirm please {{confirmed}}</dui-button>
             <dui-button textured (click)="dialog2.show()">Absolute dialog</dui-button>
         </dui-button-group>
-
-        <api-doc module="components/dialog/dialog.component" component="DialogComponent"></api-doc>
     `
 })
 export class DialogComponent {

@@ -1,7 +1,6 @@
 {
   "@deepkit/core": "../deepkit-framework/packages/core",
   "@deepkit/core-rxjs": "../deepkit-framework/packages/core-rxjs",
-  "@deepkit/framework": "../deepkit-framework/packages/framework",
   "@deepkit/angular-universal": "../deepkit-framework/packages/angular-universal",
   "@deepkit/framework-debug-gui": "../deepkit-framework/packages/framework-debug-gui",
   "@deepkit/fs": "../deepkit-framework/packages/fs",
@@ -21,5 +20,6 @@
   "@deepkit/sqlite": "../deepkit-framework/packages/sqlite",
   "@deepkit/topsort": "../deepkit-framework/packages/topsort",
   "@deepkit/desktop-ui": "../deepkit-framework/packages/desktop-ui",
-  "@deepkit/type": "../deepkit-framework/packages/type"
+  "@deepkit/type": "../deepkit-framework/packages/type",
+  "@deepkit/type-compiler": "../deepkit-framework/packages/type-compiler"
 }
