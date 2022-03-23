@@ -9,13 +9,18 @@ import { Component } from '@angular/core';
         <h3>Installation</h3>
 
         <textarea codeHighlight="bash">
-            npm install @deepkit/framework
+            npm install @deepkit/framework @deepkit/type @deepkit/type-compiler
         </textarea>
 
         <p>
             Make sure all peer dependencies are installed. By default NPM 7+ installs them automatically.
         </p>
 
+        <p>
+            Deepkit Framework is based on the TypeScript runtime type system @deepkit/type. 
+            See <a routerLink="/documentation/type/getting-started">Type: Getting Started</a> for more information.
+        </p>
+        
         <p>
             To compile your application we need the TypeScript compiler and recommend <code>ts-node</code> to run it easily. 
             Install it with this command:
@@ -52,20 +57,19 @@ import { Component } from '@angular/core';
             ├── package-lock.json
             └── tsconfig.json
         </textarea>
-
         
         <textarea codeHighlight="json" title="tsconfig.json">
             {
               "compilerOptions": {
                 "outDir": "./dist",
                 "experimentalDecorators": true,
-                "emitDecoratorMetadata": true,
                 "strict": true,
                 "esModuleInterop": true,
                 "target": "ES2020",
                 "module": "CommonJS",
                 "moduleResolution": "node"
               },
+              "reflection": true,
               "files": [
                 "app.ts"
               ]
