@@ -221,10 +221,42 @@ Once `@deepkit/type-compiler` is installed, the transformer is installed in the 
 
 If you want to have a very detailed explanation of how all this works read <a target="_blank" href="https://github.com/microsoft/TypeScript/issues/47658">TypeScript Bytecode Interpreter / Runtime Types</a>
 
-## And more
-I hope what has already been shown gives a good overview of the new features that the Deepkit framework provides. Based on these fundamental new approaches are quite a few other Deepkit libraries: ORM, RPC, Broker, Desktop UI, and more. However, we would like to introduce these to you in detail in future blog posts.
 
-If you have any questions or are just curious, <a target="_blank" href="https://discord.gg/U24mryk7Wq">join our Discord</a> and chat with us! 
+## High Performance
+
+By having all the detailed type information available in runtime it's possible to create JIT optimised functions for all kind of work: serialization, validation, change detection, and much more.
+Deepkit utilises the type information in runtime and does exactly that. Its serializer, validator, and ORM build on demand highly optimised functions that do the job much better
+and faster than any general purpose version. This is also the reason why Deepkit ORM is the fastest JavaScript ORM on the market.
+The JSON serializer, BSON encoder, and validator are optimised as well, which make in turn Deepkit RPC, the HTTP router, configuration system, and many other features very fast. 
+
+![ORM Performance](/assets/blog/deepkit-orm-performance.png)
+
+## Debugger and Profiler
+
+The bigger and more complex a project gets the more important it is to have sophisticated debugging and profiler tools that are specifically tailored
+to the framework. We want to make sure that you get a feeling of how the application behaves instead of messing around in the dark using console.log().
+
+We want to bring the same developer experience to TypeScript that developer already enjoy in framework in other languages like Symfony/Laravel. 
+
+![Profiler](/assets/screenshots-profiler/overview.png)
+
+## Enterprise
+
+Because we specifically target enterprises, we can have your back as your project grows. We will provide enterprise support to make sure
+you are not left alone when facing architectural or technical problems. Only if you are successful, we will be too.
+
+## And more
+
+I hope what has been shown above gives a good overview of the new features that the Deepkit framework provides. 
+Deepkit libraries are based on these fundamental new approaches: ORM, RPC, Broker, Desktop UI, and more. We would like to introduce these to you in detail in future blog posts.
+
+If you have any questions or are just curious, join our Discord and chat with us!
+
+<a class="button" target="_blank" href="https://discord.gg/U24mryk7Wq">Join Deepkit Discord</a>
+
+And if you have read until here, it's time to give it a try!
+
+<a class="button" href="/documentation/framework">Getting started</a>
 
 
 
