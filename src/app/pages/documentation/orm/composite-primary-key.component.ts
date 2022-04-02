@@ -186,7 +186,7 @@ import { Component } from '@angular/core';
         
         <p>
             Deepkit ORM supports auto-increment primary keys, even for MongoDB. It is the preferred way of identifying records in your
-            database. However, for MongoDB you might want to use its ObjectId (<code>@t.primary.mongoId id: string = ''</code>) as single primary key. 
+            database. However, for MongoDB you might want to use its ObjectId (<code>_id: MongoId & Primary = ''</code>) as single primary key. 
             An alternative to numeric auto-increment primary key is an UUID, which works equally well 
             (however has slightly different performance characteristics as indexing is more expensive).
         </p>

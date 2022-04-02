@@ -6,7 +6,7 @@ import 'zone.js/node';
 //     assertZonePatched: () => void 0,
 // };
 import 'reflect-metadata';
-import { App } from '@deepkit/app';
+import { App, findParentPath } from '@deepkit/app';
 import { FrameworkModule } from '@deepkit/framework';
 import { AngularUniversalModule } from '@deepkit/angular-universal';
 import { MongoDatabase } from './db';
@@ -41,6 +41,10 @@ global.cancelAnimationFrame = (id) => {
 (global as any).dispatchEvent = () => {};
 
 
+const pubDir = (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'browser';
+console.log('dirname(getCurrentFileName())', dirname(getCurrentFileName()));
+console.log('pubDir', pubDir);
+
 new App({
     providers: [
         MongoDatabase,
@@ -55,14 +59,14 @@ new App({
     config: Config,
     imports: [
         new FrameworkModule({
-            publicDir: (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'browser',
+            publicDir: (process.env.DIST || findParentPath('/dist', dirname(getCurrentFileName()))) + '/browser',
             debug: false,
             host: process.env.HOST || '127.0.0.1',
             migrateOnStartup: true,
         }),
         new AngularUniversalModule({
-            browserPath: (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'browser',
-            serverPath: (process.env.DIST || dirname(getCurrentFileName()) + '/../../../dist/') + 'server',
+            browserPath: (process.env.DIST || findParentPath('/dist', dirname(getCurrentFileName()))) + '/browser',
+            serverPath: (process.env.DIST || findParentPath('/dist', dirname(getCurrentFileName()))) + '/server',
         }),
     ]
 })

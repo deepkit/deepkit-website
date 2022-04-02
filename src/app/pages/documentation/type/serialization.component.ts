@@ -56,7 +56,7 @@ import { Component } from '@angular/core';
                 }
             }
 
-            const myModel = plainToClass(MyModel, {
+            const myModel = deserialize<MyModel>({
                 id: 5,
                 created: 'Sat Oct 13 2018 14:17:35 GMT+0200',
                 name: 'Peter',

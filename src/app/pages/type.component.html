@@ -218,7 +218,7 @@
             types, like you know from TypeScript.
         </p>
         <textarea codeHighlight>
-        import { mixin } from '@deepkit/type';
+        import { mixin, UUID, uuid } from '@deepkit/type';
 
         class Timestamp {
            createdAt: Date = new Date;
@@ -230,11 +230,11 @@
            deletedBy?: string;
         }
 
-        class UUID {
-           @t.uuid uuid: string = uuid();
+        class UUIDModel {
+           uuid: UUID = uuid();
         }
 
-        class User extends mixin(UUID, Timestamp, SoftDelete) {
+        class User extends mixin(UUIDModel, Timestamp, SoftDelete) {
           firstName?: string;
           lastName?: string;
 

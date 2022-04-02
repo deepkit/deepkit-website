@@ -258,12 +258,12 @@ import { Component } from '@angular/core';
         </p>
         
         <textarea codeHighlight>
-            import { t } from '@deepkit/type';
+            import { t, Positive } from '@deepkit/type';
 
             @cli.controller('test')
             export class TestCommand implements Command {
                 async execute(
-                    @flag @t.positive() sinceYear: number,
+                    @flag sinceYear: number & Positive,
                 ) {
                     console.log(typeof sinceYear, sinceYear);
                 }

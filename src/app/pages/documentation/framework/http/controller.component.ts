@@ -199,7 +199,7 @@ import { Component } from '@angular/core';
         </textarea>
         
         <p>
-            You can modify how a path parameter is matched using <code>@t.regexp(name, regex)</code>.
+            You can modify how a path parameter is matched using <code>@http.regexp(name, regex)</code>.
         </p>
 
         <textarea codeHighlight>
@@ -285,7 +285,7 @@ import { Component } from '@angular/core';
         
         <textarea codeHighlight>
             class HelloWorldBody {
-                @t.required text!: string;
+                text!: string;
             }
             
             class MyPage {
@@ -498,7 +498,7 @@ import { Component } from '@angular/core';
             #!/usr/bin/env ts-node-script
             import { App } from '@deepkit/app';
             import { FrameworkModule } from '@deepkit/framework';
-            import { http, Redirect } from '@deepkit/http';
+            import { http, Redirect, HttpBody } from '@deepkit/http';
             
             class User {
                 constructor(
@@ -516,13 +516,12 @@ import { Component } from '@angular/core';
                 }
             
                 @http.GET('/user').name('user_list')
-                @t.array(User)
                 getUsers() {
                     return this.users.list;
                 }
             
                 @http.POST('/user')
-                addUser(@http.body() user: User) {
+                addUser(user: HttpBody<User>) {
                     this.users.list.push(user);
                     return Redirect.toRoute('user_list');
                 }

@@ -14,15 +14,14 @@ import { Component } from '@angular/core';
         <textarea codeHighlight>
             import { jsonSerializer, t } from '@deepkit/type';
             class Config {
-                @t backgroundColor: number = 0x002200;
-                @t profileColor: number = 0x552200;
-            
-                @t image?: Uint8Array;
+                backgroundColor: number = 0x002200;
+                profileColor: number = 0x552200;
+                image?: Uint8Array;
             }
             
             class User {
-                @t config: Config = new Config;
-                @t.array(t.string) categories: string[] = [];
+                config: Config = new Config;
+                categories: string[] = [];
             }
             
             const userPatch = jsonSerializer.for(User).patchDeserialize({

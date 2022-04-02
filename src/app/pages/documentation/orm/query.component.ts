@@ -291,9 +291,9 @@ import { Component } from '@angular/core';
 
         <textarea codeHighlight="">
             await database.persist(
-                plainToClass(File, {path: 'file1', category: 'images'}),
-                plainToClass(File, {path: 'file2', category: 'images'}),
-                plainToClass(File, {path: 'file3', category: 'pdfs'})
+                cast<File>({path: 'file1', category: 'images'}),
+                cast<File>({path: 'file2', category: 'images'}),
+                cast<File>({path: 'file3', category: 'pdfs'})
             );
             
             //[ { category: 'images' }, { category: 'pdfs' } ]
