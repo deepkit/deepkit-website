@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
 
         <p>
             Deepkit Framework is based on the TypeScript runtime type system @deepkit/type. 
-            See <a routerLink="/documentation/type/getting-started">Type: Getting Started</a> for more information.
+            See <a routerLink="/documentation/type">Type: Getting Started</a> for more information.
         </p>
         
         <p>
