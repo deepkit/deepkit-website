@@ -252,6 +252,7 @@ export class BenchmarksComponent implements OnInit {
 
     async ngOnInit() {
         this.runs = await this.client.framework.getLastBenchmarkRuns();
+        console.log('runs', this.runs);
 
         this.createGraph('type/serialization/small', 'Serialization', {
             'type/serialization/small-deepkit': { label: 'deepkit/type', entry: 'serialize' },

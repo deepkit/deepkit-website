@@ -24,6 +24,7 @@ import { Component } from '@angular/core';
             $ npm install
             $ npm run bootstrap
             $ npm run link
+            $ npm run install-compiler
             $ npm run build
             $ cd packages/benchmark
         </textarea>
