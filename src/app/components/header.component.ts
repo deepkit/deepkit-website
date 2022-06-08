@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
     template: `
         <div class="wrapper" [class.showMenu]="showMenu">
             <a class="logo" *ngIf="!startPage" routerLink="/"><img src="/assets/images/deepkit_text.svg"/></a>
-            <a class="logo fadeIn" *ngIf="startPage" routerLink="/"><img src="/assets/images/deepkit_white_text.svg"/></a>
+            <a class="logo" *ngIf="startPage" routerLink="/"><img src="/assets/images/deepkit_white_text.svg"/></a>
 
             <a class="burger" (click)="toggleMenu()">
                 <svg width="21px" height="16px" viewBox="0 0 21 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
