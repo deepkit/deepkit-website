@@ -37,7 +37,7 @@
                     interface User {
                         id: integer & PrimaryKey;
                         created: Date;
-                        username: string & MaxLength<3> & Unique;
+                        username: string & MinLength<3> & Unique;
                         email: Email;
                         firstName?: string;
                         lastName?: string;

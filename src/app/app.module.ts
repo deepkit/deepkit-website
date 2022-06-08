@@ -97,7 +97,7 @@ import { DocORMTransactionComponent } from './pages/documentation/orm/transactio
 import { DocORMInheritanceComponent } from './pages/documentation/orm/inheritance.component';
 import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/composite-primary-key.component';
 import { ImageSliderComponent } from './common/image-slider.component';
-import { NgAisModule } from 'angular-instantsearch';
+// import { NgAisModule } from 'angular-instantsearch';
 
 @NgModule({
     declarations: [
@@ -196,7 +196,7 @@ import { NgAisModule } from 'angular-instantsearch';
         AppCommonModule,
         FormsModule,
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
-        NgAisModule.forRoot(),
+        // NgAisModule.forRoot(),
         // MarkdownModule.forRoot({
         //     sanitize: SecurityContext.NONE
         // }),
