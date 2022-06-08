@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
                 </svg>
             </a>
             <nav class="main">
-                <a routerLinkActive="active" routerLink="/framework">Framework</a>
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/">Framework</a>
                 <a routerLinkActive="active" routerLink="/library">Libraries</a>
                 <a routerLinkActive="active" routerLink="/community">Community</a>
                 <a routerLinkActive="active" routerLink="/blog">Blog</a>

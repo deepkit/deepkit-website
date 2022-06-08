@@ -67,7 +67,7 @@ import { DocORMCompositePrimaryKeyComponent } from './pages/documentation/orm/co
 
 
 const routes: Routes = [
-    { path: '', pathMatch: 'full', component: IndexPageComponent, data: { title: 'Welcome', startPage: true } },
+    { path: '', pathMatch: 'full', component: FeaturesPageComponent, data: { title: 'Deepkit Framework' } },
     { path: 'contact', pathMatch: 'full', component: ContactPageComponent, data: { title: 'Contact' } },
     {
         path: 'data-protection',
@@ -82,8 +82,7 @@ const routes: Routes = [
 
     {
         path: 'framework',
-        component: FeaturesPageComponent,
-        data: { title: 'Framework Features' },
+        redirectTo: '/',
     },
     {
         path: 'community',
