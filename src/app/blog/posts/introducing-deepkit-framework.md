@@ -222,8 +222,50 @@ Once `@deepkit/type-compiler` is installed, the transformer is installed in the 
 If you want to have a very detailed explanation of how all this works read <a target="_blank" href="https://github.com/microsoft/TypeScript/issues/47658">TypeScript Bytecode Interpreter / Runtime Types</a>
 
 
+## Framework
+
+Deepkit Framework is much more than just runtime TypeScript types. It's a full-featured framework
+like PHP Symfony and Java Spring Boot, but just for TypeScript. It is the only framework available
+that fully utilises TypeScript types in runtime. This allows to write less and more efficient code.
+
+Deepkit Framework contains:
+
+- Validator
+- Serializer
+- Dependency Injection Container
+- Configuration System
+- Module System
+- HTTP Framework
+- RPC Framework
+- CLI Framework
+- Event System
+- Interactive Debugger and Profiler
+- Database ORM
+- Template engine
+
+and more. 
+
+There were no mature libraries that leveraged the power of the TypeScript type system at runtime before. 
+Now, in order to provide a framework that enables fundamentally new approaches, 
+such as utilizing runtime TypeScript types in an HTTP router, it was necessary to build 
+fundamental libraries that take full advantage of a TypeScript type system at runtime first.
+Therefore, we spared no time and effort to redevelop even basic functionalities such as validation and
+serialization to leverage the power of TypeScript throughout the application. 
+The functionalities are split in multiple packages so that they can be used standalone,
+or all together in the framework.
+
+Since everything comes from one vendor, all libraries are perfectly designed for each other. 
+This allows not only to better apply enterprise design patterns, but also to implement a variety of use cases 
+much more efficiently, since glue-code between vastly different third-party libraries is not needed.
+
 ## High Performance
 
+For us, high-performance means not only fast execution time, but also constant fast development time.
+
+One of the most difficult problems in software development is to maintain a high development speed even after months or years, especially when the code and the team grow. There are many frameworks that promise to get you started quickly and allow you to cobble together more complex applications on your own in a very short time. However, these usually have the common issue that the development speed decreases drastically the older the project or the larger the team becomes. It is not uncommon that even after a few months and only a handful of developers, the development speed drops to 1% of the original speed. To counteract this phenomenon it is necessary to apply established design patterns and to use the right framework and libraries in advance. Enterprise design patterns have established themselves for the reason that they scale excellently even with larger applications and large teams. Correctly applied, they develop their capabilities especially when a project is to be developed over a longer period of time (several months to years).
+Design patterns have their advantages in theory, but in practice almost every pattern also has its disadvantages. These disadvantages are different depending on the language and framework, because the language and the framework itself determines how ergonomically a pattern can be applied. Just because a certain pattern can be used in a language, it does not mean that it automatically makes development better and faster. Some languages are better suited than others for applying certain patterns. With JavaScript or even TypeScript itself, various design patterns are often usable in the core, but there are limitations here that massively affect the user experience and thus speed. For example, Typescript decorators with all their idiosyncrasies may become necessary if a dependency injection framework specifies and is based on them. Deepkit’s runtime type system ensures that in the most ergonomic way and with as little boilerplate as possible, these design patterns can be applied, unlocking their power so that high development speed is maintained not only initially, but also in the long term.
+
+However, fast execution time is also important to us.
 By having all the detailed type information available in runtime it's possible to create JIT optimised functions for all kind of work: serialization, validation, change detection, and much more.
 Deepkit utilises the type information in runtime and does exactly that. Its serializer, validator, and ORM build on demand highly optimised functions that do the job much better
 and faster than any general purpose version. This is also the reason why Deepkit ORM is the fastest JavaScript ORM on the market.
@@ -240,15 +282,7 @@ We want to bring the same developer experience to TypeScript that developer alre
 
 ![Profiler](/assets/screenshots-profiler/overview.png)
 
-## Enterprise
-
-Because we specifically target enterprises, we can have your back as your project grows. We will provide enterprise support to make sure
-you are not left alone when facing architectural or technical problems. Only if you are successful, we will be too.
-
-## And more
-
-I hope what has been shown above gives a good overview of the new features that the Deepkit framework provides. 
-Deepkit libraries are based on these fundamental new approaches: ORM, RPC, Broker, Desktop UI, and more. We would like to introduce these to you in detail in future blog posts.
+## Join Us
 
 If you have any questions or are just curious, join our Discord and chat with us!
 
