@@ -8,17 +8,21 @@ import { Component } from '@angular/core';
 
         <h3>Installation</h3>
 
+        <p>
+            Deepkit Framework is based on the TypeScript runtime type system @deepkit/type.
+            Make sure to install it first: <a routerLink="/documentation/type">Deepkit Type: Getting Started</a>.
+        </p>
+        
+        <p>
+            Next install Deepkit Framework:
+        </p>
+        
         <textarea codeHighlight="bash">
-            npm install typescript ts-node @deepkit/framework @deepkit/type @deepkit/type-compiler
+            npm install ts-node @deepkit/framework
         </textarea>
 
         <p>
             Make sure all peer dependencies are installed. By default NPM 7+ installs them automatically.
-        </p>
-
-        <p>
-            Deepkit Framework is based on the TypeScript runtime type system @deepkit/type. 
-            See <a routerLink="/documentation/type/getting-started">Type: Getting Started</a> for more information.
         </p>
         
         <p>
