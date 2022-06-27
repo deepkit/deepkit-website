@@ -79,18 +79,18 @@ import { Component } from '@angular/core';
         <h4>Configuration partial</h4>
 
         <p>
-            To inject a partial of configuration options, use the <code>Partial</code> TypeScript type function.
+            To inject a partial configuration object, use the <code>Pick</code> TypeScript type function.
         </p>
 
         <textarea codeHighlight title="website.ts">
             import { Config } from './app-config.ts';
             
-            type WebsiteSettings = Partial<Config, 'pageTitle' | 'domain'>
+            type WebsiteSettings = Pick<Config, 'pageTitle' | 'domain'>
             
             class MyWebsite {
                 constructor(protected settings: WebsiteSettings) {}
                 //or
-                // constructor(protected settings: Partial<Config, 'pageTitle' | 'domain'>) {}
+                // constructor(protected settings: Pick<Config, 'pageTitle' | 'domain'>) {}
             
                 @http.GET()
                 helloWorld() {

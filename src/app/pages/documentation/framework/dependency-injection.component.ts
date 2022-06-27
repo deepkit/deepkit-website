@@ -224,13 +224,13 @@ import { Component } from '@angular/core';
             }
 
             class MainDatabase extends Database {
-                constructor(databaseSettings: Partial<Config, 'databaseUrl'>) {
+                constructor(databaseSettings: Pick<Config, 'databaseUrl'>) {
                     super(new MongoDatabaseAdapter(databaseSettings), []);
                 }
             }
             
             //or use multiple values and define as type alias
-            type DBConfig = Partial<Config, 'databaseUrl' | 'anotherOption'>;
+            type DBConfig = Pick<Config, 'databaseUrl' | 'anotherOption'>;
             class MainDatabase extends Database {
                 constructor(databaseSettings: DBConfig) {
             }
