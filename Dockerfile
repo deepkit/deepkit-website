@@ -8,9 +8,9 @@ EXPOSE 8080
 
 WORKDIR /app
 
-#ADD build-api.sh /app/build-api.sh
-#RUN /app/build-api.sh
-#RUN mkdir -p src/assets && cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
+ADD build-api.sh /app/build-api.sh
+RUN /app/build-api.sh
+RUN mkdir -p src/assets && cp -r /tmp/deepkit-framework-docs/docs src/assets/api-docs;
 
 ADD package.json /app/package.json
 ADD package-lock.json /app/package-lock.json
