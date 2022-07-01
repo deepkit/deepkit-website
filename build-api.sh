@@ -19,11 +19,5 @@ npm run bootstrap:ci -- --scope @deepkit/angular-universal --scope @deepkit/core
   --scope @deepkit/type-angular --scope @deepkit/workflow
 npm run link;
 npm run tsc;
-NODE_OPTIONS=--max_old_space_size=12096 ./node_modules/.bin/typedoc \
-  --packages 'packages/core' --packages 'packages/core-rxjs' --packages 'packages/app' \
-  --packages 'packages/framework' --packages 'packages/broker' --packages 'packages/bson' \
-  --packages 'packages/event' --packages 'packages/mongo' --packages 'packages/mysql' --packages 'packages/orm' \
-  --packages 'packages/postgres' --packages 'packages/rpc' --packages 'packages/rpc-tcp' --packages 'packages/sql' \
-  --packages 'packages/sqlite' --packages 'packages/stopwatch' --packages 'packages/template' \
-  --packages 'packages/type' --packages 'packages/type-spec' --packages 'packages/type-compiler' --packages 'packages/type-angular' --packages 'packages/workflow';
+NODE_OPTIONS=--max_old_space_size=12096 ./node_modules/.bin/typedoc packages/*/index.ts;
 cd -;
