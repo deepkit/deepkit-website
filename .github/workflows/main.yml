@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   website:
@@ -38,9 +38,6 @@ jobs:
           script: |
             echo "${{secrets.GITHUB_TOKEN}}" | docker login docker.pkg.github.com --username \$GITHUB_ACTOR  --password-stdin
             docker pull docker.pkg.github.com/deepkit/website/website:latest
-            docker rm -f next-deepkit-website || true;
-            docker run -d --name next-deepkit-website --restart=unless-stopped --network nginx-proxy \
-              -e CONTENTFUL_ACCESS_TOKEN="${{secrets.CONTENTFUL_ACCESS_TOKEN}}" -e VIRTUAL_HOST=deepkit.ai \
-              -e VIRTUAL_PORT=80 -e LETSENCRYPT_HOST=deepkit.io docker.pkg.github.com/deepkit/website/website:latest;
+            docker-compose up -d
 
 #            docker run -d --name next-deepkit-website --restart=unless-stopped --network nginx-proxy -e VIRTUAL_HOST=next.deepkit.ai -e VIRTUAL_PORT=80 -e LETSENCRYPT_HOST=next.deepkit.ai docker.pkg.github.com/deepkit/deepkit/website:latest;
