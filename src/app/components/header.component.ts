@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
                 <a routerLinkActive="active" routerLink="/library">Libraries</a>
                 <a routerLinkActive="active" routerLink="/community">Community</a>
                 <a routerLinkActive="active" routerLink="/blog">Blog</a>
-                <a routerLinkActive="active" routerLink="/documentation">Docs</a>
+                <a href="https://docs.deepkit.io/">Docs</a>
 
                 <!--                <nav style="justify-content: flex-end;">-->
                 <!--                    <a routerLinkActive="active" routerLink="/blog">Blog</a>-->

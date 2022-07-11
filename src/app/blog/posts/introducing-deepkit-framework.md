@@ -291,7 +291,7 @@ If you have any questions or are just curious, join our Discord and chat with us
 
 And if you have read until here, it's time to give it a try!
 
-<a class="button" href="/documentation/framework">Getting started</a>
+<a class="button" href="https://docs.deepkit.io/english/framework.html">Getting started</a>
 
 
 

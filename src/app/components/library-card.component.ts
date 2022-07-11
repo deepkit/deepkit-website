@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'library-card',
     template: `
-        <a [routerLink]="url">
+        <a #link [routerLink]="doc ? undefined : productUrl">
             <h3 class="title">{{title}}</h3>
             <div class="content">
                 <ng-content></ng-content>
@@ -61,14 +61,26 @@ import { Router } from '@angular/router';
         }
     `]
 })
-export class LibraryCardComponent {
+export class LibraryCardComponent implements AfterViewInit {
     @Input() package!: string;
     @Input() title!: string;
     @Input() sub!: string;
-    @Input() linkDocumentation: boolean = false;
+    @Input() doc?: string;
 
-    get url() {
-        return this.linkDocumentation ? '/documentation/' + this.package.substr(9) : '/library/' + this.package.substr(9);
+    @ViewChild('link') link?: ElementRef;
+
+    ngAfterViewInit(): void {
+        if (this.link) {
+            if (this.doc) this.link.nativeElement.href = this.docUrl;
+        }
+    }
+
+    get productUrl() {
+        return '/library/' + this.package.substr(9);
+    }
+
+    get docUrl() {
+        return 'https://docs.deepkit.io/english/' + this.doc;
     }
 
     constructor(public router: Router) {

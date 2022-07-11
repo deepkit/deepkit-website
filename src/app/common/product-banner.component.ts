@@ -13,11 +13,12 @@ import { Component, Input } from '@angular/core';
                 <ng-content></ng-content>
             </div>
 
-            <a class="button " routerLink="/documentation/{{id}}">read documentation</a>
+            <a *ngIf="doc"class="button " href="https://docs.deepkit.io/english/{{doc}}">read documentation</a>
         </div>
     `
 })
 export class ProductBannerComponent {
     @Input() header!: string;
     @Input() id!: string;
+    @Input() doc?: string;
 }

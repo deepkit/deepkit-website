@@ -44,7 +44,7 @@ function sortByMS(a: PlotData, b: PlotData) {
 
             <p>
                 To run benchmarks on your machine, you have to prepare a local Deepkit Framework checkout,
-                please follow <a routerLink="/documentation/benchmark">documentation/benchmark</a>.
+                please follow <a routerLink="https://docs.deepkit.io/english/benchmark.html">documentation/benchmark</a>.
             </p>
 
             <p>

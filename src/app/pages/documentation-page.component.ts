@@ -141,6 +141,11 @@ const searchClient = algoliasearch(
                 </div>
             </nav>
             <main>
+                <div style="color: red; padding: 25px 0;">
+                    You're looking at legacy documentation.<br/>
+                    New multi-language documentation available at <a href="https://docs.deepkit.io">https://docs.deepkit.io</a>
+                </div>
+                
                 <div #content>
                     <router-outlet (activate)="onOutlet($event)"></router-outlet>
                 </div>
