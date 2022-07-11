@@ -13,14 +13,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: Cache ~/.npm
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Setup
-        run: npm install
       - name: Image build
         run: |
           echo "${{secrets.GITHUB_TOKEN}}" | docker login docker.pkg.github.com --username \$GITHUB_ACTOR  --password-stdin
