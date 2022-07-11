@@ -16,7 +16,6 @@ jobs:
       - name: Image build
         run: |
           echo "${{secrets.GITHUB_TOKEN}}" | docker login docker.pkg.github.com --username \$GITHUB_ACTOR  --password-stdin
-          COMMIT=$(git log -n 1 --pretty=format:%h packages/website)
           docker build -t docker.pkg.github.com/deepkit/deepkit/website:latest -f Dockerfile .;
           docker push docker.pkg.github.com/deepkit/deepkit/website:latest
 
