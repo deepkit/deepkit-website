@@ -17,8 +17,8 @@ jobs:
         run: |
           echo "${{secrets.GITHUB_TOKEN}}" | docker login docker.pkg.github.com --username \$GITHUB_ACTOR  --password-stdin
           COMMIT=$(git log -n 1 --pretty=format:%h packages/website)
-          docker build -t docker.pkg.github.com/deepkit/website/website:latest -f Dockerfile .;
-          docker push docker.pkg.github.com/deepkit/website/website:latest
+          docker build -t docker.pkg.github.com/deepkit/deepkit/website:latest -f Dockerfile .;
+          docker push docker.pkg.github.com/deepkit/deepkit/website:latest
 
       - name: Deploy website
         uses: appleboy/ssh-action@master
@@ -29,7 +29,7 @@ jobs:
           script_stop: true
           script: |
             echo "${{secrets.GITHUB_TOKEN}}" | docker login docker.pkg.github.com --username \$GITHUB_ACTOR  --password-stdin
-            docker pull docker.pkg.github.com/deepkit/website/website:latest
+            docker pull docker.pkg.github.com/deepkit/deepkit/website:latest
             docker-compose up -d
 
 #            docker run -d --name next-deepkit-website --restart=unless-stopped --network nginx-proxy -e VIRTUAL_HOST=next.deepkit.ai -e VIRTUAL_PORT=80 -e LETSENCRYPT_HOST=next.deepkit.ai docker.pkg.github.com/deepkit/deepkit/website:latest;
