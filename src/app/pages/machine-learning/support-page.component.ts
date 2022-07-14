@@ -46,7 +46,7 @@ import {Component} from "@angular/core";
                 </p>
 
                 <div class="buttons">
-                    <a class="button-small" href="mailto:info@deepkit.ai">Contact us</a>
+                    <a class="button-small" href="mailto:info@deepkit.io">Contact us</a>
                 </div>
             </div>
 
