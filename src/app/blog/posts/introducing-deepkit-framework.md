@@ -197,7 +197,7 @@ new App({
 By simply defining `Config['domain']` as a dependency, the actual value behind `domain` is injected by the dependency injection container. The type itself of the property `domain` is `string` and can be easily provided in unit tests. Completely decoupled from the framework.
 
 ```typescript
-new MyServce('localhost');
+new MyService('localhost');
 ```
 
 Also partial configuration options are possible:
