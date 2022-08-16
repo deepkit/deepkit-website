@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
             Deepkit Type supports almost all TypeScript types out of the box. It could be a simple string, number,
             boolean,
             or more complex classes and interfaces, as well as computed types based on type functions like
-            <code>Partial</code>,
+            <code>Pick</code>,
             and even generics.
         </p>
 

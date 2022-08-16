@@ -278,7 +278,7 @@ import { Component } from '@angular/core';
             inject the whole configuration object, a single value, or a partial of the configuration.
         </p>
 
-        <h4>Partial</h4>
+        <h4>Pick</h4>
 
         <p>
             To inject only a sub section of configuration values use the <code>Pick</code> type function.
