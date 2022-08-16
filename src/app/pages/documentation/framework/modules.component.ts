@@ -68,7 +68,7 @@ import { Component } from '@angular/core';
             import { injectable } from '@deepkit/injector';
 
             class MyHttpController {
-                @http.GET('/hello)
+                @http.GET('/hello')
                 hello() {
                     return 'Hello world!';
                 }
