@@ -16,6 +16,15 @@ main {
 }
 
 .feature-with-code {
+
+  &.left {
+    flex-direction: row-reverse;
+
+    div.code-box {
+      left: -80px;
+    }
+  }
+
   div.code-box {
     //height: 550px;
     padding: 35px;

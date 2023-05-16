@@ -114,6 +114,9 @@
                     No json configuration files, unnecessary boilerplate, schema files, or code generation:
                     TypeScript utilized to its fullest capabilities.
                 </p>
+                <p class="feature-text">
+                    Don't like classes? Functional routes are supported as well.
+                </p>
             </div>
             <div class="code-box">
                 <textarea codeHighlight>
@@ -141,7 +144,112 @@
                     new App({
                         controllers: [UserAPI],
                         imports: [new FrameworkModule()]
-                    }).run();
+                    })
+                    .run();
+                </textarea>
+            </div>
+        </div>
+
+        <div class="two-column feature-with-code left">
+            <div>
+                <div class="overline">CONSOLE</div>
+                <h2>CLI</h2>
+
+                <p class="feature-text">
+                    Write CLI commands with TypeScript types and dependency injection.
+                    Fully integrated into the framework with automatic serialization and validation of arguments.
+                </p>
+            </div>
+            <div class="code-box">
+                <textarea codeHighlight>
+                    new App({
+                        providers: [Database]
+                    })
+                    .command('user:find', async (
+                            name: string & MinLength<3>,
+                            database: Database
+                        ) => {
+                        const users = await database.query(User)
+                            .filter({name: {$like: name + '%'})
+                            .find();
+                    })
+                    .run();
+                </textarea>
+            </div>
+        </div>
+
+        <div class="two-column feature-with-code">
+            <div>
+                <div class="overline">NETWORK</div>
+                <h2>RPC</h2>
+
+                <p class="feature-text">
+                    High-Performance RPC via WebSockets or TCP with type-safe controllers.
+                </p>
+
+                <p class="feature-text">
+                    A binary protocol with automatic serialization, deserialization, and validation of arguments and return values.
+                    Again, entirely based on runtime TypeScript types.
+                </p>
+            </div>
+            <div class="code-box">
+                <textarea codeHighlight>
+                    //@app/server/main.controller
+                    @rpc.controller('/main')
+                    class MainController {
+                        @rpc.action()
+                        hello(name: string): string {
+                            return 'Hello ' + name;
+                        }
+                    }
+
+                    //@app/frontend/main.ts
+                    import type {MainController} from '@app/server/main.controller'
+                    const client = new RpcClient();
+                    const controller = client.controller<MainController>('/main');
+                    const answer = await controller.hello('Peter');
+                </textarea>
+            </div>
+        </div>
+
+        <div class="two-column feature-with-code left">
+            <div>
+                <div class="overline">CLEAN CODE</div>
+                <h2>Dependency Injection</h2>
+
+                <p class="feature-text">
+                    The most powerful dependency injection container for TypeScript, entirely based on
+                    runtime types. No decorators, no custom tokens, or any other boilerplate.
+                </p>
+                <p class="feature-text">
+                    Dependency Injection is possible not only for classes, but all functions as well.
+                    Functional HTTP routes, CLI commands, and RPC controllers, all can be injected with dependencies.
+                </p>
+            </div>
+            <div class="code-box">
+                <textarea codeHighlight>
+                    interface DatabaseInterface {
+                        query<T>(model: Class<T>): Query<T>;
+                    }
+
+                    class Database implements DatabaseInterface {
+                        query<T>(model: Class<T>): Query<T> {
+                            // ...
+                        }
+                    }
+
+                    class UserAPI {
+                        // database is automatically injected by type
+                        constructor(private database: DatabaseInterface) {
+                        }
+
+                        @http.GET('/user/:id')
+                        async user(id: integer & Positive): Promise<User> {
+                            return await this.database.query(User)
+                                .filter({id})
+                                .findOne();
+                        }
+                    }
                 </textarea>
             </div>
         </div>
