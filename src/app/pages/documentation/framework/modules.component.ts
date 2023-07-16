@@ -106,7 +106,7 @@ import { Component } from '@angular/core';
             class MyHttpController {
                 constructor(private helloService: HelloWorldService) {}
             
-                @http.GET('/hello)
+                @http.GET('/hello')
                 hello() {
                     return this.helloService.helloWorld();
                 }
