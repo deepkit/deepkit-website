@@ -1,4 +1,6 @@
 
+NOTE: This is not up to date anymore. New docs and website are at https://deepkit.io/documentation
+
 
 ## development
 
